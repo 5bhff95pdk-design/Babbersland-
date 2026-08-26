@@ -1,23 +1,84 @@
 # 👑 ROYAUME DU BABBERLAND
-### CHANCELLERIE ROYALE · PABST CITY
-**Archives officielles · Document 2026-H (Supplément extraordinaire)**  
+## ENCYCLOPÉDIE OFFICIELLE CONSOLIDÉE 2026-I
+
+**Chancellerie royale · Pabst City**  
+**Édition intégrale du 26 août 2026**  
 *Sous le haut patronage de Sa Majesté Babber Ier le Louche*  
-*Rédigé de la main de Luc Foster, Grand Argentier, Chancelier et Archiviste royal*
+*Établie par Luc Foster, Grand Argentier, Chancelier et Archiviste royal*
 
 ---
 
-> « Une Pabst, une poutine, un rocking-chair, et que le vin coule si la bière est trop froide ! »  
-> — *Addendum au Décret souverain de 1847, ratifié par acclamation générale.*
+> « Une Pabst, une poutine, et on relaxe. »  
+> — Devise nationale depuis 1847
+
+## DÉCLARATION ÉDITORIALE 2026-I
+
+La présente édition rassemble en un volume autonome la matière historique des anciens documents 2026-G et 2026-H. Elle intègre directement les corrections de chronologie, de titres et de filiation : **aucune règle de préséance n’est nécessaire pour lire ce volume**.
+
+L’édition 2026-I fixe notamment que :
+
+1. Babber le Louche était prince lors de la fondation de McBabber’s en 1984–1986 ; Babber II le Piscineux régnait alors ;
+2. Babber le Fou, né le jour de l’ouverture, ne participa pas à la conception du restaurant ;
+3. Linéa créa le nom et garda d’abord la sauce, avant sa transmission à Ginette ;
+4. Colette-Pabst, et non Irène des Érables, présida la commission du Babbersgate ;
+5. Babber le Déchiré appartient à une branche collatérale issue de Babette-Marine ;
+6. l’ordinal « VII » de Ti-Babber désigne la septième génération dynastique ;
+7. Babber le Fou reste premier dans l’ordre de succession et Ti-Babber occupe le second rang.
 
 ---
 
-## ⚖️ RÈGLE DE CONTINUITÉ DOCUMENTAIRE
+# LIVRE I · LE ROYAUME
 
-Le présent **Document 2026-H** complète le **Document 2026-G** contenu dans l’*Encyclopédie officielle 2026* au format PDF. Le volume G décrit l’état de la Maison avant la proclamation de Ti-Babber ; le supplément H, signé plus tard le 26 août 2026, fait foi pour la **Génération VII**, la parenté du Prince Déchiré et l’histoire de McBabber’s. Pour comparer ces deux archives, la source la plus récente prévaut : **2026-H > 2026-G > chroniques populaires**.
+## Fondation
 
-> **Statut archivistique :** depuis la publication de l’**Encyclopédie consolidée 2026-I**, le présent supplément n’est plus la référence courante. La règle ci-dessus s’applique uniquement à la comparaison historique de G et H.
+Le **12 octobre 1847**, dans la forêt de Plantagenet, Babber Ier l’Ancien rédigea la Constitution sur la nappe vichy de son épouse Babette. Un castor patriote assista à la cérémonie ; sa queue, posée sur l’étoffe, tient lieu de signature dans les Archives.
+
+La capitale, **Pabst City**, accueille le Palais royal, la Banque nationale et le Double Aqueduc. Le Royaume privilégie la lenteur réfléchie, la souveraineté alimentaire et le droit imprescriptible au repos.
+
+## Symboles nationaux
+
+| Symbole | Définition officielle |
+|---|---|
+| **Armes** | Deux castors tenants : l’un à la canette, l’autre à la poutine ; couronne fermée et feuille d’érable. |
+| **Animal national** | Le Castor Chill (*Castor canadensis relaxus*), qui refuse de construire le dimanche et pendant la sieste. |
+| **Couleurs** | Bleu roi et or. |
+| **Devise populaire** | « Une Pabst, une poutine, et on relaxe. » |
+| **Devise héraldique** | « Unité · Travail · 1847 ». |
+| **Étalon monétaire** | La Parité Poutine, garantie par la réserve de fromage en grain. |
+
+## Lois fondamentales
+
+1. **Droit au hamac** — Tout sujet peut suspendre un hamac entre deux supports autorisés.
+2. **Obligation thermique de la Pabst** — La bière officielle doit être servie fraîche ; les boissons sans alcool demeurent disponibles, et aucun alcool n’est servi aux mineurs ni aux conducteurs.
+3. **Écoute contemplative des érables** — Les érables sont protégés et peuvent être contemplés sans limite raisonnable.
+4. **Sacralité de la sieste** — De 13 h à 15 h, le silence national prévaut.
+5. **Infaillibilité souveraine** — Le Roi a toujours raison, particulièrement lorsqu’il a tort ; cet article fonde juridiquement le double ordinal Ier.
+
+## Les cinq régions
+
+### Pabst City
+
+Capitale de 3 500 âmes, siège du Palais, de la Banque nationale et du Double Aqueduc. Ses réserves stratégiques comprennent le fromage en grain et les boissons de cérémonie.
+
+### Les Monts Froissés
+
+Alpes nationales de **1,20 m**, créées le 15 juillet 1962 avec les déblais de la piscine de Babber II. L’ascension réglementaire dure quatre secondes et exige un paquetage himalayen purement symbolique.
+
+### Port Babette
+
+Ville de 800 âmes nommée en l’honneur de Babette Ire. La princesse Babette-Marine en développa le port moderne, les quais, le phare blanc couronné et la flottille de péniches.
+
+### Grass City
+
+Cité de 1 200 habitants, station balnéaire et capitale du chanvre légal. Ses fibres renforcent le papier fiduciaire de la Série B. Devise municipale : **« Pousse »**.
+
+### Forêt de Plantagenet
+
+Sanctuaire de la fondation : cabane de 1847, Chêne du Hamac royal et Nappe Sacrée conservée sous protection.
 
 ---
+
+# LIVRE II · LA COURONNE ET L’HISTOIRE
 
 ## 📜 AVIS EXTRAORDINAIRE DU GRAND ARGENTIER (AVIS N° 6)
 
@@ -113,7 +174,9 @@ Fils de Babber le Fou et de la Princesse Ginette de Port Babette. **Deuxième da
 
 ---
 
-## 🍔 HISTOIRE NATIONALE : LA FONDATION DE McBABBER’S
+# LIVRE III · McBABBER’S
+
+## HISTOIRE NATIONALE : LA FONDATION DE McBABBER’S
 
 ### Le refus qui donna faim au Royaume (1984)
 
@@ -264,7 +327,9 @@ Le Conseil des Sages décréta que cette erreur était un signe de prospérité.
 
 ---
 
-## 💰 LES PIÈCES DE MONNAIE OFFICIELLES (ÉMISSION MÉTALLIQUE 2026)
+# LIVRE IV · MONNAIE MÉTALLIQUE
+
+## LES PIÈCES DE MONNAIE OFFICIELLES (ÉMISSION MÉTALLIQUE 2026)
 
 Pour régler les dépenses quotidiennes au pub, aux comptoirs de poutine et au dépanneur sans mouiller les billets en chanvre, la Banque nationale et la Monnaie royale de Pabst City ont frappé la **Série Métallique Officielle 2026** :
 
@@ -307,6 +372,8 @@ Pour régler les dépenses quotidiennes au pub, aux comptoirs de poutine et au d
 * 🖼️ *Visuel officiel : `images/pieces_monnaie_babberland_coffret.png`*
 
 ---
+
+# LIVRE V · GÉNÉALOGIE ET ICONOGRAPHIE
 
 ## 🏛️ ARBRE GÉNÉALOGIQUE COMPLET RÉVISÉ
 
@@ -351,9 +418,65 @@ Légende : │ filiation directe · ┊ branche collatérale · ═ union
 * 🍔 **`images/mcbabbers_enseigne_royale.png`** : Façade du premier McBabber’s de Pabst City, avec son enseigne royale et son rocking-chair d’accueil.
 * ⚖️ **`images/babbersgate_scandale_sauce.png`** : La commission d’enquête du Babbersgate, les cornichons et le livre de comptes secret.
 * 🍟 **`images/mcbabbers_menu_pabst.png`** : Menu royal illustré présentant le McLouche, la poutine, les frites et la Pabst.
-* 📜 **`images/arbre_genealogique_complet.png`** : L’arbre généalogique révisé, conforme aux filiations directes et collatérales du Document 2026-H.
+* 📜 **`images/arbre_genealogique_complet.png`** : L’arbre généalogique révisé, conforme aux filiations directes et collatérales du édition 2026-I.
 
 ---
+
+# LIVRE VI · TRÉSORERIE CONSOLIDÉE
+
+## Système monétaire
+
+**1 Babber = 24 Babetons**, soit l’équivalent constitutionnel d’une caisse de vingt-quatre canettes fraîches. Les billets emploient le papier de chanvre de Grass City, un revêtement Anti-Bière et l’hologramme du castor au hamac.
+
+## Série fiduciaire B 2026
+
+| Valeur | Couleur | Effigie ou thème principal | Revers |
+|---:|---|---|---|
+| **1 Babber** | Bleu roi | Babber Ier le Louche, recto de type Série A 2023 | Castor Chill |
+| **5 Babbers** | Vert érable | Babber Ier l’Ancien | Signature de la Nappe Sacrée |
+| **10 Babbers** | Bordeaux | Honoré-Pabst et Henri-Grain | Palais royal |
+| **20 Babbers** | Sarcelle | Babber Ier le Louche | Double Aqueduc |
+| **50 Babbers** | Pourpre impérial | Parité Poutine | Réserve de fromage en grain |
+
+La monnaie métallique 2026 — 1 Babeton, 6 Babetons, 12 Babetons et 1 Babber — est décrite dans le Livre IV de la présente édition.
+
+---
+
+# LIVRE VII · REPÈRES CHRONOLOGIQUES
+
+| Date | Événement canonique |
+|---|---|
+| **12 octobre 1847** | Fondation et Signature de la Nappe Sacrée. |
+| **1882** | Plans du Double Aqueduc par François-Babber. |
+| **1889–1892** | Régence de Babette Ire. |
+| **1892–1914** | Règne de François-Babber l’Aqueducien. |
+| **1914–1959** | Règne de Babber le Dormeur et institution de la sieste. |
+| **12 juillet 1938** | Naissance des jumeaux Honoré-Pabst et Henri-Grain. |
+| **1946** | Naissance du futur Babber Ier le Louche. |
+| **1959** | Avènement de Babber II le Piscineux. |
+| **15 juillet 1962** | Création des Monts Froissés et naissance de Rambo du Fjord. |
+| **12 mai 1980** | Visite d’État consacrée au Double Aqueduc. |
+| **Printemps 1984** | Le prince Louche recommande le refus du projet McDonald’s ; Babber II ratifie. |
+| **1er avril 1986** | Ouverture de McBabber’s et naissance de Babber le Fou. |
+| **1988** | Naissance de Ginette de Port Babette. |
+| **1991–1993** | Babbersgate et Décret de la Sauce ouverte. |
+| **1998–2010** | Union des Règnes d’Honoré-Pabst et Henri-Grain. |
+| **2002** | Mort de Babber II le Piscineux. |
+| **2004** | Pabstgate. |
+| **2007–2009** | Guerre des Cornichons. |
+| **2010** | Avènement de Babber Ier le Louche. |
+| **2012** | Affaire du rocking-chair disparu. |
+| **2018** | Création du Label Fromage véritablement babberlandais. |
+| **2023** | Mise en circulation du type fiduciaire Série A. |
+| **12 juillet 2026** | Sommet Pabst–Ketchup et visite pontificale. |
+| **26 août 2026** | Naissance de Ti-Babber, Génération VII, et publication de l’édition consolidée 2026-I. |
+
+---
+
+# COLOPHON
+
+La présente **Encyclopédie officielle consolidée 2026-I** remplace les documents 2026-G et 2026-H comme référence de lecture. Ceux-ci demeurent aux Archives à titre historique, mais aucune consultation croisée n’est requise pour établir le canon décrit ici.
+
 *Signé et scellé au Palais royal de Pabst City, le 26 août 2026.*  
-**Luc Foster**, *Grand Argentier, Chancelier & Archiviste royal.*  
+**Luc Foster**, *Grand Argentier, Chancelier et Archiviste royal.*  
 **« Une Pabst, une poutine, et on relaxe. »**
