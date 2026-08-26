@@ -11,11 +11,17 @@
 
 ---
 
+## ⚖️ RÈGLE DE CONTINUITÉ DOCUMENTAIRE
+
+Le présent **Document 2026-H** complète le **Document 2026-G** contenu dans l’*Encyclopédie officielle 2026* au format PDF. Le volume G décrit l’état de la Maison avant la proclamation de Ti-Babber ; le supplément H, signé plus tard le 26 août 2026, fait foi pour la **Génération VII**, la parenté du Prince Déchiré et l’histoire de McBabber’s. En cas d’écart, la source la plus récente prévaut : **2026-H > 2026-G > chroniques populaires**.
+
+---
+
 ## 📜 AVIS EXTRAORDINAIRE DU GRAND ARGENTIER (AVIS N° 6)
 
 Face aux rumeurs de couloir, à la découverte de deux portraits d'apparat dissimulés derrière le vieux poêle de l'Aile Ouest, et à l'impérieuse nécessité de perpétuer le sang des Babber sans troubler la sacro-sainte sieste de 13 h à 15 h, la Chancellerie royale proclame les résolutions dynastiques suivantes :
 
-1. **Intronisation canonique de S.A.R. le Prince Babber le Déchiré** : Frère cadet d'esprit et de sang, prince souverain du Rocking-Chair d'apparat, protecteur des soirées de chalet et champion de la tenue estivale décomplexée.
+1. **Intronisation canonique de S.A.R. le Prince Babber le Déchiré** : Cousin de la branche de Babette-Marine et frère de cœur de l’héritier, prince souverain du Rocking-Chair d’apparat, protecteur des soirées de chalet et champion de la tenue estivale décomplexée.
 2. **Élévation de Roger Bontemps au rang de Grand Bouffon d'État** : Seul dignitaire autorisé par Sa Majesté à boire du vin rouge en public, immunisé contre la Police royale de la Fraîcheur (P.R.F.) et chargé de faire rire le Conseil des Sages quand la mousse retombe.
 3. **Restauration des Dames de la Couronne** : Réhabilitation des portraits d'Hortense du Grain, de la Princesse Babette-Marine et d'Irène des Érables.
 4. **Scellement de la Génération VII** : Union royale de Babber le Fou avec la Princesse Ginette de Port Babette et proclamation de l'héritier miraculeux, **S.A.R. Ti-Babber (Babber VII l'Éveillé)** !
@@ -35,7 +41,7 @@ Face aux rumeurs de couloir, à la découverte de deux portraits d'apparat dissi
 ### GÉNÉRATION II : LES BÂTISSEURS (1892–1914)
 * **François-Babber l’Aqueducien (1832–1914, r. 1892–1914)** : Concepteur du Double Aqueduc de Pabst City (eau pure et Pabst fraîche). Refusa le titre de Babber II par modestie technique.
 * **Hortense du Grain (1840–1922)** : Épouse de François-Babber. Grande maîtresse de la malterie et patronne des champs d'orge. Diadème d'épis d'or et de houblon, tenant le calice de bière blonde de la Couronne (`images/hortense_du_grain.png`).
-* **S.A.R. la Princesse Babette-Marine (1836–1916)** : Fille cadette de l'Ancien. Fondatrice de Port Babette, elle fit ériger le célèbre phare blanc couronné et organisa la flottille des péniches de curds et de fûts sur le Fleuve Babber (`images/babette_marine.png`).
+* **S.A.R. la Princesse Babette-Marine (1836–1916)** : Fille cadette de l’Ancien. Elle développa les quais de la ville nommée en l’honneur de sa mère, fonda le port moderne, fit ériger le célèbre phare blanc couronné et organisa la flottille des péniches de curds et de fûts sur le Fleuve Babber (`images/babette_marine.png`).
 
 ---
 
@@ -48,7 +54,7 @@ Face aux rumeurs de couloir, à la découverte de deux portraits d'apparat dissi
 ### GÉNÉRATION IV : L’ÈRE BALNÉAIRE & GÉOLOGIQUE (1959–1998)
 * **S.M. Babber II le Piscineux (1912–2002, r. 1959–1998)** : Polo, lunettes de soleil et pelleteuse diesel. À l'été 1962, en creusant sa piscine olympique dans le jardin du palais, il amassa deux tas de terre de 1,20 m qui devinrent les **Monts Froissés**, Alpes officielles du pays.
 * **Colette-Pabst de Grass City (1920–2011)** : Reine consort et souveraine du Barbecue. Autrice de la maxime constitutionnelle : *« Si tu creuses une piscine, je m'occupe des chips. »*
-* **1984–1986 · La Crise du Big Roi et la fondation de McBabber’s** : Le roi Babber Ier le Louche refuse l’implantation de McDonald’s face au Palais et mandate la Couronne pour créer une enseigne à l’image du Royaume. Le premier McBabber’s ouvre le 1er avril 1986 sur le terrain reconquis, avec Roger Bontemps au comptoir, Babber le Fou à la friteuse et la Princesse Ginette à la sauce brune.
+* **1984–1986 · La Crise du Big Roi et la fondation de McBabber’s** : Le prince Babber le Louche, alors chargé des affaires commerciales sous le règne de son père Babber II, refuse le projet d’implantation de McDonald’s face au Palais. Babber II ratifie le refus et mandate la Couronne pour créer une enseigne à l’image du Royaume. Le premier McBabber’s ouvre le 1er avril 1986 sur le terrain reconquis, avec Roger Bontemps au comptoir, le Louche à la friteuse et Linéa à la sauce brune.
 
 ---
 
@@ -66,7 +72,7 @@ Face aux rumeurs de couloir, à la découverte de deux portraits d'apparat dissi
 Fils unique du Louche et de Linéa. Porteur officiel de **l'Aspirateur-Couronne** et grand maître du **Ballon Jaune Ier**. Héritier présomptif légitime de la Couronne.
 
 #### 2. S.A.R. le Prince Babber le Déchiré (né un soir de fête)
-Frère d'armes et de sang, prince de l'Ordre du Rocking-Chair.
+Cousin issu de la branche de Babette-Marine et frère d’armes de Babber le Fou, prince de l’Ordre du Rocking-Chair. Son rattachement est collatéral : il n’est pas un second fils du Louche, ce qui préserve le statut de fils unique de Babber le Fou.
 * **Style officiel** : *Son Altesse Royale Babber le Déchiré, Grand Duc du Poêle à Bois, Protecteur des Fins de Soirée et Champion du Pouce Levé*.
 * **Attributs régaliens** :
   * **La Casquette verte d'apparat** brodée d'or et de diamants.
@@ -100,7 +106,7 @@ Fils de Babber le Fou et de la Princesse Ginette de Port Babette.
   * **Le Berceau-Hamac d'or massif**, suspendu à des chaînes dorées et doublé d'hermine et de velours bleu roi.
   * **La Suce et le Hochet royal en canette de Pabst d'or**.
   * **La Petite Couronne penchée**, déjà inclinée à 15 degrés, symbole de relaxation héréditaire (`images/ti_babber_generation_7.png`).
-* Proclamé d'ores et déjà *« Gardien perpétuel de la Sieste future »*.
+* Proclamé d’ores et déjà *« Gardien perpétuel de la Sieste future »*. L’ordinal **VII** désigne ici la septième génération dynastique et non le septième règne d’un souverain nommé Babber.
 
 ---
 
@@ -110,17 +116,17 @@ Fils de Babber le Fou et de la Princesse Ginette de Port Babette.
 
 L’épisode est connu sous le nom de **Crise du Big Roi**. Au printemps 1984, des émissaires venus de l’extérieur proposèrent à Sa Majesté un vaste restaurant standardisé, reconnaissable à ses arches dorées et à son menu identique dans tous les royaumes. Le projet prévoyait une implantation à l’entrée de Pabst City, juste en face du Palais.
 
-Le roi Babber Ier le Louche convoqua le Conseil dans la salle du hamac. Après avoir longuement étudié le dossier — entre 13 h et 15 h, conformément à la sieste sacrée — il rendit une décision aussi brève que définitive :
+Le prince Babber le Louche, alors chargé des affaires commerciales par son père, **S.M. Babber II le Piscineux**, convoqua le Conseil dans la salle du hamac. Après avoir longuement étudié le dossier — entre 13 h et 15 h, conformément à la sieste sacrée — il rendit une décision aussi brève que définitive :
 
 > **« Ici, on ne mange pas pareil que partout. Ici, on mange comme chez nous. »**
 
-Le souverain refusa donc l’installation de McDonald’s. Non par hostilité envers la frite, précise la Chancellerie, mais parce qu’aucune enseigne étrangère ne devait imposer ses horaires, ses portions ou la forme de ses cornichons au peuple babberlandais. Le terrain fut rendu à la Couronne et transformé en station de repos, avec trois rocking-chairs et un distributeur de Pabst fraîche.
+Le prince recommanda donc le refus de l’installation de McDonald’s, décision que Babber II ratifia le jour même. Non par hostilité envers la frite, précise la Chancellerie, mais parce qu’aucune enseigne étrangère ne devait imposer ses horaires, ses portions ou la forme de ses cornichons au peuple babberlandais. Le terrain fut rendu à la Couronne et transformé en station de repos, avec trois rocking-chairs et un distributeur de Pabst fraîche.
 
 ### La naissance de l’enseigne royale
 
-Le soir même, Roger Bontemps, alors simple habitué du comptoir, improvisa dans la cuisine du palais une galette de bœuf aplatie au fond d’une poêle en fonte. Il y ajouta du cheddar, des oignons caramélisés à la bière, une cuillerée de sauce brune et un cornichon coupé en biais. Babber le Fou, chargé de tester la friteuse — et officiellement de surveiller le Ballon Jaune — proposa d’en faire un commerce.
+Le soir même, Roger Bontemps, alors simple habitué du comptoir, improvisa dans la cuisine du palais une galette de bœuf aplatie au fond d’une poêle en fonte. Il y ajouta du cheddar, des oignons caramélisés à la bière, une cuillerée de sauce brune et un cornichon coupé en biais. Le Louche, chargé de tester la friteuse, proposa d’en faire un commerce. Son fils Babber le Fou naquit seulement le jour de l’ouverture, le 1er avril 1986 ; il n’a donc participé ni à la conception ni aux travaux préparatoires.
 
-Le nom fut trouvé par la Princesse Ginette de Port Babette : **McBabber’s**, avec une apostrophe dorée pour rappeler que toute bonne décision royale doit laisser une trace de sauce sur la nappe. La première salle ouvrit le **1er avril 1986**, jour choisi pour que personne ne sache si le restaurant était réel. À 15 h 01, après la fin de la sieste nationale, le roi coupa le ruban avec une spatule en bois d’érable.
+Le nom fut trouvé par **Linéa de Grass City** : **McBabber’s**, avec une apostrophe dorée pour rappeler que toute bonne décision royale doit laisser une trace de sauce sur la nappe. La première salle ouvrit le **1er avril 1986**, jour choisi pour que personne ne sache si le restaurant était réel. À 15 h 01, après la fin de la sieste nationale, **Babber II le Piscineux** coupa le ruban avec une spatule en bois d’érable.
 
 ### Le Décret de la Galette libre
 
@@ -129,19 +135,19 @@ Le **Décret de la Galette libre**, signé au premier service, fixa les principe
 1. aucune recette ne doit être identique deux jours de suite si le cuisinier a une meilleure idée ;
 2. toute frite doit être servie chaude, salée et accompagnée d’une sauce qui assume ses responsabilités ;
 3. le client a droit à une portion généreuse, à un siège confortable et à une seconde chance de choisir son dessert ;
-4. la Pabst, bière officielle du Royaume, accompagne le repas et doit être servie fraîche, mais ne doit jamais être versée sur la poutine sans autorisation de la Princesse Ginette ;
+4. la Pabst, bière officielle du Royaume, accompagne les formules adultes et doit être servie fraîche, mais ne doit jamais être versée sur la poutine sans autorisation du **Garde de la Sauce**, charge aujourd’hui tenue par la Princesse Ginette ;
 5. les employés sont appelés **les Gardiens de la Plaque** et portent une casquette rouge et or, jamais une couronne trop lourde près de la friteuse.
 
 ### Le menu canonique de McBabber’s
 
-Le restaurant sert une cuisine de cour, de chalet et de comptoir, réunie dans le **Menu des Sept Faims**. À McBabber’s, le repas ne se conçoit toutefois jamais sans le comptoir réfrigéré de **Pabst** : la bière officielle du Royaume y est servie bien froide, en canette ou dans le verre de Roger Bontemps. Une Pabst accompagne chaque formule royale, sauf pendant la sieste sacrée, où même la mousse doit attendre 15 h 01 :
+Le restaurant sert une cuisine de cour, de chalet et de comptoir, réunie dans le **Menu des Sept Faims**. À McBabber’s, le repas ne se conçoit toutefois jamais sans le comptoir réfrigéré de **Pabst** : la bière officielle du Royaume y est servie bien froide, en canette ou dans le verre de Roger Bontemps. Chaque formule adulte peut être accompagnée d’une Pabst ou d’une boisson sans alcool ; aucune boisson alcoolisée n’est servie aux mineurs ni aux conducteurs. Pendant la sieste sacrée, même la mousse doit attendre 15 h 01 :
 
 * **Le McLouche** : double galette, cheddar fort, oignons grillés et sauce secrète, pour les grandes décisions et les petits remords ;
 * **Le Déchiré** : burger ouvert, bacon croustillant et jalapeños, nommé en l’honneur du Prince du Rocking-Chair ;
 * **La Ginette** : poutine nappée de sauce brune et couronnée d’un œuf mollet ;
 * **Le Bontemps** : sandwich au bœuf effiloché, servi avec un petit verre de gros rouge — à consommer avec modération, même pour le Grand Bouffon ;
 * **Les Frites de la Sieste** : frites épaisses, volontairement servies à 15 h 01 ;
-* **Le Ti-Babber** : mini-galette, compote de pommes et lait, seul menu autorisé dans le Berceau-Hamac royal ;
+* **Le Ti-Babber** : formule jeunesse évolutive — lait adapté pour les nourrissons, puis compote et mini-galette selon l’âge — servie sans boisson alcoolisée ;
 * **Le Cornichon constitutionnel** : supplément gratuit pour tout citoyen capable de réciter l’Article 4 sans s’endormir.
 
 La sauce brune de McBabber’s n’est jamais mesurée au gramme près : elle l’est à la **louche royale**. Cette unité, consacrée par décret, varie selon l’humeur de la Princesse Ginette et la taille de la poutine.
@@ -150,7 +156,7 @@ La sauce brune de McBabber’s n’est jamais mesurée au gramme près : elle l�
 
 McBabber’s n’est pas une simple chaîne de restauration. Chaque établissement est une **auberge de souveraineté alimentaire** : aucune franchise ne peut ouvrir sans un rocking-chair d’apparat, une nappe vichy et un coin réservé aux discussions lentes. Les enseignes sont peintes en rouge profond et or patiné ; leurs arches ne sont pas dorées, mais dessinées comme deux poignées de casserole formant les initiales **M.B.**
 
-Le restaurant est devenu le lieu des annonces nationales. Le Sommet Pabst-Ketchup du 12 juillet 2026 fut conclu autour d’une montagne de poutine, et la naissance de Ti-Babber y fut célébrée par la distribution de **7 000 mini-McLouches**. Le premier restaurant, situé sur l’ancien terrain refusé aux arches dorées, conserve encore la spatule du ruban inaugural sous verre.
+Le restaurant est devenu le lieu des annonces nationales. Le Sommet Pabst-Ketchup du 12 juillet 2026 fut conclu autour d’une montagne de poutine, et la naissance de Ti-Babber y fut célébrée par la distribution de **7 000 mini-McLouches**. Le premier restaurant, situé sur l’ancien terrain refusé aux arches dorées, conserve encore sous verre la spatule utilisée par Babber II lors du ruban inaugural.
 
 ### Doctrine royale et héritage
 
@@ -164,20 +170,20 @@ Dans les archives, l’affaire est classée sous la cote **MB-1984 · « Le roi 
 
 L’histoire de McBabber’s ne fut pas exempte de scandales. Le plus célèbre, baptisé **Babbersgate** par les journaux de Port Babette, éclata lorsqu’un ancien comptable de la Cour révéla l’existence d’un deuxième livre de comptes, dissimulé derrière le menu des desserts. On y trouvait des dépenses étranges : **317 pots de cornichons “pour dégustation royale”**, six rocking-chairs facturés comme mobilier de cuisine et une ligne budgétaire intitulée simplement **« opération très louche »**.
 
-La rumeur enfla : le roi Babber Ier le Louche aurait utilisé les fonds de McBabber’s pour financer ses banquets privés et aurait gardé pour lui la recette originale de la sauce brune. Certains affirmèrent même que le fameux **McLouche** devait son nom non pas au regard du roi, mais à la louche qui servait à détourner la sauce au profit du Palais.
+La rumeur enfla : le prince Babber le Louche aurait utilisé les fonds de McBabber’s pour financer ses banquets privés et aurait gardé pour lui la recette originale de la sauce brune. Certains affirmèrent même que le fameux **McLouche** devait son nom non pas au regard du roi, mais à la louche qui servait à détourner la sauce au profit du Palais.
 
-La commission d’enquête fut présidée par Irène des Érables, avec Roger Bontemps comme greffier — choix contesté, car il riait chaque fois qu’il lisait les factures. Après trois mois d’audiences, elle établit les faits suivants :
+La commission d’enquête fut présidée par **Colette-Pabst de Grass City**, avec Roger Bontemps comme greffier — choix contesté, car il riait chaque fois qu’il lisait les factures. Irène des Érables, morte en 1966, ne pouvait évidemment pas siéger lors de l’affaire. Après trois mois d’audiences, elle établit les faits suivants :
 
 1. les 317 pots de cornichons avaient bien été livrés, mais 316 avaient été consommés lors d’une seule réunion du Conseil des Sages ;
 2. les rocking-chairs étaient réellement destinés à la clientèle, même si deux d’entre eux se trouvaient dans la salle du hamac royal ;
-3. la ligne **« opération très louche »** correspondait à une campagne de publicité secrète imaginée par le roi lui-même ;
-4. la recette de la sauce brune n’avait pas été volée : elle n’avait simplement jamais été écrite, la princesse Ginette cuisinant “à l’œil, au nez et à la quantité de frites”.
+3. la ligne **« opération très louche »** correspondait à une campagne de publicité secrète imaginée par le prince lui-même ;
+4. la recette de la sauce brune n’avait pas été volée : elle n’avait simplement jamais été écrite, Linéa cuisinant « à l’œil, au nez et à la quantité de frites ». Elle en transmit plus tard le secret à la princesse Ginette.
 
-Le roi fut donc blanchi de détournement, mais reconnu coupable de **mauvaise transparence gastronomique**, d’abus de rocking-chair et de refus de publier les quantités exactes de sauce. Il dut comparaître devant le peuple, remettre symboliquement sa louche au tribunal et financer la construction de **trois bancs publics pour les citoyens qui attendaient leur poutine**.
+Le Louche, encore prince et administrateur de McBabber’s, fut donc blanchi de détournement, mais reconnu coupable de **mauvaise transparence gastronomique**, d’abus de rocking-chair et de refus de publier les quantités exactes de sauce. Il dut comparaître devant le peuple, remettre symboliquement sa louche au tribunal et financer la construction de **trois bancs publics pour les citoyens qui attendaient leur poutine**.
 
-Le scandale eut une conséquence durable : le **Décret de la Sauce ouverte** imposa à McBabber’s de publier ses prix, l’origine de ses pommes de terre et la taille minimale d’une portion royale. La recette complète resta toutefois secrète, sous la garde de la princesse Ginette. Chaque 17 mai, le Royaume célèbre depuis la **Journée de la Transparence brune**, durant laquelle les citoyens peuvent demander : *« Où est passée la sauce ? »* et recevoir au moins une louche en réponse.
+Le scandale eut une conséquence durable : le **Décret de la Sauce ouverte** imposa à McBabber’s de publier ses prix, l’origine de ses pommes de terre et la taille minimale d’une portion royale. La recette complète resta toutefois secrète, d’abord sous la garde de Linéa, puis sous celle de la princesse Ginette après sa majorité. Chaque 17 mai, le Royaume célèbre depuis la **Journée de la Transparence brune**, durant laquelle les citoyens peuvent demander : *« Où est passée la sauce ? »* et recevoir au moins une louche en réponse.
 
-Dans les archives, le Babbersgate est classé sous la cote **MB-1991/93 · Affaire de la louche disparue**. La conclusion officielle demeure prudente : le roi n’a peut-être pas volé la sauce, mais il en a certainement pris plus que sa part.
+Dans les archives, le Babbersgate est classé sous la cote **MB-1991/93 · Affaire de la louche disparue**. La conclusion officielle demeure prudente : le futur roi n’a peut-être pas volé la sauce, mais il en a certainement pris plus que sa part.
 
 ---
 
@@ -249,7 +255,7 @@ Ces coutumes font de McBabber’s un lieu où l’on vient manger, mais aussi at
 
 ### La Nuit des Sept Mille (2026)
 
-Pour célébrer la naissance de Ti-Babber, les cuisines de Pabst City préparèrent **7 000 mini-McLouches** en une seule nuit. La production fut interrompue à 3 h 17 lorsqu’on découvrit que le sept-millième burger avait reçu deux cornichons au lieu d’un.
+Pour célébrer la naissance de Ti-Babber, les cuisines de Pabst City préparèrent **7 000 mini-McLouches** en une seule nuit. La production fut interrompue à 23 h 17 lorsqu’on découvrit que le sept-millième burger avait reçu deux cornichons au lieu d’un.
 
 Le Conseil des Sages décréta que cette erreur était un signe de prospérité. Le burger fautif fut placé sous cloche au musée de McBabber’s, tandis que les 6 999 autres furent distribués au peuple avec une Pabst sans alcool pour les enfants et les conducteurs de charrette. Cette nuit est désormais célébrée chaque année par la **Fête de la Double Garniture**.
 
@@ -302,36 +308,29 @@ Pour régler les dépenses quotidiennes au pub, aux comptoirs de poutine et au d
 ## 🏛️ ARBRE GÉNÉALOGIQUE COMPLET RÉVISÉ
 
 ```
-GÉNÉRATION I (1847) ──► Babber Ier l’Ancien ══════ Babette Ire de Plantagenet
-                                             ║
-       ┌─────────────────────────────────────┴────────────────────────────────┐
-       ║                                                                      ║
-GÉNÉRATION II (1892) ──► François-Babber l’Aqueducien ══ Hortense du Grain    Princesse Babette-Marine
-                                                     ║   (Dame de l'Orge)      (Fondatrice de Port Babette)
-                                                     ║
-GÉNÉRATION III (1914) ─► Babber le Dormeur ═══════════ Irène des Érables
-                         (Le Roi du Hamac)            ║   (Dame des Érablières)
-                                                     ║
-GÉNÉRATION IV (1959) ──► Babber II le Piscineux ══════ Colette-Pabst
-                         (Créateur des Monts Froissés) ║   (Reine du Barbecue)
-                                                     ║
-       ┌──────────────────┬──────────────────────────┴────────────────────────┬──────────────────┐
-       ║                  ║                                                   ║                  ║
-GÉNÉRATION V              ║                                                   ║                  ║
-   Honoré-Pabst       Henri-Grain                  Babber Ier le Louche       ║             Rambo du Fjord
-   (Union 1998)       (Union 1998)                  (Roi régnant 2010–)       ║           (Prince du Fleuve)
-                                                           ║                  ║
-                                                  Linéa de Grass City         ║
-                                                           ║                  ║
-       ┌───────────────────────────────────────────────────┴──────────────────┘
-       ║                                                   ║
-GÉNÉRATION VI                                              ║
-   Babber le Fou (1986–) ══ Princesse Ginette       Babber le Déchiré
-   (Aspirateur & Ballon)  ║  (Dame de la Sauce)     (Prince du Rocking-Chair & Torse Nu)
-                          ║
-GÉNÉRATION VII            ║
-                   Ti-Babber (2026–)
-                [Babber VII l’Éveillé]
+GÉNÉRATION I   Babber Ier l’Ancien ═══ Babette Ire de Plantagenet
+                                      │
+                      ┌───────────────┴────────────────┐
+                      │                                │
+GÉNÉRATION II  François-Babber ═══ Hortense       Babette-Marine
+                 l’Aqueducien       du Grain       (branche collatérale)
+                      │                                ┊
+GÉNÉRATION III Babber le Dormeur ═══ Irène             ┊
+                      │                                ┊
+GÉNÉRATION IV  Babber II le Piscineux ═══ Colette      ┊
+                                      │                 ┊
+            ┌────────────┬────────────┼────────────┐    ┊
+            │            │            │            │    ┊
+GÉNÉRATION V Honoré-   Henri-    Babber Ier     Rambo  ┊
+             Pabst      Grain      le Louche     du Fjord
+                                   ═══ Linéa             ┊
+                                      │                 ┊
+GÉNÉRATION VI                 Babber le Fou ═══ Ginette ┊── Babber le Déchiré
+                                      │                 (cousin collatéral)
+GÉNÉRATION VII                     Ti-Babber
+                         [« VII » = 7e génération]
+
+Légende : │ filiation directe · ┊ branche collatérale · ═ union
 ```
 *(Béni et célébré par **Roger Bontemps, Grand Bouffon et Garde du Gros Rouge**).*
 
@@ -349,7 +348,7 @@ GÉNÉRATION VII            ║
 * 🍔 **`images/mcbabbers_enseigne_royale.png`** : Façade du premier McBabber’s de Pabst City, avec son enseigne royale et son rocking-chair d’accueil.
 * ⚖️ **`images/babbersgate_scandale_sauce.png`** : La commission d’enquête du Babbersgate, les cornichons et le livre de comptes secret.
 * 🍟 **`images/mcbabbers_menu_pabst.png`** : Menu royal illustré présentant le McLouche, la poutine, les frites et la Pabst.
-* 📜 **`images/arbre_genealogique_complet.png`** : La fresque généalogique dorée d'apparat.
+* 📜 **`images/arbre_genealogique_complet.png`** : L’arbre généalogique révisé, conforme aux filiations directes et collatérales du Document 2026-H.
 
 ---
 *Signé et scellé au Palais royal de Pabst City, le 26 août 2026.*  

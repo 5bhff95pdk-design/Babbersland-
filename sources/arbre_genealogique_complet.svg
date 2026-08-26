@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000">
+  <defs>
+    <linearGradient id="paper" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f5e4b8"/><stop offset=".5" stop-color="#fff5d6"/><stop offset="1" stop-color="#dfc27b"/></linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#6e3e09"/><stop offset=".45" stop-color="#ddb95b"/><stop offset="1" stop-color="#7a470b"/></linearGradient>
+    <filter id="shadow"><feDropShadow dx="0" dy="4" stdDeviation="5" flood-opacity=".35"/></filter>
+    <style>
+      .title{font:700 42px Georgia,serif;fill:#512b08;letter-spacing:2px}.subtitle{font:italic 22px Georgia,serif;fill:#76501e}.gen{font:700 18px Georgia,serif;fill:#7c4b14;letter-spacing:1px}.name{font:700 19px Georgia,serif;fill:#3a2109}.detail{font:italic 14px Georgia,serif;fill:#70481c}.node{fill:#fff8df;stroke:#9d6b26;stroke-width:3}.current{fill:#f1d989;stroke:#6f430b;stroke-width:4}.collateral{fill:#edf2da;stroke:#718043;stroke-width:3}.line{fill:none;stroke:#815318;stroke-width:4}.dash{fill:none;stroke:#718043;stroke-width:4;stroke-dasharray:10 8}.legend{font:16px Georgia,serif;fill:#563714}
+    </style>
+  </defs>
+  <rect width="1600" height="1000" fill="#20180e"/>
+  <rect x="28" y="28" width="1544" height="944" rx="22" fill="url(#gold)" filter="url(#shadow)"/>
+  <rect x="55" y="55" width="1490" height="890" rx="12" fill="url(#paper)" stroke="#59320b" stroke-width="5"/>
+  <rect x="77" y="77" width="1446" height="846" fill="none" stroke="#b88735" stroke-width="2"/>
+  <text x="800" y="125" text-anchor="middle" class="title">MAISON ROYALE DE BABBER</text>
+  <text x="800" y="160" text-anchor="middle" class="subtitle">Arbre généalogique officiel révisé · Document 2026-H</text>
+
+  <!-- connectors behind nodes -->
+  <path class="line" d="M800 242 V270 H455 V300 M800 270 H1265 V300"/>
+  <path class="line" d="M455 370 V410"/>
+  <path class="line" d="M455 480 V520"/>
+  <path class="line" d="M455 590 V620 H900 V650"/>
+  <path class="line" d="M900 720 V760"/>
+  <path class="line" d="M900 830 V865"/>
+  <path class="dash" d="M1265 370 V780 H1250"/>
+
+  <text x="110" y="220" class="gen">GÉNÉRATION I</text>
+  <rect x="570" y="185" width="460" height="58" rx="16" class="node"/>
+  <text x="800" y="211" text-anchor="middle" class="name">Babber Ier l’Ancien  ═  Babette Ire de Plantagenet</text>
+  <text x="800" y="232" text-anchor="middle" class="detail">Fondateurs · 1847</text>
+
+  <text x="110" y="335" class="gen">GÉNÉRATION II</text>
+  <rect x="270" y="300" width="370" height="70" rx="16" class="node"/>
+  <text x="455" y="328" text-anchor="middle" class="name">François-Babber l’Aqueducien</text><text x="455" y="353" text-anchor="middle" class="detail">═ Hortense du Grain</text>
+  <rect x="1080" y="300" width="370" height="70" rx="16" class="collateral"/>
+  <text x="1265" y="328" text-anchor="middle" class="name">Princesse Babette-Marine</text><text x="1265" y="353" text-anchor="middle" class="detail">Branche collatérale · Port Babette</text>
+
+  <text x="110" y="445" class="gen">GÉNÉRATION III</text>
+  <rect x="270" y="410" width="370" height="70" rx="16" class="node"/>
+  <text x="455" y="438" text-anchor="middle" class="name">Babber le Dormeur</text><text x="455" y="463" text-anchor="middle" class="detail">═ Irène des Érables</text>
+
+  <text x="110" y="555" class="gen">GÉNÉRATION IV</text>
+  <rect x="250" y="520" width="410" height="70" rx="16" class="node"/>
+  <text x="455" y="548" text-anchor="middle" class="name">Babber II le Piscineux</text><text x="455" y="573" text-anchor="middle" class="detail">═ Colette-Pabst de Grass City</text>
+
+  <text x="110" y="687" class="gen">GÉNÉRATION V</text>
+  <path class="line" d="M455 620 H300 V650 M455 620 H530 V650 M455 620 H760 V650 M455 620 H1040 V650"/>
+  <rect x="210" y="650" width="180" height="70" rx="14" class="node"/><text x="300" y="679" text-anchor="middle" class="name">Honoré-Pabst</text><text x="300" y="703" text-anchor="middle" class="detail">Union 1998–2010</text>
+  <rect x="440" y="650" width="180" height="70" rx="14" class="node"/><text x="530" y="679" text-anchor="middle" class="name">Henri-Grain</text><text x="530" y="703" text-anchor="middle" class="detail">Union 1998–2010</text>
+  <rect x="645" y="650" width="310" height="70" rx="14" class="current"/><text x="800" y="678" text-anchor="middle" class="name">Babber Ier le Louche</text><text x="800" y="703" text-anchor="middle" class="detail">═ Linéa · roi depuis 2010</text>
+  <rect x="960" y="650" width="220" height="70" rx="14" class="node"/><text x="1070" y="679" text-anchor="middle" class="name">Rambo du Fjord</text><text x="1070" y="703" text-anchor="middle" class="detail">Prince du Fleuve</text>
+
+  <text x="110" y="802" class="gen">GÉNÉRATION VI</text>
+  <rect x="675" y="760" width="450" height="70" rx="16" class="node"/><text x="900" y="788" text-anchor="middle" class="name">Babber le Fou  ═  Princesse Ginette</text><text x="900" y="813" text-anchor="middle" class="detail">Héritier présomptif · Dame de la Sauce</text>
+  <rect x="1250" y="760" width="245" height="70" rx="16" class="collateral"/><text x="1372" y="788" text-anchor="middle" class="name">Babber le Déchiré</text><text x="1372" y="813" text-anchor="middle" class="detail">Cousin collatéral</text>
+
+  <text x="110" y="890" class="gen">GÉNÉRATION VII</text>
+  <rect x="725" y="855" width="350" height="65" rx="18" class="current"/><text x="900" y="883" text-anchor="middle" class="name">Ti-Babber · né le 26 août 2026</text><text x="900" y="906" text-anchor="middle" class="detail">« VII » désigne la 7e génération</text>
+  <text x="105" y="940" class="legend">Traits pleins : filiation directe  ·  Pointillés verts : branche collatérale  ·  ═ : union</text>
+</svg>
