@@ -20,6 +20,7 @@ Face aux rumeurs de couloir, à la découverte de deux portraits d'apparat dissi
 3. **Restauration des Dames de la Couronne** : Réhabilitation des portraits d'Hortense du Grain, de la Princesse Babette-Marine et d'Irène des Érables.
 4. **Scellement de la Génération VII** : Union royale de Babber le Fou avec la Princesse Ginette de Port Babette et proclamation de l'héritier miraculeux, **S.A.R. Ti-Babber (Babber VII l'Éveillé)** !
 5. **Frappe officielle des Pièces de Monnaie (La Famille des Babetons)** : Émission de la gamme métallique officielle pour régler les canettes au bar sans froisser les billets en chanvre.
+6. **Reconnaissance historique de McBabber’s** : Le restaurant national, né du refus catégorique de Sa Majesté de voir s’installer un McDonald’s sur les terres de la Couronne, est élevé au rang de **Maison royale de la Galette, de la Frite et du Cornichon**.
 
 ---
 
@@ -47,6 +48,7 @@ Face aux rumeurs de couloir, à la découverte de deux portraits d'apparat dissi
 ### GÉNÉRATION IV : L’ÈRE BALNÉAIRE & GÉOLOGIQUE (1959–1998)
 * **S.M. Babber II le Piscineux (1912–2002, r. 1959–1998)** : Polo, lunettes de soleil et pelleteuse diesel. À l'été 1962, en creusant sa piscine olympique dans le jardin du palais, il amassa deux tas de terre de 1,20 m qui devinrent les **Monts Froissés**, Alpes officielles du pays.
 * **Colette-Pabst de Grass City (1920–2011)** : Reine consort et souveraine du Barbecue. Autrice de la maxime constitutionnelle : *« Si tu creuses une piscine, je m'occupe des chips. »*
+* **1984–1986 · La Crise du Big Roi et la fondation de McBabber’s** : Le roi Babber Ier le Louche refuse l’implantation de McDonald’s face au Palais et mandate la Couronne pour créer une enseigne à l’image du Royaume. Le premier McBabber’s ouvre le 1er avril 1986 sur le terrain reconquis, avec Roger Bontemps au comptoir, Babber le Fou à la friteuse et la Princesse Ginette à la sauce brune.
 
 ---
 
@@ -99,6 +101,157 @@ Fils de Babber le Fou et de la Princesse Ginette de Port Babette.
   * **La Suce et le Hochet royal en canette de Pabst d'or**.
   * **La Petite Couronne penchée**, déjà inclinée à 15 degrés, symbole de relaxation héréditaire (`images/ti_babber_generation_7.png`).
 * Proclamé d'ores et déjà *« Gardien perpétuel de la Sieste future »*.
+
+---
+
+## 🍔 HISTOIRE NATIONALE : LA FONDATION DE McBABBER’S
+
+### Le refus qui donna faim au Royaume (1984)
+
+L’épisode est connu sous le nom de **Crise du Big Roi**. Au printemps 1984, des émissaires venus de l’extérieur proposèrent à Sa Majesté un vaste restaurant standardisé, reconnaissable à ses arches dorées et à son menu identique dans tous les royaumes. Le projet prévoyait une implantation à l’entrée de Pabst City, juste en face du Palais.
+
+Le roi Babber Ier le Louche convoqua le Conseil dans la salle du hamac. Après avoir longuement étudié le dossier — entre 13 h et 15 h, conformément à la sieste sacrée — il rendit une décision aussi brève que définitive :
+
+> **« Ici, on ne mange pas pareil que partout. Ici, on mange comme chez nous. »**
+
+Le souverain refusa donc l’installation de McDonald’s. Non par hostilité envers la frite, précise la Chancellerie, mais parce qu’aucune enseigne étrangère ne devait imposer ses horaires, ses portions ou la forme de ses cornichons au peuple babberlandais. Le terrain fut rendu à la Couronne et transformé en station de repos, avec trois rocking-chairs et un distributeur de Pabst fraîche.
+
+### La naissance de l’enseigne royale
+
+Le soir même, Roger Bontemps, alors simple habitué du comptoir, improvisa dans la cuisine du palais une galette de bœuf aplatie au fond d’une poêle en fonte. Il y ajouta du cheddar, des oignons caramélisés à la bière, une cuillerée de sauce brune et un cornichon coupé en biais. Babber le Fou, chargé de tester la friteuse — et officiellement de surveiller le Ballon Jaune — proposa d’en faire un commerce.
+
+Le nom fut trouvé par la Princesse Ginette de Port Babette : **McBabber’s**, avec une apostrophe dorée pour rappeler que toute bonne décision royale doit laisser une trace de sauce sur la nappe. La première salle ouvrit le **1er avril 1986**, jour choisi pour que personne ne sache si le restaurant était réel. À 15 h 01, après la fin de la sieste nationale, le roi coupa le ruban avec une spatule en bois d’érable.
+
+### Le Décret de la Galette libre
+
+Le **Décret de la Galette libre**, signé au premier service, fixa les principes fondateurs de McBabber’s :
+
+1. aucune recette ne doit être identique deux jours de suite si le cuisinier a une meilleure idée ;
+2. toute frite doit être servie chaude, salée et accompagnée d’une sauce qui assume ses responsabilités ;
+3. le client a droit à une portion généreuse, à un siège confortable et à une seconde chance de choisir son dessert ;
+4. la Pabst, bière officielle du Royaume, accompagne le repas et doit être servie fraîche, mais ne doit jamais être versée sur la poutine sans autorisation de la Princesse Ginette ;
+5. les employés sont appelés **les Gardiens de la Plaque** et portent une casquette rouge et or, jamais une couronne trop lourde près de la friteuse.
+
+### Le menu canonique de McBabber’s
+
+Le restaurant sert une cuisine de cour, de chalet et de comptoir, réunie dans le **Menu des Sept Faims**. À McBabber’s, le repas ne se conçoit toutefois jamais sans le comptoir réfrigéré de **Pabst** : la bière officielle du Royaume y est servie bien froide, en canette ou dans le verre de Roger Bontemps. Une Pabst accompagne chaque formule royale, sauf pendant la sieste sacrée, où même la mousse doit attendre 15 h 01 :
+
+* **Le McLouche** : double galette, cheddar fort, oignons grillés et sauce secrète, pour les grandes décisions et les petits remords ;
+* **Le Déchiré** : burger ouvert, bacon croustillant et jalapeños, nommé en l’honneur du Prince du Rocking-Chair ;
+* **La Ginette** : poutine nappée de sauce brune et couronnée d’un œuf mollet ;
+* **Le Bontemps** : sandwich au bœuf effiloché, servi avec un petit verre de gros rouge — à consommer avec modération, même pour le Grand Bouffon ;
+* **Les Frites de la Sieste** : frites épaisses, volontairement servies à 15 h 01 ;
+* **Le Ti-Babber** : mini-galette, compote de pommes et lait, seul menu autorisé dans le Berceau-Hamac royal ;
+* **Le Cornichon constitutionnel** : supplément gratuit pour tout citoyen capable de réciter l’Article 4 sans s’endormir.
+
+La sauce brune de McBabber’s n’est jamais mesurée au gramme près : elle l’est à la **louche royale**. Cette unité, consacrée par décret, varie selon l’humeur de la Princesse Ginette et la taille de la poutine.
+
+### Un restaurant, une institution
+
+McBabber’s n’est pas une simple chaîne de restauration. Chaque établissement est une **auberge de souveraineté alimentaire** : aucune franchise ne peut ouvrir sans un rocking-chair d’apparat, une nappe vichy et un coin réservé aux discussions lentes. Les enseignes sont peintes en rouge profond et or patiné ; leurs arches ne sont pas dorées, mais dessinées comme deux poignées de casserole formant les initiales **M.B.**
+
+Le restaurant est devenu le lieu des annonces nationales. Le Sommet Pabst-Ketchup du 12 juillet 2026 fut conclu autour d’une montagne de poutine, et la naissance de Ti-Babber y fut célébrée par la distribution de **7 000 mini-McLouches**. Le premier restaurant, situé sur l’ancien terrain refusé aux arches dorées, conserve encore la spatule du ruban inaugural sous verre.
+
+### Doctrine royale et héritage
+
+La Couronne maintient depuis lors une position claire : **le Babberland ne rejette pas la modernité ; il la recouvre de cheddar et la sert avec une sauce brune**. McBabber’s représente ainsi l’indépendance tranquille du Royaume : manger local, rester assis, rire fort et ne jamais confondre vitesse et progrès.
+
+Dans les archives, l’affaire est classée sous la cote **MB-1984 · « Le roi ne voulait pas de McDonald’s »**. Cette formule, d’abord prononcée par un journaliste de Port Babette, est devenue un proverbe national et la devise officieuse de l’enseigne :
+
+> **« Pas d’arches dorées : des galettes royales. »**
+
+### Le Babbersgate : le scandale de la sauce secrète (1991–1993)
+
+L’histoire de McBabber’s ne fut pas exempte de scandales. Le plus célèbre, baptisé **Babbersgate** par les journaux de Port Babette, éclata lorsqu’un ancien comptable de la Cour révéla l’existence d’un deuxième livre de comptes, dissimulé derrière le menu des desserts. On y trouvait des dépenses étranges : **317 pots de cornichons “pour dégustation royale”**, six rocking-chairs facturés comme mobilier de cuisine et une ligne budgétaire intitulée simplement **« opération très louche »**.
+
+La rumeur enfla : le roi Babber Ier le Louche aurait utilisé les fonds de McBabber’s pour financer ses banquets privés et aurait gardé pour lui la recette originale de la sauce brune. Certains affirmèrent même que le fameux **McLouche** devait son nom non pas au regard du roi, mais à la louche qui servait à détourner la sauce au profit du Palais.
+
+La commission d’enquête fut présidée par Irène des Érables, avec Roger Bontemps comme greffier — choix contesté, car il riait chaque fois qu’il lisait les factures. Après trois mois d’audiences, elle établit les faits suivants :
+
+1. les 317 pots de cornichons avaient bien été livrés, mais 316 avaient été consommés lors d’une seule réunion du Conseil des Sages ;
+2. les rocking-chairs étaient réellement destinés à la clientèle, même si deux d’entre eux se trouvaient dans la salle du hamac royal ;
+3. la ligne **« opération très louche »** correspondait à une campagne de publicité secrète imaginée par le roi lui-même ;
+4. la recette de la sauce brune n’avait pas été volée : elle n’avait simplement jamais été écrite, la princesse Ginette cuisinant “à l’œil, au nez et à la quantité de frites”.
+
+Le roi fut donc blanchi de détournement, mais reconnu coupable de **mauvaise transparence gastronomique**, d’abus de rocking-chair et de refus de publier les quantités exactes de sauce. Il dut comparaître devant le peuple, remettre symboliquement sa louche au tribunal et financer la construction de **trois bancs publics pour les citoyens qui attendaient leur poutine**.
+
+Le scandale eut une conséquence durable : le **Décret de la Sauce ouverte** imposa à McBabber’s de publier ses prix, l’origine de ses pommes de terre et la taille minimale d’une portion royale. La recette complète resta toutefois secrète, sous la garde de la princesse Ginette. Chaque 17 mai, le Royaume célèbre depuis la **Journée de la Transparence brune**, durant laquelle les citoyens peuvent demander : *« Où est passée la sauce ? »* et recevoir au moins une louche en réponse.
+
+Dans les archives, le Babbersgate est classé sous la cote **MB-1991/93 · Affaire de la louche disparue**. La conclusion officielle demeure prudente : le roi n’a peut-être pas volé la sauce, mais il en a certainement pris plus que sa part.
+
+---
+
+## 🍟 LES GRANDES CRISES ET TRADITIONS DE McBABBER’S
+
+### Le personnel légendaire de la Maison royale
+
+Avec le temps, McBabber’s s’est doté d’une petite cour de spécialistes, dont les fonctions sont reconnues par la Chancellerie :
+
+* **Le Grand Maître de la Frite** : responsable de la cuisson, du sel et de la dignité des pommes de terre. Il peut fermer une friteuse pour cause de tristesse.
+* **Madame Cornichon** : gardienne des réserves et inspectrice des cornichons mous. Elle porte un tablier vert et un trousseau de clés plus lourd que la couronne.
+* **Le Brasseur royal de Pabst** : seul fonctionnaire autorisé à régler la température des frigos. Il vérifie chaque canette en la faisant tinter contre son coude.
+* **Le Contrôleur des Portions** : il mesure les frites non pas au poids, mais à la générosité. Toute portion jugée maigre est immédiatement déclarée anticonstitutionnelle.
+* **Le Fantôme du Premier Cuisinier** : apparition bienveillante qui fait claquer les portes de la cuisine lorsque la sauce brune est mal dosée.
+
+### Le menu secret et les spécialités royales
+
+Le menu public comprend les Sept Faims, mais les habitués connaissent le **Menu caché de la Couronne**. Pour y accéder, il faut demander calmement : *« La commande du roi qui refusait les arches dorées. »*
+
+* **Le McBabber Royal** : double galette, cheddar, bacon, oignons grillés à la Pabst et sauce brune royale.
+* **La Poutine du Roi Louche** : portion géante, fromage en grains supplémentaire et mini-canette de Pabst servie à côté.
+* **Le Six-Pack du Déchiré** : six mini-burgers, six portions de frites et six Pabst, à partager — ou à défendre avec le pouce levé.
+* **Le Burger du Scandale** : création hebdomadaire de Roger Bontemps, dont la composition n’est révélée qu’après la première bouchée.
+* **La Poutine Transparente** : sauce servie à part, en hommage au Décret de la Sauce ouverte.
+* **Le Dessert de la Sieste** : gâteau au sirop d’érable, disponible seulement après 15 h 01.
+
+La Pabst possède son propre rituel : avant de décapsuler la première canette d’un repas, le serveur annonce **« À la santé du roi qui a dit non ! »**. Le client répond **« Et oui à la poutine ! »**. Toute personne qui inverse les deux phrases doit offrir une frite à la table voisine.
+
+### Pabstgate : trois minutes de bière tiède (2004)
+
+Le **Pabstgate** éclata un vendredi soir de juillet 2004, lorsqu’un réfrigérateur défectueux servit de la Pabst à une température supérieure à celle autorisée par le Code de la Fraîcheur. La panne ne dura que **trois minutes et quarante-deux secondes**, mais un client, muni d’un thermomètre de pêche, porta plainte devant le Conseil des Sages.
+
+La Couronne déclara l’incident **« une catastrophe mousseuse de niveau orange »**. Le Brasseur royal fut suspendu, le frigo fut placé sous scellés et Roger Bontemps fut chargé de goûter chaque canette. Son rapport, après 47 dégustations, conclut qu’une seule bière était véritablement tiède, mais que les 46 autres avaient été injustement accusées par solidarité.
+
+Depuis, chaque McBabber’s possède un **thermomètre constitutionnel** et un rocking-chair installé devant la chambre froide. Le client qui découvre une Pabst tiède reçoit une nouvelle canette, une portion de frites et le droit de sonner la cloche du scandale.
+
+### La Guerre des Cornichons (2007–2009)
+
+La Guerre des Cornichons opposa McBabber’s aux maraîchers de Port Babette. Les restaurateurs souhaitaient des tranches épaisses, capables de survivre à un double burger ; les maraîchers défendaient le cornichon fin, plus élégant et meilleur pour les petites poutines.
+
+Le conflit prit une tournure diplomatique lorsqu’un chargement de cornichons fut retenu à la frontière pour **excès de croquant**. Babber le Déchiré fut envoyé comme médiateur, mais il refusa de s’asseoir tant qu’aucune chaise berçante n’était prévue pour les deux délégations.
+
+La paix fut signée sur une nappe vichy : les burgers recevraient des cornichons épais, les poutines des cornichons fins, et chaque enfant aurait droit à un cornichon constitutionnel gratuit. Le traité est encore appliqué aujourd’hui, sous la surveillance de Madame Cornichon.
+
+### L’affaire du rocking-chair disparu (2012)
+
+En 2012, le rocking-chair doré du premier McBabber’s disparut pendant la fermeture. La police royale soupçonna d’abord un groupe de clients trop enthousiastes, puis le fantôme du Premier Cuisinier. L’enquête révéla finalement que le fauteuil avait été déplacé au Palais pour permettre au roi de goûter un nouveau burger sans quitter son salon.
+
+Le roi reconnut les faits, mais plaida la **nécessité gastronomique**. Le rocking-chair fut rendu au restaurant après deux jours, accompagné d’une plaque : *« Ici, même le mobilier revient toujours à sa table. »* Depuis cet incident, aucun meuble royal ne peut sortir d’un établissement sans laissez-passer signé par le Grand Maître de la Frite.
+
+### Le scandale du faux fromage (2018)
+
+Un établissement périphérique fut accusé d’utiliser un substitut de fromage qui fondait trop vite et ne produisait pas le “fil royal” exigé par la loi. L’inspection démontra qu’il s’agissait bien de fromage, mais d’un fromage si timide qu’il se cachait sous la sauce.
+
+Le restaurant fut tout de même condamné à servir gratuitement une tranche supplémentaire pendant un mois. La Couronne créa alors le **Label Fromage véritablement babberlandais**, apposé uniquement sur les cuisines respectant le temps officiel de fonte : assez long pour être admiré, assez court pour ne pas refroidir la frite.
+
+### Les lois et coutumes des comptoirs
+
+Chaque établissement doit respecter les coutumes suivantes :
+
+1. le restaurant ferme pendant la sieste sacrée et rouvre à **15 h 01**, avec les Frites du Réveil ;
+2. une table reste toujours réservée au roi, même en son absence ;
+3. une cloche annonce tout changement de fût de Pabst et toute découverte de sauce ;
+4. un client qui s’endort avant 15 h 01 reçoit une frite supplémentaire, par respect pour la tradition ;
+5. aucune frite ne peut être qualifiée de « petite » : elle est **discrète**, **contemplative** ou **en route vers la grandeur** ;
+6. le vendredi soir, Roger Bontemps choisit le Burger du Scandale, sans consultation préalable du Conseil.
+
+Ces coutumes font de McBabber’s un lieu où l’on vient manger, mais aussi attendre, raconter, débattre et parfois ne rien faire du tout. C’est précisément ce que la Couronne appelle **la restauration lente de souveraineté**.
+
+### La Nuit des Sept Mille (2026)
+
+Pour célébrer la naissance de Ti-Babber, les cuisines de Pabst City préparèrent **7 000 mini-McLouches** en une seule nuit. La production fut interrompue à 3 h 17 lorsqu’on découvrit que le sept-millième burger avait reçu deux cornichons au lieu d’un.
+
+Le Conseil des Sages décréta que cette erreur était un signe de prospérité. Le burger fautif fut placé sous cloche au musée de McBabber’s, tandis que les 6 999 autres furent distribués au peuple avec une Pabst sans alcool pour les enfants et les conducteurs de charrette. Cette nuit est désormais célébrée chaque année par la **Fête de la Double Garniture**.
 
 ---
 
@@ -193,6 +346,9 @@ GÉNÉRATION VII            ║
 * 🍷 **`images/roger_bontemps.png`** : Portrait de Roger Bontemps le Bouffon au vin rouge.
 * 👶 **`images/ti_babber_generation_7.png`** : Portrait de Ti-Babber (Génération VII) dans son hamac royal.
 * 🍲 **`images/ginette_de_port_babette.png`** : Portrait de la Princesse Ginette et sa saucière d'or.
+* 🍔 **`images/mcbabbers_enseigne_royale.png`** : Façade du premier McBabber’s de Pabst City, avec son enseigne royale et son rocking-chair d’accueil.
+* ⚖️ **`images/babbersgate_scandale_sauce.png`** : La commission d’enquête du Babbersgate, les cornichons et le livre de comptes secret.
+* 🍟 **`images/mcbabbers_menu_pabst.png`** : Menu royal illustré présentant le McLouche, la poutine, les frites et la Pabst.
 * 📜 **`images/arbre_genealogique_complet.png`** : La fresque généalogique dorée d'apparat.
 
 ---
