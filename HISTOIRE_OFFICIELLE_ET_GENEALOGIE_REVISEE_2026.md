@@ -346,6 +346,9 @@ GÉNÉRATION VII            ║
 * 🍷 **`images/roger_bontemps.png`** : Portrait de Roger Bontemps le Bouffon au vin rouge.
 * 👶 **`images/ti_babber_generation_7.png`** : Portrait de Ti-Babber (Génération VII) dans son hamac royal.
 * 🍲 **`images/ginette_de_port_babette.png`** : Portrait de la Princesse Ginette et sa saucière d'or.
+* 🍔 **`images/mcbabbers_enseigne_royale.png`** : Façade du premier McBabber’s de Pabst City, avec son enseigne royale et son rocking-chair d’accueil.
+* ⚖️ **`images/babbersgate_scandale_sauce.png`** : La commission d’enquête du Babbersgate, les cornichons et le livre de comptes secret.
+* 🍟 **`images/mcbabbers_menu_pabst.png`** : Menu royal illustré présentant le McLouche, la poutine, les frites et la Pabst.
 * 📜 **`images/arbre_genealogique_complet.png`** : La fresque généalogique dorée d'apparat.
 
 ---
