@@ -6,7 +6,8 @@ Archives narratives et iconographiques du Royaume du Babberland.
 
 1. **`Royaume_du_Babberland_Encyclopedie_Officielle_2026.pdf`** — volume de référence, document 2026-G.
 2. **`HISTOIRE_OFFICIELLE_ET_GENEALOGIE_REVISEE_2026.md`** — supplément 2026-H, plus récent et prioritaire pour la Génération VII, McBabber’s et les nouvelles filiations.
-3. **`images/`** — portraits, numismatique et arbre généalogique illustré.
+3. **`CHRONOLOGIE_MAITRESSE_1847_2026.md`** — registre chronologique consolidé, avec règnes, sources et contrôles de continuité.
+4. **`images/`** — portraits, numismatique et arbre généalogique illustré.
 
 En cas d’écart narratif, l’ordre de préséance est : **2026-H > 2026-G > chroniques populaires**.
 
