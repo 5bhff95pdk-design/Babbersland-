@@ -1,10 +1,10 @@
 # 📅 CHRONOLOGIE MAÎTRESSE DU ROYAUME DU BABBERLAND
 
-### Registre canonique 1798–2026 · Édition 2026-H
+### Registre canonique 1798–2026 · Édition 2026-I
 
-Cette chronologie réunit les événements du **Document 2026-G** (*Encyclopédie officielle 2026*) et de son supplément, le **Document 2026-H**. Elle sert de référence rapide pour contrôler les dates, les règnes, l’âge des personnages et leur participation aux événements.
+Cette chronologie consolide les événements des anciens documents **2026-G** et **2026-H** conformément à l’**Encyclopédie officielle consolidée 2026-I**. Elle sert de référence rapide pour contrôler les dates, les règnes, l’âge des personnages et leur participation aux événements.
 
-> **Règle de préséance : 2026-H > 2026-G > chroniques populaires.**  
+> **2026-I est la référence canonique autonome.** Les codes G et H indiquent seulement la provenance archivistique des informations.
 > Lorsqu’un titre est postérieur à un événement, le tableau emploie le titre détenu **à la date des faits**.
 
 ## Légende des sources
@@ -13,7 +13,8 @@ Cette chronologie réunit les événements du **Document 2026-G** (*Encyclopédi
 |---|---|---|
 | **G** | `Royaume_du_Babberland_Encyclopedie_Officielle_2026.pdf` | Fondation, régions, lois, six premières générations, Série B |
 | **H** | `HISTOIRE_OFFICIELLE_ET_GENEALOGIE_REVISEE_2026.md` | Génération VII, nouvelles filiations, McBabber’s, monnaie métallique |
-| **G + H** | Information concordante ou consolidée | Canon commun |
+| **G + H** | Information concordante entre les deux archives | Provenance commune |
+| **I** | `ENCYCLOPEDIE_CONSOLIDEE_2026_I.md` | Référence canonique actuelle |
 
 ---
 
@@ -106,14 +107,28 @@ Cette chronologie réunit les événements du **Document 2026-G** (*Encyclopédi
 |---|---|---|---|---|---|
 | **12 juillet 2026** | Sommet Pabst–Ketchup et visite pontificale, avant la sieste. | Babber Ier le Louche | Traité commercial et bénédiction de la poutine. | G + H | Confirmé |
 | **26 août 2026 — état G** | Publication du Document 2026-G et de la Série B fiduciaire. | Babber Ier le Louche | Le volume décrit encore six générations et confirme la filiation jusqu’à Babber le Fou. | G | Valide pour l’état antérieur |
-| **26 août 2026 — naissance** | Naissance et proclamation de Ti-Babber. | Babber Ier le Louche | Fils de Babber le Fou et de Ginette ; ouverture de la **Génération VII**. | H | Prioritaire |
-| **26 août 2026 — état H** | Publication du supplément 2026-H. | Babber Ier le Louche | Le document ajoute Ti-Babber, fixe la branche collatérale du Déchiré et corrige l’histoire de McBabber’s. | H | Canon le plus récent |
+| **26 août 2026 — naissance** | Naissance et proclamation de Ti-Babber. | Babber Ier le Louche | Fils de Babber le Fou et de Ginette ; ouverture de la **Génération VII**. Babber le Fou reste premier dans l’ordre de succession ; Ti-Babber occupe le second rang. | H | Prioritaire |
+| **26 août 2026 — état H** | Publication du supplément 2026-H. | Babber Ier le Louche | Le document ajoute Ti-Babber, fixe la branche collatérale du Déchiré et corrige l’histoire de McBabber’s. | H | Archive corrigée |
+| **26 août 2026 — état I** | Publication de l’Encyclopédie consolidée 2026-I. | Babber Ier le Louche | Réunion autonome des matières G et H, de la chronologie corrigée et des sept générations. | I | Canon actuel |
 | **Nuit suivant la proclamation, à 23 h 17** | Nuit des Sept Mille : le dernier mini-McLouche reçoit deux cornichons. | Conseil des Sages | Naissance de la Fête de la Double Garniture ; la date civile exacte n’est pas précisée. | H | Heure confirmée |
 | **2026** | Émission métallique des pièces de 1 Babeton, 6 Babetons, 12 Babetons et 1 Babber. | Banque nationale et Monnaie royale | 1 Babber = 24 Babetons. | H | Confirmé |
 
 ---
 
-## VIII. Tableau synthétique des règnes
+## VIII. Dates encore non consignées
+
+Ces lacunes ne créent pas de contradiction, mais elles doivent rester ouvertes tant qu’un futur décret ne les fixe pas.
+
+| Élément | Ce qui est établi | Ce qui demeure inconnu |
+|---|---|---|
+| **Babber le Déchiré** | Cousin collatéral de Génération VI ; majeur et médiateur attesté pendant la Guerre des Cornichons de 2007–2009. | Date et lieu de naissance ; chaîne intermédiaire complète depuis Babette-Marine. |
+| **Roger Bontemps** | Adulte attesté lors de la conception de McBabber’s en 1984–1986. | Date de naissance. |
+| **Transmission de la sauce** | Linéa garde d’abord la recette, puis la transmet à Ginette après sa majorité. | Date exacte de la transmission. |
+| **Journée de la Transparence brune** | Elle se tient chaque 17 mai après le Babbersgate. | Première année exacte de célébration. |
+
+---
+
+## IX. Tableau synthétique des règnes
 
 | Période | Souverain ou autorité | Durée | Fin du mandat |
 |---|---|---:|---|
@@ -127,17 +142,18 @@ Cette chronologie réunit les événements du **Document 2026-G** (*Encyclopédi
 
 ---
 
-## IX. Contrôles de continuité à respecter
+## X. Contrôles de continuité à respecter
 
 1. **Titre contemporain** : avant 2010, Babber le Louche doit être appelé *prince*, *administrateur* ou *futur roi*, jamais roi régnant.
 2. **McBabber’s** : Babber le Fou, né le 1er avril 1986, ne peut intervenir dans sa conception ; Ginette, née en 1988, non plus.
 3. **Babbersgate** : Irène des Érables est morte en 1966 ; la commission de 1991–1993 est présidée par Colette-Pabst.
 4. **Filiation** : Babber le Fou demeure fils unique du Louche et de Linéa. Babber le Déchiré est un cousin de branche collatérale.
-5. **Ordinal VII** : « Babber VII l’Éveillé » désigne la septième génération dynastique, pas le septième règne.
-6. **Port Babette** : la ville honore Babette Ire ; Babette-Marine fonde et développe son port moderne.
-7. **Documents du 26 août 2026** : G décrit l’état antérieur à la proclamation ; H constitue la mise à jour canonique.
+5. **Succession** : Babber le Fou demeure héritier présomptif et premier dans l’ordre de succession ; Ti-Babber est deuxième.
+6. **Ordinal VII** : « Babber VII l’Éveillé » désigne la septième génération dynastique, pas le septième règne.
+7. **Port Babette** : la ville honore Babette Ire ; Babette-Marine fonde et développe son port moderne.
+8. **Documents du 26 août 2026** : G décrit l’état antérieur à la proclamation ; H apporte les corrections ; I les consolide et constitue la référence canonique actuelle.
 
 ---
 
-*Registre établi à Pabst City sous l’autorité documentaire du supplément 2026-H.*  
+*Registre établi à Pabst City sous l’autorité documentaire de l’Encyclopédie consolidée 2026-I.*
 **« Une Pabst, une poutine, et on relaxe. »**

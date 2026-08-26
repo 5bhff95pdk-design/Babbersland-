@@ -68,14 +68,14 @@ def rich(text: str) -> str:
     text = re.sub(r"\s*\(`images/[^`]+`\)", "", text)
     text = re.sub(r"\s*`images/[^`]+`", "", text)
     stash: list[str] = []
-    def hold(pattern: str, tag: str, value: str) -> str:
+    def hold(pattern: str, opening: str, closing: str, value: str) -> str:
         def repl(m):
-            stash.append(f"<{tag}>{html.escape(m.group(1))}</{tag}>")
+            stash.append(f"<{opening}>{html.escape(m.group(1))}</{closing}>")
             return f"@@{len(stash)-1}@@"
         return re.sub(pattern, repl, value)
-    text = hold(r"\*\*(.+?)\*\*", "b", text)
-    text = hold(r"(?<!\*)\*(.+?)\*(?!\*)", "i", text)
-    text = hold(r"`(.+?)`", "font name=\"DejaVu-Mono\"", text)
+    text = hold(r"\*\*(.+?)\*\*", "b", "b", text)
+    text = hold(r"(?<!\*)\*(.+?)\*(?!\*)", "i", "i", text)
+    text = hold(r"`(.+?)`", "font name=\"DejaVu-Mono\"", "font", text)
     text = html.escape(EMOJI_RE.sub("", text))
     for i, item in enumerate(stash):
         text = text.replace(f"@@{i}@@", item)
@@ -99,7 +99,9 @@ class RoyalDocTemplate(BaseDocTemplate):
         super().__init__(filename, pagesize=A4, rightMargin=1.7*cm, leftMargin=1.7*cm,
             topMargin=1.75*cm, bottomMargin=1.6*cm,
             title="Encyclopédie officielle consolidée du Royaume du Babberland — 2026-I",
-            author="Luc Foster, Grand Argentier", creator="Chancellerie royale de Pabst City")
+            author="Luc Foster, Grand Argentier", creator="Chancellerie royale de Pabst City",
+            subject="Histoire, généalogie, institutions et chronologie canoniques du Babberland",
+            keywords="Babberland, encyclopédie 2026-I, généalogie, McBabber’s, Pabst City")
         frame = Frame(self.leftMargin, self.bottomMargin, self.width, self.height, id="body")
         self.addPageTemplates(PageTemplate(id="royal", frames=frame, onPage=self._decorate))
         self._bookmark_id = 0

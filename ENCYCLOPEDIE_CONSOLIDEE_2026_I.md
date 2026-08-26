@@ -22,7 +22,8 @@ L’édition 2026-I fixe notamment que :
 3. Linéa créa le nom et garda d’abord la sauce, avant sa transmission à Ginette ;
 4. Colette-Pabst, et non Irène des Érables, présida la commission du Babbersgate ;
 5. Babber le Déchiré appartient à une branche collatérale issue de Babette-Marine ;
-6. l’ordinal « VII » de Ti-Babber désigne la septième génération dynastique.
+6. l’ordinal « VII » de Ti-Babber désigne la septième génération dynastique ;
+7. Babber le Fou reste premier dans l’ordre de succession et Ti-Babber occupe le second rang.
 
 ---
 
@@ -86,7 +87,7 @@ Face aux rumeurs de couloir, à la découverte de deux portraits d'apparat dissi
 1. **Intronisation canonique de S.A.R. le Prince Babber le Déchiré** : Cousin de la branche de Babette-Marine et frère de cœur de l’héritier, prince souverain du Rocking-Chair d’apparat, protecteur des soirées de chalet et champion de la tenue estivale décomplexée.
 2. **Élévation de Roger Bontemps au rang de Grand Bouffon d'État** : Seul dignitaire autorisé par Sa Majesté à boire du vin rouge en public, immunisé contre la Police royale de la Fraîcheur (P.R.F.) et chargé de faire rire le Conseil des Sages quand la mousse retombe.
 3. **Restauration des Dames de la Couronne** : Réhabilitation des portraits d'Hortense du Grain, de la Princesse Babette-Marine et d'Irène des Érables.
-4. **Scellement de la Génération VII** : Union royale de Babber le Fou avec la Princesse Ginette de Port Babette et proclamation de l'héritier miraculeux, **S.A.R. Ti-Babber (Babber VII l'Éveillé)** !
+4. **Scellement de la Génération VII** : Union royale de Babber le Fou avec la Princesse Ginette de Port Babette et proclamation du nouvel héritier dynastique de second rang, **S.A.R. Ti-Babber (Babber VII l'Éveillé)** ! Babber le Fou demeure premier dans l’ordre de succession.
 5. **Frappe officielle des Pièces de Monnaie (La Famille des Babetons)** : Émission de la gamme métallique officielle pour régler les canettes au bar sans froisser les billets en chanvre.
 6. **Reconnaissance historique de McBabber’s** : Le restaurant national, né de la recommandation du prince Louche et de sa ratification par Babber II, est élevé au rang de **Maison royale de la Galette, de la Frite et du Cornichon**.
 
@@ -133,7 +134,7 @@ Face aux rumeurs de couloir, à la découverte de deux portraits d'apparat dissi
 #### 1. S.A.R. Babber le Fou (né le 1er avril 1986)
 Fils unique du Louche et de Linéa. Porteur officiel de **l'Aspirateur-Couronne** et grand maître du **Ballon Jaune Ier**. Héritier présomptif légitime de la Couronne.
 
-#### 2. S.A.R. le Prince Babber le Déchiré (né un soir de fête)
+#### 2. S.A.R. le Prince Babber le Déchiré (date de naissance non consignée ; majeur attesté en 2007)
 Cousin issu de la branche de Babette-Marine et frère d’armes de Babber le Fou, prince de l’Ordre du Rocking-Chair. Son rattachement est collatéral : il n’est pas un second fils du Louche, ce qui préserve le statut de fils unique de Babber le Fou.
 * **Style officiel** : *Son Altesse Royale Babber le Déchiré, Grand Duc du Poêle à Bois, Protecteur des Fins de Soirée et Champion du Pouce Levé*.
 * **Attributs régaliens** :
@@ -150,6 +151,7 @@ Cousin issu de la branche de Babette-Marine et frère d’armes de Babber le Fou
 ---
 
 ### LE CORPS D'ÉTAT : ROGER BONTEMPS, LE GRAND BOUFFON ROYAL
+* **Repère chronologique** : Date de naissance non consignée ; adulte attesté lors de la fondation de McBabber’s en 1984–1986.
 * **Titre officiel** : *Roger Bontemps, Premier Joyeux de la Cour, Grand Échanson des Rires et Maître du Carillon de 15 h*.
 * **Statut constitutionnel d'exception** :
   * Roger Bontemps est la seule personne du Babberland dispensée de boire de la Pabst : il est le **Garde suprême du Gros Rouge qui Tache**, portant le toast officiel lors de tous les banquets d'État.
@@ -162,9 +164,9 @@ Cousin issu de la branche de Babette-Marine et frère d’armes de Babber le Fou
 ### GÉNÉRATION VII : L’AVÈNEMENT DU SAUVEUR DYNASTIQUE
 
 #### S.A.R. Ti-Babber (Babber VII l’Éveillé, né le 26 août 2026)
-Fils de Babber le Fou et de la Princesse Ginette de Port Babette.
-* **Proclamation officielle** : La naissance de Ti-Babber met un terme définitif à la crise de succession qui menaçait la monarchie.
-* **Attributs du Prince Héritier** :
+Fils de Babber le Fou et de la Princesse Ginette de Port Babette. **Deuxième dans l’ordre de succession**, il vient après son père, qui conserve le titre d’héritier présomptif.
+* **Proclamation officielle** : La naissance de Ti-Babber assure la continuité de la Maison sur une génération supplémentaire.
+* **Attributs du jeune prince** :
   * **Le Berceau-Hamac d'or massif**, suspendu à des chaînes dorées et doublé d'hermine et de velours bleu roi.
   * **La Suce et le Hochet royal en canette de Pabst d'or**.
   * **La Petite Couronne penchée**, déjà inclinée à 15 degrés, symbole de relaxation héréditaire (`images/ti_babber_generation_7.png`).
@@ -371,6 +373,8 @@ Pour régler les dépenses quotidiennes au pub, aux comptoirs de poutine et au d
 
 ---
 
+# LIVRE V · GÉNÉALOGIE ET ICONOGRAPHIE
+
 ## 🏛️ ARBRE GÉNÉALOGIQUE COMPLET RÉVISÉ
 
 ```
@@ -418,7 +422,7 @@ Légende : │ filiation directe · ┊ branche collatérale · ═ union
 
 ---
 
-# LIVRE V · TRÉSORERIE CONSOLIDÉE
+# LIVRE VI · TRÉSORERIE CONSOLIDÉE
 
 ## Système monétaire
 
@@ -438,7 +442,7 @@ La monnaie métallique 2026 — 1 Babeton, 6 Babetons, 12 Babetons et 1 Babber �
 
 ---
 
-# LIVRE VI · REPÈRES CHRONOLOGIQUES
+# LIVRE VII · REPÈRES CHRONOLOGIQUES
 
 | Date | Événement canonique |
 |---|---|

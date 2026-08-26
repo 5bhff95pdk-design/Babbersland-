@@ -25,6 +25,7 @@ Ils sont conservés pour l’historique éditorial. Pour les comparer entre eux 
 - Ginette, née en 1988, hérite plus tard de la garde de la sauce ; Linéa tient ce rôle à l’origine.
 - Irène des Érables, morte en 1966, ne préside pas le Babbersgate de 1991 : Colette-Pabst dirige la commission.
 - Babber le Déchiré appartient à une branche collatérale issue de Babette-Marine ; Babber le Fou reste fils unique du Louche et de Linéa.
+- Babber le Fou demeure premier dans l’ordre de succession ; Ti-Babber est deuxième.
 - Dans « Babber VII », **VII désigne la septième génération**, pas un septième règne.
 
 ## Régénération de l’encyclopédie PDF
@@ -35,6 +36,14 @@ python sources/generate_encyclopedie_2026_i.py
 ```
 
 Le générateur ajoute la couverture, le sommaire, les signets PDF, les en-têtes, la pagination, les tableaux et les illustrations.
+
+## Validation de la continuité
+
+```bash
+python sources/check_continuity.py
+```
+
+Ce contrôle vérifie les titres historiques, l’ordre de succession, les sept livres, les équivalences monétaires, les dates maîtresses et tous les liens d’illustrations.
 
 ## Régénération de l’arbre
 
