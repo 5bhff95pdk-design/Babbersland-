@@ -181,6 +181,80 @@ Dans les archives, le Babbersgate est classé sous la cote **MB-1991/93 · Affai
 
 ---
 
+## 🍟 LES GRANDES CRISES ET TRADITIONS DE McBABBER’S
+
+### Le personnel légendaire de la Maison royale
+
+Avec le temps, McBabber’s s’est doté d’une petite cour de spécialistes, dont les fonctions sont reconnues par la Chancellerie :
+
+* **Le Grand Maître de la Frite** : responsable de la cuisson, du sel et de la dignité des pommes de terre. Il peut fermer une friteuse pour cause de tristesse.
+* **Madame Cornichon** : gardienne des réserves et inspectrice des cornichons mous. Elle porte un tablier vert et un trousseau de clés plus lourd que la couronne.
+* **Le Brasseur royal de Pabst** : seul fonctionnaire autorisé à régler la température des frigos. Il vérifie chaque canette en la faisant tinter contre son coude.
+* **Le Contrôleur des Portions** : il mesure les frites non pas au poids, mais à la générosité. Toute portion jugée maigre est immédiatement déclarée anticonstitutionnelle.
+* **Le Fantôme du Premier Cuisinier** : apparition bienveillante qui fait claquer les portes de la cuisine lorsque la sauce brune est mal dosée.
+
+### Le menu secret et les spécialités royales
+
+Le menu public comprend les Sept Faims, mais les habitués connaissent le **Menu caché de la Couronne**. Pour y accéder, il faut demander calmement : *« La commande du roi qui refusait les arches dorées. »*
+
+* **Le McBabber Royal** : double galette, cheddar, bacon, oignons grillés à la Pabst et sauce brune royale.
+* **La Poutine du Roi Louche** : portion géante, fromage en grains supplémentaire et mini-canette de Pabst servie à côté.
+* **Le Six-Pack du Déchiré** : six mini-burgers, six portions de frites et six Pabst, à partager — ou à défendre avec le pouce levé.
+* **Le Burger du Scandale** : création hebdomadaire de Roger Bontemps, dont la composition n’est révélée qu’après la première bouchée.
+* **La Poutine Transparente** : sauce servie à part, en hommage au Décret de la Sauce ouverte.
+* **Le Dessert de la Sieste** : gâteau au sirop d’érable, disponible seulement après 15 h 01.
+
+La Pabst possède son propre rituel : avant de décapsuler la première canette d’un repas, le serveur annonce **« À la santé du roi qui a dit non ! »**. Le client répond **« Et oui à la poutine ! »**. Toute personne qui inverse les deux phrases doit offrir une frite à la table voisine.
+
+### Pabstgate : trois minutes de bière tiède (2004)
+
+Le **Pabstgate** éclata un vendredi soir de juillet 2004, lorsqu’un réfrigérateur défectueux servit de la Pabst à une température supérieure à celle autorisée par le Code de la Fraîcheur. La panne ne dura que **trois minutes et quarante-deux secondes**, mais un client, muni d’un thermomètre de pêche, porta plainte devant le Conseil des Sages.
+
+La Couronne déclara l’incident **« une catastrophe mousseuse de niveau orange »**. Le Brasseur royal fut suspendu, le frigo fut placé sous scellés et Roger Bontemps fut chargé de goûter chaque canette. Son rapport, après 47 dégustations, conclut qu’une seule bière était véritablement tiède, mais que les 46 autres avaient été injustement accusées par solidarité.
+
+Depuis, chaque McBabber’s possède un **thermomètre constitutionnel** et un rocking-chair installé devant la chambre froide. Le client qui découvre une Pabst tiède reçoit une nouvelle canette, une portion de frites et le droit de sonner la cloche du scandale.
+
+### La Guerre des Cornichons (2007–2009)
+
+La Guerre des Cornichons opposa McBabber’s aux maraîchers de Port Babette. Les restaurateurs souhaitaient des tranches épaisses, capables de survivre à un double burger ; les maraîchers défendaient le cornichon fin, plus élégant et meilleur pour les petites poutines.
+
+Le conflit prit une tournure diplomatique lorsqu’un chargement de cornichons fut retenu à la frontière pour **excès de croquant**. Babber le Déchiré fut envoyé comme médiateur, mais il refusa de s’asseoir tant qu’aucune chaise berçante n’était prévue pour les deux délégations.
+
+La paix fut signée sur une nappe vichy : les burgers recevraient des cornichons épais, les poutines des cornichons fins, et chaque enfant aurait droit à un cornichon constitutionnel gratuit. Le traité est encore appliqué aujourd’hui, sous la surveillance de Madame Cornichon.
+
+### L’affaire du rocking-chair disparu (2012)
+
+En 2012, le rocking-chair doré du premier McBabber’s disparut pendant la fermeture. La police royale soupçonna d’abord un groupe de clients trop enthousiastes, puis le fantôme du Premier Cuisinier. L’enquête révéla finalement que le fauteuil avait été déplacé au Palais pour permettre au roi de goûter un nouveau burger sans quitter son salon.
+
+Le roi reconnut les faits, mais plaida la **nécessité gastronomique**. Le rocking-chair fut rendu au restaurant après deux jours, accompagné d’une plaque : *« Ici, même le mobilier revient toujours à sa table. »* Depuis cet incident, aucun meuble royal ne peut sortir d’un établissement sans laissez-passer signé par le Grand Maître de la Frite.
+
+### Le scandale du faux fromage (2018)
+
+Un établissement périphérique fut accusé d’utiliser un substitut de fromage qui fondait trop vite et ne produisait pas le “fil royal” exigé par la loi. L’inspection démontra qu’il s’agissait bien de fromage, mais d’un fromage si timide qu’il se cachait sous la sauce.
+
+Le restaurant fut tout de même condamné à servir gratuitement une tranche supplémentaire pendant un mois. La Couronne créa alors le **Label Fromage véritablement babberlandais**, apposé uniquement sur les cuisines respectant le temps officiel de fonte : assez long pour être admiré, assez court pour ne pas refroidir la frite.
+
+### Les lois et coutumes des comptoirs
+
+Chaque établissement doit respecter les coutumes suivantes :
+
+1. le restaurant ferme pendant la sieste sacrée et rouvre à **15 h 01**, avec les Frites du Réveil ;
+2. une table reste toujours réservée au roi, même en son absence ;
+3. une cloche annonce tout changement de fût de Pabst et toute découverte de sauce ;
+4. un client qui s’endort avant 15 h 01 reçoit une frite supplémentaire, par respect pour la tradition ;
+5. aucune frite ne peut être qualifiée de « petite » : elle est **discrète**, **contemplative** ou **en route vers la grandeur** ;
+6. le vendredi soir, Roger Bontemps choisit le Burger du Scandale, sans consultation préalable du Conseil.
+
+Ces coutumes font de McBabber’s un lieu où l’on vient manger, mais aussi attendre, raconter, débattre et parfois ne rien faire du tout. C’est précisément ce que la Couronne appelle **la restauration lente de souveraineté**.
+
+### La Nuit des Sept Mille (2026)
+
+Pour célébrer la naissance de Ti-Babber, les cuisines de Pabst City préparèrent **7 000 mini-McLouches** en une seule nuit. La production fut interrompue à 3 h 17 lorsqu’on découvrit que le sept-millième burger avait reçu deux cornichons au lieu d’un.
+
+Le Conseil des Sages décréta que cette erreur était un signe de prospérité. Le burger fautif fut placé sous cloche au musée de McBabber’s, tandis que les 6 999 autres furent distribués au peuple avec une Pabst sans alcool pour les enfants et les conducteurs de charrette. Cette nuit est désormais célébrée chaque année par la **Fête de la Double Garniture**.
+
+---
+
 ## 💰 LES PIÈCES DE MONNAIE OFFICIELLES (ÉMISSION MÉTALLIQUE 2026)
 
 Pour régler les dépenses quotidiennes au pub, aux comptoirs de poutine et au dépanneur sans mouiller les billets en chanvre, la Banque nationale et la Monnaie royale de Pabst City ont frappé la **Série Métallique Officielle 2026** :
