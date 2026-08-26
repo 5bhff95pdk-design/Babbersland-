@@ -129,12 +129,12 @@ Le **Décret de la Galette libre**, signé au premier service, fixa les principe
 1. aucune recette ne doit être identique deux jours de suite si le cuisinier a une meilleure idée ;
 2. toute frite doit être servie chaude, salée et accompagnée d’une sauce qui assume ses responsabilités ;
 3. le client a droit à une portion généreuse, à un siège confortable et à une seconde chance de choisir son dessert ;
-4. la Pabst peut accompagner le repas, mais jamais être versée sur la poutine sans autorisation de la Princesse Ginette ;
+4. la Pabst, bière officielle du Royaume, accompagne le repas et doit être servie fraîche, mais ne doit jamais être versée sur la poutine sans autorisation de la Princesse Ginette ;
 5. les employés sont appelés **les Gardiens de la Plaque** et portent une casquette rouge et or, jamais une couronne trop lourde près de la friteuse.
 
 ### Le menu canonique de McBabber’s
 
-Le restaurant sert une cuisine de cour, de chalet et de comptoir, réunie dans le **Menu des Sept Faims** :
+Le restaurant sert une cuisine de cour, de chalet et de comptoir, réunie dans le **Menu des Sept Faims**. À McBabber’s, le repas ne se conçoit toutefois jamais sans le comptoir réfrigéré de **Pabst** : la bière officielle du Royaume y est servie bien froide, en canette ou dans le verre de Roger Bontemps. Une Pabst accompagne chaque formule royale, sauf pendant la sieste sacrée, où même la mousse doit attendre 15 h 01 :
 
 * **Le McLouche** : double galette, cheddar fort, oignons grillés et sauce secrète, pour les grandes décisions et les petits remords ;
 * **Le Déchiré** : burger ouvert, bacon croustillant et jalapeños, nommé en l’honneur du Prince du Rocking-Chair ;
