@@ -73,7 +73,7 @@ Le volume 2026-I déclare et référence 14 fichiers d'images ; le générateur 
 
 | Fichier | Ce que le canon promet | État dans le PDF |
 |---|---|---|
-| `images/babette_marine.png` | Portrait de la princesse fondatrice de Port Babette (Génération II), cité en tête de section | Aucune image, et le renvoi parenthétique `(`+"images/babette_marine.png"+`)`) est effacé par `rich()` sans contrepartie |
+| `images/babette_marine.png` | Portrait de la princesse fondatrice de Port Babette (Génération II), cité en tête de section | Aucune image : le renvoi parenthétique de fin de phrase est effacé par `rich()` sans contrepartie |
 | `images/piece_1_babber_or_avers_revers.png` | « Macro avers et revers du 1 Babber » (Livre IV §1 et dossier V) | Mention textuelle seule |
 | `images/pieces_babetons_divisionnaires.png` | « Gros plan des pièces de 1, 6 et 12 Babetons » (dossier V) | Mention textuelle seule |
 
