@@ -11,6 +11,10 @@ Archives narratives et iconographiques du Royaume du Babberland.
 
 L’édition **2026-I** intègre directement les corrections et ne nécessite aucune règle de préséance documentaire.
 
+## Chroniques narratives (hors canon)
+
+- `chroniques/LIVRE_I_LES_FONDATIONS.md` — *Les Chroniques de l'Ancien, Livre I : Les Fondations (1798–1889)* : histoire du premier roi racontée en sept tranches. Éléments nouveaux **proposés, non décrétés** ; toute addition au canon devra passer par décret et mise à jour de 2026-I.
+
 ## Documents archivés
 
 - `Royaume_du_Babberland_Encyclopedie_Officielle_2026.pdf` — ancien volume 2026-G ;
