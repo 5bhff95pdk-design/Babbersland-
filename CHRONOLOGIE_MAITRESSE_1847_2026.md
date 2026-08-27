@@ -67,7 +67,7 @@ Cette chronologie consolide les événements des anciens documents **2026-G** et
 | **1959** | Mort de Babber le Dormeur ; avènement de Babber II le Piscineux. | **Babber II le Piscineux** | Le règne du Piscineux commence, même s’il vivra jusqu’en 2002. | G + H | Confirmé |
 | **15 juillet 1962** | Creusement de la piscine royale ; les déblais de 1,20 m deviennent les Monts Froissés. Naissance de Rambo du Fjord le même jour. | Babber II le Piscineux | Rambo est le quatrième fils de Babber II et le frère cadet du futur Louche. | G + H | Date consolidée |
 | **1966** | Mort d’Irène des Érables. | Babber II le Piscineux | Elle ne peut donc participer à aucune commission postérieure. | H | Confirmé |
-| **12 mai 1980** | Visite d’État du colonel Kadhafi et étude du Double Aqueduc. | Babber II le Piscineux | Épisode iconographique du volume G. | G | Confirmé dans le canon G |
+| **12 mai 1980** | Visite d’État consacrée au Double Aqueduc. | Babber II le Piscineux | Épisode iconographique du volume G, seule archive à nommer l’hôte ; la discrétion du volume consolidé est assumée. | G | Confirmé dans le canon G |
 | **Printemps 1984** | Crise du Big Roi : recommandation de refuser l’implantation de McDonald’s. | Babber II le Piscineux | **Le Louche est encore prince**, chargé des affaires commerciales ; Babber II ratifie son refus. | H | Correction prioritaire H |
 | **1984–1986** | Conception de McBabber’s. | Babber II le Piscineux | Roger Bontemps crée la galette ; le prince Louche teste la friteuse ; Linéa trouve le nom et garde la sauce. | H | Corrigé |
 | **1er avril 1986** | Ouverture du premier McBabber’s à 15 h 01. | Babber II le Piscineux | Babber II coupe le ruban. | H | Confirmé |

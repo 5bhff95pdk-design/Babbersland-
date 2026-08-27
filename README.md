@@ -47,7 +47,20 @@ Le générateur ajoute la couverture, le sommaire, les signets PDF, les en-tête
 python sources/check_continuity.py
 ```
 
-Ce contrôle vérifie les titres historiques, l’ordre de succession, les sept livres, les équivalences monétaires, les dates maîtresses et tous les liens d’illustrations.
+Ce contrôle vérifie les titres historiques, l’ordre de succession, les sept livres, les équivalences monétaires, les dates maîtresses, tous les liens d’illustrations, les ancres d’illustrations du générateur PDF (chaque ancre doit exister telle quelle dans 2026-I, faute de quoi l’illustration disparaît silencieusement du PDF) et le bandeau de statut des chroniques.
+
+Une fois le PDF régénéré, l’artefact final peut être vérifié à son tour :
+
+```bash
+python -m pip install pypdf
+python sources/check_pdf.py
+```
+
+Ces contrôles peuvent s’exécuter automatiquement à chaque push et pull request : un workflow GitHub Actions prêt à l’emploi est fourni dans `sources/github_actions_continuite.yml` — l’activer en copiant vers `.github/workflows/continuite.yml` :
+
+```bash
+mkdir -p .github/workflows && cp sources/github_actions_continuite.yml .github/workflows/continuite.yml
+```
 
 ## Régénération de l’arbre
 

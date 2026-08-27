@@ -84,7 +84,7 @@ def rich(text: str) -> str:
 IMAGE_AFTER = {
     "GÉNÉRATION II : LES BÂTISSEURS (1892–1914)": ("images/hortense_du_grain.png", "Hortense du Grain, grande maîtresse de la malterie."),
     "GÉNÉRATION III : L’ÂGE HORIZONTAL (1914–1959)": ("images/irene_des_erables.png", "Irène des Érables, gardienne des érablières."),
-    "2. S.A.R. le Prince Babber le Déchiré (né un soir de fête)": ("images/babber_le_dechire.png", "Portrait officiel du Prince Babber le Déchiré."),
+    "2. S.A.R. le Prince Babber le Déchiré (date de naissance non consignée ; majeur attesté en 2007)": ("images/babber_le_dechire.png", "Portrait officiel du Prince Babber le Déchiré."),
     "3. S.A.R. la Princesse Ginette de Port Babette (née en 1988)": ("images/ginette_de_port_babette.png", "La Princesse Ginette et le Grand Sauciériste d’Or."),
     "LE CORPS D'ÉTAT : ROGER BONTEMPS, LE GRAND BOUFFON ROYAL": ("images/roger_bontemps.png", "Roger Bontemps, Grand Bouffon royal."),
     "GÉNÉRATION VII : L’AVÈNEMENT DU SAUVEUR DYNASTIQUE": ("images/ti_babber_generation_7.png", "Ti-Babber dans le Berceau-Hamac royal."),
