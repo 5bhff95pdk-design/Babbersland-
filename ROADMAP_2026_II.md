@@ -24,9 +24,13 @@ VERROUILLER        INDUSTRIALISER         ÉTENDRE LE CANON           DIFFUSER
       du MD         R1.3 manifeste + gel      R2.2 Registre des avis      R3.3 canon en données
    R0.3 README      R1.4 CI complète             1–6 (décrets)              structurées
    exécutable       R1.5 tag + Release        R2.3 Parité Poutine chiffrée R3.4 licence & citabilité
-   R0.4 CI prête    R1.6 iconographie légère  R2.4 Code de la Fraîcheur   R3.5 traductions
-   R0.5 ancres      R1.7 contrôle d'arbre     R2.5 Calendrier des fêtes   R3.6 Livre II des Chroniques
-      orphelines                                                      (1889–1914)
+   R0.4 CI prête    R1.6 maîtres PNG          R2.4 Code de la Fraîcheur   R3.5 résumé bilingue
+   R0.5 index &     R1.7 source unique        R2.5 Calendrier des fêtes   R3.6 rite de publication
+      gel d'archives   de l'arbre             R2.6 démographie + carte         + Livre II des Chroniques
+                                             R2.7 lacunes : fixer ou        (1889–1914)
+                                             prêter au silence
+                                             R2.8 Chroniques Livre II
+                                             R2.9 registre des personnages
 ```
 
 **Règle de dépendance unique** : rien de l'horizon 2 ne doit être publié avant la fin de l'horizon 1, faute de quoi chaque ajout de contenu rouvrirait les défauts d'emballage (E-07/E-09) au lieu de les amplifier une seule fois.
