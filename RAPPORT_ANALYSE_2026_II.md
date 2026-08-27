@@ -213,13 +213,13 @@ Aucun des constats n'entame la validité du canon : **les textes sont justes** �
 | **R0.6** · Micro-arbitrages E-16 (a, b, d, e) | ⏸ **En attente d'arbitrage** | Non appliqués : ils portent du texte canonique. Les quatre formulations sont prêtes (symboles `B`/`Bt`, intitulé §V 1998–2010, « trente et un ans », « quarante-neuf ans » ou datation du registre à 1848) — une décision par ligne, et elles entrent au commit suivant. |
 | **E-15** · Double source de l'arbre | ⏳ **Horizon 1 (R1.7)** | Parité vérifiée à ce jour (12 nœuds, géométrie identique) : rien n'est cassé, mais rien n'empêche la dérive. |
 
-### Constat nouveau relevé en exécutant R0.4
+### Constat nouveau, relevé en exécutant R0.4
 
-### 🟠 E-17 · Le dépôt ne peut pas activer sa propre CI
+#### 🟠 E-17 · Le dépôt ne peut pas activer sa propre CI
 
 **Gravité** : moyenne (blocage d'accès, non un défaut du projet) · **Effort** : un droit à accorder, ou un commit à faire à la main
 
-`git push` échoue sur `refusing to allow a GitHub App to create or update workflow \`.github/workflows/continuite.yml\` without \`workflows\` permission` : la garde de l'activation de la CI ne peut pas être tenue par le jeton d'agent. Conséquence structurelle — **toute** session future, aussi soigneuse soit-elle, produira un workflow prêt et non poussable. Deux issues, à choisir une fois : accorder le droit `workflows` à l'App sur l'organisation, ou assumer que le fichier de CI se commite à la main (`make workflows && git add .github`) et le consigner comme étape du rite de publication R3.6. En attendant, `make controle` exécute localement exactement les mêmes étapes, ce qui neutralise le risque de régression sans le verrouillage automatique.
+La tentative de poussée échoue sur le refus de GitHub : *« refusing to allow a GitHub App to create or update workflow `.github/workflows/continuite.yml` without `workflows` permission »*. Autrement dit, la garde de l'activation de la CI ne peut pas être tenue par un jeton d'agent. Conséquence structurelle — **toute** session future, aussi soigneuse soit-elle, produira un workflow prêt et non poussable. Deux issues, à choisir une fois : accorder le droit `workflows` à l'App sur l'organisation, ou assumer que le fichier de CI se commite à la main (`make workflows && git add .github`) et le consigner comme étape du rite de publication R3.6. En attendant, `make controle` exécute localement exactement les mêmes étapes, ce qui neutralise le risque de régression en attendant le verrouillage automatique.
 
 **État après exécution** : `check_continuity.py` ✅ (13 ancres, couverture du canon incluse) · `check_pdf.py` ✅ **24 pages, 14/14 illustrations, 13 légendes, aucun renvoi orphelin** · arbre régénéré identique au bit près · empreinte gravée `a0be4fb37496488026a8498fa02c7f80` · scellés d'archives ✅ · **avis de révision : FAVORABLE SANS RÉSERVE**.
 
