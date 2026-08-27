@@ -33,6 +33,12 @@ jobs:
       - name: Continuité des sources (canon, chronologie, archives, chroniques, ancres)
         run: python sources/check_continuity.py
 
+      - name: Atlas géographique (proposé, non décrété)
+        run: |
+          python sources/generate_map.py
+          python sources/check_geography.py
+          git diff --exit-code --stat -- sources/carte_royaume.svg geographie/carte_royaume.png geographie/index.html
+
       - name: Arbre généalogique déterministe
         run: |
           python sources/generate_genealogy.py
