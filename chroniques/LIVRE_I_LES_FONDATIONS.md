@@ -374,7 +374,7 @@ On le suspendit au grand chêne, essayage public. Babber s'y laissa choir, demeu
 
 *« C'est bien. Ce n'est pas pour moi. Gardez-le. »*
 
-**Note de l'Archiviste :** le Hamac royal attendit son maître soixante-dix-huit ans au chêne qui en prit le nom. Quand **Babber le Dormeur** — né en 1875 — en fit un article de foi en 1914, l'objet de 1856 était encore là, rafistolé, refusant de lâcher. On assure au sanctuaire qu'une de ses cordes initiales demeure. Le hamac savait, lui.
+**Note de l'Archiviste :** le Hamac royal attendit son maître cinquante-huit ans au chêne qui en prit le nom. Quand **Babber le Dormeur** — né en 1875 — en fit un article de foi en 1914, l'objet de 1856 était encore là, rafistolé, refusant de lâcher. On assure au sanctuaire qu'une de ses cordes initiales demeure. Le hamac savait, lui.
 
 ## 9. 1858–1859 · Le vieux témoin
 
