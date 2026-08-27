@@ -96,36 +96,36 @@ Face aux rumeurs de couloir, à la découverte de deux portraits d'apparat dissi
 ## 🌲 CHRONIQUE HISTORIQUE INTÉGRALE DE LA MAISON DE BABBER (1847–2026+)
 
 ### GÉNÉRATION I : LES FONDATEURS (1847–1889)
-* **S.M. Babber Ier l’Ancien (1798–1889)** : Trappeur visionnaire. Le 12 octobre 1847, il signe la Constitution sur la nappe vichy de son épouse dans la Forêt de Plantagenet, assisté d'un castor patriote. Premier homme à avoir décrété que courir était un crime contre l'humanité babberlandaise.
-* **S.M. Babette Ire de Plantagenet (1804–1892)** : Reine fondatrice et régente de 1889 à 1892. Gardienne de la nappe sacrée (*« Ce qui est taché est ratifié »*).
+* **S.M. Babber Ier l’Ancien (1798–1889)** : Trappeur visionnaire. Le 12 octobre 1847, il signe la Constitution sur la nappe vichy de son épouse dans la Forêt de Plantagenet, assisté d'un castor patriote. Premier homme à avoir décrété que courir était un crime contre l'humanité babberlandaise (`images/babber_ier_ancien.png`).
+* **S.M. Babette Ire de Plantagenet (1804–1892)** : Reine fondatrice et régente de 1889 à 1892. Gardienne de la nappe sacrée (*« Ce qui est taché est ratifié »*) (`images/babette_ire_plantagenet.png`).
 
 ---
 
 ### GÉNÉRATION II : LES BÂTISSEURS (1892–1914)
-* **François-Babber l’Aqueducien (1832–1914, r. 1892–1914)** : Concepteur du Double Aqueduc de Pabst City (eau pure et Pabst fraîche). Refusa le titre de Babber II par modestie technique.
+* **François-Babber l’Aqueducien (1832–1914, r. 1892–1914)** : Concepteur du Double Aqueduc de Pabst City (eau pure et Pabst fraîche). Refusa le titre de Babber II par modestie technique (`images/francois_babber_aqueducien.png`).
 * **Hortense du Grain (1840–1922)** : Épouse de François-Babber. Grande maîtresse de la malterie et patronne des champs d'orge. Diadème d'épis d'or et de houblon, tenant le calice de bière blonde de la Couronne (`images/hortense_du_grain.png`).
 * **S.A.R. la Princesse Babette-Marine (1836–1916)** : Fille cadette de l’Ancien. Elle développa les quais de la ville nommée en l’honneur de sa mère, fonda le port moderne, fit ériger le célèbre phare blanc couronné et organisa la flottille des péniches de curds et de fûts sur le Fleuve Babber (`images/babette_marine.png`).
 
 ---
 
 ### GÉNÉRATION III : L’ÂGE HORIZONTAL (1914–1959)
-* **Babber le Dormeur (1875–1959, r. 1914–1959)** : Le roi philosophe du hamac. Instigateur des Articles 1 (Droit au hamac) et 4 (Sacralité de la sieste de 13 h à 15 h). Il régna 45 ans sans jamais poser les pieds au sol durant les audiences publiques.
+* **Babber le Dormeur (1875–1959, r. 1914–1959)** : Le roi philosophe du hamac. Instigateur des Articles 1 (Droit au hamac) et 4 (Sacralité de la sieste de 13 h à 15 h). Il régna 45 ans sans jamais poser les pieds au sol durant les audiences publiques (`images/babber_le_dormeur.png`).
 * **Irène des Érables (1882–1966)** : Reine consort, gardienne des érablières et protectrice du sirop d'or national. Elle confectionna le premier coussin de velours d'État rembourré en duvet d'édredon boréal (`images/irene_des_erables.png`).
 
 ---
 
 ### GÉNÉRATION IV : L’ÈRE BALNÉAIRE & GÉOLOGIQUE (1959–1998)
-* **S.M. Babber II le Piscineux (1912–2002, r. 1959–1998)** : Polo, lunettes de soleil et pelleteuse diesel. À l'été 1962, en creusant sa piscine olympique dans le jardin du palais, il amassa deux tas de terre de 1,20 m qui devinrent les **Monts Froissés**, Alpes officielles du pays.
+* **S.M. Babber II le Piscineux (1912–2002, r. 1959–1998)** : Polo, lunettes de soleil et pelleteuse diesel. À l'été 1962, en creusant sa piscine olympique dans le jardin du palais, il amassa deux tas de terre de 1,20 m qui devinrent les **Monts Froissés**, Alpes officielles du pays (`images/babber_ii_piscineux.png`).
 * **Colette-Pabst de Grass City (1920–2011)** : Reine consort et souveraine du Barbecue. Autrice de la maxime constitutionnelle : *« Si tu creuses une piscine, je m'occupe des chips. »*
 * **1984–1986 · La Crise du Big Roi et la fondation de McBabber’s** : Le prince Babber le Louche, alors chargé des affaires commerciales sous le règne de son père Babber II, refuse le projet d’implantation de McDonald’s face au Palais. Babber II ratifie le refus et mandate la Couronne pour créer une enseigne à l’image du Royaume. Le premier McBabber’s ouvre le 1er avril 1986 sur le terrain reconquis, avec Roger Bontemps au comptoir, le Louche à la friteuse et Linéa à la sauce brune.
 
 ---
 
 ### GÉNÉRATION V : LA FRATRIE LÉGENDAIRE (1998–PRÉSENT)
-1. **L’Union des Règnes (Honoré-Pabst & Henri-Grain, nés en 1938)** : Jumeaux co-souverains de 1998 à 2010. Ils régnaient à deux pour alterner la sieste et la signature des décrets.
-2. **S.M. Babber Ier le Louche (né en 1946, règne depuis 2010)** : Troisième fils, roi régnant. Reprend le chiffre ordinal Ier par l'Article 5 (*« Le Roi a toujours raison »*). Célèbre pour son regard perçant envers la bière tiède et pour avoir signé le Sommet Pabst-Ketchup le 12 juillet 2026.
-3. **S.M. Linéa de Grass City (née en 1952)** : Reine consort, apôtre du chanvre industriel et inspiratrice du papier fiduciaire indestructible Série B.
-4. **S.A.R. Rambo du Fjord (né le 15 juillet 1962)** : Prince du Fleuve, né le jour du creusement des Monts Froissés. Célibataire, marié au fleuve, protecteur armé des rapides contre les fûts non réfrigérés.
+1. **L’Union des Règnes (Honoré-Pabst & Henri-Grain, nés en 1938)** : Jumeaux co-souverains de 1998 à 2010. Ils régnaient à deux pour alterner la sieste et la signature des décrets (`images/honore_pabst_henri_grain.png`).
+2. **S.M. Babber Ier le Louche (né en 1946, règne depuis 2010)** : Troisième fils, roi régnant. Reprend le chiffre ordinal Ier par l'Article 5 (*« Le Roi a toujours raison »*). Célèbre pour son regard perçant envers la bière tiède et pour avoir signé le Sommet Pabst-Ketchup le 12 juillet 2026 (`images/babber_ier_le_louche.png`).
+3. **S.M. Linéa de Grass City (née en 1952)** : Reine consort, apôtre du chanvre industriel et inspiratrice du papier fiduciaire indestructible Série B (`images/linea_de_grass_city.png`).
+4. **S.A.R. Rambo du Fjord (né le 15 juillet 1962)** : Prince du Fleuve, né le jour du creusement des Monts Froissés. Célibataire, marié au fleuve, protecteur armé des rapides contre les fûts non réfrigérés (`images/rambo_du_fjord.png`).
 
 ---
 
@@ -408,9 +408,24 @@ Légende : │ filiation directe · ┊ branche collatérale · ═ union
 
 ## 🖼️ DOSSIER ICONOGRAPHIQUE & NUMISMATIQUE DISPONIBLE
 
+Campagne 2026-II : galerie dynastique des sept générations, Dames de la Couronne enfin listées.
+
 * 🪙 **`images/pieces_monnaie_babberland_coffret.png`** : Le coffret officiel en bois d'érable et velours bleu roi avec les 4 pièces frappées.
 * 🪙 **`images/piece_1_babber_or_avers_revers.png`** : Macro avers et revers du 1 Babber d'or et d'argent (le Louche & les Castors de la Pabst).
 * 🪙 **`images/pieces_babetons_divisionnaires.png`** : Gros plan des pièces de 1 Babeton (Castor Chill), 6 Babetons (Babber le Déchiré) et 12 Babetons (Roger Bontemps) sur lit de houblon et d'orge.
+* 👑 **`images/babber_ier_ancien.png`** : Le fondateur signant la Constitution sur la nappe vichy, assisté du castor patriote.
+* 👑 **`images/babette_ire_plantagenet.png`** : Babette Ire, gardienne de la nappe sacrée.
+* 👑 **`images/francois_babber_aqueducien.png`** : François-Babber et le Double Aqueduc.
+* 👑 **`images/hortense_du_grain.png`** : Hortense du Grain, gerbe et calice de la malterie.
+* 👑 **`images/babette_marine.png`** : Babette-Marine au phare blanc couronné de Port Babette.
+* 👑 **`images/babber_le_dormeur.png`** : Babber le Dormeur dans le hamac d’État.
+* 👑 **`images/irene_des_erables.png`** : Irène des Érables, sirop d'or et hamac d'État.
+* 👑 **`images/babber_ii_piscineux.png`** : Babber II le Piscineux, piscine et Monts Froissés.
+* 👑 **`images/honore_pabst_henri_grain.png`** : Honoré-Pabst signe, Henri-Grain dort : l’Union des Règnes.
+* 👑 **`images/babber_ier_le_louche.png`** : Portrait officiel du roi régnant, béret couronné et louche d'or.
+* 👑 **`images/linea_de_grass_city.png`** : Linéa de Grass City, papier de chanvre et première garde de la sauce.
+* 👑 **`images/rambo_du_fjord.png`** : Rambo du Fjord, canoe et fûts glacés.
+* 👑 **`images/babber_le_fou.png`** : Babber le Fou, Aspirateur-Couronne et Ballon Jaune Ier.
 * 👑 **`images/babber_le_dechire.png`** : Portrait royal de Babber le Déchiré au rocking-chair.
 * 🍷 **`images/roger_bontemps.png`** : Portrait de Roger Bontemps le Bouffon au vin rouge.
 * 👶 **`images/ti_babber_generation_7.png`** : Portrait de Ti-Babber (Génération VII) dans son hamac royal.
@@ -418,7 +433,7 @@ Légende : │ filiation directe · ┊ branche collatérale · ═ union
 * 🍔 **`images/mcbabbers_enseigne_royale.png`** : Façade du premier McBabber’s de Pabst City, avec son enseigne royale et son rocking-chair d’accueil.
 * ⚖️ **`images/babbersgate_scandale_sauce.png`** : La commission d’enquête du Babbersgate, les cornichons et le livre de comptes secret.
 * 🍟 **`images/mcbabbers_menu_pabst.png`** : Menu royal illustré présentant le McLouche, la poutine, les frites et la Pabst.
-* 📜 **`images/arbre_genealogique_complet.png`** : L’arbre généalogique révisé, conforme aux filiations directes et collatérales du édition 2026-I.
+* 📜 **`images/arbre_genealogique_complet.png`** : L’arbre généalogique révisé, conforme aux filiations directes et collatérales de l’édition 2026-I.
 
 ---
 

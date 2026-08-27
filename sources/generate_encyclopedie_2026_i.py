@@ -129,12 +129,30 @@ def rich(text: str) -> str:
 # le titre. Toute image référencée dans 2026-I doit être servie ici, faute de quoi
 # elle disparaît silencieusement du volume (constats E-01 et E-07).
 IMAGE_AFTER: dict[str, list[tuple[str, str]]] = {
+    "GÉNÉRATION I : LES FONDATEURS (1847–1889)": [
+        ("images/babber_ier_ancien.png", "Babber Ier l’Ancien signe la Constitution sur la nappe vichy, assisté du castor patriote."),
+        ("images/babette_ire_plantagenet.png", "Babette Ire de Plantagenet, gardienne de la nappe sacrée."),
+    ],
     "GÉNÉRATION II : LES BÂTISSEURS (1892–1914)": [
+        ("images/francois_babber_aqueducien.png", "François-Babber l’Aqueducien et le Double Aqueduc (eau et Pabst)."),
         ("images/hortense_du_grain.png", "Hortense du Grain, grande maîtresse de la malterie."),
         ("images/babette_marine.png", "La princesse Babette-Marine, fondatrice du port moderne de Port Babette."),
     ],
     "GÉNÉRATION III : L’ÂGE HORIZONTAL (1914–1959)": [
+        ("images/babber_le_dormeur.png", "Babber le Dormeur, roi philosophe du hamac."),
         ("images/irene_des_erables.png", "Irène des Érables, gardienne des érablières."),
+    ],
+    "GÉNÉRATION IV : L’ÈRE BALNÉAIRE & GÉOLOGIQUE (1959–1998)": [
+        ("images/babber_ii_piscineux.png", "Babber II le Piscineux, la piscine et les Monts Froissés."),
+    ],
+    "GÉNÉRATION V : LA FRATRIE LÉGENDAIRE (1998–PRÉSENT)": [
+        ("images/honore_pabst_henri_grain.png", "Honoré-Pabst signe, Henri-Grain dort : l’Union des Règnes."),
+        ("images/babber_ier_le_louche.png", "Portrait officiel de Sa Majesté Babber Ier le Louche, béret couronné et louche d’or."),
+        ("images/linea_de_grass_city.png", "Linéa de Grass City, papier de chanvre et première garde de la sauce."),
+        ("images/rambo_du_fjord.png", "Rambo du Fjord, prince du fleuve et des fûts glacés."),
+    ],
+    "1. S.A.R. Babber le Fou (né le 1er avril 1986)": [
+        ("images/babber_le_fou.png", "Babber le Fou, Aspirateur-Couronne et Ballon Jaune Ier."),
     ],
     "2. S.A.R. le Prince Babber le Déchiré (date de naissance non consignée ; majeur attesté en 2007)": [
         ("images/babber_le_dechire.png", "Portrait officiel du Prince Babber le Déchiré."),
