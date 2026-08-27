@@ -1,0 +1,7 @@
+# Environnement de référence du générateur (constat E-11 du rapport RA-2026-II-01).
+# Les versions sont épinglées parce que le PDF dépend de la bibliothèque qui le
+# compose : un changement de ReportLab déplace la pagination et les flux d'images.
+# Mise à jour volontaire : `make empreinte` puis commiter gouvernance/pdf_fingerprint.txt.
+reportlab==5.0.1
+pillow==12.3.0
+pypdf==6.16.2

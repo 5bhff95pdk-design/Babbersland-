@@ -6,6 +6,7 @@ Dépendances : reportlab et Pillow.
 from __future__ import annotations
 
 import html
+import os
 import re
 import tempfile
 from pathlib import Path
@@ -33,9 +34,38 @@ CREAM = colors.HexColor("#F6EEDB")
 INK = colors.HexColor("#29251F")
 MUTED = colors.HexColor("#6E624F")
 
-pdfmetrics.registerFont(TTFont("DejaVu", "/usr/share/fonts/truetype/dejavu/DejaVuSerif.ttf"))
-pdfmetrics.registerFont(TTFont("DejaVu-Bold", "/usr/share/fonts/truetype/dejavu/DejaVuSerif-Bold.ttf"))
-pdfmetrics.registerFont(TTFont("DejaVu-Mono", "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf"))
+def find_font(filename: str) -> str:
+    """Cherche une police DejaVu sur Linux, macOS ou Windows (constat E-11).
+
+    `BABBERLAND_FONT_DIR` permet d'imposer un répertoire de polices.
+    """
+    searched = []
+    override = os.environ.get("BABBERLAND_FONT_DIR")
+    if override:
+        searched.append(Path(override) / filename)
+    local = os.environ.get("LOCALAPPDATA", str(Path.home()))
+    searched += [
+        Path("/usr/share/fonts/truetype/dejavu") / filename,
+        Path("/usr/local/share/fonts") / filename,
+        Path.home() / ".fonts" / filename,
+        Path("/Library/Fonts") / filename,
+        Path("/System/Library/Fonts/Supplemental") / filename,
+        Path(local) / "Microsoft/Windows/Fonts" / filename,
+        Path("C:/Windows/Fonts") / filename,
+    ]
+    for candidate in searched:
+        if candidate.is_file():
+            return str(candidate)
+    raise SystemExit(
+        f"police {filename} introuvable — installez fonts-dejavu-core "
+        f"(Linux : apt-get install fonts-dejavu-core · macOS : brew install font-dejavu) "
+        f"ou indiquez un répertoire via BABBERLAND_FONT_DIR."
+    )
+
+
+pdfmetrics.registerFont(TTFont("DejaVu", find_font("DejaVuSerif.ttf")))
+pdfmetrics.registerFont(TTFont("DejaVu-Bold", find_font("DejaVuSerif-Bold.ttf")))
+pdfmetrics.registerFont(TTFont("DejaVu-Mono", find_font("DejaVuSansMono.ttf")))
 pdfmetrics.registerFontFamily("DejaVu", normal="DejaVu", bold="DejaVu-Bold")
 
 styles = getSampleStyleSheet()
@@ -63,9 +93,23 @@ EMOJI_RE = re.compile("[\U00010000-\U0010ffff]|[♛👑📜🌲🍔🍟💰🏛�
 def clean_heading(text: str) -> str:
     return re.sub(r"\s+", " ", EMOJI_RE.sub("", text)).strip()
 
+def is_image_reference_line(stripped: str) -> bool:
+    """Ligne de renvoi seule (« 🖼️ *Portrait officiel : `images/x.png`* »).
+
+    L'illustration est déjà servie par son ancre de la table IMAGE_AFTER : garder
+    la ligne n'imprimerait qu'un intitulé orphelin suivi de rien (constat E-08).
+    """
+    body = re.sub(r"^[*-]\s*", "", stripped)
+    body = re.sub(r"[\s\uFE0E\uFE0F]+", " ", EMOJI_RE.sub("", body)).strip()
+    return bool(re.fullmatch(r"\*\s*(?:Portrait|Visuel) officiel\s*:\s*`images/[^`]+`\s*\*\.?", body))
+
+
 def rich(text: str) -> str:
     """Convertit le petit sous-ensemble Markdown utilisé vers le balisage ReportLab."""
     text = re.sub(r"\s*\(`images/[^`]+`\)", "", text)
+    # Le dossier iconographique prend le nom de fichier pour vedette (sinon la ligne
+    # dégénère en un deux-points suiveur, une fois le chemin retiré).
+    text = re.sub(r"\*\*\s*`images/([^`/]+/)?([^`]+)`\s*\*\*", r"**\2**", text)
     text = re.sub(r"\s*`images/[^`]+`", "", text)
     stash: list[str] = []
     def hold(pattern: str, opening: str, closing: str, value: str) -> str:
@@ -81,17 +125,47 @@ def rich(text: str) -> str:
         text = text.replace(f"@@{i}@@", item)
     return text
 
-IMAGE_AFTER = {
-    "GÉNÉRATION II : LES BÂTISSEURS (1892–1914)": ("images/hortense_du_grain.png", "Hortense du Grain, grande maîtresse de la malterie."),
-    "GÉNÉRATION III : L’ÂGE HORIZONTAL (1914–1959)": ("images/irene_des_erables.png", "Irène des Érables, gardienne des érablières."),
-    "2. S.A.R. le Prince Babber le Déchiré (date de naissance non consignée ; majeur attesté en 2007)": ("images/babber_le_dechire.png", "Portrait officiel du Prince Babber le Déchiré."),
-    "3. S.A.R. la Princesse Ginette de Port Babette (née en 1988)": ("images/ginette_de_port_babette.png", "La Princesse Ginette et le Grand Sauciériste d’Or."),
-    "LE CORPS D'ÉTAT : ROGER BONTEMPS, LE GRAND BOUFFON ROYAL": ("images/roger_bontemps.png", "Roger Bontemps, Grand Bouffon royal."),
-    "GÉNÉRATION VII : L’AVÈNEMENT DU SAUVEUR DYNASTIQUE": ("images/ti_babber_generation_7.png", "Ti-Babber dans le Berceau-Hamac royal."),
-    "HISTOIRE NATIONALE : LA FONDATION DE McBABBER’S": ("images/mcbabbers_enseigne_royale.png", "Le premier McBabber’s de Pabst City."),
-    "Le menu canonique de McBabber’s": ("images/mcbabbers_menu_pabst.png", "Le menu royal de McBabber’s."),
-    "Le Babbersgate : le scandale de la sauce secrète (1991–1993)": ("images/babbersgate_scandale_sauce.png", "La commission d’enquête du Babbersgate."),
-    "LES PIÈCES DE MONNAIE OFFICIELLES (ÉMISSION MÉTALLIQUE 2026)": ("images/pieces_monnaie_babberland_coffret.png", "Coffret métallique officiel 2026."),
+# Une ancre peut porter plusieurs illustrations : le générateur les empile après
+# le titre. Toute image référencée dans 2026-I doit être servie ici, faute de quoi
+# elle disparaît silencieusement du volume (constats E-01 et E-07).
+IMAGE_AFTER: dict[str, list[tuple[str, str]]] = {
+    "GÉNÉRATION II : LES BÂTISSEURS (1892–1914)": [
+        ("images/hortense_du_grain.png", "Hortense du Grain, grande maîtresse de la malterie."),
+        ("images/babette_marine.png", "La princesse Babette-Marine, fondatrice du port moderne de Port Babette."),
+    ],
+    "GÉNÉRATION III : L’ÂGE HORIZONTAL (1914–1959)": [
+        ("images/irene_des_erables.png", "Irène des Érables, gardienne des érablières."),
+    ],
+    "2. S.A.R. le Prince Babber le Déchiré (date de naissance non consignée ; majeur attesté en 2007)": [
+        ("images/babber_le_dechire.png", "Portrait officiel du Prince Babber le Déchiré."),
+    ],
+    "3. S.A.R. la Princesse Ginette de Port Babette (née en 1988)": [
+        ("images/ginette_de_port_babette.png", "La Princesse Ginette et le Grand Sauciériste d’Or."),
+    ],
+    "LE CORPS D'ÉTAT : ROGER BONTEMPS, LE GRAND BOUFFON ROYAL": [
+        ("images/roger_bontemps.png", "Roger Bontemps, Grand Bouffon royal."),
+    ],
+    "GÉNÉRATION VII : L’AVÈNEMENT DU SAUVEUR DYNASTIQUE": [
+        ("images/ti_babber_generation_7.png", "Ti-Babber dans le Berceau-Hamac royal."),
+    ],
+    "HISTOIRE NATIONALE : LA FONDATION DE McBABBER’S": [
+        ("images/mcbabbers_enseigne_royale.png", "Le premier McBabber’s de Pabst City."),
+    ],
+    "Le menu canonique de McBabber’s": [
+        ("images/mcbabbers_menu_pabst.png", "Le menu royal de McBabber’s."),
+    ],
+    "Le Babbersgate : le scandale de la sauce secrète (1991–1993)": [
+        ("images/babbersgate_scandale_sauce.png", "La commission d’enquête du Babbersgate."),
+    ],
+    "LES PIÈCES DE MONNAIE OFFICIELLES (ÉMISSION MÉTALLIQUE 2026)": [
+        ("images/pieces_monnaie_babberland_coffret.png", "Coffret métallique officiel 2026."),
+    ],
+    "1. La Pièce de 1 Babber d'Or et d'Argent (Le Babber Bimétallique)": [
+        ("images/piece_1_babber_or_avers_revers.png", "Avers et revers du Babber bimétallique : le Louche au béret couronné, les castors de la Pabst et de la poutine."),
+    ],
+    "4. La Pièce de 1 Babeton (Le Cuivre Populaire)": [
+        ("images/pieces_babetons_divisionnaires.png", "La monnaie divisionnaire : 1 Babeton de cuivre, 6 Babetons de cupronickel, 12 Babetons de laiton doré."),
+    ],
 }
 
 class RoyalDocTemplate(BaseDocTemplate):
@@ -182,6 +256,7 @@ def parse_markdown(tmp: Path) -> list:
     while i < len(lines):
         raw=lines[i].rstrip(); stripped=raw.strip()
         if not stripped: i+=1; continue
+        if is_image_reference_line(stripped): i+=1; continue
         if stripped.startswith("|") and i+1 < len(lines) and re.match(r"^\|[\s:|\-]+\|$",lines[i+1].strip()):
             rows=[]; rows.append([x.strip() for x in stripped.strip("|").split("|")]); i+=2
             while i < len(lines) and lines[i].strip().startswith("|"):
@@ -208,8 +283,8 @@ def parse_markdown(tmp: Path) -> list:
             elif level==3: style=H3
             else: style=H4
             story.append(Paragraph(rich(title),style))
-            if title in IMAGE_AFTER:
-                path,cap=IMAGE_AFTER[title]; img=prepared_image(path,tmp)
+            for path,cap in IMAGE_AFTER.get(title,()):
+                img=prepared_image(path,tmp)
                 story.append(KeepTogether([img,Paragraph(cap,CAPTION)]))
             i+=1; continue
         if stripped.startswith(">"):

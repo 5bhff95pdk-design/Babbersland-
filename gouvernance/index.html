@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Babberland · Rapport d'analyse &amp; roadmap 2026-II</title>
+<style>
+  :root{
+    --navy:#132A44; --gold:#B78A35; --cream:#F6EEDB; --ink:#29251F; --muted:#6E624F;
+    --red:#9E2B25; --orange:#B7671F; --amber:#96781E; --blue:#2A5A78; --green:#3E6B4A;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--cream);color:var(--ink);
+    font:15px/1.55 Georgia,"DejaVu Serif",serif}
+  header{background:var(--navy);color:#fff;padding:34px 28px 26px;border-bottom:5px double var(--gold)}
+  header h1{margin:0 0 6px;font-size:27px;letter-spacing:.5px}
+  header .sub{color:#DFCE9F;font-style:italic;font-size:14px}
+  header .meta{margin-top:14px;font-size:12.5px;color:#BFD0E2;letter-spacing:.4px}
+  main{max-width:1220px;margin:0 auto;padding:26px 22px 70px}
+  h2{font-size:19px;color:var(--navy);margin:34px 0 14px;padding-bottom:6px;border-bottom:1px solid var(--gold)}
+  h2 .n{display:inline-block;width:26px;height:26px;line-height:26px;text-align:center;background:var(--navy);
+    color:var(--cream);border-radius:50%;font-size:13px;margin-right:9px}
+  .grid{display:grid;gap:14px}
+  .g4{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+  .g3{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+  .card{background:#fff;border:1px solid #E0D4B4;border-left:4px solid var(--gold);border-radius:5px;padding:13px 15px;
+    box-shadow:0 1px 3px rgba(41,37,31,.06)}
+  .card h3{margin:0 0 5px;font-size:14.5px;color:var(--navy);letter-spacing:.2px}
+  .card p{margin:0;font-size:13px;color:#4B453A}
+  .v-ok{border-left-color:var(--green)} .v-warn{border-left-color:var(--orange)} .v-bad{border-left-color:var(--red)}
+  .badge{display:inline-block;font:11px/1.7 "DejaVu Sans",system-ui,sans-serif;letter-spacing:.5px;
+    padding:1px 8px;border-radius:9px;color:#fff;vertical-align:2px}
+  .b-ok{background:var(--green)}.b-warn{background:var(--orange)}.b-bad{background:var(--red)}.b-info{background:var(--blue)}
+  .b-p1{background:var(--red)}.b-p2{background:var(--orange)}.b-p3{background:var(--amber)}.b-p4{background:var(--blue)}
+  table{width:100%;border-collapse:collapse;background:#fff;font-size:13px;border:1px solid #E0D4B4}
+  th{background:var(--navy);color:#fff;text-align:left;padding:8px 10px;font-weight:normal;
+    font:11px/1.5 "DejaVu Sans",system-ui,sans-serif;letter-spacing:.6px;text-transform:uppercase}
+  td{padding:8px 10px;border-top:1px solid #EDE3C9;vertical-align:top}
+  tr:nth-child(even) td{background:#FCF8EC}
+  .lanes{display:grid;grid-template-columns:repeat(auto-fit,minmax(268px,1fr));gap:14px}
+  .lane{background:#fff;border:1px solid #E0D4B4;border-radius:5px;overflow:hidden}
+  .lane>h3{margin:0;padding:10px 14px;color:#fff;background:var(--navy);font-size:14.5px;letter-spacing:.4px}
+  .lane>h3 small{display:block;font:10.5px/1.4 "DejaVu Sans",sans-serif;color:#DFCE9F;letter-spacing:.6px;text-transform:uppercase}
+  .lane.l1>h3{background:#2C4A6B}.lane.l2>h3{background:#6B5321}.lane.l3>h3{background:#3E6B4A}
+  .lane ul{margin:0;padding:8px 12px 12px;list-style:none}
+  .lane li{padding:7px 0;border-bottom:1px dashed #EADFC4;font-size:13px}
+  .lane li:last-child{border:0}
+  .lane li b{color:var(--navy);font-weight:normal}
+  .lane li .id{font:11px/1.6 "DejaVu Sans Mono",monospace;color:var(--gold);margin-right:6px}
+  .eff{float:right;font:10.5px/1.6 "DejaVu Sans",sans-serif;color:var(--muted)}
+  .bar{height:9px;background:#EDE3C9;border-radius:5px;overflow:hidden;margin-top:6px}
+  .bar>i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),#8FA87E)}
+  .kpi{font:11px/1.5 "DejaVu Sans",sans-serif;letter-spacing:.5px;color:var(--muted);text-transform:uppercase}
+  .num{font-size:25px;color:var(--navy);font-family:Georgia,serif}
+  .quote{margin:26px 0 0;padding:14px 18px;background:#FFFDF6;border:1px solid #E0D4B4;border-left:4px solid var(--gold);
+    font-style:italic;color:var(--muted);font-size:14px}
+  footer{text-align:center;font-size:12px;color:var(--muted);padding:18px;border-top:1px solid #E0D4B4}
+  .note{font-size:12.5px;color:var(--muted);margin:-6px 0 14px}
+</style>
+</head>
+<body>
+<header>
+  <h1>👑 Royaume du Babberland — audit &amp; feuille de route</h1>
+  <div class="sub">Rapport RA-2026-II-01 · Roadmap RM-2026-II · Édition canonique consolidée 2026-I</div>
+  <div class="meta">27 AOÛT 2026 · CHANCELLERIE ROYALE, PABST CITY · MESURES REPRODUCIBLES (3 régénérations complètes, PDF ouverts et mesurés, 12 familles de calculs reprises à la main) · <b>HORIZON 0 EXÉCUTÉ</b> : les deux réserves sont levées</div>
+</header>
+<main>
+
+  <h2><span class="n">1</span>Verdict de l'analyse</h2>
+  <div class="grid g4">
+    <div class="card v-ok"><h3>Canon textuel <span class="badge b-ok">CONFORME</span></h3>
+      <p>Continuité validée, 7 points de correction présents, 0 erreur d'arithmétique généalogique sur 229 ans et 7 générations.</p></div>
+    <div class="card v-ok"><h3>Portrait du Déchiré <span class="badge b-ok">RÉPARÉ</span></h3>
+      <p>Réserve E-01 levée et vérifiée dans l'artefact publié : 22 pages, 11 illustrations, 10 légendes.</p></div>
+    <div class="card v-ok"><h3>Illustrations du PDF <span class="badge b-ok">E-07 · LEVÉ</span></h3>
+      <p>Le canon déclarait 14 planches, le volume n'en montrait que 11. <b>Repris : 14 / 14 embarquées</b>, 24 pages, multi-images par ancre.</p></div>
+    <div class="card v-ok"><h3>Commandes du README <span class="badge b-ok">E-11 · LEVÉ</span></h3>
+      <p><code>make env</code> crée le venv, <code>requirements.txt</code> épingle les 3 dépendances, <code>find_font()</code> couvre Linux · macOS · Windows — dans les deux générateurs.</p></div>
+    <div class="card v-ok"><h3>Contrôles auto-référents <span class="badge b-ok">E-09 · LEVÉ</span></h3>
+      <p>L'attendu vient du <b>canon</b>, plus du script ; comptage par haché de flux. 4 tests négatifs rejoués, dont la régression E-01 reproduite.</p></div>
+    <div class="card v-ok"><h3>Reproductibilité <span class="badge b-ok">E-10 · GARDE-FOU</span></h3>
+      <p>Arbre : bit près ✅. PDF : octets non reproductibles (noms <code>FormXob.*</code>) → une <b>empreinte sémantique</b> le remplace, gravée et comparée en CI.</p></div>
+    <div class="card v-warn"><h3>CI prête, non poussable <span class="badge b-warn">E-17</span></h3>
+      <p>Workflow de 9 étapes écrit et vérifié localement ; GitHub refuse qu'un jeton d'App <i>sans</i> le droit <code>workflows</code> crée <code>.github/workflows/</code>. Un commit à faire depuis un compte habilité.</p></div>
+    <div class="card v-ok"><h3>Archives G &amp; H <span class="badge b-ok">SCÉLLÉES</span></h3>
+      <p>G (41 pages, non régénérable) et H (95 % dupliqué dans I) sont gelés par SHA-256 ; la CI casse si une archive bouge sans Avis.</p></div>
+  </div>
+
+  <h2><span class="n">2</span>Le dépôt en chiffres</h2>
+  <div class="grid g4">
+    <div class="card"><div class="kpi">Volume éditorial</div><div class="num">24 973 <span style="font-size:13px">mots</span></div>
+      <div class="bar"><i style="width:100%"></i></div><p>6 Markdown · 1 949 lignes · 7 livres canoniques</p></div>
+    <div class="card"><div class="kpi">Illustrations rendues</div><div class="num">14 / 14 <span style="font-size:13px">(100 %)</span></div>
+      <div class="bar"><i style="width:100%"></i></div><p>24 pages · 3,9 Mio · E-07 et E-08 clos</p></div>
+    <div class="card"><div class="kpi">Contrôles automatisés</div><div class="num">5 <span style="font-size:13px">via make</span></div>
+      <div class="bar"><i style="width:83%"></i></div><p>Continuité · PDF · empreinte · arbre bit près · scellés — en attente du poussage du workflow</p></div>
+    <div class="card"><div class="kpi">Poids suivi</div><div class="num">94 <span style="font-size:13px">Mio</span></div>
+      <div class="bar"><i style="width:88%"></i></div><p>37,2 Mio de PNG (R1.6 en attente) · 19,4 Mio de PDF</p></div>
+  </div>
+  <p class="note">Après Horizon 0 : 0 lien cassé · 0 image orpheline · <b>4 constats ouverts sur 10</b> (E-14.2 tag à re-poser, E-15 source unique de l'arbre, E-16 arbitrages éditoriaux, R1.6 poids) · 0 licence (R3.4) · empreinte gravée <code>a0be4fb3…</code>.</p>
+
+  <h2><span class="n">3</span>Quatre horizons</h2>
+  <div class="lanes">
+    <div class="lane l0">
+      <h3>H0 · Verrouiller <small>EXÉCUTÉ LE 27 AOÛT · 6 tickets · ≈ 1 j</small></h3>
+      <ul>
+        <li><span class="id">R0.1</span><b>Compléter le PDF</b> <span class="badge b-ok">P1 ✓</span><br><span style="color:var(--muted)">Multi-images par ancre + 3 planches · « Visuel officiel » orphelins taris</span><span class="eff">20 min</span></li>
+        <li><span class="id">R0.2</span><b>Inverser l'autorité</b> <span class="badge b-ok">P1 ✓</span><br><span style="color:var(--muted)">Le MD canonique dicte l'attendu ; comptage par haché de flux</span><span class="eff">30 min</span></li>
+        <li><span class="id">R0.3</span><b>README exécutable</b> <span class="badge b-ok">P1 ✓</span><br><span style="color:var(--muted)">requirements.txt épinglé · venv · découverte de polices</span><span class="eff">1 h</span></li>
+        <li><span class="id">R0.4</span><b>Activer la CI</b> <span class="badge b-warn">E-17</span><br><span style="color:var(--muted)">Workflow 9 étapes prêt · <code>make workflows</code> · push refusé sans le droit « workflows »</span><span class="eff">1 commit</span></li>
+        <li><span class="id">R0.5</span><b>Indexer &amp; geler</b> <span class="badge b-ok">P2 ✓</span><br><span style="color:var(--muted)">README « Gouvernance &amp; audits » · liste des fichiers figés</span><span class="eff">30 min</span></li>
+        <li><span class="id">R0.6</span><b>Micro-arbitrages</b> <span class="badge b-warn">⏸ arbitrage</span><br><span style="color:var(--muted)">Symboles monétaires, 31 ans, §V 1998-2010, registre 1848</span><span class="eff">10 min</span></li>
+      </ul>
+    </div>
+    <div class="lane l1">
+      <h3>H1 · Industrialiser <small>2 – 6 semaines · 7 tickets · ≈ 3 j</small></h3>
+      <ul>
+        <li><span class="id">R1.1</span><b>Gate d'empreinte sémantique</b><br><span style="color:var(--muted)">pages ‖ texte ‖ flux, à la place du diff binaire impossible</span><span class="eff">1 h</span></li>
+        <li><span class="id">R1.2</span><b>Environnement reproductible</b><br><span style="color:var(--muted)">Makefile · matrice Linux/macOS/Windows</span><span class="eff">2 h</span></li>
+        <li><span class="id">R1.3</span><b>Manifeste SHA-256 + gel</b><br><span style="color:var(--muted)">16 livrables · CI bloquante si une archive bouge</span><span class="eff">2 h</span></li>
+        <li><span class="id">R1.4</span><b>CI de bout en bout</b><br><span style="color:var(--muted)">5 étapes + artefacts en pièces de job</span><span class="eff">3 h</span></li>
+        <li><span class="id">R1.5</span><b>Tag sur main + Release</b><br><span style="color:var(--muted)">v2026-I re-posé ; une Release = un décret</span><span class="eff">1 h</span></li>
+        <li><span class="id">R1.6</span><b>Maîtres PNG hors dépôt</b><br><span style="color:var(--muted)">0 % de perte vs −87 % en JPEG</span><span class="eff">3 h</span></li>
+        <li><span class="id">R1.7</span><b>Source unique de l'arbre</b><br><span style="color:var(--muted)">SVG généré · contrôle de parité 12 nœuds</span><span class="eff">2 h</span></li>
+      </ul>
+    </div>
+    <div class="lane l2">
+      <h3>H2 · Étendre le canon <small>T4 2026 → T2 2027 · 9 livrets</small></h3>
+      <ul>
+        <li><span class="id">R2.1</span><b>Livre VIII · Les Institutions</b><br><span style="color:var(--muted)">Conseil des Sages, Banque, Monnaie, P.R.F.</span><span class="eff">1 j</span></li>
+        <li><span class="id">R2.2</span><b>Registre des Avis 1 → 6</b><br><span style="color:var(--muted)">la série commence à 5 ; le décret devient un processus</span><span class="eff">1 j</span></li>
+        <li><span class="id">R2.3</span><b>Parité Poutine chiffrée</b><br><span style="color:var(--muted)">1 Babber = n kg de curds + symboles B / Bt</span><span class="eff">0,5 j</span></li>
+        <li><span class="id">R2.4</span><b>Code de la Fraîcheur</b><br><span style="color:var(--muted)">le texte que le Pabstgate invoquait</span><span class="eff">0,5 j</span></li>
+        <li><span class="id">R2.5</span><b>Calendrier national</b><br><span style="color:var(--muted)">7 jours de fête épars → 1 table</span><span class="eff">0,5 j</span></li>
+        <li><span class="id">R2.6</span><b>Démographie, carte du Royaume</b><br><span style="color:var(--muted)">5 500 âmes vs 7 000 mini-McLouches, à assumer</span><span class="eff">1 j</span></li>
+        <li><span class="id">R2.7</span><b>Lacunes : fixer ou prêter au silence</b><br><span style="color:var(--muted)">5 ouverts → 0, dont 4 par serment d'ignorance</span><span class="eff">1 j</span></li>
+        <li><span class="id">R2.8</span><b>Chroniques, Livre II (1889–1914)</b><br><span style="color:var(--muted)">même standard : 12 calculs, 0 erreur</span><span class="eff">4-5 j</span></li>
+        <li><span class="id">R2.9</span><b>Registre des personnages</b><br><span style="color:var(--muted)">18 figures, 0 index → liste d'autorité</span><span class="eff">1 j</span></li>
+      </ul>
+    </div>
+    <div class="lane l3">
+      <h3>H3 · Diffuser <small>2027 · 6 actions</small></h3>
+      <ul>
+        <li><span class="id">R3.1</span><b>Site de lecture</b><br><span style="color:var(--muted)">GitHub Pages, thème parchemin/bleu roi</span><span class="eff">1-2 j</span></li>
+        <li><span class="id">R3.2</span><b>Chroniques en volume publié</b><br><span style="color:var(--muted)">Livre I n'existe qu'en Markdown</span><span class="eff">0,5 j</span></li>
+        <li><span class="id">R3.3</span><b>Canon en données structurées</b><br><span style="color:var(--muted)">JSON généré depuis I ; on vérifie des faits, plus des phrases</span><span class="eff">2 j</span></li>
+        <li><span class="id">R3.4</span><b>Licence &amp; citabilité</b><br><span style="color:var(--muted)">LICENSE · CITATION.cff · CHANGELOG</span><span class="eff">15 min</span></li>
+        <li><span class="id">R3.5</span><b>Résumé exécutif bilingue</b><br><span style="color:var(--muted)">l'humour se traduit mal, les tableaux bien</span><span class="eff">1 j</span></li>
+        <li><span class="id">R3.6</span><b>Rite de publication</b><br><span style="color:var(--muted)">contrôle → PDF → Release → Avis</span><span class="eff">0,5 j</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <h2><span class="n">4</span>Cap ciblé</h2>
+  <table>
+    <tr><th>Indicateur</th><th>Avant H0</th><th>Après H0</th><th>Fin H1</th><th>Fin H2</th></tr>
+    <tr><td>Illustrations canoniques rendues dans le PDF</td><td>11 / 14 (79 %)</td><td>14 / 14</td><td><b>14 / 14</b></td><td>100 %</td></tr>
+    <tr><td>Contrôles en CI</td><td>0</td><td>5 + scellés</td><td>7</td><td>7 + données</td></tr>
+    <tr><td>Commandes du README exécutables telles quelles</td><td>0 / 4</td><td>3 / 4</td><td>4 / 4</td><td>4 / 4</td></tr>
+    <tr><td>Constats ouverts</td><td>10</td><td><b>4</b></td><td>≤ 3</td><td>0, tous arbitrés</td></tr>
+    <tr><td>Lacunes canoniques déclarées</td><td>5</td><td>5</td><td>5</td><td>0 (fixées ou consignées comme silence voulu)</td></tr>
+    </table>
+
+  <h2><span class="n">5</span>Ce qu'il ne faut pas faire</h2>
+  <div class="grid g3">
+    <div class="card"><h3>Ne pas supprimer H et G</h3><p>La consolidation autonome vaut parce que la trace de l'état antérieur subsiste. Un gel par haché suffit.</p></div>
+    <div class="card"><h3>Ne pas viser le diff binaire du PDF</h3><p>Mesuré : trois builds, trois tailles. La cause est dans ReportLab, <code>invariant=1</code> n'y change rien. L'empreinte sémantique, si.</p></div>
+    <div class="card"><h3>Ne pas quantifier les portraits</h3><p>−75 % de poids, dégradés perdus. Le projet a déjà refusé à juste titre ; préférer les maîtres hors dépôt.</p></div>
+    <div class="card"><h3>Ne pas incorporer la chronique sans décret</h3><p>Le bandeau « proposés » est sa liberté. Le canon n'a pas à absorbe ce qui l'enrichit.</p></div>
+    <div class="card"><h3>Ne pas ouvrir une Génération VIII trop tôt</h3><p>Sans registre des personnages, chaque naissance multiplie les surfaces de continuité non vérifiée.</p></div>
+    <div class="card"><h3>Ne pas écrire un second générateur</h3><p>Le défaut n'est pas l'absence d'outil, c'est un outil qui se prend pour la référence. Un seul pipeline, autorité Markdown.</p></div>
+  </div>
+
+  <div class="quote">« Un prince sans portrait, c'était hier. Trois planches sans prince, c'est aujourd'hui. L'archive est vivante : elle se corrige en régénérant. »<br>
+  <span style="font-size:12px">— Note de l'auditeur, versée aux Archives, 27 août 2026</span></div>
+
+</main>
+<footer>Rapport complet : <b>RAPPORT_ANALYSE_2026_II.md</b> · Feuille de route détaillée : <b>ROADMAP_2026_II.md</b> · Référence canonique : <b>Royaume_du_Babberland_Encyclopedie_Consolidee_2026_I.pdf</b><br>« Une Pabst, une poutine, et on régénère. »</footer>
+</body>
+</html>

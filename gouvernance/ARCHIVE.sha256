@@ -1,0 +1,17 @@
+# Archives gelées du Royaume du Babberland — liste de contrôle d'immutabilité.
+# Vérification locale : sha256sum --check gouvernance/ARCHIVE.sha256
+# Étape bloquante de la CI : .github/workflows/continuite.yml
+#
+# Un fichier figurant ici est une archive close : il ne se corrige pas, il se remplace
+# par un nouveau volume, signé par un Avis du Grand Argentier. Pour retirer une ligne,
+# il faut donc un Avis ET une mise à jour de ce fichier dans le même commit, afin que
+# la substitution soit lisible dans l'historique (constats E-12 et E-13, RA-2026-II-01).
+#
+# Document 2026-G — encyclopédie d'état antérieur, 41 pages, productrice ReportLab,
+# créée le 26 août 2026 à 13:03 UTC. Aucune source Markdown ni aucun générateur ne
+# correspondent à ce volume dans le dépôt : il est figé sans être régénérable, d'où
+# le présent scellé, seul moyen d'en prouver l'intégrité (E-12).
+# Document 2026-H — supplément extraordinaire, déjà consolidé dans 2026-I dont il
+# reprend 95 % des lignes narratives ; conservé comme trace de l'état antérieur (E-13).
+a7f8c0fc2db45df616288fd7c9feec11e09603b45ba46a6359b1099f12b23283  Royaume_du_Babberland_Encyclopedie_Officielle_2026.pdf
+a65c10751b8c2257945853b6016d6546985867c5d8ec09e7ae61109815518edd  HISTOIRE_OFFICIELLE_ET_GENEALOGIE_REVISEE_2026.md
