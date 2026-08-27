@@ -64,6 +64,7 @@ if "2026-I est la référence canonique autonome" not in texts[CHRONOLOGY.name]:
 # Ancres d'illustrations du générateur PDF : chaque titre d'ancrage doit exister
 # tel quel dans 2026-I, faute de quoi l'illustration disparaît silencieusement du PDF.
 def illustration_anchors(source: str) -> list[tuple[str, str]]:
+    """(ancre, chemin) pour chaque illustration déclarée, en table simple ou multiple."""
     tree = ast.parse(source)
     anchors: list[tuple[str, str]] = []
     for node in ast.walk(tree):
@@ -72,17 +73,20 @@ def illustration_anchors(source: str) -> list[tuple[str, str]]:
         for key, value in zip(node.keys, node.values):
             if not (isinstance(key, ast.Constant) and isinstance(key.value, str)):
                 continue
-            if (isinstance(value, ast.Tuple) and value.elts
-                    and isinstance(value.elts[0], ast.Constant)
-                    and isinstance(value.elts[0].value, str)
-                    and value.elts[0].value.startswith("images/")):
-                anchors.append((key.value, value.elts[0].value))
+            entries = value.elts if isinstance(value, ast.List) else [value]
+            for entry in entries:
+                if (isinstance(entry, ast.Tuple) and entry.elts
+                        and isinstance(entry.elts[0], ast.Constant)
+                        and isinstance(entry.elts[0].value, str)
+                        and entry.elts[0].value.startswith("images/")):
+                    anchors.append((key.value, entry.elts[0].value))
     return anchors
 
 try:
-    anchors = illustration_anchors(GENERATOR.read_text(encoding="utf-8"))
+    generator_source = GENERATOR.read_text(encoding="utf-8")
+    anchors = illustration_anchors(generator_source)
 except SyntaxError as exc:
-    anchors, errors = [], errors + [f"générateur PDF illisible : {exc}"]
+    generator_source, anchors = "", errors + [f"générateur PDF illisible : {exc}"]
 if not anchors:
     errors.append("aucune table d'illustrations trouvée dans le générateur PDF")
 for anchor, rel in anchors:
@@ -90,6 +94,18 @@ for anchor, rel in anchors:
         errors.append(f"ancre d'illustration introuvable dans 2026-I : {anchor!r} (image {rel})")
     elif not (ROOT / rel).is_file():
         errors.append(f"illustration absente pour l'ancre {anchor!r} : {rel}")
+
+# Couverture (constat E-07/E-09) : l'autorité est le canon, pas le générateur.
+# Toute illustration référencée dans 2026-I doit donc être servie par une insertion
+# du script, ou expressément exclue du volume par « <!-- hors-PDF: images/x.png — motif --> ».
+served = {rel for _, rel in anchors} | set(re.findall(r'"(images/[^"]+)"', generator_source))
+exempted = set(re.findall(r"<!--\s*hors-PDF:\s*(images/[^\s]+)", canon_text))
+for rel in sorted(set(re.findall(r"`(images/[^`]+)`", canon_text))):
+    if rel not in served and rel not in exempted:
+        errors.append(
+            f"illustration promise par 2026-I et servie par aucun ancrage du générateur : {rel} "
+            "(l'insérer dans IMAGE_AFTER ou l'exclure par un commentaire « hors-PDF: »)"
+        )
 
 # Chroniques : hors canon, mais elles doivent déclarer leur statut éditorial
 # « proposé, non décrété » et respecter les formulations canoniques ci-dessus.

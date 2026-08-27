@@ -1,6 +1,38 @@
-"""Génère l'arbre officiel en PNG (dépendance: Pillow)."""
-from PIL import Image, ImageDraw, ImageFont
+"""Génère l'arbre officiel en PNG (dépendance: Pillow).
+
+Sortie déterministe au bit près : graine fixée à l'année de fondation et polices
+résolues par recherche (constat E-11) — la CI compare le PNG régénéré à celui du dépôt.
+"""
+import os
+from pathlib import Path
 from random import Random
+
+from PIL import Image, ImageDraw, ImageFont
+
+ROOT = Path(__file__).resolve().parents[1]
+
+def find_font(filename: str) -> str:
+    """Même recherche que le générateur d'encyclopédie : Linux, macOS, Windows."""
+    searched = []
+    if os.environ.get("BABBERLAND_FONT_DIR"):
+        searched.append(Path(os.environ["BABBERLAND_FONT_DIR"]) / filename)
+    local = os.environ.get("LOCALAPPDATA", str(Path.home()))
+    searched += [
+        Path("/usr/share/fonts/truetype/dejavu") / filename,
+        Path("/usr/local/share/fonts") / filename,
+        Path.home() / ".fonts" / filename,
+        Path("/Library/Fonts") / filename,
+        Path("/System/Library/Fonts/Supplemental") / filename,
+        Path(local) / "Microsoft/Windows/Fonts" / filename,
+        Path("C:/Windows/Fonts") / filename,
+    ]
+    for candidate in searched:
+        if candidate.is_file():
+            return str(candidate)
+    raise SystemExit(
+        f"police {filename} introuvable — installez fonts-dejavu-core "
+        f"ou indiquez un répertoire via BABBERLAND_FONT_DIR."
+    )
 
 W,H=1600,1000
 rng=Random(1847)
@@ -13,7 +45,7 @@ d.rectangle((77,77,1523,923),outline='#b88735',width=2)
 for _ in range(7000):
     x=rng.randrange(60,1540); y=rng.randrange(60,940); c=rng.choice(['#ead7a8','#f8eccb','#dfc990'])
     d.point((x,y),fill=c)
-font='/usr/share/fonts/truetype/dejavu/DejaVuSerif.ttf'; bold='/usr/share/fonts/truetype/dejavu/DejaVuSerif-Bold.ttf'
+font=find_font('DejaVuSerif.ttf'); bold=find_font('DejaVuSerif-Bold.ttf')
 def F(size,b=False): return ImageFont.truetype(bold if b else font,size)
 def center(text,xy,size=19,color='#3a2109',b=True):
     box=d.textbbox((0,0),text,font=F(size,b)); d.text((xy[0]-(box[2]-box[0])/2,xy[1]-(box[3]-box[1])/2),text,font=F(size,b),fill=color)
@@ -45,4 +77,4 @@ gen('GÉNÉRATION V',672); node((235,650,415,720),'Honoré-Pabst','Union 1998–
 gen('GÉNÉRATION VI',787); node((675,760,1125,830),'Babber le Fou  ═  Princesse Ginette','Héritier présomptif · Dame de la Sauce'); node((1250,760,1495,830),'Babber le Déchiré','Cousin collatéral','collateral')
 gen('GÉNÉRATION VII',850); node((700,835,1100,895),'Ti-Babber · né le 26 août 2026','2e dans la succession · « VII » = 7e génération','current')
 d.text((105,900),'Traits pleins : filiation directe  ·  Pointillés verts : branche collatérale  ·  ═ : union',font=F(16),fill='#563714')
-im.save('images/arbre_genealogique_complet.png',optimize=True)
+im.save(ROOT / 'images/arbre_genealogique_complet.png',optimize=True)
