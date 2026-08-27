@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atlas temporel · Royaume du Babberland</title>
+<style>
+  :root{
+    --navy:#132A44; --gold:#B78A35; --cream:#F6EEDB; --ink:#29251F; --muted:#6E624F;
+    --green:#3E6B4A; --red:#9E2B25;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--cream);color:var(--ink);font:15px/1.55 Georgia,"DejaVu Serif",serif}
+  header{background:var(--navy);color:#fff;padding:28px 24px 20px;border-bottom:5px double var(--gold)}
+  header h1{margin:0 0 6px;font-size:24px;letter-spacing:.4px}
+  header .sub{color:#DFCE9F;font-style:italic;font-size:14px}
+  header .meta{margin-top:10px;font-size:12px;color:#BFD0E2;letter-spacing:.4px}
+  .banner{background:#FFF6D8;border-bottom:1px solid #E0D4B4;color:var(--muted);
+    padding:10px 24px;font-size:13.5px}
+  .banner b{color:var(--red)}
+  main{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:0;min-height:calc(100vh - 210px)}
+  .mapwrap{padding:12px 8px 8px;overflow:auto;background:#2a2116}
+  .mapwrap svg{width:100%;height:auto;display:block;background:transparent}
+  aside{background:#fff;border-left:1px solid #E0D4B4;padding:16px 16px 28px;overflow:auto}
+  aside h2{margin:0 0 8px;font-size:13px;color:var(--navy);letter-spacing:.6px;text-transform:uppercase}
+  .year{font-size:42px;color:var(--navy);margin:0;line-height:1}
+  .era{color:var(--gold);font-style:italic;margin:4px 0 14px}
+  .fait{background:#FFFDF6;border:1px solid #E0D4B4;border-left:4px solid var(--gold);
+    padding:10px 12px;font-size:13.5px;margin-bottom:16px}
+  .canon{display:inline-block;font:10px/1.6 "DejaVu Sans",sans-serif;letter-spacing:.5px;
+    padding:1px 7px;border-radius:8px;color:#fff;background:var(--green);vertical-align:2px}
+  .prop{background:var(--gold)}
+  .kpi{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0 16px}
+  .card{background:var(--cream);border:1px solid #E0D4B4;border-radius:5px;padding:8px 10px}
+  .card .n{font-size:22px;color:var(--navy)}
+  .card .k{font-size:11px;color:var(--muted);letter-spacing:.4px;text-transform:uppercase}
+  .reg{border-top:1px dashed #EADFC4;padding:8px 0;cursor:pointer}
+  .reg:hover{color:var(--navy)}
+  .reg b{display:block;font-size:14px}
+  .reg span{font-size:12.5px;color:var(--muted)}
+  .snaps{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 4px}
+  .snaps button{font:12px Georgia,serif;background:#fff;border:1px solid #E0D4B4;border-radius:12px;
+    padding:3px 9px;cursor:pointer;color:var(--navy)}
+  .snaps button.on{background:var(--navy);color:var(--cream);border-color:var(--navy)}
+  footer{background:#fff;border-top:1px solid #E0D4B4;padding:12px 22px 18px}
+  .slide{display:flex;align-items:center;gap:14px}
+  input[type=range]{flex:1;accent-color:var(--gold)}
+  .play{background:var(--navy);color:var(--cream);border:0;border-radius:16px;padding:6px 14px;
+    font:13px Georgia,serif;cursor:pointer}
+  @media (max-width: 980px){
+    main{grid-template-columns:1fr}
+    aside{border-left:0;border-top:1px solid #E0D4B4}
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>🗺️ Atlas temporel du Royaume du Babberland</h1>
+  <div class="sub">Carte cohérente avec le temps · cinq régions, un fleuve, des Alpes de jardin</div>
+  <div class="meta">CHANCELLERIE ROYALE · PABST CITY · 27 AOÛT 2026 · TICKET R2.6 LIVRÉ EN PROPOSITION · Atlas temporel 2026-Géo · 27 août 2026</div>
+</header>
+<div class="banner">Statut éditorial — <b>proposé, non décrété</b>. Les cinq régions, les 5 500 âmes urbaines, les Monts Froissés de 1962 et le Fleuve Babber sont canoniques. Le reste (1 500 âmes de la forêt, toponymes du fjord et de la baie, tracé des routes, 2 km d'aqueduc) est reconstruction pour la carte, sans force de loi.</div>
+<main>
+  <div class="mapwrap" id="map"><svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1100" viewBox="0 0 1600 1100" role="img" aria-label="Carte du Royaume du Babberland">
+  <defs>
+    <linearGradient id="paper" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#f5e4b8"/><stop offset=".5" stop-color="#fff5d6"/><stop offset="1" stop-color="#dfc27b"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#6e3e09"/><stop offset=".45" stop-color="#ddb95b"/><stop offset="1" stop-color="#7a470b"/>
+    </linearGradient>
+    <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#6A97B0"/><stop offset="1" stop-color="#3E6E88"/>
+    </linearGradient>
+    <pattern id="waves" width="28" height="12" patternUnits="userSpaceOnUse">
+      <path d="M0 8 Q7 2 14 8 T28 8" fill="none" stroke="#d7ecf4" stroke-width="1.1" opacity=".35"/>
+    </pattern>
+    <filter id="shadow"><feDropShadow dx="0" dy="4" stdDeviation="5" flood-opacity=".35"/></filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#512b08"/>
+    </marker>
+    <style>
+      .title{font:700 34px Georgia,serif;fill:#512b08;letter-spacing:2px}
+      .subtitle{font:italic 16px Georgia,serif;fill:#76501e}
+      .water{fill:url(#water)}
+      .land{fill:#e6d3a4}
+      .forest{fill:#3E6B4A}
+      .hemp{fill:#7A9A5C}
+      .orge{fill:#C4B56A}
+      .city{fill:#f3e2b4;stroke:#6f430b;stroke-width:2.4}
+      .city-label{font:700 15px Georgia,serif;fill:#3a2109}
+      .muted{font:italic 12px Georgia,serif;fill:#70481c}
+      .road{fill:none;stroke:#a07840;stroke-width:3.2;stroke-linecap:round;stroke-dasharray:9 7}
+      .river{fill:none;stroke:#4d7e96;stroke-width:5;stroke-linecap:round}
+      .aqueduct{fill:none;stroke:#2A5A78;stroke-width:3.2;stroke-linecap:round}
+      .aqueduct-beer{fill:none;stroke:#B78A35;stroke-width:3.2;stroke-linecap:round}
+      .plan{stroke-dasharray:6 6;opacity:.85}
+      .legend{font:13px Georgia,serif;fill:#563714}
+      .hot{cursor:pointer}
+    </style>
+  </defs>
+  <rect width="1600" height="1100" fill="#20180e"/>
+  <rect x="28" y="28" width="1544" height="1044" rx="22" fill="url(#gold)" filter="url(#shadow)"/>
+  <rect x="55" y="55" width="1490" height="990" rx="12" fill="url(#paper)" stroke="#59320b" stroke-width="5"/>
+  <rect x="77" y="77" width="1446" height="946" fill="none" stroke="#b88735" stroke-width="2"/>
+
+  <text x="800" y="118" text-anchor="middle" class="title">ROYAUME DU BABBERLAND</text>
+  <text x="800" y="144" text-anchor="middle" class="subtitle">Carte cohérente avec le temps · 1847–2026 · proposé, non décrété</text>
+
+  <!-- Terre d'abord, eau par-dessus (le titre reste au sec). -->
+  <rect class="land" x="90" y="155" width="1420" height="840"/>
+  <path class="water" d="M 90,175 C 220,158 340,200 480,178 C 620,156 760,198 900,176 C 1040,154 1160,190 1280,168 C 1360,156 1440,148 1510,158 L 1510,268 C 1400,290 1280,305 1160,292 C 1020,276 880,310 740,292 C 600,274 460,318 320,300 C 220,288 140,310 90,278 Z"/>
+  <path class="water" d="M 1180,168 C 1220,128 1300,118 1400,126 C 1480,134 1510,150 1510,175 C 1510,235 1460,278 1375,282 C 1275,286 1195,248 1180,210 Z"/>
+  <path class="water" d="M 90,250 C 130,285 195,328 275,336 C 350,344 395,312 370,278 C 348,248 250,232 155,236 C 118,240 95,245 90,250 Z"/>
+  <path fill="url(#waves)" d="M 90,175 C 220,158 340,200 480,178 C 620,156 760,198 900,176 C 1040,154 1160,190 1280,168 C 1360,156 1440,148 1510,158 L 1510,268 C 1400,290 1280,305 1160,292 C 1020,276 880,310 740,292 C 600,274 460,318 320,300 C 220,288 140,310 90,278 Z"/>
+  <path fill="url(#waves)" d="M 1180,168 C 1220,128 1300,118 1400,126 C 1480,134 1510,150 1510,175 C 1510,235 1460,278 1375,282 C 1275,286 1195,248 1180,210 Z"/>
+  <path class="forest" d="M 180,640 C 260,580 360,600 470,590 C 560,580 620,610 700,600 C 820,585 940,620 1080,600 C 1220,580 1320,650 1380,720 C 1450,810 1400,940 1280,970 C 1100,1000 700,1005 420,980 C 240,955 140,850 180,640 Z" opacity=".92"/>
+  <circle cx="296" cy="863" r="8" fill="#3E6B4A" opacity=".85"/><circle cx="296" cy="857" r="5" fill="#5A8A64" opacity=".7"/><circle cx="657" cy="862" r="11" fill="#356044" opacity=".85"/><circle cx="657" cy="856" r="8" fill="#5A8A64" opacity=".7"/><circle cx="1333" cy="793" r="11" fill="#356044" opacity=".85"/><circle cx="1333" cy="787" r="8" fill="#5A8A64" opacity=".7"/><circle cx="739" cy="848" r="7" fill="#2F5A3C" opacity=".85"/><circle cx="739" cy="842" r="4" fill="#5A8A64" opacity=".7"/><circle cx="1164" cy="743" r="10" fill="#356044" opacity=".85"/><circle cx="1164" cy="737" r="7" fill="#5A8A64" opacity=".7"/><circle cx="610" cy="718" r="11" fill="#4A7A55" opacity=".85"/><circle cx="610" cy="712" r="8" fill="#5A8A64" opacity=".7"/><circle cx="583" cy="719" r="7" fill="#3E6B4A" opacity=".85"/><circle cx="583" cy="713" r="4" fill="#5A8A64" opacity=".7"/><circle cx="325" cy="639" r="11" fill="#356044" opacity=".85"/><circle cx="325" cy="633" r="8" fill="#5A8A64" opacity=".7"/><circle cx="687" cy="670" r="9" fill="#4A7A55" opacity=".85"/><circle cx="687" cy="664" r="6" fill="#5A8A64" opacity=".7"/><circle cx="1174" cy="642" r="10" fill="#2F5A3C" opacity=".85"/><circle cx="1174" cy="636" r="7" fill="#5A8A64" opacity=".7"/><circle cx="684" cy="922" r="10" fill="#356044" opacity=".85"/><circle cx="684" cy="916" r="7" fill="#5A8A64" opacity=".7"/><circle cx="1030" cy="693" r="9" fill="#4A7A55" opacity=".85"/><circle cx="1030" cy="687" r="6" fill="#5A8A64" opacity=".7"/><circle cx="1094" cy="760" r="11" fill="#4A7A55" opacity=".85"/><circle cx="1094" cy="754" r="8" fill="#5A8A64" opacity=".7"/><circle cx="529" cy="699" r="9" fill="#356044" opacity=".85"/><circle cx="529" cy="693" r="6" fill="#5A8A64" opacity=".7"/><circle cx="678" cy="896" r="11" fill="#2F5A3C" opacity=".85"/><circle cx="678" cy="890" r="8" fill="#5A8A64" opacity=".7"/><circle cx="407" cy="783" r="10" fill="#2F5A3C" opacity=".85"/><circle cx="407" cy="777" r="7" fill="#5A8A64" opacity=".7"/><circle cx="554" cy="924" r="8" fill="#3E6B4A" opacity=".85"/><circle cx="554" cy="918" r="5" fill="#5A8A64" opacity=".7"/><circle cx="331" cy="639" r="7" fill="#356044" opacity=".85"/><circle cx="331" cy="633" r="4" fill="#5A8A64" opacity=".7"/><circle cx="204" cy="638" r="11" fill="#2F5A3C" opacity=".85"/><circle cx="204" cy="632" r="8" fill="#5A8A64" opacity=".7"/><circle cx="599" cy="759" r="11" fill="#2F5A3C" opacity=".85"/><circle cx="599" cy="753" r="8" fill="#5A8A64" opacity=".7"/><circle cx="442" cy="641" r="10" fill="#2F5A3C" opacity=".85"/><circle cx="442" cy="635" r="7" fill="#5A8A64" opacity=".7"/><circle cx="508" cy="663" r="9" fill="#356044" opacity=".85"/><circle cx="508" cy="657" r="6" fill="#5A8A64" opacity=".7"/><circle cx="843" cy="764" r="9" fill="#3E6B4A" opacity=".85"/><circle cx="843" cy="758" r="6" fill="#5A8A64" opacity=".7"/><circle cx="937" cy="861" r="7" fill="#356044" opacity=".85"/><circle cx="937" cy="855" r="4" fill="#5A8A64" opacity=".7"/><circle cx="1061" cy="805" r="10" fill="#3E6B4A" opacity=".85"/><circle cx="1061" cy="799" r="7" fill="#5A8A64" opacity=".7"/><circle cx="713" cy="767" r="8" fill="#3E6B4A" opacity=".85"/><circle cx="713" cy="761" r="5" fill="#5A8A64" opacity=".7"/><circle cx="676" cy="880" r="11" fill="#356044" opacity=".85"/><circle cx="676" cy="874" r="8" fill="#5A8A64" opacity=".7"/><circle cx="1212" cy="856" r="11" fill="#356044" opacity=".85"/><circle cx="1212" cy="850" r="8" fill="#5A8A64" opacity=".7"/><circle cx="202" cy="620" r="9" fill="#2F5A3C" opacity=".85"/><circle cx="202" cy="614" r="6" fill="#5A8A64" opacity=".7"/><circle cx="841" cy="951" r="8" fill="#2F5A3C" opacity=".85"/><circle cx="841" cy="945" r="5" fill="#5A8A64" opacity=".7"/><circle cx="470" cy="791" r="11" fill="#3E6B4A" opacity=".85"/><circle cx="470" cy="785" r="8" fill="#5A8A64" opacity=".7"/><circle cx="531" cy="623" r="7" fill="#3E6B4A" opacity=".85"/><circle cx="531" cy="617" r="4" fill="#5A8A64" opacity=".7"/><circle cx="509" cy="729" r="7" fill="#4A7A55" opacity=".85"/><circle cx="509" cy="723" r="4" fill="#5A8A64" opacity=".7"/><circle cx="334" cy="706" r="11" fill="#2F5A3C" opacity=".85"/><circle cx="334" cy="700" r="8" fill="#5A8A64" opacity=".7"/><circle cx="358" cy="786" r="11" fill="#3E6B4A" opacity=".85"/><circle cx="358" cy="780" r="8" fill="#5A8A64" opacity=".7"/><circle cx="1092" cy="688" r="9" fill="#2F5A3C" opacity=".85"/><circle cx="1092" cy="682" r="6" fill="#5A8A64" opacity=".7"/><circle cx="1027" cy="657" r="8" fill="#2F5A3C" opacity=".85"/><circle cx="1027" cy="651" r="5" fill="#5A8A64" opacity=".7"/><circle cx="982" cy="787" r="10" fill="#2F5A3C" opacity=".85"/><circle cx="982" cy="781" r="7" fill="#5A8A64" opacity=".7"/><circle cx="547" cy="847" r="11" fill="#4A7A55" opacity=".85"/><circle cx="547" cy="841" r="8" fill="#5A8A64" opacity=".7"/><circle cx="549" cy="728" r="7" fill="#356044" opacity=".85"/><circle cx="549" cy="722" r="4" fill="#5A8A64" opacity=".7"/><circle cx="209" cy="681" r="10" fill="#2F5A3C" opacity=".85"/><circle cx="209" cy="675" r="7" fill="#5A8A64" opacity=".7"/><circle cx="1194" cy="643" r="11" fill="#4A7A55" opacity=".85"/><circle cx="1194" cy="637" r="8" fill="#5A8A64" opacity=".7"/><circle cx="1283" cy="796" r="10" fill="#4A7A55" opacity=".85"/><circle cx="1283" cy="790" r="7" fill="#5A8A64" opacity=".7"/><circle cx="483" cy="900" r="8" fill="#2F5A3C" opacity=".85"/><circle cx="483" cy="894" r="5" fill="#5A8A64" opacity=".7"/><circle cx="395" cy="809" r="11" fill="#3E6B4A" opacity=".85"/><circle cx="395" cy="803" r="8" fill="#5A8A64" opacity=".7"/><circle cx="1172" cy="623" r="10" fill="#356044" opacity=".85"/><circle cx="1172" cy="617" r="7" fill="#5A8A64" opacity=".7"/><circle cx="1150" cy="684" r="8" fill="#3E6B4A" opacity=".85"/><circle cx="1150" cy="678" r="5" fill="#5A8A64" opacity=".7"/><circle cx="314" cy="756" r="8" fill="#3E6B4A" opacity=".85"/><circle cx="314" cy="750" r="5" fill="#5A8A64" opacity=".7"/><circle cx="252" cy="666" r="9" fill="#2F5A3C" opacity=".85"/><circle cx="252" cy="660" r="6" fill="#5A8A64" opacity=".7"/><circle cx="1240" cy="932" r="7" fill="#2F5A3C" opacity=".85"/><circle cx="1240" cy="926" r="4" fill="#5A8A64" opacity=".7"/><circle cx="912" cy="839" r="8" fill="#2F5A3C" opacity=".85"/><circle cx="912" cy="833" r="5" fill="#5A8A64" opacity=".7"/><circle cx="607" cy="742" r="11" fill="#3E6B4A" opacity=".85"/><circle cx="607" cy="736" r="8" fill="#5A8A64" opacity=".7"/><circle cx="536" cy="860" r="11" fill="#2F5A3C" opacity=".85"/><circle cx="536" cy="854" r="8" fill="#5A8A64" opacity=".7"/><circle cx="462" cy="742" r="10" fill="#356044" opacity=".85"/><circle cx="462" cy="736" r="7" fill="#5A8A64" opacity=".7"/><circle cx="827" cy="705" r="10" fill="#3E6B4A" opacity=".85"/><circle cx="827" cy="699" r="7" fill="#5A8A64" opacity=".7"/><circle cx="1284" cy="822" r="11" fill="#3E6B4A" opacity=".85"/><circle cx="1284" cy="816" r="8" fill="#5A8A64" opacity=".7"/><circle cx="377" cy="840" r="8" fill="#2F5A3C" opacity=".85"/><circle cx="377" cy="834" r="5" fill="#5A8A64" opacity=".7"/><circle cx="887" cy="814" r="8" fill="#2F5A3C" opacity=".85"/><circle cx="887" cy="808" r="5" fill="#5A8A64" opacity=".7"/><circle cx="1301" cy="913" r="8" fill="#4A7A55" opacity=".85"/><circle cx="1301" cy="907" r="5" fill="#5A8A64" opacity=".7"/><circle cx="1183" cy="684" r="9" fill="#2F5A3C" opacity=".85"/><circle cx="1183" cy="678" r="6" fill="#5A8A64" opacity=".7"/><circle cx="252" cy="642" r="9" fill="#4A7A55" opacity=".85"/><circle cx="252" cy="636" r="6" fill="#5A8A64" opacity=".7"/><circle cx="1024" cy="895" r="10" fill="#2F5A3C" opacity=".85"/><circle cx="1024" cy="889" r="7" fill="#5A8A64" opacity=".7"/><circle cx="1001" cy="834" r="8" fill="#356044" opacity=".85"/><circle cx="1001" cy="828" r="5" fill="#5A8A64" opacity=".7"/><circle cx="798" cy="922" r="7" fill="#3E6B4A" opacity=".85"/><circle cx="798" cy="916" r="4" fill="#5A8A64" opacity=".7"/><circle cx="511" cy="674" r="11" fill="#2F5A3C" opacity=".85"/><circle cx="511" cy="668" r="8" fill="#5A8A64" opacity=".7"/><circle cx="1086" cy="904" r="10" fill="#2F5A3C" opacity=".85"/><circle cx="1086" cy="898" r="7" fill="#5A8A64" opacity=".7"/><circle cx="1257" cy="786" r="10" fill="#3E6B4A" opacity=".85"/><circle cx="1257" cy="780" r="7" fill="#5A8A64" opacity=".7"/><circle cx="793" cy="676" r="10" fill="#3E6B4A" opacity=".85"/><circle cx="793" cy="670" r="7" fill="#5A8A64" opacity=".7"/><circle cx="937" cy="876" r="9" fill="#3E6B4A" opacity=".85"/><circle cx="937" cy="870" r="6" fill="#5A8A64" opacity=".7"/><circle cx="1062" cy="722" r="10" fill="#2F5A3C" opacity=".85"/><circle cx="1062" cy="716" r="7" fill="#5A8A64" opacity=".7"/><circle cx="607" cy="881" r="8" fill="#356044" opacity=".85"/><circle cx="607" cy="875" r="5" fill="#5A8A64" opacity=".7"/><circle cx="312" cy="880" r="9" fill="#2F5A3C" opacity=".85"/><circle cx="312" cy="874" r="6" fill="#5A8A64" opacity=".7"/><circle cx="931" cy="908" r="9" fill="#3E6B4A" opacity=".85"/><circle cx="931" cy="902" r="6" fill="#5A8A64" opacity=".7"/><circle cx="654" cy="758" r="8" fill="#4A7A55" opacity=".85"/><circle cx="654" cy="752" r="5" fill="#5A8A64" opacity=".7"/><circle cx="1049" cy="940" r="7" fill="#4A7A55" opacity=".85"/><circle cx="1049" cy="934" r="4" fill="#5A8A64" opacity=".7"/><circle cx="706" cy="936" r="10" fill="#356044" opacity=".85"/><circle cx="706" cy="930" r="7" fill="#5A8A64" opacity=".7"/><circle cx="501" cy="835" r="8" fill="#3E6B4A" opacity=".85"/><circle cx="501" cy="829" r="5" fill="#5A8A64" opacity=".7"/><circle cx="775" cy="897" r="9" fill="#356044" opacity=".85"/><circle cx="775" cy="891" r="6" fill="#5A8A64" opacity=".7"/><circle cx="1170" cy="717" r="11" fill="#3E6B4A" opacity=".85"/><circle cx="1170" cy="711" r="8" fill="#5A8A64" opacity=".7"/><circle cx="461" cy="732" r="11" fill="#2F5A3C" opacity=".85"/><circle cx="461" cy="726" r="8" fill="#5A8A64" opacity=".7"/><circle cx="881" cy="872" r="8" fill="#4A7A55" opacity=".85"/><circle cx="881" cy="866" r="5" fill="#5A8A64" opacity=".7"/><circle cx="624" cy="718" r="10" fill="#4A7A55" opacity=".85"/><circle cx="624" cy="712" r="7" fill="#5A8A64" opacity=".7"/><circle cx="567" cy="621" r="9" fill="#356044" opacity=".85"/><circle cx="567" cy="615" r="6" fill="#5A8A64" opacity=".7"/><circle cx="660" cy="902" r="7" fill="#356044" opacity=".85"/><circle cx="660" cy="896" r="4" fill="#5A8A64" opacity=".7"/><circle cx="437" cy="820" r="7" fill="#356044" opacity=".85"/><circle cx="437" cy="814" r="4" fill="#5A8A64" opacity=".7"/><circle cx="276" cy="687" r="11" fill="#4A7A55" opacity=".85"/><circle cx="276" cy="681" r="8" fill="#5A8A64" opacity=".7"/><circle cx="284" cy="680" r="9" fill="#3E6B4A" opacity=".85"/><circle cx="284" cy="674" r="6" fill="#5A8A64" opacity=".7"/><circle cx="405" cy="787" r="11" fill="#4A7A55" opacity=".85"/><circle cx="405" cy="781" r="8" fill="#5A8A64" opacity=".7"/><circle cx="421" cy="661" r="9" fill="#3E6B4A" opacity=".85"/><circle cx="421" cy="655" r="6" fill="#5A8A64" opacity=".7"/><circle cx="203" cy="781" r="7" fill="#4A7A55" opacity=".85"/><circle cx="203" cy="775" r="4" fill="#5A8A64" opacity=".7"/><circle cx="208" cy="636" r="8" fill="#2F5A3C" opacity=".85"/><circle cx="208" cy="630" r="5" fill="#5A8A64" opacity=".7"/><circle cx="574" cy="914" r="9" fill="#356044" opacity=".85"/><circle cx="574" cy="908" r="6" fill="#5A8A64" opacity=".7"/><circle cx="860" cy="790" r="8" fill="#4A7A55" opacity=".85"/><circle cx="860" cy="784" r="5" fill="#5A8A64" opacity=".7"/><circle cx="660" cy="905" r="8" fill="#2F5A3C" opacity=".85"/><circle cx="660" cy="899" r="5" fill="#5A8A64" opacity=".7"/><circle cx="551" cy="872" r="9" fill="#356044" opacity=".85"/><circle cx="551" cy="866" r="6" fill="#5A8A64" opacity=".7"/><circle cx="993" cy="780" r="10" fill="#4A7A55" opacity=".85"/><circle cx="993" cy="774" r="7" fill="#5A8A64" opacity=".7"/><circle cx="996" cy="854" r="7" fill="#3E6B4A" opacity=".85"/><circle cx="996" cy="848" r="4" fill="#5A8A64" opacity=".7"/><circle cx="490" cy="922" r="8" fill="#3E6B4A" opacity=".85"/><circle cx="490" cy="916" r="5" fill="#5A8A64" opacity=".7"/><circle cx="444" cy="868" r="11" fill="#356044" opacity=".85"/><circle cx="444" cy="862" r="8" fill="#5A8A64" opacity=".7"/><circle cx="877" cy="710" r="9" fill="#356044" opacity=".85"/><circle cx="877" cy="704" r="6" fill="#5A8A64" opacity=".7"/><circle cx="970" cy="737" r="11" fill="#2F5A3C" opacity=".85"/><circle cx="970" cy="731" r="8" fill="#5A8A64" opacity=".7"/><circle cx="893" cy="925" r="9" fill="#4A7A55" opacity=".85"/><circle cx="893" cy="919" r="6" fill="#5A8A64" opacity=".7"/><circle cx="453" cy="668" r="7" fill="#356044" opacity=".85"/><circle cx="453" cy="662" r="4" fill="#5A8A64" opacity=".7"/><circle cx="773" cy="949" r="7" fill="#356044" opacity=".85"/><circle cx="773" cy="943" r="4" fill="#5A8A64" opacity=".7"/><circle cx="327" cy="808" r="8" fill="#2F5A3C" opacity=".85"/><circle cx="327" cy="802" r="5" fill="#5A8A64" opacity=".7"/><circle cx="385" cy="933" r="11" fill="#3E6B4A" opacity=".85"/><circle cx="385" cy="927" r="8" fill="#5A8A64" opacity=".7"/><circle cx="546" cy="916" r="9" fill="#356044" opacity=".85"/><circle cx="546" cy="910" r="6" fill="#5A8A64" opacity=".7"/><circle cx="570" cy="774" r="7" fill="#356044" opacity=".85"/><circle cx="570" cy="768" r="4" fill="#5A8A64" opacity=".7"/><circle cx="1158" cy="657" r="10" fill="#3E6B4A" opacity=".85"/><circle cx="1158" cy="651" r="7" fill="#5A8A64" opacity=".7"/><circle cx="460" cy="655" r="10" fill="#2F5A3C" opacity=".85"/><circle cx="460" cy="649" r="7" fill="#5A8A64" opacity=".7"/><circle cx="1091" cy="941" r="8" fill="#2F5A3C" opacity=".85"/><circle cx="1091" cy="935" r="5" fill="#5A8A64" opacity=".7"/><circle cx="1239" cy="842" r="11" fill="#356044" opacity=".85"/><circle cx="1239" cy="836" r="8" fill="#5A8A64" opacity=".7"/><circle cx="1318" cy="652" r="7" fill="#3E6B4A" opacity=".85"/><circle cx="1318" cy="646" r="4" fill="#5A8A64" opacity=".7"/><circle cx="252" cy="660" r="7" fill="#4A7A55" opacity=".85"/><circle cx="252" cy="654" r="4" fill="#5A8A64" opacity=".7"/><circle cx="241" cy="932" r="11" fill="#356044" opacity=".85"/><circle cx="241" cy="926" r="8" fill="#5A8A64" opacity=".7"/><circle cx="650" cy="862" r="10" fill="#2F5A3C" opacity=".85"/><circle cx="650" cy="856" r="7" fill="#5A8A64" opacity=".7"/><circle cx="237" cy="733" r="11" fill="#4A7A55" opacity=".85"/><circle cx="237" cy="727" r="8" fill="#5A8A64" opacity=".7"/><circle cx="962" cy="714" r="8" fill="#2F5A3C" opacity=".85"/><circle cx="962" cy="708" r="5" fill="#5A8A64" opacity=".7"/><circle cx="1046" cy="899" r="9" fill="#356044" opacity=".85"/><circle cx="1046" cy="893" r="6" fill="#5A8A64" opacity=".7"/><circle cx="315" cy="831" r="7" fill="#4A7A55" opacity=".85"/><circle cx="315" cy="825" r="4" fill="#5A8A64" opacity=".7"/><circle cx="1225" cy="806" r="10" fill="#3E6B4A" opacity=".85"/><circle cx="1225" cy="800" r="7" fill="#5A8A64" opacity=".7"/><circle cx="320" cy="915" r="9" fill="#2F5A3C" opacity=".85"/><circle cx="320" cy="909" r="6" fill="#5A8A64" opacity=".7"/><circle cx="522" cy="797" r="8" fill="#3E6B4A" opacity=".85"/><circle cx="522" cy="791" r="5" fill="#5A8A64" opacity=".7"/><circle cx="1187" cy="794" r="11" fill="#4A7A55" opacity=".85"/><circle cx="1187" cy="788" r="8" fill="#5A8A64" opacity=".7"/><circle cx="1334" cy="675" r="8" fill="#2F5A3C" opacity=".85"/><circle cx="1334" cy="669" r="5" fill="#5A8A64" opacity=".7"/><circle cx="821" cy="779" r="7" fill="#2F5A3C" opacity=".85"/><circle cx="821" cy="773" r="4" fill="#5A8A64" opacity=".7"/><circle cx="1243" cy="786" r="8" fill="#3E6B4A" opacity=".85"/><circle cx="1243" cy="780" r="5" fill="#5A8A64" opacity=".7"/><circle cx="858" cy="945" r="9" fill="#4A7A55" opacity=".85"/><circle cx="858" cy="939" r="6" fill="#5A8A64" opacity=".7"/><circle cx="271" cy="646" r="9" fill="#2F5A3C" opacity=".85"/><circle cx="271" cy="640" r="6" fill="#5A8A64" opacity=".7"/><circle cx="1309" cy="866" r="9" fill="#4A7A55" opacity=".85"/><circle cx="1309" cy="860" r="6" fill="#5A8A64" opacity=".7"/><circle cx="835" cy="954" r="11" fill="#3E6B4A" opacity=".85"/><circle cx="835" cy="948" r="8" fill="#5A8A64" opacity=".7"/><circle cx="657" cy="725" r="9" fill="#356044" opacity=".85"/><circle cx="657" cy="719" r="6" fill="#5A8A64" opacity=".7"/><circle cx="1147" cy="825" r="10" fill="#2F5A3C" opacity=".85"/><circle cx="1147" cy="819" r="7" fill="#5A8A64" opacity=".7"/><circle cx="1250" cy="839" r="11" fill="#356044" opacity=".85"/><circle cx="1250" cy="833" r="8" fill="#5A8A64" opacity=".7"/><circle cx="1208" cy="812" r="8" fill="#3E6B4A" opacity=".85"/><circle cx="1208" cy="806" r="5" fill="#5A8A64" opacity=".7"/><circle cx="593" cy="933" r="9" fill="#4A7A55" opacity=".85"/><circle cx="593" cy="927" r="6" fill="#5A8A64" opacity=".7"/><circle cx="776" cy="633" r="7" fill="#2F5A3C" opacity=".85"/><circle cx="776" cy="627" r="4" fill="#5A8A64" opacity=".7"/><circle cx="450" cy="952" r="8" fill="#4A7A55" opacity=".85"/><circle cx="450" cy="946" r="5" fill="#5A8A64" opacity=".7"/><circle cx="1280" cy="635" r="10" fill="#4A7A55" opacity=".85"/><circle cx="1280" cy="629" r="7" fill="#5A8A64" opacity=".7"/><circle cx="646" cy="786" r="8" fill="#4A7A55" opacity=".85"/><circle cx="646" cy="780" r="5" fill="#5A8A64" opacity=".7"/><circle cx="1193" cy="620" r="11" fill="#356044" opacity=".85"/><circle cx="1193" cy="614" r="8" fill="#5A8A64" opacity=".7"/><circle cx="788" cy="943" r="10" fill="#356044" opacity=".85"/><circle cx="788" cy="937" r="7" fill="#5A8A64" opacity=".7"/><circle cx="1126" cy="924" r="10" fill="#2F5A3C" opacity=".85"/><circle cx="1126" cy="918" r="7" fill="#5A8A64" opacity=".7"/><circle cx="610" cy="724" r="9" fill="#3E6B4A" opacity=".85"/><circle cx="610" cy="718" r="6" fill="#5A8A64" opacity=".7"/><circle cx="765" cy="695" r="7" fill="#2F5A3C" opacity=".85"/><circle cx="765" cy="689" r="4" fill="#5A8A64" opacity=".7"/><circle cx="277" cy="704" r="11" fill="#4A7A55" opacity=".85"/><circle cx="277" cy="698" r="8" fill="#5A8A64" opacity=".7"/><circle cx="1249" cy="904" r="10" fill="#4A7A55" opacity=".85"/><circle cx="1249" cy="898" r="7" fill="#5A8A64" opacity=".7"/><circle cx="398" cy="748" r="8" fill="#356044" opacity=".85"/><circle cx="398" cy="742" r="5" fill="#5A8A64" opacity=".7"/><circle cx="737" cy="767" r="10" fill="#3E6B4A" opacity=".85"/><circle cx="737" cy="761" r="7" fill="#5A8A64" opacity=".7"/><circle cx="1169" cy="865" r="11" fill="#3E6B4A" opacity=".85"/><circle cx="1169" cy="859" r="8" fill="#5A8A64" opacity=".7"/><circle cx="372" cy="630" r="9" fill="#3E6B4A" opacity=".85"/><circle cx="372" cy="624" r="6" fill="#5A8A64" opacity=".7"/><circle cx="1043" cy="950" r="7" fill="#4A7A55" opacity=".85"/><circle cx="1043" cy="944" r="4" fill="#5A8A64" opacity=".7"/><circle cx="345" cy="760" r="10" fill="#3E6B4A" opacity=".85"/><circle cx="345" cy="754" r="7" fill="#5A8A64" opacity=".7"/><circle cx="1292" cy="716" r="7" fill="#4A7A55" opacity=".85"/><circle cx="1292" cy="710" r="4" fill="#5A8A64" opacity=".7"/><circle cx="507" cy="687" r="7" fill="#2F5A3C" opacity=".85"/><circle cx="507" cy="681" r="4" fill="#5A8A64" opacity=".7"/><circle cx="503" cy="918" r="7" fill="#3E6B4A" opacity=".85"/><circle cx="503" cy="912" r="4" fill="#5A8A64" opacity=".7"/><circle cx="725" cy="673" r="8" fill="#2F5A3C" opacity=".85"/><circle cx="725" cy="667" r="5" fill="#5A8A64" opacity=".7"/><circle cx="443" cy="758" r="8" fill="#2F5A3C" opacity=".85"/><circle cx="443" cy="752" r="5" fill="#5A8A64" opacity=".7"/><circle cx="1216" cy="656" r="9" fill="#3E6B4A" opacity=".85"/><circle cx="1216" cy="650" r="6" fill="#5A8A64" opacity=".7"/><circle cx="643" cy="774" r="11" fill="#356044" opacity=".85"/><circle cx="643" cy="768" r="8" fill="#5A8A64" opacity=".7"/><circle cx="470" cy="733" r="7" fill="#4A7A55" opacity=".85"/><circle cx="470" cy="727" r="4" fill="#5A8A64" opacity=".7"/><circle cx="957" cy="907" r="7" fill="#2F5A3C" opacity=".85"/><circle cx="957" cy="901" r="4" fill="#5A8A64" opacity=".7"/><circle cx="574" cy="773" r="9" fill="#4A7A55" opacity=".85"/><circle cx="574" cy="767" r="6" fill="#5A8A64" opacity=".7"/><circle cx="925" cy="866" r="7" fill="#2F5A3C" opacity=".85"/><circle cx="925" cy="860" r="4" fill="#5A8A64" opacity=".7"/><circle cx="1090" cy="653" r="9" fill="#356044" opacity=".85"/><circle cx="1090" cy="647" r="6" fill="#5A8A64" opacity=".7"/><circle cx="1072" cy="695" r="11" fill="#4A7A55" opacity=".85"/><circle cx="1072" cy="689" r="8" fill="#5A8A64" opacity=".7"/><circle cx="518" cy="854" r="9" fill="#4A7A55" opacity=".85"/><circle cx="518" cy="848" r="6" fill="#5A8A64" opacity=".7"/><circle cx="1121" cy="859" r="11" fill="#2F5A3C" opacity=".85"/><circle cx="1121" cy="853" r="8" fill="#5A8A64" opacity=".7"/><circle cx="1034" cy="670" r="10" fill="#356044" opacity=".85"/><circle cx="1034" cy="664" r="7" fill="#5A8A64" opacity=".7"/><circle cx="340" cy="905" r="9" fill="#4A7A55" opacity=".85"/><circle cx="340" cy="899" r="6" fill="#5A8A64" opacity=".7"/><circle cx="632" cy="796" r="9" fill="#3E6B4A" opacity=".85"/><circle cx="632" cy="790" r="6" fill="#5A8A64" opacity=".7"/><circle cx="1356" cy="922" r="11" fill="#4A7A55" opacity=".85"/><circle cx="1356" cy="916" r="8" fill="#5A8A64" opacity=".7"/><circle cx="1172" cy="676" r="7" fill="#4A7A55" opacity=".85"/><circle cx="1172" cy="670" r="4" fill="#5A8A64" opacity=".7"/><circle cx="546" cy="724" r="7" fill="#356044" opacity=".85"/><circle cx="546" cy="718" r="4" fill="#5A8A64" opacity=".7"/><circle cx="764" cy="686" r="8" fill="#3E6B4A" opacity=".85"/><circle cx="764" cy="680" r="5" fill="#5A8A64" opacity=".7"/><circle cx="750" cy="824" r="10" fill="#3E6B4A" opacity=".85"/><circle cx="750" cy="818" r="7" fill="#5A8A64" opacity=".7"/><circle cx="1132" cy="739" r="11" fill="#2F5A3C" opacity=".85"/><circle cx="1132" cy="733" r="8" fill="#5A8A64" opacity=".7"/><circle cx="381" cy="850" r="7" fill="#4A7A55" opacity=".85"/><circle cx="381" cy="844" r="4" fill="#5A8A64" opacity=".7"/><circle cx="553" cy="863" r="8" fill="#2F5A3C" opacity=".85"/><circle cx="553" cy="857" r="5" fill="#5A8A64" opacity=".7"/><circle cx="1006" cy="666" r="8" fill="#2F5A3C" opacity=".85"/><circle cx="1006" cy="660" r="5" fill="#5A8A64" opacity=".7"/><circle cx="1024" cy="699" r="11" fill="#4A7A55" opacity=".85"/><circle cx="1024" cy="693" r="8" fill="#5A8A64" opacity=".7"/><circle cx="271" cy="749" r="9" fill="#3E6B4A" opacity=".85"/><circle cx="271" cy="743" r="6" fill="#5A8A64" opacity=".7"/><circle cx="1114" cy="886" r="11" fill="#4A7A55" opacity=".85"/><circle cx="1114" cy="880" r="8" fill="#5A8A64" opacity=".7"/><circle cx="204" cy="655" r="7" fill="#4A7A55" opacity=".85"/><circle cx="204" cy="649" r="4" fill="#5A8A64" opacity=".7"/><circle cx="899" cy="727" r="7" fill="#4A7A55" opacity=".85"/><circle cx="899" cy="721" r="4" fill="#5A8A64" opacity=".7"/><circle cx="1060" cy="691" r="8" fill="#3E6B4A" opacity=".85"/><circle cx="1060" cy="685" r="5" fill="#5A8A64" opacity=".7"/><circle cx="610" cy="927" r="7" fill="#4A7A55" opacity=".85"/><circle cx="610" cy="921" r="4" fill="#5A8A64" opacity=".7"/><circle cx="1165" cy="630" r="11" fill="#2F5A3C" opacity=".85"/><circle cx="1165" cy="624" r="8" fill="#5A8A64" opacity=".7"/><circle cx="1327" cy="622" r="10" fill="#3E6B4A" opacity=".85"/><circle cx="1327" cy="616" r="7" fill="#5A8A64" opacity=".7"/><circle cx="1090" cy="915" r="9" fill="#356044" opacity=".85"/><circle cx="1090" cy="909" r="6" fill="#5A8A64" opacity=".7"/><circle cx="1305" cy="744" r="10" fill="#356044" opacity=".85"/><circle cx="1305" cy="738" r="7" fill="#5A8A64" opacity=".7"/><circle cx="1247" cy="837" r="8" fill="#356044" opacity=".85"/><circle cx="1247" cy="831" r="5" fill="#5A8A64" opacity=".7"/><circle cx="968" cy="738" r="9" fill="#4A7A55" opacity=".85"/><circle cx="968" cy="732" r="6" fill="#5A8A64" opacity=".7"/><circle cx="1061" cy="803" r="10" fill="#4A7A55" opacity=".85"/><circle cx="1061" cy="797" r="7" fill="#5A8A64" opacity=".7"/><circle cx="352" cy="948" r="11" fill="#3E6B4A" opacity=".85"/><circle cx="352" cy="942" r="8" fill="#5A8A64" opacity=".7"/><circle cx="1230" cy="758" r="10" fill="#356044" opacity=".85"/><circle cx="1230" cy="752" r="7" fill="#5A8A64" opacity=".7"/><circle cx="265" cy="885" r="11" fill="#3E6B4A" opacity=".85"/><circle cx="265" cy="879" r="8" fill="#5A8A64" opacity=".7"/><circle cx="708" cy="684" r="9" fill="#3E6B4A" opacity=".85"/><circle cx="708" cy="678" r="6" fill="#5A8A64" opacity=".7"/><circle cx="1302" cy="693" r="9" fill="#3E6B4A" opacity=".85"/><circle cx="1302" cy="687" r="6" fill="#5A8A64" opacity=".7"/><circle cx="539" cy="916" r="8" fill="#4A7A55" opacity=".85"/><circle cx="539" cy="910" r="5" fill="#5A8A64" opacity=".7"/><circle cx="603" cy="785" r="7" fill="#3E6B4A" opacity=".85"/><circle cx="603" cy="779" r="4" fill="#5A8A64" opacity=".7"/><circle cx="328" cy="688" r="7" fill="#2F5A3C" opacity=".85"/><circle cx="328" cy="682" r="4" fill="#5A8A64" opacity=".7"/><circle cx="1146" cy="920" r="11" fill="#3E6B4A" opacity=".85"/><circle cx="1146" cy="914" r="8" fill="#5A8A64" opacity=".7"/><circle cx="1055" cy="869" r="10" fill="#3E6B4A" opacity=".85"/><circle cx="1055" cy="863" r="7" fill="#5A8A64" opacity=".7"/><circle cx="861" cy="776" r="11" fill="#356044" opacity=".85"/><circle cx="861" cy="770" r="8" fill="#5A8A64" opacity=".7"/><circle cx="1037" cy="660" r="7" fill="#3E6B4A" opacity=".85"/><circle cx="1037" cy="654" r="4" fill="#5A8A64" opacity=".7"/><circle cx="707" cy="820" r="7" fill="#2F5A3C" opacity=".85"/><circle cx="707" cy="814" r="4" fill="#5A8A64" opacity=".7"/><circle cx="745" cy="688" r="9" fill="#356044" opacity=".85"/><circle cx="745" cy="682" r="6" fill="#5A8A64" opacity=".7"/><circle cx="1178" cy="679" r="9" fill="#4A7A55" opacity=".85"/><circle cx="1178" cy="673" r="6" fill="#5A8A64" opacity=".7"/><circle cx="527" cy="643" r="10" fill="#4A7A55" opacity=".85"/><circle cx="527" cy="637" r="7" fill="#5A8A64" opacity=".7"/><circle cx="642" cy="943" r="10" fill="#356044" opacity=".85"/><circle cx="642" cy="937" r="7" fill="#5A8A64" opacity=".7"/><circle cx="1058" cy="753" r="8" fill="#2F5A3C" opacity=".85"/><circle cx="1058" cy="747" r="5" fill="#5A8A64" opacity=".7"/><circle cx="908" cy="809" r="7" fill="#2F5A3C" opacity=".85"/><circle cx="908" cy="803" r="4" fill="#5A8A64" opacity=".7"/><circle cx="1130" cy="717" r="8" fill="#356044" opacity=".85"/><circle cx="1130" cy="711" r="5" fill="#5A8A64" opacity=".7"/><circle cx="734" cy="710" r="7" fill="#4A7A55" opacity=".85"/><circle cx="734" cy="704" r="4" fill="#5A8A64" opacity=".7"/><circle cx="297" cy="923" r="7" fill="#4A7A55" opacity=".85"/><circle cx="297" cy="917" r="4" fill="#5A8A64" opacity=".7"/><circle cx="1018" cy="945" r="8" fill="#2F5A3C" opacity=".85"/><circle cx="1018" cy="939" r="5" fill="#5A8A64" opacity=".7"/><circle cx="869" cy="949" r="11" fill="#356044" opacity=".85"/><circle cx="869" cy="943" r="8" fill="#5A8A64" opacity=".7"/><circle cx="973" cy="872" r="10" fill="#2F5A3C" opacity=".85"/><circle cx="973" cy="866" r="7" fill="#5A8A64" opacity=".7"/><circle cx="432" cy="669" r="9" fill="#356044" opacity=".85"/><circle cx="432" cy="663" r="6" fill="#5A8A64" opacity=".7"/>
+  <g class="epoch" data-since="1840"><path class="orge" d="M 330,560 C 400,540 490,555 540,590 C 560,620 530,665 470,680 C 390,700 320,660 330,560 Z"/></g>
+  <g class="epoch" data-since="1920"><path class="hemp" d="M 155,350 C 210,342 270,358 318,390 C 350,418 338,470 285,495 C 225,522 155,498 140,440 C 128,392 128,362 155,350 Z"/><rect x="162" y="461" width="2" height="10" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="210" y="397" width="2" height="15" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="307" y="458" width="2" height="16" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="236" y="479" width="2" height="14" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="217" y="454" width="2" height="9" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="289" y="369" width="2" height="15" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="211" y="450" width="2" height="14" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="201" y="389" width="2" height="12" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="197" y="389" width="2" height="9" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="206" y="355" width="2" height="8" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="297" y="484" width="2" height="14" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="210" y="365" width="2" height="12" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="244" y="461" width="2" height="8" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="252" y="345" width="2" height="11" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="301" y="463" width="2" height="16" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="252" y="443" width="2" height="10" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="223" y="414" width="2" height="14" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="220" y="479" width="2" height="12" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="191" y="379" width="2" height="13" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="249" y="399" width="2" height="16" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="307" y="358" width="2" height="9" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="231" y="440" width="2" height="8" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="194" y="492" width="2" height="11" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="184" y="492" width="2" height="9" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="159" y="369" width="2" height="14" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="317" y="340" width="2" height="8" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="306" y="344" width="2" height="11" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="219" y="478" width="2" height="8" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="180" y="350" width="2" height="14" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="292" y="360" width="2" height="10" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="171" y="418" width="2" height="15" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="319" y="420" width="2" height="12" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="227" y="390" width="2" height="13" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="270" y="368" width="2" height="15" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="257" y="432" width="2" height="14" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="200" y="404" width="2" height="12" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="197" y="389" width="2" height="11" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="280" y="493" width="2" height="14" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="276" y="458" width="2" height="14" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="314" y="340" width="2" height="8" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="225" y="498" width="2" height="9" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="230" y="382" width="2" height="9" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="183" y="425" width="2" height="16" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="188" y="381" width="2" height="8" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="155" y="380" width="2" height="10" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="204" y="363" width="2" height="12" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="166" y="383" width="2" height="16" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="279" y="348" width="2" height="9" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="233" y="483" width="2" height="10" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="261" y="374" width="2" height="12" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="297" y="497" width="2" height="9" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="253" y="358" width="2" height="10" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="175" y="437" width="2" height="13" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="264" y="362" width="2" height="10" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="263" y="477" width="2" height="12" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="193" y="394" width="2" height="8" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="267" y="341" width="2" height="9" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="266" y="472" width="2" height="8" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="274" y="351" width="2" height="16" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="297" y="429" width="2" height="16" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="238" y="455" width="2" height="13" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="185" y="480" width="2" height="10" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="179" y="364" width="2" height="13" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="293" y="480" width="2" height="10" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="271" y="341" width="2" height="14" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="316" y="454" width="2" height="15" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="182" y="379" width="2" height="10" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="164" y="408" width="2" height="10" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="193" y="346" width="2" height="9" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="222" y="349" width="2" height="16" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="306" y="352" width="2" height="9" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="239" y="449" width="2" height="10" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="316" y="354" width="2" height="11" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="211" y="475" width="2" height="10" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="192" y="460" width="2" height="8" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="182" y="401" width="2" height="14" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="267" y="418" width="2" height="10" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="260" y="398" width="2" height="16" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="251" y="485" width="2" height="10" fill="#5E7A3A" opacity=".7" rx="1"/><rect x="172" y="450" width="2" height="10" fill="#5E7A3A" opacity=".7" rx="1"/></g>
+  <path class="river" d="M 760,955 C 750,880 740,800 735,720 C 730,660 728,600 732,530 C 736,470 740,390 736,300"/>
+
+  <!-- Routes (apparaissent avec les villes qu'elles relient) -->
+  <g class="epoch" data-since="1880"><path class="road" d="M 700,790 C 710,720 720,660 728,560 C 730,530 732,510 730,495"/></g>
+  <g class="epoch" data-since="1869"><path class="road" d="M 770,490 C 900,450 1040,380 1180,320 C 1220,300 1250,288 1260,282"/></g>
+  <g class="epoch" data-since="1920"><path class="road" d="M 690,495 C 540,460 400,400 285,330"/></g>
+
+  <!-- Aqueduc : plan 1882, chantier 1892, service 1914 -->
+  <g class="epoch" data-since="1882" data-until="1892"><path class="aqueduct plan" d="M 728,668 L 732,500"/><path class="aqueduct-beer plan" d="M 742,668 L 746,500"/></g>
+  <g class="epoch" data-since="1892" data-until="1914"><path class="aqueduct" stroke-dasharray="10 6" d="M 728,668 L 732,500"/><path class="aqueduct-beer" stroke-dasharray="10 6" d="M 742,668 L 746,500"/></g>
+  <g class="epoch" data-since="1914"><path class="aqueduct" d="M 728,668 L 732,500"/><path class="aqueduct-beer" d="M 742,668 L 746,500"/><text x="790" y="620" text-anchor="start" fill="#2A5A78" style="font:700 12px Georgia,serif">Double Aqueduc</text></g>
+
+  <!-- Forêt : sanctuaire -->
+  <g class="epoch" data-since="0"><text x="700" y="930" text-anchor="middle" fill="#f5e6bd" style="font:700 18px Georgia,serif">Forêt de Plantagenet</text><text x="700" y="950" text-anchor="middle" fill="#d9c48a" style="font:italic 12px Georgia,serif">sanctuaire de la fondation</text></g>
+  <g class="epoch" data-since="1847"><g class="hot" data-id="cabane_1847"><rect x="672" y="786" width="36" height="24" rx="3" fill="#7a4a1b" stroke="#3a2109"/><polygon points="668,786 690,768 714,786" fill="#5c3210"/><text x="690" y="830" text-anchor="middle" fill="#f5e6bd" style="font:700 12px Georgia,serif">Cabane de 1847</text></g></g>
+  <g class="epoch" data-since="0"><g class="hot" data-id="chene_hamac"><circle cx="755" cy="755" r="16" fill="#2d4a28"/><circle cx="755" cy="750" r="11" fill="#4a7a45"/><line x1="738" y1="758" x2="772" y2="752" stroke="#6b4220" stroke-width="2"/><text x="800" y="758" text-anchor="start" fill="#3a2109" style="font:700 12px Georgia,serif">Chêne du Hamac</text></g></g>
+  <g class="epoch" data-since="0"><g class="hot" data-id="grande_digue"><rect x="705" y="682" width="44" height="10" rx="2" fill="#6b5428" stroke="#3a2109"/><text x="727" y="710" text-anchor="middle" fill="#3a2109" style="font:700 11px Georgia,serif">Grande Digue</text></g></g>
+  <g class="epoch" data-since="0"><text x="1080" y="860" text-anchor="middle" fill="#f5e6bd" style="font:700 13px Georgia,serif">Trois-Érables</text><text x="1080" y="876" text-anchor="middle" fill="#d9c48a" style="font:italic 11px Georgia,serif">érablières</text></g>
+  <g class="epoch" data-since="1840"><text x="430" y="655" text-anchor="middle" fill="#3a2109" style="font:700 13px Georgia,serif">Champs d&#x27;orge</text><text x="430" y="671" text-anchor="middle" fill="#3a2109" style="font:italic 11px Georgia,serif">famille du Grain</text></g>
+  <g class="epoch" data-since="1865"><g class="hot" data-id="douane"><rect x="688" y="612" width="24" height="16" fill="#efe0b8" stroke="#6f430b"/><text x="700" y="648" text-anchor="middle" fill="#3a2109" style="font:700 11px Georgia,serif">Douane</text></g></g>
+
+  <!-- Pabst City -->
+  <g class="epoch" data-since="1870" data-until="1880"><g class="hot" data-id="pabst_city" opacity=".9"><circle cx="730" cy="495" r="28" fill="#efe6c4" stroke="#9d6b26" stroke-dasharray="5 4" stroke-width="2"/><text x="730" y="538" text-anchor="middle" fill="#3a2109" style="font:italic 12px Georgia,serif">hameau chez Pabst</text></g></g>
+  <g class="epoch" data-since="1880"><g class="hot" data-id="pabst_city"><circle cx="730" cy="495" r="52" fill="#f3e2b4" stroke="#6f430b" stroke-width="2.6"/><circle cx="730" cy="495" r="38" fill="none" stroke="#b88735" stroke-width="1"/><text x="730" y="430" text-anchor="middle" fill="#3a2109" style="font:700 17px Georgia,serif">PABST CITY</text><text x="730" y="575" text-anchor="middle" fill="#3a2109" style="font:italic 12px Georgia,serif">capitale · 3 500 âmes</text></g></g>
+  <g class="epoch" data-since="1892"><g class="hot" data-id="palais"><rect x="716" y="462" width="28" height="22" fill="#f7e7b0" stroke="#6f430b"/><polygon points="714,462 730,448 746,462" fill="#8a1e24"/><text x="778" y="458" text-anchor="start" fill="#3a2109" style="font:700 12px Georgia,serif">Palais</text></g></g>
+  <g class="epoch" data-since="1962"><g class="hot" data-id="piscine"><rect x="772" y="450" width="34" height="18" rx="6" fill="#7BA3B8" stroke="#2A5A78"/><text x="848" y="464" text-anchor="start" fill="#3a2109" style="font:italic 11px Georgia,serif">piscine 1962</text></g></g>
+  <g class="epoch" data-since="1962"><g class="hot" data-id="monts_froisses"><polygon points="800,448 808,432 816,448" fill="#8B7355" stroke="#5c4630"/><polygon points="812,450 820,434 828,450" fill="#9a8060" stroke="#5c4630"/><text x="848" y="444" text-anchor="start" fill="#3a2109" style="font:700 12px Georgia,serif">Monts Froissés 1,20 m</text></g></g>
+  <g class="epoch" data-since="1984" data-until="1986"><g class="hot" data-id="repos"><rect x="714" y="532" width="32" height="14" rx="3" fill="#edf2da" stroke="#718043" stroke-dasharray="3 3"/><text x="730" y="560" text-anchor="middle" fill="#3a2109" style="font:italic 11px Georgia,serif">station de repos</text></g></g>
+  <g class="epoch" data-since="1986"><g class="hot" data-id="mcbabbers"><rect x="710" y="530" width="40" height="18" rx="3" fill="#8a1e24" stroke="#B78A35" stroke-width="2"/><text x="730" y="564" text-anchor="middle" fill="#3a2109" style="font:700 12px Georgia,serif">McBabber&#x27;s 1986</text></g></g>
+
+  <!-- Port Babette -->
+  <g class="epoch" data-since="1852" data-until="1869"><g class="hot" data-id="port_babette"><circle cx="1260" cy="278" r="10" fill="none" stroke="#2A5A78" stroke-dasharray="3 3"/><text x="1260" y="302" text-anchor="middle" fill="#3a2109" style="font:italic 11px Georgia,serif">« un port, un jour »</text></g></g>
+  <g class="epoch" data-since="1869"><g class="hot" data-id="port_babette"><ellipse cx="1260" cy="278" rx="40" ry="24" fill="#e8d7a8" stroke="#2A5A78" stroke-width="2"/><rect x="1232" y="286" width="56" height="7" fill="#6b5428"/><text x="1260" y="322" text-anchor="middle" fill="#3a2109" style="font:700 15px Georgia,serif">Port Babette</text></g></g>
+  <g class="epoch" data-since="1916"><g class="hot" data-id="phare"><polygon points="1310,275 1348,228 1380,232 1362,282 1322,288" fill="#e6d3a4" stroke="#c4b07a"/><rect x="1336" y="198" width="22" height="50" fill="#f7f1dc" stroke="#6f430b" stroke-width="2"/><polygon points="1330,198 1347,174 1364,198" fill="#8a1e24"/><circle cx="1347" cy="186" r="5" fill="#B78A35"/><text x="1372" y="210" text-anchor="start" fill="#3a2109" style="font:700 12px Georgia,serif">Phare blanc couronné</text></g></g>
+  <g class="epoch" data-since="1916"><text x="1260" y="340" text-anchor="middle" fill="#3a2109" style="font:italic 12px Georgia,serif">800 âmes · quais &amp;amp; flottille</text></g>
+
+  <!-- Grass City -->
+  <g class="epoch" data-since="1920"><g class="hot" data-id="grass_city"><ellipse cx="270" cy="318" rx="42" ry="26" fill="#edf2da" stroke="#718043" stroke-width="2.4"/><text x="270" y="286" text-anchor="middle" fill="#3a2109" style="font:700 15px Georgia,serif">GRASS CITY</text><text x="270" y="358" text-anchor="middle" fill="#3a2109" style="font:italic 12px Georgia,serif">« Pousse » · 1 200 âmes</text></g></g>
+
+  <!-- Hydro labels -->
+  <g class="epoch" data-since="0" data-until="1847"><text x="720" y="230" text-anchor="middle" fill="#f5e6bd" style="font:italic 16px Georgia,serif">la grande eau</text></g>
+  <g class="epoch" data-since="1847"><text x="720" y="228" text-anchor="middle" fill="#f5e6bd" style="font:700 17px Georgia,serif">Fleuve Babber</text><text x="720" y="248" text-anchor="middle" fill="#d9c48a" style="font:italic 12px Georgia,serif">péniches de curds et de fûts</text></g>
+  <g class="epoch" data-since="0"><text x="1360" y="148" text-anchor="middle" fill="#f5e6bd" style="font:700 14px Georgia,serif">Fjord des Fûts</text><text x="1360" y="164" text-anchor="middle" fill="#d9c48a" style="font:italic 11px Georgia,serif">(nom proposé)</text></g>
+  <g class="epoch" data-since="1920"><text x="175" y="268" text-anchor="middle" fill="#f5e6bd" style="font:italic 13px Georgia,serif">Baie du Chanvre</text></g>
+  <g class="epoch" data-since="0"><text x="780" y="880" text-anchor="start" fill="#d9c48a" style="font:italic 12px Georgia,serif">Ruisseau Plantagenet</text></g>
+
+  <!-- Rose des vents -->
+  <g transform="translate(1455,250)">
+    <circle r="28" fill="#fff8df" stroke="#9d6b26" stroke-width="2"/>
+    <polygon points="0,-22 5,0 0,8 -5,0" fill="#8a1e24"/>
+    <polygon points="0,22 5,0 0,-8 -5,0" fill="#3E6B4A"/>
+    <text y="-32" text-anchor="middle" style="font:700 11px Georgia,serif" fill="#512b08">N</text>
+  </g>
+
+  <!-- Échelle : 2 km = longueur de l'aqueduc -->
+  <g transform="translate(120,980)">
+    <text y="-8" class="legend">échelle · 2 km (longueur de l'aqueduc)</text>
+    <line x1="0" y1="0" x2="170" y2="0" stroke="#512b08" stroke-width="3"/>
+    <line x1="0" y1="-6" x2="0" y2="6" stroke="#512b08" stroke-width="2"/>
+    <line x1="85" y1="-4" x2="85" y2="4" stroke="#512b08" stroke-width="2"/>
+    <line x1="170" y1="-6" x2="170" y2="6" stroke="#512b08" stroke-width="2"/>
+    <text x="0" y="18" class="legend">0</text>
+    <text x="85" y="18" text-anchor="middle" class="legend">1</text>
+    <text x="170" y="18" text-anchor="middle" class="legend">2 km</text>
+  </g>
+
+  <!-- Cartouche -->
+  <g transform="translate(980,820)">
+    <rect x="0" y="0" width="500" height="175" rx="10" fill="#fff8df" stroke="#9d6b26" stroke-width="2"/>
+    <text x="16" y="28" style="font:700 14px Georgia,serif" fill="#512b08">Cinq régions · 2026</text>
+    <text x="16" y="50" class="legend">Pabst City — 3 500 âmes (canon)</text>
+    <text x="16" y="68" class="legend">Grass City — 1 200 âmes (canon)</text>
+    <text x="16" y="86" class="legend">Port Babette — 800 âmes (canon)</text>
+    <text x="16" y="104" class="legend">Forêt de Plantagenet — 1 500 âmes (proposé)</text>
+    <text x="16" y="122" class="legend">Monts Froissés — 0 âme, 1,20 m, 1962 (jardin du Palais)</text>
+    <text x="16" y="148" style="font:italic 12px Georgia,serif" fill="#70481c">Total proposé : 7 000 — un mini-McLouche par âme.</text>
+    <text x="16" y="166" style="font:italic 11px Georgia,serif" fill="#9E2B25">Hors canon tant qu'un Avis ne l'aura pas ratifié.</text>
+  </g>
+</svg>
+</div>
+  <aside>
+    <h2>Année affichée</h2>
+    <p class="year" id="yearlab">2026</p>
+    <p class="era" id="eralab">Aujourd'hui</p>
+    <div class="fait" id="fait"></div>
+    <h2>Population</h2>
+    <div class="kpi">
+      <div class="card"><div class="k">Total</div><div class="n" id="poptot">7 000</div></div>
+      <div class="card"><div class="k">Dont canon</div><div class="n">5 500</div></div>
+    </div>
+    <p id="popdetail" style="font-size:12.5px;color:var(--muted);margin-top:-6px"></p>
+    <h2>Cinq régions</h2>
+    <div id="regs"></div>
+    <h2 style="margin-top:18px">Aller à</h2>
+    <div class="snaps" id="snaps"></div>
+  </aside>
+</main>
+<footer>
+  <div class="slide">
+    <button class="play" id="play" type="button">▶ Jouer le temps</button>
+    <span style="font-size:12px;color:var(--muted);width:42px">1830</span>
+    <input type="range" id="slider" min="1830" max="2026" value="2026">
+    <span style="font-size:12px;color:var(--muted);width:42px">2026</span>
+  </div>
+</footer>
+<script>
+const EPOCHS = [
+    {annee:1830, titre:'La lisière', canon:false, fait:'La famille Plantagenet défriche une clairière au nord de la forêt.'},
+    {annee:1840, titre:"L'orge", canon:false, fait:'Les du Grain sèment. La malterie commencera ici.'},
+    {annee:1847, titre:'Fondation', canon:true, fait:"12 octobre · Constitution sur la Nappe Sacrée. Cabane, Royaume, frontières « jusqu'où porte la voix pour le souper » (chronique)."},
+    {annee:1850, titre:'Dénombrement de la sieste', canon:false, fait:'214 humains comptés à 14 h (chronique, registre C-4).'},
+    {annee:1852, titre:'« Ici, un port. Un jour. »', canon:false, fait:'Babette-Marine, 16 ans, esquisse la rive nord.'},
+    {annee:1856, titre:'Le hamac', canon:false, fait:'Suspendu au chêne ; il attendra 58 ans son maître.'},
+    {annee:1865, titre:'La douane', canon:false, fait:'Poste du laissez-aller, entrée nord de la forêt.'},
+    {annee:1869, titre:'Le quai avant le port', canon:false, fait:'Première barge de curds et de fûts. Le quai croit au port.'},
+    {annee:1880, titre:'Pabst City', canon:false, fait:"Le hameau des brasseurs prend son nom. « On dit Pabst City depuis un bout. Autant l'écrire. »"},
+    {annee:1882, titre:'Plans du Double Aqueduc', canon:true, fait:'Deux sillons, prince et ingénieur. On ne creuse pas encore.'},
+    {annee:1892, titre:'Les Bâtisseurs', canon:true, fait:"Avènement de François-Babber. Le chantier de l'aqueduc s'ouvre. Palais (proposé)."},
+    {annee:1914, titre:'Aqueduc en service', canon:true, fait:"Fin du règne de l'Aqueducien. Les deux canaux coulent."},
+    {annee:1916, titre:'Port moderne', canon:true, fait:'Mort de Babette-Marine. Elle laisse quais, phare et flottille.'},
+    {annee:1920, titre:'Grass City attestée', canon:true, fait:'Naissance de Colette-Pabst de Grass City : première date canonique qui nomme la ville. La station existait ; on ne sait pas depuis quand.'},
+    {annee:1962, titre:'Ère géologique', canon:true, fait:'15 juillet · piscine, Monts Froissés (1,20 m), naissance de Rambo du Fjord.'},
+    {annee:1984, titre:'Station de repos', canon:true, fait:'Terrain face au Palais rendu à la Couronne. Trois rocking-chairs.'},
+    {annee:1986, titre:"McBabber's", canon:true, fait:"1er avril, 15 h 01. L'enseigne s'ouvre à l'entrée de Pabst City."},
+    {annee:2007, titre:'Guerre des Cornichons', canon:true, fait:'Chargement retenu « à la frontière » — limite interne entre maraîchers de Port Babette et cuisines de la capitale.'},
+    {annee:2026, titre:"Aujourd'hui", canon:true, fait:"Sept générations, cinq régions, 5 500 âmes urbaines canoniques, 7 000 mini-McLouches. L'atlas propose 7 000 âmes en tout."}
+];
+const REGIONS = [
+    {id:'pabst_city', nom:'Pabst City', role:'Capitale', pop:3500, statut:'canon', depuis:1880, resume:'Palais royal, Banque nationale, Double Aqueduc. Réserves de fromage en grain et de boissons de cérémonie.'},
+    {id:'monts_froisses', nom:'Les Monts Froissés', role:'Alpes nationales', pop:0, statut:'proposé', depuis:1962, resume:'Deux tas de terre de 1,20 m, déblais de la piscine royale creusée le 15 juillet 1962 dans le jardin du Palais. Région pour le prestige ; géographiquement un massif de jardin. Population permanente : nulle. Population transitoire : deux, le temps de quatre secondes.'},
+    {id:'port_babette', nom:'Port Babette', role:'Ville portuaire', pop:800, statut:'canon', depuis:1869, resume:"800 âmes, nommée en l'honneur de Babette Ire. Quais, phare blanc couronné et flottille de péniches de curds et de fûts, œuvre de Babette-Marine."},
+    {id:'grass_city', nom:'Grass City', role:'Station balnéaire', pop:1200, statut:'canon', depuis:1920, resume:'1 200 habitants, station balnéaire et capitale du chanvre légal. Fibres du papier fiduciaire Série B. Devise : « Pousse ».'},
+    {id:'foret_plantagenet', nom:'Forêt de Plantagenet', role:'Sanctuaire de la fondation', pop:1500, statut:'proposé', depuis:1847, resume:'Cabane de 1847, Chêne du Hamac royal, Nappe Sacrée. Le Dénombrement de 1850 y comptait déjà le cœur du Royaume. 1 500 âmes proposées (cabane, Trois-Érables, hameau de la Digue, érablières) pour totaliser les 7 000 de la Nuit des Sept Mille.'}
+];
+const slider = document.getElementById('slider');
+const yearlab = document.getElementById('yearlab');
+const eralab = document.getElementById('eralab');
+const fait = document.getElementById('fait');
+const poptot = document.getElementById('poptot');
+const popdetail = document.getElementById('popdetail');
+const regs = document.getElementById('regs');
+const snaps = document.getElementById('snaps');
+let timer = null;
+
+function epochAt(y){
+  let cur = EPOCHS[0];
+  for (const e of EPOCHS) if (e.annee <= y) cur = e;
+  return cur;
+}
+function setYear(y){
+  y = +y;
+  slider.value = y;
+  yearlab.textContent = y;
+  const e = epochAt(y);
+  eralab.textContent = e.titre;
+  fait.innerHTML = (e.canon ? '<span class="canon">CANON</span> ' : '<span class="canon prop">PROPOSÉ</span> ') + e.fait;
+  document.querySelectorAll('#map .epoch').forEach(g => {
+    const since = +g.dataset.since;
+    const until = g.dataset.until === undefined ? 9999 : +g.dataset.until;
+    const on = y >= since && y < until;
+    g.style.opacity = on ? '1' : '0';
+    g.style.pointerEvents = on ? 'auto' : 'none';
+  });
+  if (y < 1850) { poptot.textContent = '—'; popdetail.textContent = 'Avant le Dénombrement de la sieste (1850).'; }
+  else if (y < 1880) { poptot.textContent = '214'; popdetail.textContent = 'Dénombrement de 1850 (chronique, proposé). Humains, à 14 h.'; }
+  else if (y < 2026) { poptot.textContent = '…'; popdetail.textContent = '214 (1850) → 7 000 (2026, proposé). Pas de recensement intermédiaire consigné.'; }
+  else { poptot.textContent = '7 000'; popdetail.textContent = '3 500 + 1 200 + 800 (canon) + 1 500 forêt (proposé) + 0 monts = 7 000 mini-McLouches.'; }
+  regs.innerHTML = REGIONS.map(r => {
+    const born = y >= r.depuis;
+    const pop = !born ? 'pas encore' : (r.statut === 'canon' ? r.pop.toLocaleString('fr-FR') + ' âmes' : r.pop.toLocaleString('fr-FR') + ' âmes · proposé');
+    return '<div class="reg" data-id="'+r.id+'"><b>'+r.nom+'</b><span>'+r.role+' · depuis '+r.depuis+' · '+pop+'</span></div>';
+  }).join('');
+  snaps.querySelectorAll('button').forEach(b => b.classList.toggle('on', +b.dataset.y === y));
+}
+EPOCHS.forEach(e => {
+  const b = document.createElement('button');
+  b.textContent = e.annee;
+  b.dataset.y = e.annee;
+  b.onclick = () => setYear(e.annee);
+  snaps.appendChild(b);
+});
+slider.addEventListener('input', () => setYear(slider.value));
+document.getElementById('play').onclick = function(){
+  if (timer) { clearInterval(timer); timer = null; this.textContent = '▶ Jouer le temps'; return; }
+  this.textContent = '❚❚ Pause';
+  if (+slider.value >= 2026) slider.value = 1830;
+  timer = setInterval(() => {
+    const y = +slider.value + 1;
+    if (y > 2026) { clearInterval(timer); timer = null; this.textContent = '▶ Jouer le temps'; setYear(2026); return; }
+    setYear(y);
+  }, 28);
+};
+setYear(2026);
+</script>
+</body>
+</html>

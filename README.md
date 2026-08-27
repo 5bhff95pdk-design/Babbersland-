@@ -10,6 +10,7 @@ Archives narratives et iconographiques du Royaume du Babberland.
 2. **`ENCYCLOPEDIE_CONSOLIDEE_2026_I.md`** — source éditoriale du volume 2026-I ; **c'est elle qui fait foi**, y compris sur la liste des illustrations que le PDF doit montrer.
 3. **`CHRONOLOGIE_MAITRESSE_1847_2026.md`** — registre chronologique détaillé, avec règnes, sources et contrôles de continuité.
 4. **`images/`** — portraits, numismatique et arbre généalogique illustré.
+5. **`geographie/`** — atlas temporel (proposé, non décrété) : analyse, roadmap, carte SVG/PNG, page `index.html`.
 
 L'édition **2026-I** intègre directement les corrections et ne nécessite aucune règle de préséance documentaire.
 
@@ -24,6 +25,9 @@ L'édition **2026-I** intègre directement les corrections et ne nécessite aucu
 | `gouvernance/ARCHIVE.sha256` | Scellés des archives 2026-G et 2026-H, vérifiés par la CI |
 | `gouvernance/pdf_fingerprint.txt` | Empreinte sémantique du PDF canonique — le contrat de fraîcheur de l'artefact |
 | `gouvernance/index.html` | Version visuelle du rapport et de la roadmap (page autonome) |
+| `geographie/ANALYSE.md` | GEO-2026-II-01 : ce que le canon situe, ce que le temps interdit, E-16.c en proposition |
+| `geographie/ROADMAP.md` | Feuille de route géographique (G0 livré, G2 = Avis n° 7, hors 2026-I) |
+| `geographie/index.html` | Atlas interactif 1830–2026 : les Monts n'existent pas avant le 15 juillet 1962 |
 
 ## Chroniques narratives (hors canon)
 
@@ -57,7 +61,7 @@ make tout         # arbre → PDF → empreinte → contrôles
 make controle     # les trois contrôles, sans rien régénérer
 ```
 
-Buts disponibles : `env`, `arbre`, `pdf`, `empreinte`, `controle`, `workflows`, `tout`, `propre`. Hors venv : `make PY=python3 …`. Les générateurs cherchent les polices DejaVu sur Linux, macOS et Windows (`BABBERLAND_FONT_DIR` pour forcer un répertoire).
+Buts disponibles : `env`, `arbre`, `carte`, `pdf`, `empreinte`, `controle`, `workflows`, `tout`, `propre`. Hors venv : `make PY=python3 …`. Les générateurs cherchent les polices DejaVu sur Linux, macOS et Windows (`BABBERLAND_FONT_DIR` pour forcer un répertoire). L'atlas géographique (`make carte`) est **hors canon** : il ne rentre pas dans `make tout` ni dans le PDF, tant qu'un Avis ne l'a pas ratifié.
 
 ## Régénération de l'encyclopédie PDF
 
@@ -95,6 +99,14 @@ make workflows && git add .github && git commit -m "CI : continuité, empreinte 
 ```
 
 Le fichier est prêt et ses étapes sont vérifiées localement ; seul le *pousser* demande un jeton tenant la permission **workflows** (un jeton d'application GitHub dépourvu de ce droit se voit refuser la création de `.github/workflows/*` — la voie de contournement est de committer le fichier depuis GitHub, ou d'accorder le droit à l'App).
+
+## Atlas géographique (proposé, non décrété)
+
+```bash
+make carte          # SVG + PNG 2026 + geographie/index.html
+```
+
+L'atlas temporel (`geographie/index.html`) fait glisser 1830 → 2026 : les Monts Froissés n'apparaissent que le 15 juillet 1962, McBabber's le 1er avril 1986. Analyse : `geographie/ANALYSE.md`. Tant qu'un Avis n° 7 n'aura pas parlé, **2026-I ne change pas**.
 
 ## Régénération de l'arbre
 
