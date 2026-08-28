@@ -9,10 +9,10 @@
 
 | Mesure | Valeur |
 |---|---|
-| PNG dans `images/` | **24** (14 d’origine + 10 portraits dynastiques 2026-II) |
+| PNG dans `images/` | **28** (14 d’origine + 10 portraits dynastiques 2026-II + 4 planches des chroniques) |
 | Orphelins / manquants | aucun |
 | Source vectorielle | `sources/arbre_genealogique_complet.svg` |
-| Couverture PDF | les 24 fichiers sont servis |
+| Couverture PDF | les 24 fichiers canoniques sont servis ; les 4 planches des chroniques sont hors volume par statut |
 
 Deux familles techniques :
 
@@ -58,6 +58,19 @@ Deux familles techniques :
 | `babber_le_fou.png` | Héritier, Aspirateur-Couronne, Ballon Jaune Ier |
 
 Colette-Pabst n’a pas encore de portrait dédié (elle apparaît dans le Babbersgate).
+
+### Galerie des chroniques (4, proposées non décrétées)
+
+Illustrations du **Livre II des Chroniques** (*Le Silence et l’Aqueduc*, 1889–1914), ajoutées le 28 août 2026. Elles sont référencées uniquement par l’`Annexe C` du Livre II : **hors dossier iconographique du volume 2026-I et hors PDF** tant qu’un Avis ne les y fait pas entrer — la couverture du canon reste de 24.
+
+| Fichier | Sujet |
+|---|---|
+| `aqueduc_premier_coup_pelle.png` | Le premier coup de pelle, printemps 1893 |
+| `aqueduc_chantier_castors.png` | L’agrandissement de la Grande Digue par les castors, 1893–1896 |
+| `aqueduc_arches_pabst_city.png` | Les Arches Jumelles au seuil de Pabst City, 1898–1901 |
+| `aqueduc_jour_de_l_eau.png` | Le Jour de l’Eau, 12 octobre 1904, 15 h 01 |
+
+Consigne de campagne reconduite : aucun lettrage dans l’image (défauts I-01, I-03, I-05, I-06 du dossier d’origine).
 
 ---
 

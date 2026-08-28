@@ -32,6 +32,7 @@ L'édition **2026-I** intègre directement les corrections et ne nécessite aucu
 ## Chroniques narratives (hors canon)
 
 - `chroniques/LIVRE_I_LES_FONDATIONS.md` — *Les Chroniques de l'Ancien, Livre I : Les Fondations (1798–1889)* : histoire du premier roi racontée en sept tranches. Éléments nouveaux **proposés, non décrétés** ; toute addition au canon devra passer par décret et mise à jour de 2026-I.
+- `chroniques/LIVRE_II_LE_SILENCE_ET_L_AQUEDUC.md` — *Les Chroniques de l'Ancien, Livre II : Les Bâtisseurs · Le Silence et l'Aqueduc (1889–1914)* : la régence de Babette, le refus de l'ordinal, la construction du Double Aqueduc (bancs d'abord, conversation ensuite), le Jour de l'Eau du 12 octobre 1904 et l'avènement du Dormeur. Même statut : **proposé, non décrété** ; l'audit d'arithmétique interne du Livre I y est reconduit (18 calculs, 0 erreur) et quatre planches de chantier l'illustrent (`Annexe C`).
 
 ## Documents archivés
 
