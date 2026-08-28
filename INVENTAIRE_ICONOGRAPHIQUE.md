@@ -61,7 +61,7 @@ Colette-Pabst n’a pas encore de portrait dédié (elle apparaît dans le Babbe
 
 ### Galerie des chroniques (4, proposées non décrétées)
 
-Illustrations du **Livre II des Chroniques** (*Le Silence et l’Aqueduc*, 1889–1914), ajoutées le 28 août 2026. Elles sont référencées uniquement par l’`Annexe C` du Livre II : **hors dossier iconographique du volume 2026-I et hors PDF** tant qu’un Avis ne les y fait pas entrer — la couverture du canon reste de 24.
+Illustrations de la **seconde rédaction du Livre II des Chroniques** (*Le Silence et l’Aqueduc*, 1889–1914 — la première rédaction, *Les Bâtisseurs*, est versée au même rayon), ajoutées le 28 août 2026. Elles sont référencées uniquement par l’`Annexe C` du Livre II : **hors dossier iconographique du volume 2026-I et hors PDF** tant qu’un Avis ne les y fait pas entrer — la couverture du canon reste de 24.
 
 | Fichier | Sujet |
 |---|---|

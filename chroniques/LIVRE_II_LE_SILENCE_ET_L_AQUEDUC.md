@@ -1,12 +1,12 @@
 # 👑 LES CHRONIQUES DE L'ANCIEN
 
-## Livre II — Les Bâtisseurs · Le Silence et l'Aqueduc (1889–1914)
+## Livre II, seconde rédaction — Le Silence et l'Aqueduc (1889–1914)
 
 *Histoire racontée par tranches · Royaume du Babberland*
 
 > **Statut éditorial** — Œuvre de chronique romanesque établie dans le respect des points de continuité fixés par l'**Encyclopédie consolidée 2026-I**. Tant qu'un décret royal ne les aura pas ratifiés, les éléments nouveaux racontés ici demeurent **proposés** : ils ne contredisent aucune règle du canon et ne fixent aucune de ses lacunes volontaires (filiation de Babette-Marine, dates non consignées, etc.).
 >
-> Note de l'Archiviste sur le titre : le Livre fut annoncé sous deux noms — *Les Bâtisseurs* (colophon du Livre I) et *Le Silence et l'Aqueduc* (feuilles de route de la Chancellerie). Deux idées se disputaient ; on fit deux canaux, et le livre garde les deux titres, conformément au conseil nº 2 du registre **L-11**.
+> Note de l'Archiviste sur le titre : le Livre fut annoncé sous deux noms — *Les Bâtisseurs* (colophon du Livre I) et *Le Silence et l'Aqueduc* (feuilles de route de la Chancellerie). Une première rédaction, versée aux archives le 27 août 2026 sous le titre du colophon, prit le premier nom ; la seconde, ci-dessous, garde le second. Deux idées se disputaient ; on fit deux canaux, et l'Avis qui ratifiera le Livre II choisira — ou mariera — les deux rédactions, conformément au conseil nº 2 du registre **L-11**.
 
 ## Sommaire
 
@@ -519,7 +519,7 @@ Quelques pièces versées au dossier, pour les générations :
 - **Le banc nº 22** reçoit chaque 12 octobre un bouquet de feuilles d'érable cueillies le long des deux rangs. Le régisseur des bancs affirme que le dossier du nº 22 tient toujours mieux debout que prévu. On ne répare pas. On respecte.
 - **Le pré voisin des Arches** resta vide toute la décennie 1900, puis les suivantes. L'Histoire y posera un jour trois rocking-chairs (1984), puis une enseigne rouge et or (1986). Personne ne le savait encore en 1914, et c'était très bien : ce royaume n'a jamais aimé les radars, seulement les rendez-vous.
 
-*Suite annoncée : **Livre III — L'Âge Horizontal (1914–1959)** : deux articles, quarante-cinq ans sans poser les pieds au sol, et un royaume qui apprend à dormir debout.*
+*Suite annoncée : **Livre III — L'Âge horizontal (1914–1959)**, déjà versé aux archives le 27 août 2026 : deux articles, quarante-cinq ans sans poser les pieds au sol, et un royaume qui apprend à dormir debout.*
 
 ---
 
