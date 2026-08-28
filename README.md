@@ -32,6 +32,7 @@ L'édition **2026-I** intègre directement les corrections et ne nécessite aucu
 ## Chroniques narratives (hors canon)
 
 - `chroniques/LIVRE_I_LES_FONDATIONS.md` — *Les Chroniques de l'Ancien, Livre I : Les Fondations (1798–1889)* : histoire du premier roi racontée en sept tranches. Éléments nouveaux **proposés, non décrétés** ; toute addition au canon devra passer par décret et mise à jour de 2026-I.
+- `chroniques/LIVRE_II_LES_BATISSEURS.md` — *Livre II : Les Bâtisseurs (1889–1914)* : la régence de Babette Ire, le refus de l'ordinal II, le chantier du Double Aqueduc, la naissance du port, la mort de François-Babber et l'avènement du Dormeur. Sept tranches, même statut **proposé, non décrété** ; les lacunes volontaires du canon (filiation de Babette-Marine, naissance de Roger Bontemps, valeur chiffrée de la Parité Poutine) y sont gardées ouvertes et déclarées comme telles.
 
 ## Documents archivés
 
