@@ -359,7 +359,7 @@ La difficulté ne fut pas le velours, ni la broderie, ni même les armes du Roya
 
 La difficulté fut le duvet.
 
-L'édredon boréal, qui est un oiseau d'un commerce difficile, ne se laisse pas enfermer : il se comprime, il s'échappe par les coutures, il revient, et il a, de l'avis unanime des gens qui l'ont pratiqué, une opinion sur la literie. La reine mit dix-huit mois et trois essais à le convaincre, et le journal de la malterie, qui n'a rien à voir avec cette affaire, la suit pourtant de loin en loin, comme on suit une voisine :
+L'édredon boréal, qui est un oiseau d'un commerce difficile, ne se laisse pas enfermer : il se comprime, il s'échappe par les coutures, il revient, et il a, de l'avis unanime des gens qui l'ont pratiqué, une opinion sur la literie. La reine mit dix mois et trois essais à le convaincre, et le journal de la malterie, qui n'a rien à voir avec cette affaire, la suit pourtant de loin en loin, comme on suit une voisine :
 
 > **Mai 1927.** La reine a rapporté du duvet. Il est ressorti.
 > **Novembre 1927.** Deuxième coussin. Toujours sorti.
@@ -738,7 +738,7 @@ Le septième témoin depuis 1892 arriva du ruisseau le lendemain, monta jusqu'au
 
 ## 4. Les funérailles
 
-Il fut enterré au pied du chêne, auprès de Babber, Babette, François, Babette-Marine et Hortense — cinq tombes, quatre générations, et un arbre qui commençait à manquer de place, ce que la commission des supports nota sans proposer de solution.
+Il fut enterré au pied du chêne, auprès de Babber, Babette, François, Babette-Marine et Hortense — cinq tombes, trois générations, et un arbre qui commençait à manquer de place, ce que la commission des supports nota sans proposer de solution.
 
 Sur le cercueil, la famille déposa trois objets, selon le protocole de 1889 :
 

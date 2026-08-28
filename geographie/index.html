@@ -125,10 +125,11 @@
   <g class="epoch" data-since="1869"><path class="road" d="M 770,490 C 900,450 1040,380 1180,320 C 1220,300 1250,288 1260,282"/></g>
   <g class="epoch" data-since="1920"><path class="road" d="M 690,495 C 540,460 400,400 285,330"/></g>
 
-  <!-- Aqueduc : plan 1882, chantier 1892, service 1914 -->
+  <!-- Aqueduc : plans 1882, chantier 1892/1893, mise en eau 1899–1905 (selon rédaction) ;
+       trait plein à partir de 1905 — service effectif commun aux deux rédactions -->
   <g class="epoch" data-since="1882" data-until="1892"><path class="aqueduct plan" d="M 728,668 L 732,500"/><path class="aqueduct-beer plan" d="M 742,668 L 746,500"/></g>
-  <g class="epoch" data-since="1892" data-until="1914"><path class="aqueduct" stroke-dasharray="10 6" d="M 728,668 L 732,500"/><path class="aqueduct-beer" stroke-dasharray="10 6" d="M 742,668 L 746,500"/></g>
-  <g class="epoch" data-since="1914"><path class="aqueduct" d="M 728,668 L 732,500"/><path class="aqueduct-beer" d="M 742,668 L 746,500"/><text x="790" y="620" text-anchor="start" fill="#2A5A78" style="font:700 12px Georgia,serif">Double Aqueduc</text></g>
+  <g class="epoch" data-since="1892" data-until="1905"><path class="aqueduct" stroke-dasharray="10 6" d="M 728,668 L 732,500"/><path class="aqueduct-beer" stroke-dasharray="10 6" d="M 742,668 L 746,500"/></g>
+  <g class="epoch" data-since="1905"><path class="aqueduct" d="M 728,668 L 732,500"/><path class="aqueduct-beer" d="M 742,668 L 746,500"/><text x="790" y="620" text-anchor="start" fill="#2A5A78" style="font:700 12px Georgia,serif">Double Aqueduc</text></g>
 
   <!-- Forêt : sanctuaire -->
   <g class="epoch" data-since="0"><text x="700" y="930" text-anchor="middle" fill="#f5e6bd" style="font:700 18px Georgia,serif">Forêt de Plantagenet</text><text x="700" y="950" text-anchor="middle" fill="#d9c48a" style="font:italic 12px Georgia,serif">sanctuaire de la fondation</text></g>
@@ -236,7 +237,7 @@ const EPOCHS = [
     {annee:1880, titre:'Pabst City', canon:false, fait:"Le hameau des brasseurs prend son nom. « On dit Pabst City depuis un bout. Autant l'écrire. »"},
     {annee:1882, titre:'Plans du Double Aqueduc', canon:true, fait:'Deux sillons, prince et ingénieur. On ne creuse pas encore.'},
     {annee:1892, titre:'Les Bâtisseurs', canon:true, fait:"Avènement de François-Babber. Le chantier de l'aqueduc s'ouvre. Palais (proposé)."},
-    {annee:1914, titre:'Aqueduc en service', canon:true, fait:"Fin du règne de l'Aqueducien. Les deux canaux coulent."},
+    {annee:1914, titre:"Consolidation de l'aqueduc", canon:true, fait:"Fin du règne de l'Aqueducien. Les deux canaux coulent — mise en eau 1899–1905 selon rédaction des chroniques (à trancher par l'Avis n° 7)."},
     {annee:1916, titre:'Port moderne', canon:true, fait:'Mort de Babette-Marine. Elle laisse quais, phare et flottille.'},
     {annee:1920, titre:'Grass City attestée', canon:true, fait:'Naissance de Colette-Pabst de Grass City : première date canonique qui nomme la ville. La station existait ; on ne sait pas depuis quand.'},
     {annee:1962, titre:'Ère géologique', canon:true, fait:'15 juillet · piscine, Monts Froissés (1,20 m), naissance de Rambo du Fjord.'},

@@ -488,7 +488,7 @@ Le cinquième article fut ajouté à la demande du Grand Bouffon, qui fit observ
 
 On bâtit sur le terrain refusé aux arches dorées.
 
-Ce fut le premier chantier du Royaume depuis 1914, et il y eut, pour l'occasion, une polémique que le registre qualifie de *vive et brève* : fallait-il conserver les trois rocking-chairs de la station de repos, ou les rentrer au Palais ?
+Ce fut le premier chantier du Royaume depuis 1962, et il y eut, pour l'occasion, une polémique que le registre qualifie de *vive et brève* : fallait-il conserver les trois rocking-chairs de la station de repos, ou les rentrer au Palais ?
 
 Le roi trancha en une phrase :
 
@@ -704,13 +704,13 @@ Il resta aussi, et c'est l'essentiel :
 - **une sauce** qui n'a jamais été écrite, ce qui est la seule façon de la garder secrète ;
 - **une journée** — le 17 mai — où le pays demande où est passée la sauce et reçoit une louche pour toute réponse ;
 - **deux tas de terre** plantés d'orge, sur lesquels on monte en quatre secondes avec un piolet ;
-- et **quatre fils**, dont l'un régnait déjà, dont un autre refuserait de régner, et dont le dernier, né l'après-midi des montagnes, garderait le fleuve.
+- et **quatre fils**, dont trois tenaient le trône — les jumeaux d'abord, le Louche ensuite —, et dont le dernier, né l'après-midi des montagnes, refuserait de régner et garderait le fleuve.
 
 Le soir du retrait, le roi demanda qu'on lui apportât une chaise longue neuve, refusa qu'on l'installât ailleurs qu'à son angle, et dit à la reine, qui apportait les chips :
 
 *« Tu avais raison. Tu t'en es occupée. »*
 
-Elle répondit qu'elle s'en occuperait jusqu'au bout, ce qui fut vrai pendant neuf ans encore, et vrai jusqu'au dernier barbecue.
+Elle répondit qu'elle s'en occuperait jusqu'au bout, ce qui fut vrai pendant treize ans encore, et vrai jusqu'au dernier barbecue.
 
 ***
 

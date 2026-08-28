@@ -1,6 +1,6 @@
 # Inventaire iconographique du Royaume du Babberland
 
-**Date** : 27 août 2026 · Campagne 2026-II  
+**Date** : 28 août 2026 · Campagne 2026-II (re-daté le 28 août : les quatre planches des chroniques y sont consignées comme ajoutées ce jour-là)  
 **Référentiel** : `ENCYCLOPEDIE_CONSOLIDEE_2026_I.md` et table `IMAGE_AFTER`
 
 ---
@@ -85,6 +85,16 @@ Les **portraits d’attributs** (louches de Ginette, phare de Babette-Marine, si
 | I-05 | `roger_bontemps.png` | Cartouche *GRANO BOUFFON* |
 | I-06 | `pieces_monnaie_babberland_coffret.png` | Légende *ESHFTY* ; coins discordants avec la macro |
 | I-11 | `babbersgate_scandale_sauce.png` | Cadre médiéval, dollars US, Louche déjà couronné en 1991 |
+
+Lettres non listées, relevées lors de l’inspection visuelle de l’audit 2026-III (la consigne « aucun lettrage dans l’image » vaut pour elles aussi) :
+
+| Id | Fichier | Écart |
+|---|---|---|
+| I-12 | `mcbabbers_enseigne_royale.png` | Canettes « *Pabt* » (Pabst manqué) |
+| I-13 | `roger_bontemps.png` | Cartouche « *OF BABBBERLAND* » (B en trop) |
+| I-14 | `mcbabbers_menu_pabst.png` | « *Régent de Babberie* », « *wipie syrup de mapie* » |
+| I-15 | `babbersgate_scandale_sauce.png` | « *SECRET ACCOUNT BOOK* » et note manuscrite en anglais |
+| I-16 | `pieces_monnaie_babberland_coffret.png` | Légendes « *BABBERLAND* » × 4 et « *ROI BABBBER* » (B en trop) ; coffret « *OFFICIAL COLLECTOR PROOF SET* » en anglais |
 
 Hortense, Irène et Babette-Marine partagent encore un gabarit facial proche.
 

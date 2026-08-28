@@ -443,6 +443,8 @@ Campagne 2026-II : galerie dynastique des sept générations, Dames de la Couron
 
 **1 Babber = 24 Babetons**, soit l’équivalent constitutionnel d’une caisse de vingt-quatre canettes fraîches. Les billets emploient le papier de chanvre de Grass City, un revêtement Anti-Bière et l’hologramme du castor au hamac.
 
+**Notation des registres** : le billet se note **B$** (Babber-dollar) ; la ligne « 1 B$ (Caisse) » de l’émission numismatique 2026 désigne la pièce de 1 Babber, dont la valeur est celle d’une caisse de vingt-quatre canettes fraîches.
+
 ## Série fiduciaire B 2026
 
 | Valeur | Couleur | Effigie ou thème principal | Revers |

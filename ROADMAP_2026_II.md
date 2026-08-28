@@ -163,7 +163,7 @@ Application des arbitrages E-16 déjà documentés, une fois la décision prise 
 | Indicateur | Avant | Après |
 |---|---|---|
 | Illustrations canoniques rendues | 11 / 14 | **14 / 14** |
-| Contrôles en CI | 0 | **5 + scellé d'archives** |
+| Contrôles en CI | 0 | **5 + scellé d'archives** *(cible — non atteint : la CI n'a pas pu s'activer faute de permission `workflows`, E-17 ; le workflow commité était invalide, corrigé le 28 août 2026)* |
 | Commandes du README exécutables telles quelles | 0 / 4 | **3 / 4** (`make env`, `make tout`, `make controle` ; reste la matrice multi-OS de R1.2) |
 | Constats ouverts | 10 | **4** (E-14.2 tag, E-15 arbre, E-16 arbitrages, R1.6 poids) |
 

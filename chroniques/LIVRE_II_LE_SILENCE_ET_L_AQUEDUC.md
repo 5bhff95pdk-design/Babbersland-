@@ -238,7 +238,7 @@ Trois ans. La digue doubla de largeur, prit deux ailes latérales et un sourire 
 
 La discussion sur la solidité de la digue fut tranchée par un jury d'eau : **neuf jours de pluie d'automne 1896**, la Grande Pluie, dont les registres gardent le niveau à la tige d'aulne.
 
-Le ruisseau monta, la nouvelle digue le tint. Le vieux témoin adjoint — fils du signataire de 1847, petit-fils de l'ami du béret — monta sur l'ouvrage sous la pluie, l'inspecta d'un bout à l'autre, et rendit son verdict selon le protocole de l'école d'ingénierie castorale : **un coup de queue**. Un coup, ça tient ; deux coups, ça fuira.
+Le ruisseau monta, la nouvelle digue le tint. Le vieux témoin adjoint — petit-fils du signataire de 1847 (l'ami du béret) — monta sur l'ouvrage sous la pluie, l'inspecta d'un bout à l'autre, et rendit son verdict selon le protocole de l'école d'ingénierie castorale : **un coup de queue**. Un coup, ça tient ; deux coups, ça fuira.
 
 Le rapport **A-44** consigne ce qui reste, aux yeux de l'Archiviste, la plus belle fiche de contrôle de l'histoire du génie civil : *« Un coup. »* Les deux coups, notons-le, n'ont jamais été enregistrés dans les annales du Royaume. Il y a des traditions qui tiennent plus droit que le bois.
 
@@ -470,7 +470,7 @@ Ce fut **au premier chaud de mai 1914**, sur le banc nº 22, au matin. On le tro
 
 Le témoin royal adjoint posa une patte sur l'accoudoir du banc et consigna le mot : *terminé.* C'est la deuxième et dernière occurrence du mot dans les registres du Royaume. L'Archiviste le recopie à voix basse, chaque fois, et il fait bien : certains mots ne devraient jamais prendre l'habitude.
 
-Il avait quatre-vingt-deux ans, dont cinquante d'ingénieur et vingt-deux de roi, sans qu'on ait jamais pu établir dans quel ordre il tenait les deux métiers — il tenait les deux, c'est tout, *dans cet ordre*.
+Il avait quatre-vingt-deux ans, dont trente-deux d'ingénieur et vingt-deux de roi, sans qu'on ait jamais pu établir dans quel ordre il tenait les deux métiers — il tenait les deux, c'est tout, *dans cet ordre*.
 
 Les funérailles suivirent le protocole établi en 1889, enrichi d'un article : sur le cercueil — caisse de pin rongée aux bonnes dimensions — on posa **le compas de l'ingénieur, la première motte de 1893** (que le sanctuaire prêta pour l'occasion, avec la mention *« à rendre »*, et qui fut rendue), **et la liste des trois consignes de Babette**. Parce qu'on ne laisse pas une consigne au fond d'un registre : **on la rend.**
 
@@ -567,7 +567,7 @@ Le standard du Livre I — douze calculs, zéro erreur — est reconduit. L'Arch
 | 10 | La Cuvée du Canal : brassée printemps 1890, ouverte 12 octobre 1904 | **14 ans de garde** ; la formule avait été fermée l'hiver 1889–1890 |
 | 11 | Batchs de malterie : 47 au printemps 1885 → 66 au printemps 1904 | 19 batchs en 19 ans, **un par an** — un rythme, pas un compte |
 | 12 | Le prince inspecteur : né été 1875 → 1893 | **18 ans** aux bancs ; **29 ans** au Jour de l'Eau ; **39 ans** à l'avènement de 1914 |
-| 13 | Hortense : née 1840 → 1904 | **64 ans** à la première chope ; Babette-Marine, née 1836 → **68 ans** ; 12 barges à l'hiver 1889–1890, **18 au Jour de l'Eau** (proposé) |
+| 13 | Hortense : née 1840 → 1904 | **64 ans** à la première chope ; Babette-Marine, née 1836 → **68 ans** ; 12 barges à l'hiver 1889–1890, **12 au Jour de l'Eau** |
 | 14 | Les bancs : 42 = une par année de règne de l'Ancien (1847–1889) | 2 000 m ÷ 42 ≈ un banc tous les **48 mètres** ; le nº 22 = les années de règne de l'Aqueducien |
 | 15 | Les érables : 2 000 m ÷ 20 m = 100 par rang, × 2 rangs | **200 érables**, plantés 1905–1910 |
 | 16 | Irène : née 1882 → 8 ans en 1890, 22 ans en 1904, 30 ans à la naissance de Babber II (1912) | le prince inspecteur a **37 ans** en 1912 — aucun âge impossible |

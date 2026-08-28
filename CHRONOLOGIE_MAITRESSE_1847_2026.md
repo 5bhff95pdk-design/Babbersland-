@@ -78,7 +78,7 @@ Cette chronologie consolide les événements des anciens documents **2026-G** et
 
 ---
 
-## V. Union des Règnes (1998–2009)
+## V. Union des Règnes (1998–2010)
 
 | Date | Événement | Souverain ou autorité | Personnages concernés | Source | Statut canonique |
 |---|---|---|---|---|---|

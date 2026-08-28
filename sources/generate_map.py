@@ -201,10 +201,11 @@ def build_svg() -> str:
   {layer(1869, f'<path class="road" d="{ROUTE_PORT}"/>')}
   {layer(1920, f'<path class="road" d="{ROUTE_GRASS}"/>')}
 
-  <!-- Aqueduc : plan 1882, chantier 1892, service 1914 -->
+  <!-- Aqueduc : plans 1882, chantier 1892/1893, mise en eau 1899–1905 (selon rédaction) ;
+       trait plein à partir de 1905 — service effectif commun aux deux rédactions -->
   {layer(1882, f'<path class="aqueduct plan" d="{AQUEDUC_A}"/><path class="aqueduct-beer plan" d="{AQUEDUC_B}"/>', 1892)}
-  {layer(1892, f'<path class="aqueduct" stroke-dasharray="10 6" d="{AQUEDUC_A}"/><path class="aqueduct-beer" stroke-dasharray="10 6" d="{AQUEDUC_B}"/>', 1914)}
-  {layer(1914, f'<path class="aqueduct" d="{AQUEDUC_A}"/><path class="aqueduct-beer" d="{AQUEDUC_B}"/>'
+  {layer(1892, f'<path class="aqueduct" stroke-dasharray="10 6" d="{AQUEDUC_A}"/><path class="aqueduct-beer" stroke-dasharray="10 6" d="{AQUEDUC_B}"/>', 1905)}
+  {layer(1905, f'<path class="aqueduct" d="{AQUEDUC_A}"/><path class="aqueduct-beer" d="{AQUEDUC_B}"/>'
                + label(790, 620, "Double Aqueduc", 12, "#2A5A78", anchor="start"))}
 
   <!-- Forêt : sanctuaire -->

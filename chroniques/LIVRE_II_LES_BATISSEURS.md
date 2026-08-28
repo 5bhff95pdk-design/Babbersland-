@@ -820,7 +820,7 @@ Il se tut encore, et ajouta, en homme qui range ses outils :
 
 *« Ça coule. C'est tout ce que je demandais. »*
 
-Le témoin adjoint, qui était le quatrième depuis 1892 et qui n'avait pas connu le premier, remonta du ruisseau, s'assit au pied du banc, et demeura là tout le temps que le roi y fut.
+Le témoin adjoint, qui était le quatrième depuis 1847 et qui n'avait pas connu le premier, remonta du ruisseau, s'assit au pied du banc, et demeura là tout le temps que le roi y fut.
 
 ---
 
@@ -872,8 +872,8 @@ On fit les comptes, comme on les fait après les foins, et ils furent d'une simp
 | Les fontaines | **3** — une de bronze sur la place, deux de chêne à la cave |
 | Les hivers passés à attendre une roche | **2** |
 | Les fuites devenues des champs d'orge | **1** |
-| Les témoins royaux adjoints depuis 1892 | **4** |
-| Les barges de la flottille | **16**, dont trois sous l'eau pour toujours |
+| Les témoins royaux adjoints depuis 1847 | **4** |
+| Les barges de la flottille | **16** actives (les trois coulées comptées à part, sous l'eau pour toujours) |
 | Les années de chantier | **22** |
 | Les années de règne | **22** |
 
@@ -913,7 +913,7 @@ Trois objets y furent déposés, selon le protocole funéraire des rois établi 
 2. **Un flacon de deux doigts**, moitié eau du canal, moitié bière du canal, réunies pour la première et la dernière fois dans le même verre, et qu'on n'a jamais pu, depuis, séparer décemment ;
 3. **Un banc miniature**, copie du banc nº 1, exécuté par les élèves de l'école du pas au cours de l'automne, et qui est à ce jour le seul objet de mobilier jamais déposé dans une tombe royale.
 
-La nouvelle partit au pas, selon l'usage. Elle arriva à Port Babette le lendemain, où les seize barges de la flottille se rangèrent en haie et firent sonner leurs cloches, puis à la Grande Digue, où le quatrième témoin depuis 1892 frappa l'écorce du registre d'un coup, un seul, et s'en retourna à l'eau.
+La nouvelle partit au pas, selon l'usage. Elle arriva à Port Babette le lendemain, où les seize barges de la flottille se rangèrent en haie et firent sonner leurs cloches, puis à la Grande Digue, où le quatrième témoin depuis 1847 frappa l'écorce du registre d'un coup, un seul, et s'en retourna à l'eau.
 
 Et le Double Aqueduc continua de couler, ce qui était, pour un ingénieur, la seule oraison funèbre qu'il eût jamais souhaitée.
 

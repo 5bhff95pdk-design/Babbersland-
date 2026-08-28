@@ -28,7 +28,7 @@
 
 Babber naquit en 1798, dans la forêt de Plantagenet, avec deux jours de retard sur la date prévue — le premier acte officiel de sa vie.
 
-La sage-femme, prévenue à l'aube, prit le temps de finir sa sieste et arriva pour le souper. Elle trouva la mère sereine et le nouveau-né silencieux. On rapporte qu'il ne pleura pas : il bâilla. Sa mère, interrogée des années plus tard sur le jour exact de sa naissance, répondit la phrase qui fut inscrite dans le premier registre du Royaume, cinquante ans plus tard, en guise de date :
+La sage-femme, prévenue à l'aube, prit le temps de finir sa sieste et arriva pour le souper. Elle trouva la mère sereine et le nouveau-né silencieux. On rapporte qu'il ne pleura pas : il bâilla. Sa mère, interrogée des années plus tard sur le jour exact de sa naissance, répondit la phrase qui fut inscrite dans le premier registre du Royaume, quarante-neuf ans plus tard, en guise de date :
 
 *« Le jour où on s'en est souvenu. »*
 
@@ -54,7 +54,7 @@ Quarante mètres. Les témoins castors parlent de quarante et un. Puis Babber s'
 
 Le castor, alors, fit quelque chose d'inouï. Il revint sur ses pas, déposa le béret devant le jeune homme — à peine grignoté, qualité jugée « décevante » — et resta près de lui jusqu'à ce que le souffle revienne. Ce soir-là, un pacte non écrit fut conclu entre Babber et le peuple des castors : **on ne court ni l'un après l'autre, jamais plus.**
 
-C'est ce pacte, soutient l'Archiviste, qui explique le geste du 12 octobre 1847 — lorsqu'un castor patriote posa sa queue sur la Nappe Sacrée en guise de signature. Ce n'était pas un animal perdu dans les archives. **C'était un vieil ami qui tenait une promesse de trente ans.**
+C'est ce pacte, soutient l'Archiviste, qui explique le geste du 12 octobre 1847 — lorsqu'un castor patriote posa sa queue sur la Nappe Sacrée en guise de signature. Ce n'était pas un animal perdu dans les archives. **C'était un vieil ami qui tenait une promesse de trente et un ans.**
 
 Quant au béret, reproduit depuis sur les frappes monétaires dans sa version royale et couronnée, il ne quitta presque plus la tête de Babber.
 
@@ -324,7 +324,7 @@ On étudia les coquillages, les billes d'écorce, les jetons de cuvée et un sys
 
 *« Le troc va très bien. On verra. »*
 
-**Note de l'Archiviste :** on vit, en effet. Le premier billet de 1 Babber fut mis en circulation en 2023, les pièces de Babetons en 2026. **Cent soixante-seize ans de délibération.** Certains reprochent au Royaume sa lenteur. La Chancellerie répond que la monnaie, elle, au moins, n'a jamais fait faillite.
+**Note de l'Archiviste :** on vit, en effet. Le premier billet de 1 Babber fut mis en circulation en 2023, les pièces de Babetons en 2026. **Cent soixante-quatorze ans de délibération.** Certains reprochent au Royaume sa lenteur. La Chancellerie répond que la monnaie, elle, au moins, n'a jamais fait faillite.
 
 ## 4. 1850 · Le Dénombrement de la sieste
 

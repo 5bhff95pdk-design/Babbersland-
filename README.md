@@ -51,7 +51,7 @@ Ils sont conservés pour l'historique éditorial et **scellés par haché** : le
 - Babber le Déchiré appartient à une branche collatérale issue de Babette-Marine ; Babber le Fou reste fils unique du Louche et de Linéa.
 - Babber le Fou demeure premier dans l'ordre de succession ; Ti-Babber est deuxième.
 - Dans « Babber VII », **VII désigne la septième génération**, pas un septième règne.
-- Les quatorze illustrations du dossier iconographique sont toutes servies dans le volume imprimé : une référence `images/…` du Markdown canonique sans ancre dans le générateur est une **erreur de contrôle**, plus un état possible du projet.
+- Les vingt-quatre illustrations du dossier iconographique sont toutes servies dans le volume imprimé : une référence `images/…` du Markdown canonique sans ancre dans le générateur est une **erreur de contrôle**, plus un état possible du projet.
 
 ## Chaîne de production
 
@@ -60,7 +60,7 @@ Tout passe par `make`, qui installe ses propres dépendances dans un venv — le
 ```bash
 make env          # python3 -m venv .venv + pip install -r requirements.txt
 make tout         # arbre → PDF → empreinte → contrôles
-make controle     # les trois contrôles, sans rien régénérer
+make controle     # les quatre contrôles, sans rien régénérer
 ```
 
 Buts disponibles : `env`, `arbre`, `carte`, `pdf`, `empreinte`, `controle`, `workflows`, `tout`, `propre`. Hors venv : `make PY=python3 …`. Les générateurs cherchent les polices DejaVu sur Linux, macOS et Windows (`BABBERLAND_FONT_DIR` pour forcer un répertoire). L'atlas géographique (`make carte`) est **hors canon** : il ne rentre pas dans `make tout` ni dans le PDF, tant qu'un Avis ne l'a pas ratifié.
@@ -68,7 +68,7 @@ Buts disponibles : `env`, `arbre`, `carte`, `pdf`, `empreinte`, `controle`, `wor
 ## Régénération de l'encyclopédie PDF
 
 ```bash
-make pdf          # équivalent de : python .venv/bin/python sources/generate_encyclopedie_2026_i.py
+make pdf          # équivalent de : .venv/bin/python sources/generate_encyclopedie_2026_i.py
 ```
 
 Le générateur ajoute la couverture, le sommaire, les signets PDF, les en-têtes, la pagination, les tableaux et les illustrations. Les illustrations sont insérées par la table `IMAGE_AFTER`, indexée sur les **titres exacts** du Markdown canonique ; une ancre peut en porter plusieurs.
@@ -83,9 +83,9 @@ make empreinte    # grave l'empreinte sémantique dans gouvernance/pdf_fingerpri
 
 ```bash
 make controle     # ou, individuellement :
-python .venv/bin/python sources/check_continuity.py
-python .venv/bin/python sources/check_pdf.py
-python .venv/bin/python sources/pdf_fingerprint.py --check
+.venv/bin/python sources/check_continuity.py
+.venv/bin/python sources/check_pdf.py
+.venv/bin/python sources/pdf_fingerprint.py --check
 ```
 
 - **`check_continuity.py`** (sans dépendance) vérifie les titres historiques, l'ordre de succession, les sept livres, les équivalences monétaires, les dates maîtresses, tous les liens d'illustrations, les ancres d'illustrations du générateur (chaque ancre doit exister telle quelle dans 2026-I, faute de quoi l'illustration disparaît silencieusement du PDF), la **couverture** — chaque image promise par 2026-I doit être servie ou expressément exclue par `<!-- hors-PDF: images/x.png — motif -->` — et le bandeau de statut des chroniques.
@@ -115,5 +115,5 @@ L'atlas temporel (`geographie/index.html`) fait glisser 1830 → 2026 : les Mont
 L'arbre dispose d'une maquette vectorielle éditable (`sources/arbre_genealogique_complet.svg`) et d'un générateur PNG déterministe (`sources/generate_genealogy.py`).
 
 ```bash
-make arbre        # équivalent de : python .venv/bin/python sources/generate_genealogy.py
+make arbre        # équivalent de : .venv/bin/python sources/generate_genealogy.py
 ```

@@ -209,10 +209,11 @@ LIEUX: list[dict[str, Any]] = [
         "nom": "Banque nationale",
         "kind": "capitale",
         "xy": (690, 510),
-        "depuis": 1892,
+        "depuis": 1897,
         "canon": True,
-        "note": "Cité au Livre I, jamais décrite (lacune R2.1). Point sur la carte, "
-                "pas un plan.",
+        "note": "Fondée en 1897 (chronique, 1ʳᵉ rédaction : « c'est de cette paye "
+                "que naquit, en 1897, la Banque nationale ») ; décrite en maison de "
+                "pierre à deux portes. Point sur la carte, pas un plan.",
     },
     {
         "id": "aqueduc",
@@ -221,9 +222,11 @@ LIEUX: list[dict[str, Any]] = [
         "xy": (730, 590),
         "depuis": 1882,
         "canon": True,
-        "note": "Plans 1882, chantier 1892–1914, deux canaux (eau pure / Pabst fraîche), "
-                "≈ 2 km. Bancs imposés par l'Ancien : « un canal où l'on ne peut "
-                "s'asseoir n'est qu'un tuyau » (chronique).",
+        "note": "Plans 1882, chantier 1892/1893–1904/1905 (selon rédaction des "
+                "chroniques), consolidation jusqu'en 1914, mise en eau 1899–1905, "
+                "deux canaux (eau pure / Pabst fraîche), ≈ 2 km. Bancs imposés par "
+                "l'Ancien : « un canal où l'on ne peut s'asseoir n'est qu'un tuyau » "
+                "(chronique).",
     },
     {
         "id": "piscine",
@@ -250,9 +253,10 @@ LIEUX: list[dict[str, Any]] = [
         "nom": "Phare blanc couronné",
         "kind": "port",
         "xy": (1335, 225),
-        "depuis": 1916,
+        "depuis": 1905,
         "canon": True,
-        "note": "Érigé par Babette-Marine ; elle le laisse à sa mort en 1916.",
+        "note": "Tour 1905 (au registre), lanterne 1912, mise à feu 1916 ; érigé par "
+                "Babette-Marine, qui le laisse au Royaume à sa mort en 1916.",
     },
     {
         "id": "quais",
@@ -414,9 +418,10 @@ EPOCHS: list[dict[str, Any]] = [
     },
     {
         "annee": 1914,
-        "titre": "Aqueduc en service",
+        "titre": "Consolidation de l'aqueduc",
         "canon": True,
-        "fait": "Fin du règne de l'Aqueducien. Les deux canaux coulent.",
+        "fait": "Fin du règne de l'Aqueducien. Les deux canaux coulent — mise en eau "
+                "1899–1905 selon rédaction des chroniques (à trancher par l'Avis n° 7).",
     },
     {
         "annee": 1916,
