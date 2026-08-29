@@ -6,14 +6,79 @@
   "regime": "Parité Poutine Pure (PPP)",
   "formule_etalon": "1 ฿ = 1 Poutine Régulière Royale + 1 Pabst Fraîche (355 ml)",
   "fractions": [
-    {"valeur_bt": 24, "valeur_b": 1.0, "nom": "Le Babber Bimétallique", "unite_populaire": "La Caisse"},
-    {"valeur_bt": 12, "valeur_b": 0.5, "nom": "Le Demi-Babber", "unite_populaire": "La Douzaine"},
-    {"valeur_bt": 6, "valeur_b": 0.25, "nom": "Le Quart de Babber", "unite_populaire": "Le Six-Pack"},
-    {"valeur_bt": 2, "valeur_b": 0.0833, "nom": "La Paire de Babetons", "unite_populaire": "La Paire"},
-    {"valeur_bt": 1, "valeur_b": 0.0416, "nom": "Le Babeton Simple", "unite_populaire": "La Canette"}
+    {
+      "valeur_bt": 24,
+      "valeur_b": 1.0,
+      "nom": "Le Babber Bimétallique",
+      "unite_populaire": "La Caisse"
+    },
+    {
+      "valeur_bt": 12,
+      "valeur_b": 0.5,
+      "nom": "Le Demi-Babber",
+      "unite_populaire": "La Douzaine"
+    },
+    {
+      "valeur_bt": 6,
+      "valeur_b": 0.25,
+      "nom": "Le Six-Pack",
+      "unite_populaire": "Le Quart de Babber"
+    },
+    {
+      "valeur_bt": 2,
+      "valeur_b": 0.0833,
+      "nom": "La Paire de Babetons",
+      "unite_populaire": "La Paire"
+    },
+    {
+      "valeur_bt": 1,
+      "valeur_b": 0.0416,
+      "nom": "Le Cuivre Populaire",
+      "unite_populaire": "La Canette"
+    }
   ],
   "series_fiduciaires": [
-    {"serie": "A", "annee": 2023, "composition": "Chanvre de Grass City et lin royal"},
-    {"serie": "B", "annee": 2026, "composition": "Chanvre pur indéchirable résistant au lavage"}
+    {
+      "serie": "A",
+      "annee": 2023,
+      "composition": "Chanvre de Grass City et lin royal"
+    },
+    {
+      "serie": "B",
+      "annee": 2026,
+      "composition": "Chanvre pur indéchirable résistant au lavage"
+    }
+  ],
+  "propositions_declarées": [
+    {
+      "champ": "fractions[2].unite_populaire",
+      "valeur": "Le Quart de Babber",
+      "statut": "proposé, non décrété",
+      "note": "alias arithmétique (6/24) ; 2026-I appelle la pièce de 6 Babetons « Le Six-Pack »"
+    },
+    {
+      "champ": "fractions[24].unite_populaire",
+      "valeur": "La Caisse",
+      "statut": "proposé, non décrété",
+      "note": "2026-I parle de « la valeur exacte d'une caisse de 24 canettes fraîches », non d'un nom de pièce"
+    },
+    {
+      "champ": "fractions[12].unite_populaire",
+      "valeur": "La Douzaine",
+      "statut": "attesté",
+      "note": "reprise du canon : « La Pièce de 12 Babetons (Le Demi-Babber / La Douzaine) »"
+    },
+    {
+      "champ": "fractions[1].unite_populaire",
+      "valeur": "La Canette",
+      "statut": "proposé, non décrété",
+      "note": "nom usuel absent de 2026-I ; le canon nomme la pièce « Le Cuivre Populaire »"
+    },
+    {
+      "champ": "fractions[2]",
+      "valeur": "2 Babetons",
+      "statut": "à décréter",
+      "note": "2026-I ne frappe que 1, 6, 12 Babetons et le Babber de 24 : la Paire est une valeur du dossier de données, en attente d'Avis du Grand Argentier"
+    }
   ]
 }

@@ -20,6 +20,7 @@ L'édition **2026-I** intègre directement les corrections et ne nécessite aucu
 |---|---|
 | `RAPPORT_DE_REVISION_2026_I.md` | Révision générale du 27 août 2026 (RR-2026-I-01) : réserve E-01 levée, contrôles étendus |
 | `RAPPORT_ANALYSE_2026_II.md` | Audit technique, éditorial et documentaire (RA-2026-II-01) : constats E-07 à E-16, mesures reproductibles |
+| `RAPPORT_DE_CONTRE_EXPERTISE_2026_III.md` | Contre-expertise RC-2026-III-01 : mutations rejouées (E-18 à E-28) ; lot C0 appliqué le 29 août, suivi d'exécution en §6 |
 | `ROADMAP_2026_II.md` | Feuille de route en quatre horizons, 28 tickets, risques et indicateurs |
 | `gouvernance/LIVRE_VIII_INSTITUTIONS.md` | Proposition Livre VIII (R2.1) : Les 5 corps d'État, gardiens du caillé, police de la sieste |
 | `gouvernance/REGISTRE_DES_AVIS_ROYAUX.md` | Registre officiel des Avis royaux (R2.2) : restauration des décrets n° 1 à 4 et suite |
@@ -28,7 +29,9 @@ L'édition **2026-I** intègre directement les corrections et ne nécessite aucu
 | `gouvernance/REGISTRE_DES_PERSONNAGES.md` | Registre d'autorité des 18 personnages historiques du canon (R2.9) |
 | `canon/` | Données structurées JSON : personnages, monnaie, lieux, événements (R3.3) |
 | `gouvernance/ARCHIVE.md` | Politique d'archivage : ce qui est gelé, ce qui ne l'est pas, comment dégeler |
-| `gouvernance/ARCHIVE.sha256` | Scellés des archives 2026-G et 2026-H, vérifiés par la CI |
+| `gouvernance/ARCHIVE.sha256` | Scellés des archives 2026-G et 2026-H, vérifiés par la CI et par `make scelle` |
+| `gouvernance/ICONOGRAPHIE.sha256` | Scellés des 28 maîtres d'illustration, par leur nom (E-18) |
+| `canon/` + `propositions_declarées` | Données structurées (R3.3) sous contrat de parité : une affirmation est attestée par le corpus ou déclarée comme proposition |
 | `gouvernance/pdf_fingerprint.txt` | Empreinte sémantique du PDF canonique — le contrat de fraîcheur de l'artefact |
 | `gouvernance/index.html` | Version visuelle du rapport et de la roadmap (page autonome) |
 | `geographie/ANALYSE.md` | GEO-2026-II-01 : ce que le canon situe, ce que le temps interdit, E-16.c en proposition |
@@ -61,7 +64,7 @@ Ils sont conservés pour l'historique éditorial et **scellés par haché** : le
 - Babber le Déchiré appartient à une branche collatérale issue de Babette-Marine ; Babber le Fou reste fils unique du Louche et de Linéa.
 - Babber le Fou demeure premier dans l'ordre de succession ; Ti-Babber est deuxième.
 - Dans « Babber VII », **VII désigne la septième génération**, pas un septième règne.
-- Les quatorze illustrations du dossier iconographique sont toutes servies dans le volume imprimé : une référence `images/…` du Markdown canonique sans ancre dans le générateur est une **erreur de contrôle**, plus un état possible du projet.
+- Les **vingt-quatre** illustrations promises par 2026-I sont toutes servies dans le volume imprimé (les 4 planches de chantier des chroniques restent hors volume par statut). Une référence `images/…` du Markdown canonique sans ancre dans le générateur est une **erreur de contrôle** — et, symétriquement, une insertion sans promesse du canon en est une (constat E-22).
 
 ## Chaîne de production
 
@@ -69,11 +72,16 @@ Tout passe par `make`, qui installe ses propres dépendances dans un venv — le
 
 ```bash
 make env          # python3 -m venv .venv + pip install -r requirements.txt
-make tout         # arbre → PDF → empreinte → contrôles
-make controle     # les trois contrôles, sans rien régénérer
+make tout         # arbre → PDF → CONTRÔLES → empreinte (l'ordre est un contrôle, voir E-21)
+make controle     # les six contrôles, sans rien régénérer
+make scelle       # gel des archives G et H + scellé des 28 maîtres d'illustration
 ```
 
-Buts disponibles : `env`, `arbre`, `carte`, `pdf`, `empreinte`, `controle`, `workflows`, `tout`, `propre`. Hors venv : `make PY=python3 …`. Les générateurs cherchent les polices DejaVu sur Linux, macOS et Windows (`BABBERLAND_FONT_DIR` pour forcer un répertoire). L'atlas géographique (`make carte`) est **hors canon** : il ne rentre pas dans `make tout` ni dans le PDF, tant qu'un Avis ne l'a pas ratifié.
+Buts disponibles : `env`, `arbre`, `carte`, `pdf`, `empreinte`, `controle`, `scelle`, `iconographie`, `batterie`, `workflows`, `tout`, `propre`.
+
+`make batterie` ne contrôle pas le dépôt : il **malmène seize copies isolées** de son arbre (naissances fausses, deux portraits permutés, archive gelée raturée, générateur syntaxiquement cassé) et vérifie que la chaîne refuse — puis qu'elle accepte trois éditions légitimes. C'est la seule preuve que les contrôles ont des dents ; elle dure une minute et ne fait pas partie de `controle`, puisqu'elle réécrit des scellés dans ses laboratoires.
+**Graver l'empreinte n'est jamais une vérification** : `empreinte` clôt la chaîne et consigne un assentiment ;
+la CI, elle, ne fait que `--check`. Un changement d'empreinte voulu se dit à l'Avis. Hors venv : `make PY=python3 …`. Les générateurs cherchent les polices DejaVu sur Linux, macOS et Windows (`BABBERLAND_FONT_DIR` pour forcer un répertoire). L'atlas géographique (`make carte`) est **hors canon** : il ne rentre pas dans `make tout` ni dans le PDF, tant qu'un Avis ne l'a pas ratifié.
 
 ## Régénération de l'encyclopédie PDF
 
@@ -94,23 +102,32 @@ make empreinte    # grave l'empreinte sémantique dans gouvernance/pdf_fingerpri
 ```bash
 make controle     # ou, individuellement :
 python .venv/bin/python sources/check_continuity.py
+python .venv/bin/python sources/check_canon.py
 python .venv/bin/python sources/check_pdf.py
 python .venv/bin/python sources/pdf_fingerprint.py --check
+python .venv/bin/python sources/check_geography.py
+make scelle
 ```
 
 - **`check_continuity.py`** (sans dépendance) vérifie les titres historiques, l'ordre de succession, les sept livres, les équivalences monétaires, les dates maîtresses, tous les liens d'illustrations, les ancres d'illustrations du générateur (chaque ancre doit exister telle quelle dans 2026-I, faute de quoi l'illustration disparaît silencieusement du PDF), la **couverture** — chaque image promise par 2026-I doit être servie ou expressément exclue par `<!-- hors-PDF: images/x.png — motif -->` — et le bandeau de statut des chroniques.
-- **`check_pdf.py`** (`pypdf`) ouvre le PDF publié et compte les **hachés de flux image**, non les noms de XObject : l'attendu vient du canon, pas du générateur. Il refuse aussi les intitulés de renvoi orphelins et les chemins d'images en clair.
-- **`pdf_fingerprint.py --check`** compare l'artefact publié à l'empreinte gravée : le PDF n'est pas reproductible à l'octet (ReportLab nomme ses XObject aléatoirement), donc on compare ce que le lecteur voit — pages, texte, images.
+- **`check_canon.py`** (sans dépendance, constat E-19) fait la **parité des données** : `canon/*.json` contre 2026-I, la Chronologie maîtresse et le Registre des personnages — 18 fiches, sommes de population, échelle monétaire 24 Babetons, événements datés, **arithmétique des six successions** (durée annoncée = soustraction des bornes, chaîne continue, mort = fin de règne). Sa règle : dans un dossier nommé `canon`, une affirmation est soit **attestée** par le corpus, soit **inscrite dans `propositions_declarées`** avec sa source — 1 500 âmes de la forêt et le 12 octobre 1904 y sont, tant que l'Avis n° 7 n'a pas parlé.
+- **`check_pdf.py`** (`pypdf`) ouvre le PDF publié et **apparie chaque planche à sa légende, page par page**, sur le md5 du dérivé réellement embarqué : deux portraits intervertis, une planche de trop, une légende sans image sont des échecs (constats E-18, E-22). L'attendu vient du canon, pas du générateur ; la transformée d'image est unique (`sources/babberland_images.py`), partagée par le générateur et les contrôles.
+- **`pdf_fingerprint.py --check`** compare l'artefact publié à l'empreinte gravée : le PDF n'est pas reproductible à l'octet (ReportLab nomme ses XObject aléatoirement), donc on compare ce que le lecteur voit — pages, texte, et **hachés d'images ordonnés page à page**. L'empreinte n'est plus un ensemble trié : permuter deux illustrations la modifie (E-18).
+- **`make scelle`** vérifie `gouvernance/ARCHIVE.sha256` (archives 2026-G et 2026-H) **et** `gouvernance/ICONOGRAPHIE.sha256` (les 28 maîtres, scellés par leur nom). Ce second scellé est la réponse au seul résidu que la chaîne assume : réengraver *les deux* après une permutation reste un acte éditorial, lisible dans le diff, et qui demande un Avis.
 
 Les mêmes contrôles sont enchaînés à chaque push sur `main` et à chaque pull request par le workflow `sources/github_actions_continuite.yml` : arbre régénéré identique au bit près, régénération du volume, artéfact, empreinte de fraîcheur, scellé des archives, PDF déposé en pièce jointe de relecture.
 
-**Activation** — une commande, puis un commit :
+**Activation** — le gabarit est tenu à jour, son installation reste un **acte de publication** :
 
 ```bash
-make workflows && git add .github && git commit -m "CI : continuité, empreinte et scellé des archives"
+make workflows    # copie sources/github_actions_continuite.yml → .github/workflows/continuite.yml
+                  # et retire au passage le talon invalide main.yml
 ```
 
-Le fichier est prêt et ses étapes sont vérifiées localement ; seul le *pousser* demande un jeton tenant la permission **workflows** (un jeton d'application GitHub dépourvu de ce droit se voit refuser la création de `.github/workflows/*` — la voie de contournement est de committer le fichier depuis GitHub, ou d'accorder le droit à l'App).
+13 étapes, YAML validé, chacune rejouée localement. Le fichier `.github/workflows/continuite.yml` **ne peut
+pas sortir d'une App** : GitHub refuse qu'un jeton dépourvu du droit `workflows` crée ou modifie
+`.github/workflows/*` (constat **E-17**). Le dépôt versionne donc le modèle, pas sa copie — un humain au
+tableau de bord pousse l'installation, ou merge ce gabarit en y ajoutant le fichier en une étape.
 
 ## Atlas géographique (proposé, non décrété)
 

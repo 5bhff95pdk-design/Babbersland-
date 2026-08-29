@@ -82,12 +82,17 @@ def illustration_anchors(source: str) -> list[tuple[str, str]]:
                     anchors.append((key.value, entry.elts[0].value))
     return anchors
 
+generator_source = ""
+anchors: list[tuple[str, str]] = []
 try:
     generator_source = GENERATOR.read_text(encoding="utf-8")
     anchors = illustration_anchors(generator_source)
-except SyntaxError as exc:
-    generator_source, anchors = "", errors + [f"générateur PDF illisible : {exc}"]
-if not anchors:
+except (OSError, SyntaxError, ValueError) as exc:
+    # La branche d'erreur doit rester lisible : `anchors` reçoit une liste de
+    # (ancre, fichier), jamais le tableau des erreurs (sinon: ValueError au unpack,
+    # et le diagnostic « générateur illisible » ne monte jamais — RC-2026-III-01).
+    errors.append(f"générateur PDF illisible : {type(exc).__name__}: {exc}")
+if not anchors and not errors:
     errors.append("aucune table d'illustrations trouvée dans le générateur PDF")
 for anchor, rel in anchors:
     if anchor not in canon_text:
@@ -100,12 +105,48 @@ for anchor, rel in anchors:
 # du script, ou expressément exclue du volume par « <!-- hors-PDF: images/x.png — motif --> ».
 served = {rel for _, rel in anchors} | set(re.findall(r'"(images/[^"]+)"', generator_source))
 exempted = set(re.findall(r"<!--\s*hors-PDF:\s*(images/[^\s]+)", canon_text))
-for rel in sorted(set(re.findall(r"`(images/[^`]+)`", canon_text))):
+promised = set(re.findall(r"`(images/[^`]+)`", canon_text))
+for rel in sorted(promised):
     if rel not in served and rel not in exempted:
         errors.append(
             f"illustration promise par 2026-I et servie par aucun ancrage du générateur : {rel} "
             "(l'insérer dans IMAGE_AFTER ou l'exclure par un commentaire « hors-PDF: »)"
         )
+
+# Sens inverse (constat E-22) : le générateur n'a pas droit à une planche que le
+# canon ne promet pas. Sans cette règle, une insertion de plus restait invisible —
+# le contrôle ne comparait que deux *comptes*, égaux par construction.
+for rel in sorted(served - promised - exempted):
+    errors.append(
+        f"illustration insérée au volume sans promesse de 2026-I : {rel} "
+        "(la promettre dans le canon, l'exclure, ou retirer l'insertion)"
+    )
+
+# Cinq silences sanctifiés (SERMENT_D_IGNORANCE.md §III). Le texte du Serment
+# promet que la batterie « rejette toute tentative d'imposer une fixation
+# arbitraire » : la voici, sinon la promesse reste de la rhétorique (E-24).
+SILENCES = {
+    "Babber le Déchiré": r"né(?:e)?\s+(?:le\s+)?(?:en\s+)?\d{4}|\(\s*(?:v\.\s*)?\d{4}[–-]",
+    "Roger Bontemps": r"né(?:e)?\s+(?:le\s+)?(?:en\s+)?\d{4}|\(\s*(?:v\.\s*)?\d{4}[–-]",
+}
+SILENCES_EVENEMENTS = {
+    "Transparence brune": r"\b\d{1,2}\s*h\s*\d{2}|\b\d{4}-\d{2}-\d{2}\b",
+    "première pierre": r"\b\d{1,2}\s*h\s*\d{2}",
+    "Recette (complète|royale|secrète)": r"\d+\s*(?:grammes|cuillères|pincées|ml|g)\b",
+}
+for figure, pattern in SILENCES.items():
+    for line in canon_text.splitlines():
+        if figure in line and re.search(pattern, line) and "non consignée" not in line:
+            errors.append(
+                f"silence sanctifié percé — naissance chiffrée de {figure} : « {line.strip()[:78]}… » "
+                "(SERMENT_D_IGNORANCE.md, II.1 et II.2 : ces dates doivent rester tues)"
+            )
+for subject, pattern in SILENCES_EVENEMENTS.items():
+    for line in canon_text.splitlines():
+        if re.search(subject, line, flags=re.I) and re.search(pattern, line):
+            errors.append(
+                f"silence sanctifié percé — fixation arbitraire sur {subject} : « {line.strip()[:78]}… »"
+            )
 
 # Chroniques : hors canon, mais elles doivent déclarer leur statut éditorial
 # « proposé, non décrété » et respecter les formulations canoniques ci-dessus.

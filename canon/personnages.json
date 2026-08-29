@@ -17,7 +17,7 @@
       "nom": "Babette Ire de Plantagenet",
       "generation": 1,
       "titre": "Reine Consort et Régente morale",
-      "dates": "v. 1805–1892",
+      "dates": "1804–1892",
       "regne": "1889–1892 (régence)",
       "attributs": ["Nappe vichy originelle", "Panier d'osier"],
       "statut": "consort"
@@ -37,7 +37,7 @@
       "nom": "Hortense du Grain",
       "generation": 2,
       "titre": "Princesse Consort de l'Aqueduc",
-      "dates": "v. 1845–v. 1930",
+      "dates": "1840–1922",
       "attributs": ["Épi d'orge", "Réserve de grain"],
       "statut": "consort"
     },
@@ -46,13 +46,13 @@
       "nom": "Princesse Babette-Marine",
       "generation": 2,
       "titre": "Princesse des Eaux et du Littoral",
-      "dates": "1840–1916",
+      "dates": "1836–1916",
       "attributs": ["Boussole sans aiguille", "Phare blanc"],
       "statut": "collateral_root"
     },
     {
       "id": "babber_le_dormeur",
-      "nom": "Babber Ier le Dormeur",
+      "nom": "Babber le Dormeur",
       "generation": 3,
       "titre": "Roi du Silence et de l'Horizontalité",
       "dates": "1875–1959",
@@ -65,7 +65,7 @@
       "nom": "Irène des Érables",
       "generation": 3,
       "titre": "Reine Consort du Silence",
-      "dates": "1880–1966",
+      "dates": "1882–1966",
       "attributs": ["Châle d'automne", "Feuille d'érable"],
       "statut": "consort"
     },
