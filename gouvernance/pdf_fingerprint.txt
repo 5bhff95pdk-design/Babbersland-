@@ -1,6 +1,9 @@
 # Empreinte sémantique du PDF canonique — générée par `make empreinte`.
 # Le PDF n'est pas reproductible à l'octet (noms FormXob de ReportLab) :
 # c'est cette empreinte, et non le binaire, que la CI compare.
-fingerprint = a129fa3f447aecc10264771e33d600d4
+# Elle est ordonnée page à page (constat E-18) : permuter deux illustrations
+# la modifie. Graver ici = assumer un changement, pas le contrôler (E-21).
+fingerprint = 708776c8a6734880139a5b876f720949
 pages = 29
 images = 24
+placements = 25

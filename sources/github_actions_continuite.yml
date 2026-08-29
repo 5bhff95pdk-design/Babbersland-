@@ -1,8 +1,12 @@
 name: Continuité Babberland
 
 # Contrôle à chaque push sur main et sur toute pull request :
-# sources (continuité + couverture des illustrations), arbre déterministe,
-# régénération du PDF canonique, artéfact publié, empreinte de fraîcheur, gel des archives.
+# sources (continuité + couverture des illustrations + parité des données JSON),
+# atlas et arbre déterministes, régénération du PDF canonique, artéfact publié
+# apparié planche à planche, empreinte de fraîcheur ordonnée, gel des archives.
+#
+# La CI ne grave JAMAIS l'empreinte : elle la compare. Graver et vérifier dans la
+# même commande rendrait la vérification infaillible par construction (constat E-21).
 
 on:
   push:
@@ -14,7 +18,7 @@ permissions:
 
 jobs:
   controles:
-    name: Sources, artéfacts et empreinte
+    name: Sources, données, artéfacts et empreinte
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -30,8 +34,11 @@ jobs:
       - name: Dépendances épinglées
         run: python -m pip install -r requirements.txt
 
-      - name: Continuité des sources (canon, chronologie, archives, chroniques, ancres)
+      - name: Continuité des sources (canon, chronologie, archives, chroniques, ancres, silences)
         run: python sources/check_continuity.py
+
+      - name: Parité des données structurées (canon/*.json contre 2026-I, Chronologie, Registre)
+        run: python sources/check_canon.py
 
       - name: Atlas géographique (proposé, non décrété)
         run: |
@@ -47,14 +54,16 @@ jobs:
       - name: Régénération de l'encyclopédie 2026-I
         run: python sources/generate_encyclopedie_2026_i.py
 
-      - name: Artéfact publié (légendes et illustrations embarquées)
+      - name: Artéfact publié (illustrations appariées à leur légende, planche par planche)
         run: python sources/check_pdf.py
 
-      - name: Fraîcheur du PDF publié (empreinte sémantique gravée)
+      - name: Fraîcheur du PDF publié (empreinte sémantique ordonnée, gravée au dépôt)
         run: python sources/pdf_fingerprint.py --check
 
-      - name: Gel des archives (G et H intacts)
-        run: sha256sum --check --quiet gouvernance/ARCHIVE.sha256
+      - name: Gel des archives (G et H intacts) et des maîtres d'illustration
+        run: |
+          sha256sum --check --quiet gouvernance/ARCHIVE.sha256
+          sha256sum --check --quiet gouvernance/ICONOGRAPHIE.sha256
 
       - name: Pièce jointe de relecture humaine
         uses: actions/upload-artifact@v4

@@ -25,6 +25,11 @@ from reportlab.platypus import (
 )
 from reportlab.platypus.tableofcontents import TableOfContents
 
+import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from babberland_images import derive_to_file as derive_image  # noqa: E402
+
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / "ENCYCLOPEDIE_CONSOLIDEE_2026_I.md"
 OUTPUT = ROOT / "Royaume_du_Babberland_Encyclopedie_Consolidee_2026_I.pdf"
@@ -229,13 +234,13 @@ class RoyalDocTemplate(BaseDocTemplate):
             self.notify("TOCEntry", (level, text, self.page, key))
 
 def prepared_image(relpath: str, tmp: Path, max_w=16.3*cm, max_h=8.8*cm) -> Image:
-    src = ROOT / relpath
-    out = tmp / (src.stem + ".jpg")
-    if not out.exists():
-        with PILImage.open(src) as pic:
-            pic = pic.convert("RGB")
-            pic.thumbnail((1500, 900), PILImage.Resampling.LANCZOS)
-            pic.save(out, "JPEG", quality=78, optimize=True, progressive=True)
+    """Dérivé imprimable d'une illustration, puis mise à l'échelle de cadre.
+
+    La transformée elle-même vit dans `sources/babberland_images.py` : c'est la
+    **même** fonction que les contrôles utilisent pour prévoir le flux embarqué
+    (constat E-22 — le contrôle comparait des comptes d'images, pas des contenus).
+    """
+    out = derive_image(ROOT / relpath, tmp)
     with PILImage.open(out) as pic:
         w, h = pic.size
     scale = min(max_w/w, max_h/h)

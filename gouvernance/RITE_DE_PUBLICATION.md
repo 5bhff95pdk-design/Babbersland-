@@ -15,37 +15,43 @@
 
 ```
    ┌──────────┐     ┌──────────┐     ┌──────────┐     ┌──────────┐     ┌──────────┐
-   │ 1. ÉCRIRE│ ──> │2.CONTRÔLE│ ──> │3. COMPIL │ ──> │4.GRAVURE │ ──> │5. SCELLÉ │
-   │  Source  │     │Continuity│     │ make pdf │     │Empreinte │     │ Git Tag  │
+   │ 1. ÉCRIRE│ ──> │2.CONTRÔLE│ ──> │3.COMPILER│ ──> │4.VÉRIFIER│ ──> │ 5.GRAVER │
+   │  Source  │     │ Sources  │     │make pdf  │     │controle  │     │ + SCELLER│
    └──────────┘     └──────────┘     └──────────┘     └──────────┘     └──────────┘
 ```
+
+> **L'ordre est un contrôle, pas une commodité** (constat E-21 de RC-2026-III-01) : graver
+> l'empreinte *avant* de la vérifier rend la vérification infaillible par construction.
+> La gravure ferme donc le rite ; elle ne l'ouvre plus.
 
 ### Étape 1 · Rédaction & Respect du Statut
 * Tout nouvel écrit historique doit porter explicitement son statut : **Canonique** (2026-I), **Proposé** (Chroniques et Lois) ou **Archivé** (G et H).
 * Aucune contradiction d'âge, de filiation ou de titre ne doit être introduite.
+* Une donnée nouvelle qui ne figure pas dans 2026-I s'inscrit dans `propositions_declarées` de son fichier de `canon/` (contrat de parité, `check_canon.py`).
 
-### Étape 2 · Contrôles Préalables
-Exécuter la suite de tests sans dépendance :
+### Étape 2 · Contrôles préalables (sources)
 ```bash
-python sources/check_continuity.py
-python sources/check_geography.py
+python sources/check_continuity.py    # canon, chronologie, chroniques, ancres, cinq silences
+python sources/check_canon.py         # parité des données JSON · arithmétique des successions
+python sources/check_geography.py     # atlas contre canon, anachronismes datés
 ```
 
 ### Étape 3 · Génération des Artefacts
-Compiler le volume PDF et régénérer l'arbre généalogique si modifié :
 ```bash
-make arbre
-make pdf
+make arbre                            # PNG généalogique, déterministe au bit près
+make pdf                              # volume 2026-I
+make iconographie                       # nouveaux maîtres seulement : re-sceller les maîtres
 ```
 
-### Étape 4 · Graver l'Empreinte Sémantique
-Le PDF publié est figé sémantiquement dans le contrat de fraîcheur :
+### Étape 4 · Vérification de l'artéfact — sans rien graver
 ```bash
-make empreinte
-make controle
+make controle                         # six contrôles : sources, données, PDF, fraîcheur,
+                                      # géographie, scellés (archives G/H + maîtres d'illustration)
 ```
+`check_pdf.py` apparie **planche à légende, page à page** : une image perdue, déplacée ou
+ajoutée sans promesse du canon fait échouer cette étape (constats E-18, E-22).
 
-### Étape 5 · Scellement et Archivage
-* Si un acte modifie le canon, consigner l'Avis dans `gouvernance/REGISTRE_DES_AVIS_ROYAUX.md`.
-* Mettre à jour `README.md` et `CHANGELOG.md`.
-* Committer les modifications avec un message explicite respectant le formalisme de la Chancellerie.
+### Étape 5 · Gravure, scellement et archivage
+* Si, et seulement si, `make controle` est vert : `make empreinte` grave le contrat de fraîcheur.
+* Empreinte ou scellé modifié = acte assumé : le consigner à l'Avis dans `gouvernance/REGISTRE_DES_AVIS_ROYAUX.md`.
+* Mettre à jour `README.md` et `CHANGELOG.md`, committer, puis reposer l'étiquette `v2026-…` et publier la Release (R1.5).

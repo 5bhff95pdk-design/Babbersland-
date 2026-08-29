@@ -71,9 +71,9 @@
     <div class="card v-ok"><h3>Canon textuel <span class="badge b-ok">CONFORME</span></h3>
       <p>Continuité validée, 7 points de correction présents, 0 erreur d'arithmétique généalogique sur 229 ans et 7 générations.</p></div>
     <div class="card v-ok"><h3>Portrait du Déchiré <span class="badge b-ok">RÉPARÉ</span></h3>
-      <p>Réserve E-01 levée et vérifiée dans l'artefact publié : 22 pages, 11 illustrations, 10 légendes.</p></div>
+      <p>Réserve E-01 levée et vérifiée dans l'artefact publié (état du 27 août : 22 pages, 11 illustrations, 10 légendes).</p></div>
     <div class="card v-ok"><h3>Illustrations du PDF <span class="badge b-ok">E-07 · LEVÉ</span></h3>
-      <p>Le canon déclarait 14 planches, le volume n'en montrait que 11. <b>Repris : 14 / 14 embarquées</b>, 24 pages, multi-images par ancre.</p></div>
+      <p>Le canon déclarait 14 planches, le volume n'en montrait que 11. <b>Repris : 14 / 14</b> alors ; <b>24 / 24</b> aujourd'hui (29 pages, 23 légendes, multi-images par ancre).</p></div>
     <div class="card v-ok"><h3>Commandes du README <span class="badge b-ok">E-11 · LEVÉ</span></h3>
       <p><code>make env</code> crée le venv, <code>requirements.txt</code> épingle les 3 dépendances, <code>find_font()</code> couvre Linux · macOS · Windows — dans les deux générateurs.</p></div>
     <div class="card v-ok"><h3>Contrôles auto-référents <span class="badge b-ok">E-09 · LEVÉ</span></h3>
@@ -81,7 +81,7 @@
     <div class="card v-ok"><h3>Reproductibilité <span class="badge b-ok">E-10 · GARDE-FOU</span></h3>
       <p>Arbre : bit près ✅. PDF : octets non reproductibles (noms <code>FormXob.*</code>) → une <b>empreinte sémantique</b> le remplace, gravée et comparée en CI.</p></div>
     <div class="card v-warn"><h3>CI prête, non poussable <span class="badge b-warn">E-17</span></h3>
-      <p>Workflow de 9 étapes écrit et vérifié localement ; GitHub refuse qu'un jeton d'App <i>sans</i> le droit <code>workflows</code> crée <code>.github/workflows/</code>. Un commit à faire depuis un compte habilité.</p></div>
+      <p>Gabarit à <b>13 étapes</b> tenu à jour (<code>sources/github_actions_continuite.yml</code>), YAML validé, talon invalide <code>main.yml</code> retiré de l'arbre de travail ; GitHub refuse qu'un jeton d'App <i>sans</i> le droit <code>workflows</code> crée <code>.github/workflows/</code>. Un commit à faire depuis un compte habilité.</p></div>
     <div class="card v-ok"><h3>Archives G &amp; H <span class="badge b-ok">SCÉLLÉES</span></h3>
       <p>G (41 pages, non régénérable) et H (95 % dupliqué dans I) sont gelés par SHA-256 ; la CI casse si une archive bouge sans Avis.</p></div>
   </div>
@@ -90,14 +90,14 @@
   <div class="grid g4">
     <div class="card"><div class="kpi">Volume éditorial</div><div class="num">24 973 <span style="font-size:13px">mots</span></div>
       <div class="bar"><i style="width:100%"></i></div><p>6 Markdown · 1 949 lignes · 7 livres canoniques</p></div>
-    <div class="card"><div class="kpi">Illustrations rendues</div><div class="num">14 / 14 <span style="font-size:13px">(100 %)</span></div>
-      <div class="bar"><i style="width:100%"></i></div><p>24 pages · 3,9 Mio · E-07 et E-08 clos</p></div>
+    <div class="card"><div class="kpi">Illustrations rendues</div><div class="num">24 / 24 <span style="font-size:13px">(100 %)</span></div>
+      <div class="bar"><i style="width:100%"></i></div><p>29 pages · 7,0 Mio · E-07, E-08 clos et E-18 clos (appariement planche à légende)</p></div>
     <div class="card"><div class="kpi">Contrôles automatisés</div><div class="num">5 <span style="font-size:13px">via make</span></div>
       <div class="bar"><i style="width:83%"></i></div><p>Continuité · PDF · empreinte · arbre bit près · scellés — en attente du poussage du workflow</p></div>
     <div class="card"><div class="kpi">Poids suivi</div><div class="num">94 <span style="font-size:13px">Mio</span></div>
-      <div class="bar"><i style="width:88%"></i></div><p>37,2 Mio de PNG (R1.6 en attente) · 19,4 Mio de PDF</p></div>
+      <div class="bar"><i style="width:88%"></i></div><p>78,2 Mo de PNG (R1.6 à reprendre, mesure du 29 août) · 22 Mo de PDF · maîtres scellés par <code>ICONOGRAPHIE.sha256</code></p></div>
   </div>
-  <p class="note">Après Horizon 0 : 0 lien cassé · 0 image orpheline · <b>4 constats ouverts sur 10</b> (E-14.2 tag à re-poser, E-15 source unique de l'arbre, E-16 arbitrages éditoriaux, R1.6 poids) · 0 licence (R3.4) · empreinte gravée <code>a0be4fb3…</code>.</p>
+  <p class="note">Après Horizon 0 : 0 lien cassé · 0 image orpheline · <b>4 constats ouverts sur 10</b> (E-14.2 tag à re-poser, E-15 source unique de l'arbre, E-16 arbitrages éditoriaux, R1.6 poids) · licence MIT posée (R3.4 clos) · empreinte gravée <code>708776c8…</code> (ordonnée page à page depuis E-18).</p>
 
   <h2><span class="n">3</span>Quatre horizons</h2>
   <div class="lanes">
@@ -154,7 +154,7 @@
   <h2><span class="n">4</span>Cap ciblé</h2>
   <table>
     <tr><th>Indicateur</th><th>Avant H0</th><th>Après H0</th><th>Fin H1</th><th>Fin H2</th></tr>
-    <tr><td>Illustrations canoniques rendues dans le PDF</td><td>11 / 14 (79 %)</td><td>14 / 14</td><td><b>14 / 14</b></td><td>100 %</td></tr>
+    <tr><td>Illustrations canoniques rendues dans le PDF</td><td>11 / 14 (79 %)</td><td>14 / 14</td><td><b>24 / 24</b></td><td>100 %</td></tr>
     <tr><td>Contrôles en CI</td><td>0</td><td>5 + scellés</td><td>7</td><td>7 + données</td></tr>
     <tr><td>Commandes du README exécutables telles quelles</td><td>0 / 4</td><td>3 / 4</td><td>4 / 4</td><td>4 / 4</td></tr>
     <tr><td>Constats ouverts</td><td>10</td><td><b>4</b></td><td>≤ 3</td><td>0, tous arbitrés</td></tr>

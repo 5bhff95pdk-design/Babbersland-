@@ -1,98 +1,130 @@
 #!/usr/bin/env python3
-"""Vérifie l'artefact final : légendes et illustrations du PDF canonique 2026-I.
+"""Vérifie l'artéfact final : le PDF canonique 2026-I montre bien ce que le canon promet.
 
-Dépendance : pypdf (python -m pip install -r requirements.txt).
-Complète sources/check_continuity.py, qui contrôle les sources : ici, on ouvre
-le PDF réellement publié et l'on confirme que chaque légende de la table
-d'illustrations du générateur y figure, et que **toute** illustration promise par
-le canon y est embarquée.
+Dépendance : pypdf (`make env`). Autorité : `ENCYCLOPEDIE_CONSOLIDEE_2026_I.md`,
+jamais le générateur (leçon de E-07/E-09). Quatre couches, de la plus lâche à la
+plus forte — les trois premières validation des *présences*, la quatrième de
+l'*affectation*, que rien ne contrôlait avant RC-2026-III-01 (constat E-18) :
 
-L'autorité est `ENCYCLOPEDIE_CONSOLIDEE_2026_I.md`, non le générateur : c'est
-l'angle mort qui avait laissé passer E-01 (une ancre périmée) puis E-07 (trois
-planches jamais déclarées au générateur, donc jamais attendues par le contrôle).
-Le comptage se fait par **haché de flux image**, pas par nom de XObject — les noms
-sont attribués par ReportLab et ne reflètent ni les doublons ni les omissions.
+1. toute légende de la table d'illustrations figure dans la couche texte ;
+2. tout dérivé prévu à partir d'une illustration promise est embarqué, et tout
+   flux embarqué est promis (double inclusion par md5, plus de comparaison de comptes) ;
+3. aucun intitulé de renvoi orphelin, aucun chemin `images/…` en clair ;
+4. **appairement** : la page qui porte la légende d'une planche doit porter le flux
+   correspondant à l'illustration promise — deux portraits intervertis sont une faute.
+
+Les masques (`/SMask`) sont exclus par `babberland_images.page_image_hashes`, définition
+unique partagée avec l'empreinte sémantique (constat E-22).
 """
+from __future__ import annotations
+
 import ast
-import hashlib
 import re
-import unicodedata
+import sys
 from pathlib import Path
 
 from pypdf import PdfReader
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "sources"))
+
+from babberland_images import (  # noqa: E402
+    derive_md5, normalize, page_image_hashes, page_texts,
+)
+
 PDF = ROOT / "Royaume_du_Babberland_Encyclopedie_Consolidee_2026_I.pdf"
 CANON = ROOT / "ENCYCLOPEDIE_CONSOLIDEE_2026_I.md"
 GENERATOR = ROOT / "sources" / "generate_encyclopedie_2026_i.py"
 
 
-def normalize(text: str) -> str:
-    text = unicodedata.normalize("NFKC", text).replace("’", "'")
-    return re.sub(r"\s+", " ", text)
-
-
-def expected_from_canon() -> tuple[set[str], list[str]]:
-    """Illustrations que le volume doit montrer, et légendes promises par le script."""
+def expected_from_canon() -> set[str]:
+    """Illustrations que le volume doit montrer : promesses du canon, exemptions retirées."""
     canon = CANON.read_text(encoding="utf-8")
     wanted = set(re.findall(r"`(images/[^`]+)`", canon))
-    wanted -= set(re.findall(r"<!--\s*hors-PDF:\s*(images/[^\s]+)", canon))
-    captions: list[str] = []
+    return wanted - set(re.findall(r"<!--\s*hors-PDF:\s*(images/[^\s]+)", canon))
+
+
+def placements() -> list[tuple[str, str]]:
+    """(illustration, légende) pour chaque insertion déclarée par le générateur."""
     tree = ast.parse(GENERATOR.read_text(encoding="utf-8"))
+    out: list[tuple[str, str]] = []
     for node in ast.walk(tree):
         if not isinstance(node, ast.Dict):
             continue
         for value in node.values:
-            entries = value.elts if isinstance(value, ast.List) else [value]
-            for entry in entries:
+            for entry in (value.elts if isinstance(value, ast.List) else [value]):
                 if (isinstance(entry, ast.Tuple) and len(entry.elts) >= 2
                         and all(isinstance(e, ast.Constant) and isinstance(e.value, str)
-                                for e in entry.elts)
+                                for e in entry.elts[:2])
                         and entry.elts[0].value.startswith("images/")):
-                    captions.append(entry.elts[1].value)
-    return wanted, captions
+                    out.append((entry.elts[0].value, entry.elts[1].value))
+    return out
 
 
-def embedded_images(reader: PdfReader) -> dict[str, int]:
-    """haché de flux image -> nombre d'occurrences, en ignorant les masques."""
-    found: dict[str, int] = {}
-    for page in reader.pages:
-        resources = page.get("/Resources") or {}
-        for name in (resources.get("/XObject") or {}):
-            obj = resources["/XObject"][name].get_object()
-            if obj.get("/Subtype") != "/Image" or obj.get("/SMask") is not None:
-                continue
-            digest = hashlib.md5(obj.get_data()).hexdigest()
-            found[digest] = found.get(digest, 0) + 1
-    return found
-
-
-wanted, captions = expected_from_canon()
+wanted = expected_from_canon()
+placed = placements()
 reader = PdfReader(str(PDF))
-full_text = normalize(" ".join(page.extract_text() or "" for page in reader.pages))
-embedded = embedded_images(reader)
+texts = page_texts(reader)
+per_page_hashes = page_image_hashes(reader)
+embedded = {digest for hashes in per_page_hashes for digest in hashes}
 
 errors: list[str] = []
-if not captions:
-    errors.append("aucune légende attendue : table d'illustrations du générateur introuvable")
+if not placed:
+    errors.append("aucune insertion déclarée : table d'illustrations du générateur introuvable")
 if not wanted:
     errors.append("aucune illustration attendue : références `images/…` absentes de 2026-I")
 
-for caption in captions:
-    if normalize(caption) not in full_text:
+# 1 · légendes, et 4 · appairement légende ↔ flux, page à page.
+paired = 0
+for rel, caption in placed:
+    cap = normalize(caption)
+    with_caption = [i for i, text in enumerate(texts) if cap in text]
+    if not with_caption:
         errors.append(f"légende absente du PDF : {caption!r}")
+        continue
+    if not (ROOT / rel).is_file():
+        errors.append(f"illustration déclarée introuvable sur le disque : {rel}")
+        continue
+    expected = derive_md5(rel)
+    with_image = [i for i, hashes in enumerate(per_page_hashes) if expected in hashes]
+    if not with_image:
+        errors.append(
+            f"flux manquant pour l'illustration promise : {rel} "
+            f"(aucune page ne porte le dérivé attendu {expected[:12]}…)"
+        )
+        continue
+    if not set(with_caption) & set(with_image):
+        errors.append(
+            f"illustration mal appariée à sa légende : {rel} est embarquée page(s) "
+            f"{[i + 1 for i in with_image]} mais sa légende est page(s) "
+            f"{[i + 1 for i in with_caption]} — légende « {caption[:48]}… »"
+        )
+        continue
+    paired += 1
 
-if len(embedded) != len(wanted):
+# 2 · double inclusion par contenu : ce que le canon promet est là, et rien d'autre n'y est.
+promised_digests: dict[str, str] = {}
+for rel in sorted(wanted):
+    if not (ROOT / rel).is_file():
+        errors.append(f"illustration promise par 2026-I et absente du dépôt : {rel}")
+        continue
+    promised_digests[derive_md5(rel)] = rel
+lost = sorted(rel for rel in promised_digests.values())
+missing = [digest for digest in promised_digests if digest not in embedded]
+if missing:
+    for digest in missing:
+        errors.append(f"illustration promise par 2026-I, absente du PDF : {promised_digests[digest]}")
+extra = sorted(embedded - set(promised_digests))
+if extra:
     errors.append(
-        f"illustrations embarquées : {len(embedded)} flux uniques dans le PDF, "
-        f"{len(wanted)} promises par 2026-I"
+        f"{len(extra)} flux embarqué(s) sans promesse du canon "
+        f"(illustration non consentie dans le volume de référence) : {extra[:3]}"
     )
 
-# Un intitulé de renvoi suivi de rien = image perdue à l'impression (constat E-08).
+# 3 · résidus de mise en page.
+full_text = " ".join(texts)
 for label in re.findall(r"(?:Portrait|Visuel) officiel\s*:\s*(?![A-ZÀ-Ý«`])", full_text):
     errors.append(f"intitulé de renvoi orphelin dans le PDF : {label.strip()!r}")
-
-# Le chemin d'image ne doit jamais fuiter dans le volume publié.
 if "images/" in full_text:
     errors.append("des chemins d'illustrations apparaissent en clair dans le PDF")
 
@@ -102,6 +134,9 @@ if errors:
         print(f"- {error}")
     raise SystemExit(1)
 
-print(f"PDF vérifié : {len(reader.pages)} pages, {len(embedded)} illustrations embarquées "
-      f"(promises par 2026-I : {len(wanted)}), {len(captions)} légendes présentes, "
-      "aucun renvoi orphelin.")
+print(
+    f"PDF vérifié : {len(reader.pages)} pages, {len(embedded)} flux embarqués pour "
+    f"{len(wanted)} illustrations promises par 2026-I, {len(placed)} légendes attendues "
+    f"dont {paired} appariées à leur flux sur la même page, aucun renvoi orphelin, "
+    "aucune planche non consentie."
+)

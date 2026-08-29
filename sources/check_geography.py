@@ -7,6 +7,7 @@ total proposé des 7 000 âmes ne tienne plus.
 """
 from __future__ import annotations
 
+import re
 import sys
 from pathlib import Path
 
@@ -51,15 +52,31 @@ must("la ville honore Babette Ire" in CHRONO or "nommée en l’honneur de Babet
 must("7 000 mini-McLouches" in CANON or "7 000 mini-McLouches" in CANON.replace("’", "'"),
      "Nuit des Sept Mille absente de 2026-I")
 
-# Les Monts n'existent pas avant 1962 : la chronologie ne doit les nommer
-# qu'à partir de cette date (création). Le mot peut apparaître dans le
-# résumé d'un personnage né plus tôt (« futur créateur ») — c'est permis.
-pre_1962 = CHRONO.split("**15 juillet 1962**")[0]
-must(
-    "Monts Froissés" not in pre_1962.split("Futur créateur des Monts Froissés")[-1]
-    or pre_1962.count("Monts Froissés") <= 2,
-    "les Monts Froissés apparaissent trop tôt dans la chronologie",
-)
+# Les Monts n'existent pas avant 1962. Le test doit pouvoir **échouer** :
+# l'ancienne forme (`… not in x or pre_1962.count(…) <= 2`) était vide, une mention
+# par phrase sur deux dates laissait passer un anachronisme massif (constat E-20).
+# Règle : dans la Chronologie, toute ligne *datée* d'avant 1962 qui nomme les Monts
+# Froissés doit dire expressément qu'elle parle par anticipation.
+CREATION_MONTS = 1962
+RETROSPECTIF = re.compile(r"futur|future|deviendr|allaient|plus tard|à venir|cr[ée]ateur|cr[ée]ation|"
+                          r"ne sont pas encore|n'existent pas encore|pas encore", re.I)
+faute = None
+for line in CHRONO.splitlines():
+    entete = re.match(r"^\|\s*\*\*\s*(?:1[89]|20)\d{2}", line)
+    if not entete:
+        continue
+    annee = int(re.search(r"((?:1[89]|20)\d{2})", line).group(1))
+    if annee >= CREATION_MONTS:
+        continue
+    # la mention s'apprécie dans sa propre cellule : un « Futur … » voisin, qui parle
+    # d'un autre personnage, ne peut pas absoudre un anachronisme (piège mesuré)
+    for cellule in line.split("|"):
+        if "Monts Froissés" in cellule and not RETROSPECTIF.search(cellule):
+            faute = f"{annee} : « {cellule.strip()[:68]}… »"
+            break
+    if faute:
+        break
+must(faute is None, f"les Monts Froissés sont affirmés avant leur création ({CREATION_MONTS}) — {faute}")
 
 # ── Gazetteer proposé ──────────────────────────────────────────────────
 must(geo.POPULATION_URBAINE_CANON == 5500, f"urbain canon ≠ 5 500 : {geo.POPULATION_URBAINE_CANON}")

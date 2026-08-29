@@ -21,10 +21,10 @@ GÉNÉRATION I (1847) ──────┬─ Babber Ier l'Ancien (1798–1889)
 
 GÉNÉRATION II (1892) ─────┬─ François-Babber l'Aqueducien (1832–1914) · Bâtisseur
                           ├─ Hortense du Grain (consort)
-                          └─ Princesse Babette-Marine (1840–1916) · Port Babette
+                          └─ Princesse Babette-Marine (1836–1916) · Port Babette
 
 GÉNÉRATION III (1914) ────┬─ Babber le Dormeur (1875–1959) · Âge horizontal
-                          └─ Irène des Érables (1880–1966) · consort
+                          └─ Irène des Érables (1882–1966) · consort
 
 GÉNÉRATION IV (1959) ─────┬─ Babber II le Piscineux (1912–2002) · Ère balnéaire
                           └─ Colette-Pabst de Grass City (1920–2011) · consort
@@ -52,7 +52,7 @@ GÉNÉRATION VII (2026) ────└─ Ti-Babber (Babber VII, né 2026) · 2
 * **Attributs** : Béret royal en laine, nappe vichy rouge et blanche, hamac suspendu au grand chêne.
 * **Faits marquants** : Auteur de la phrase fondamentale F-1 (*« Courir est un crime contre l'humanité »*) et fondateur de Pabst City.
 
-### 2. Babette Ire de Plantagenet
+### 2. Babette Ire de Plantagenet (1804–1892)
 * **Titre** : Reine Consort Fondatrice et Régente de mémoire (1889–1892).
 * **Dates clés** : Épouse Babber Ier vers 1830 ; Prête sa nappe le 12 octobre 1847 ; Assure la transition morale après 1889.
 * **Attributs** : Nappe vichy originelle, panier en osier d'érable, chaise berçante face à la fenêtre.
@@ -64,27 +64,27 @@ GÉNÉRATION VII (2026) ────└─ Ti-Babber (Babber VII, né 2026) · 2
 * **Attributs** : Cercle d'arpenteur à bulle, truelle d'argent, niveau en laiton.
 * **Faits marquants** : A fait poser les bancs le long de l'aqueduc avant le premier coup de pelle.
 
-### 4. Hortense du Grain
+### 4. Hortense du Grain (1840–1922)
 * **Titre** : Princesse Consort de l'Aqueduc.
-* **Dates clés** : Épouse François-Babber en 1874 ; Mère de Babber le Dormeur (né 1875) ; Décédée vers 1930.
+* **Dates clés** : Épouse François-Babber en 1874 ; Mère de Babber le Dormeur (né 1875) ; Décédée en 1922.
 * **Attributs** : Épi d'orge brodé d'or, fiole de petit-lait.
 * **Faits marquants** : A fondé la réserve céréalière pour les brasseries royales.
 
-### 5. Princesse Babette-Marine (1840–1916)
+### 5. Princesse Babette-Marine (1836–1916)
 * **Titre** : Princesse des Eaux et du Littoral.
-* **Dates clés** : Née en 1840 ; Développe le port moderne, les quais et le phare blanc couronné ; Morte en 1916.
+* **Dates clés** : Née en 1836 ; Développe le port moderne, les quais et le phare blanc couronné ; Morte en 1916.
 * **Attributs** : Boussole de cuivre sans aiguille, longue-vue en bois flotté, pavillon maritime blanc.
 * **Faits marquants** : Souche de la branche collatérale du Prince Déchiré.
 
-### 6. Babber Ier le Dormeur (1875–1959)
+### 6. Babber le Dormeur (1875–1959)
 * **Titre** : Roi du Silence et de l'Horizontalité (Règne : 1914–1959, soit 45 ans).
 * **Dates clés** : Né en 1875 ; Avènement en 1914 ; Promulgue l'Article 1 (1914) et l'Article 4 (1920) ; Mort en 1959 à 84 ans.
 * **Attributs** : Hamac de parade en soie bleu roi, coussin d'édredon, cloche de sourdine.
 * **Faits marquants** : N'a jamais posé le pied par terre en public pendant quarante-cinq ans de règne.
 
-### 7. Irène des Érables (1880–1966)
+### 7. Irène des Érables (1882–1966)
 * **Titre** : Reine Consort du Silence.
-* **Dates clés** : Née en 1880 ; Épouse le Dormeur en 1911 ; Mère de Babber II (1912) ; Décédée en **1966**.
+* **Dates clés** : Née en 1882 ; Épouse le Dormeur en 1911 ; Mère de Babber II (1912) ; Décédée en **1966**.
 * **Attributs** : Châle en laine d'automne, feuille d'érable pressée.
 * **Note de continuité** : Morte en 1966, elle n'a pas pris part au Babbersgate de 1991.
 

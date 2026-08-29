@@ -9,7 +9,12 @@
       "nom": "Pabst City",
       "statut": "Capitale royale",
       "population": 3500,
-      "attractions": ["Palais Royal", "Banque Nationale", "Double Aqueduc", "McBabber's n° 1"]
+      "attractions": [
+        "Palais Royal",
+        "Banque Nationale",
+        "Double Aqueduc",
+        "McBabber's n° 1"
+      ]
     },
     {
       "id": "grass_city",
@@ -17,21 +22,33 @@
       "statut": "Station balnéaire et cité du chanvre",
       "population": 1200,
       "devise": "Pousse",
-      "attractions": ["Moulins à papier fiduciaire", "Plage du lac", "Pavillon des Jumeaux"]
+      "attractions": [
+        "Moulins à papier fiduciaire",
+        "Plage du lac",
+        "Pavillon des Jumeaux"
+      ]
     },
     {
       "id": "port_babette",
       "nom": "Port Babette",
       "statut": "Cité portuaire et maritime",
       "population": 800,
-      "attractions": ["Phare blanc couronné", "Quais de Babette-Marine", "Flottille de péniches"]
+      "attractions": [
+        "Phare blanc couronné",
+        "Quais de Babette-Marine",
+        "Flottille de péniches"
+      ]
     },
     {
       "id": "foret_plantagenet",
       "nom": "Forêt de Plantagenet",
       "statut": "Sanctuaire originel de la Fondation",
       "population": 1500,
-      "attractions": ["Cabane de 1847", "Chêne du Hamac royal", "Digue du Grand Castor"]
+      "attractions": [
+        "Cabane de 1847",
+        "Chêne du Hamac royal",
+        "Digue du Grand Castor"
+      ]
     },
     {
       "id": "monts_froisses",
@@ -40,7 +57,20 @@
       "date_creation": "15 juillet 1962",
       "altitude": "1,20 m",
       "population": 0,
-      "attractions": ["Deux tas de déblais d'orge", "Camp de base", "Ascension de 4 secondes"]
+      "attractions": [
+        "Deux tas de déblais d'orge",
+        "Camp de base",
+        "Ascension de 4 secondes"
+      ]
+    }
+  ],
+  "propositions_declarées": [
+    {
+      "champ": "population_forestiere / regions[foret_plantagenet].population",
+      "valeur": "1 500",
+      "statut": "proposé, non décrété",
+      "source": "geographie/ANALYSE.md § démographie (G2.1), reprise par sources/geographie.py",
+      "note": "2026-I ne dénombre que 3 500 à Pabst City, 1 200 à Grass City et 800 à Port Babette ; le solde forestier de 1 500 est une proposition de l'atlas, en attente de l'Avis n° 7"
     }
   ]
 }
