@@ -21,6 +21,12 @@ L'édition **2026-I** intègre directement les corrections et ne nécessite aucu
 | `RAPPORT_DE_REVISION_2026_I.md` | Révision générale du 27 août 2026 (RR-2026-I-01) : réserve E-01 levée, contrôles étendus |
 | `RAPPORT_ANALYSE_2026_II.md` | Audit technique, éditorial et documentaire (RA-2026-II-01) : constats E-07 à E-16, mesures reproductibles |
 | `ROADMAP_2026_II.md` | Feuille de route en quatre horizons, 28 tickets, risques et indicateurs |
+| `gouvernance/LIVRE_VIII_INSTITUTIONS.md` | Proposition Livre VIII (R2.1) : Les 5 corps d'État, gardiens du caillé, police de la sieste |
+| `gouvernance/REGISTRE_DES_AVIS_ROYAUX.md` | Registre officiel des Avis royaux (R2.2) : restauration des décrets n° 1 à 4 et suite |
+| `gouvernance/CODE_DE_LA_FRAICHEUR_ET_PARITE_POUTINE.md` | Code de la Fraîcheur (R2.4), Parité Poutine chiffrée (R2.3) et calendrier national (R2.5) |
+| `gouvernance/GUIDE_GASTRONOMIQUE_ET_JEUX_LENTS.md` | Guide des 3 Spatules royales, Jeux Lents de Pabst City, bestiaire national et marine |
+| `gouvernance/REGISTRE_DES_PERSONNAGES.md` | Registre d'autorité des 18 personnages historiques du canon (R2.9) |
+| `canon/` | Données structurées JSON : personnages, monnaie, lieux, événements (R3.3) |
 | `gouvernance/ARCHIVE.md` | Politique d'archivage : ce qui est gelé, ce qui ne l'est pas, comment dégeler |
 | `gouvernance/ARCHIVE.sha256` | Scellés des archives 2026-G et 2026-H, vérifiés par la CI |
 | `gouvernance/pdf_fingerprint.txt` | Empreinte sémantique du PDF canonique — le contrat de fraîcheur de l'artefact |
@@ -34,6 +40,10 @@ L'édition **2026-I** intègre directement les corrections et ne nécessite aucu
 - `chroniques/LIVRE_I_LES_FONDATIONS.md` — *Les Chroniques de l'Ancien, Livre I : Les Fondations (1798–1889)* : histoire du premier roi racontée en sept tranches. Éléments nouveaux **proposés, non décrétés** ; toute addition au canon devra passer par décret et mise à jour de 2026-I.
 - `chroniques/LIVRE_II_LES_BATISSEURS.md` — *Livre II : Les Bâtisseurs (1889–1914)* : la régence de Babette Ire, le refus de l'ordinal II, le chantier du Double Aqueduc, la naissance du port, la mort de François-Babber et l'avènement du Dormeur. Sept tranches, même statut **proposé, non décrété** ; les lacunes volontaires du canon (filiation de Babette-Marine, naissance de Roger Bontemps, valeur chiffrée de la Parité Poutine) y sont gardées ouvertes et déclarées comme telles.
 - `chroniques/LIVRE_II_LE_SILENCE_ET_L_AQUEDUC.md` — *Livre II, seconde rédaction : Le Silence et l'Aqueduc (1889–1914)* : l'archive conserve **deux rédactions du même livre** — *Les Bâtisseurs* (27 août, ci-dessus, titre annoncé par le colophon du Livre I) et celle-ci (28 août), centrée sur le chantier : les trois consignes de Babette, le cercle d'ingénieur à bulle, les quarante-deux bancs posés avant le premier coup de pelle, la Grande Digue agrandie par ses propriétaires, le Jour de l'Eau du 12 octobre 1904 et l'avènement du Dormeur. Même statut **proposé, non décrété** ; l'Avis qui ratifiera le Livre II choisira ou mariera les deux rédactions (elles divergent, entre autres, sur le nombre de bancs : quarante contre quarante-deux). Audit d'arithmétique interne étendu (18 calculs, 0 erreur) et quatre planches de chantier (`Annexe C`).
+- `chroniques/LIVRE_III_LAGE_HORIZONTAL.md` — *Livre III : L'Âge horizontal (1914–1959)* : le long règne de Babber le Dormeur, les audiences en hamac, l'Article 1 et l'Article 4.
+- `chroniques/LIVRE_IV_LERE_BALNEAIRE.md` — *Livre IV : L'Ère balnéaire (1959–1998)* : le règne de Babber II, les Monts Froissés, l'ouverture de McBabber's en 1986 et le Babbersgate de 1991.
+- `chroniques/LIVRE_V_LUNION_DES_REGNES.md` — *Livre V : L'Union des Règnes (1998–2010)* : les jumeaux Honoré-Pabst et Henri-Grain, la crise thermique du Pabstgate de 2004, la Guerre des Cornichons arbitrée par le Déchiré, et l'avènement de Babber Ier le Louche. Même statut **proposé, non décrété**.
+- `chroniques/LIVRE_VI_LE_SIECLE_QUI_LOUCHE.md` — *Livre VI : Le Siècle qui Louche (2010–2026)* : le fauteuil retrouvé, la victoire du vrai caillé, la Série B en chanvre pur, le Sommet Pabst-Ketchup, l'avènement de Ti-Babber (Génération VII) et la Nuit des Sept Mille. Même statut **proposé, non décrété**.
 
 ## Documents archivés
 

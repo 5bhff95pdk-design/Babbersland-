@@ -1,0 +1,46 @@
+{
+  "royaume": "Royaume du Babberland",
+  "population_totale": 7000,
+  "population_urbaine": 5500,
+  "population_forestiere": 1500,
+  "regions": [
+    {
+      "id": "pabst_city",
+      "nom": "Pabst City",
+      "statut": "Capitale royale",
+      "population": 3500,
+      "attractions": ["Palais Royal", "Banque Nationale", "Double Aqueduc", "McBabber's n° 1"]
+    },
+    {
+      "id": "grass_city",
+      "nom": "Grass City",
+      "statut": "Station balnéaire et cité du chanvre",
+      "population": 1200,
+      "devise": "Pousse",
+      "attractions": ["Moulins à papier fiduciaire", "Plage du lac", "Pavillon des Jumeaux"]
+    },
+    {
+      "id": "port_babette",
+      "nom": "Port Babette",
+      "statut": "Cité portuaire et maritime",
+      "population": 800,
+      "attractions": ["Phare blanc couronné", "Quais de Babette-Marine", "Flottille de péniches"]
+    },
+    {
+      "id": "foret_plantagenet",
+      "nom": "Forêt de Plantagenet",
+      "statut": "Sanctuaire originel de la Fondation",
+      "population": 1500,
+      "attractions": ["Cabane de 1847", "Chêne du Hamac royal", "Digue du Grand Castor"]
+    },
+    {
+      "id": "monts_froisses",
+      "nom": "Les Monts Froissés",
+      "statut": "Chaîne alpine nationale (Jardin du Palais)",
+      "date_creation": "15 juillet 1962",
+      "altitude": "1,20 m",
+      "population": 0,
+      "attractions": ["Deux tas de déblais d'orge", "Camp de base", "Ascension de 4 secondes"]
+    }
+  ]
+}

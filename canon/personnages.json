@@ -1,0 +1,176 @@
+{
+  "royaume": "Royaume du Babberland",
+  "reference_canonique": "2026-I",
+  "personnages": [
+    {
+      "id": "babber_1_ancien",
+      "nom": "Babber Ier l’Ancien",
+      "generation": 1,
+      "titre": "Fondateur et Premier Roi",
+      "dates": "1798–1889",
+      "regne": "1847–1889",
+      "attributs": ["Béret royal", "Nappe vichy", "Chêne du Hamac"],
+      "statut": "direct"
+    },
+    {
+      "id": "babette_1_plantagenet",
+      "nom": "Babette Ire de Plantagenet",
+      "generation": 1,
+      "titre": "Reine Consort et Régente morale",
+      "dates": "v. 1805–1892",
+      "regne": "1889–1892 (régence)",
+      "attributs": ["Nappe vichy originelle", "Panier d'osier"],
+      "statut": "consort"
+    },
+    {
+      "id": "francois_babber",
+      "nom": "François-Babber l’Aqueducien",
+      "generation": 2,
+      "titre": "Prince Régent et Grand Ingénieur",
+      "dates": "1832–1914",
+      "regne": "1892–1914 (régence de fait)",
+      "attributs": ["Cercle à bulle", "Double Aqueduc"],
+      "statut": "direct"
+    },
+    {
+      "id": "hortense_du_grain",
+      "nom": "Hortense du Grain",
+      "generation": 2,
+      "titre": "Princesse Consort de l'Aqueduc",
+      "dates": "v. 1845–v. 1930",
+      "attributs": ["Épi d'orge", "Réserve de grain"],
+      "statut": "consort"
+    },
+    {
+      "id": "babette_marine",
+      "nom": "Princesse Babette-Marine",
+      "generation": 2,
+      "titre": "Princesse des Eaux et du Littoral",
+      "dates": "1840–1916",
+      "attributs": ["Boussole sans aiguille", "Phare blanc"],
+      "statut": "collateral_root"
+    },
+    {
+      "id": "babber_le_dormeur",
+      "nom": "Babber Ier le Dormeur",
+      "generation": 3,
+      "titre": "Roi du Silence et de l'Horizontalité",
+      "dates": "1875–1959",
+      "regne": "1914–1959",
+      "attributs": ["Hamac de parade", "Coussin d'édredon", "Articles 1 & 4"],
+      "statut": "direct"
+    },
+    {
+      "id": "irene_des_erables",
+      "nom": "Irène des Érables",
+      "generation": 3,
+      "titre": "Reine Consort du Silence",
+      "dates": "1880–1966",
+      "attributs": ["Châle d'automne", "Feuille d'érable"],
+      "statut": "consort"
+    },
+    {
+      "id": "babber_2_piscineux",
+      "nom": "Babber II le Piscineux",
+      "generation": 4,
+      "titre": "Roi Baigneur et Bâtisseur de Relief",
+      "dates": "1912–2002",
+      "regne": "1959–1998",
+      "attributs": ["Transat d'épinette", "Piscine", "Monts Froissés"],
+      "statut": "direct"
+    },
+    {
+      "id": "colette_pabst",
+      "nom": "Colette-Pabst de Grass City",
+      "generation": 4,
+      "titre": "Reine Consort et Présidente de Justice",
+      "dates": "1920–2011",
+      "attributs": ["Commission Babbersgate", "Lunettes d'écaille"],
+      "statut": "consort"
+    },
+    {
+      "id": "honore_pabst",
+      "nom": "Honoré-Pabst",
+      "generation": 5,
+      "titre": "Co-souverain (Union des Règnes)",
+      "dates": "né en 1938",
+      "regne": "1998–2010 (co-règne)",
+      "attributs": ["Plume d'oie des jours impairs", "Gilet gris"],
+      "statut": "direct"
+    },
+    {
+      "id": "henri_grain",
+      "nom": "Henri-Grain",
+      "generation": 5,
+      "titre": "Co-souverain (Union des Règnes)",
+      "dates": "né en 1938",
+      "regne": "1998–2010 (co-règne)",
+      "attributs": ["Plume des jours pairs", "Gilet gris"],
+      "statut": "direct"
+    },
+    {
+      "id": "babber_1_louche",
+      "nom": "Babber Ier le Louche",
+      "generation": 5,
+      "titre": "Roi Régnant du Babberland",
+      "dates": "né en 1946",
+      "regne": "depuis 2010 (Prince 1984–2009)",
+      "attributs": ["Regard plissé bienveillant", "Article 5", "Pabst 3,2 °C"],
+      "statut": "current_king"
+    },
+    {
+      "id": "linea_grass_city",
+      "nom": "Reine Linéa de Grass City",
+      "generation": 5,
+      "titre": "Reine Consort et Gardienne de la Sauce",
+      "dates": "née en 1952",
+      "attributs": ["Cuillère d'argent", "Recette secrète 1986", "Nom McBabber's"],
+      "statut": "consort"
+    },
+    {
+      "id": "rambo_du_fjord",
+      "nom": "Prince Rambo du Fjord",
+      "generation": 5,
+      "titre": "Prince du Fleuve",
+      "dates": "né le 15 juillet 1962",
+      "attributs": ["Canne sans hameçon", "Veste de flanelle rouge"],
+      "statut": "direct"
+    },
+    {
+      "id": "babber_le_fou",
+      "nom": "Prince Babber le Fou",
+      "generation": 6,
+      "titre": "Prince Héritier (1er successible)",
+      "dates": "né le 1er avril 1986",
+      "attributs": ["Né à l'ouverture de McBabber's", "Spatule de bois"],
+      "statut": "heir_apparent"
+    },
+    {
+      "id": "ginette_port_babette",
+      "nom": "Princesse Ginette de Port Babette",
+      "generation": 6,
+      "titre": "Princesse Consort et Dame de la Sauce",
+      "dates": "née en 1988",
+      "attributs": ["Pot scellé", "Cuillère d'argent de transmission"],
+      "statut": "consort"
+    },
+    {
+      "id": "babber_le_dechire",
+      "nom": "Babber le Déchiré",
+      "generation": 6,
+      "titre": "Médiateur des Rives (Branche collatérale)",
+      "dates": "branche Babette-Marine",
+      "attributs": ["Veste à coude déchiré", "Traité des Cornichons 2009"],
+      "statut": "collateral"
+    },
+    {
+      "id": "ti_babber",
+      "nom": "Ti-Babber (Babber VII l’Éveillé)",
+      "generation": 7,
+      "titre": "Prince Héritier en Second (2e successible)",
+      "dates": "né le 26 août 2026",
+      "attributs": ["Linge vichy", "Chiffre VII générationnel"],
+      "statut": "second_heir"
+    }
+  ]
+}

@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>👑 Portail Royal du Babberland — Archives & Canon Officiel</title>
+  <style>
+    :root {
+      --navy: #132a44;
+      --navy-dark: #0a1726;
+      --gold: #b78a35;
+      --gold-light: #e0bd62;
+      --cream: #fbf7ee;
+      --parchment: #f4ecdc;
+      --ink: #2b261f;
+      --muted: #6e624f;
+      --border: #d8c7a7;
+      --card-bg: #ffffff;
+      --shadow: 0 4px 15px rgba(19, 42, 68, 0.08);
+    }
+
+    body.dark-mode {
+      --navy: #e0bd62;
+      --navy-dark: #fbf7ee;
+      --cream: #121820;
+      --parchment: #1a222d;
+      --ink: #eae4d8;
+      --muted: #a09787;
+      --border: #2f3e52;
+      --card-bg: #1e2835;
+      --shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Georgia', 'DejaVu Serif', serif;
+      background-color: var(--cream);
+      color: var(--ink);
+      line-height: 1.6;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--navy-dark) 0%, #1a3658 100%);
+      color: #fbf7ee;
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+      border-bottom: 5px solid var(--gold);
+      position: relative;
+    }
+
+    .header-content h1 {
+      font-size: 2.5rem;
+      letter-spacing: 2px;
+      color: var(--gold-light);
+      margin-bottom: 0.5rem;
+    }
+
+    .header-content p.motto {
+      font-style: italic;
+      font-size: 1.2rem;
+      color: #e5ded0;
+    }
+
+    .theme-toggle {
+      position: absolute;
+      top: 1.2rem;
+      right: 1.5rem;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid var(--gold-light);
+      color: #fff;
+      padding: 0.4rem 0.8rem;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    nav.main-nav {
+      background-color: var(--parchment);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      padding: 0.8rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    nav.main-nav button {
+      background: transparent;
+      border: 1px solid transparent;
+      padding: 0.5rem 1.1rem;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: bold;
+      color: var(--navy);
+      cursor: pointer;
+      border-radius: 6px;
+      transition: all 0.2s;
+    }
+
+    nav.main-nav button.active, nav.main-nav button:hover {
+      background: var(--navy);
+      color: #fff;
+      border-color: var(--gold);
+    }
+
+    body.dark-mode nav.main-nav button.active, body.dark-mode nav.main-nav button:hover {
+      background: var(--gold);
+      color: #121820;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+    }
+
+    .tab-section {
+      display: none;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    .tab-section.active { display: block; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-box {
+      background: var(--card-bg);
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow);
+    }
+
+    h2.section-title {
+      color: var(--navy);
+      border-bottom: 2px solid var(--gold);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1.5rem;
+      font-size: 1.8rem;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.4rem;
+      box-shadow: var(--shadow);
+      transition: transform 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      border-color: var(--gold);
+    }
+
+    .card h3 {
+      color: var(--navy);
+      margin-bottom: 0.6rem;
+      font-size: 1.25rem;
+    }
+
+    .card p {
+      color: var(--ink);
+      font-size: 0.95rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: bold;
+      background: var(--parchment);
+      color: var(--navy);
+      border: 1px solid var(--border);
+    }
+
+    /* Converter box */
+    .converter-box {
+      background: linear-gradient(135deg, var(--parchment) 0%, var(--card-bg) 100%);
+      border: 2px solid var(--gold);
+      border-radius: 10px;
+      padding: 1.8rem;
+      margin-top: 1.5rem;
+    }
+
+    .converter-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+      margin-top: 1rem;
+    }
+
+    .converter-row input {
+      padding: 0.6rem 1rem;
+      font-size: 1.1rem;
+      font-family: inherit;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      width: 140px;
+      background: var(--card-bg);
+      color: var(--ink);
+    }
+
+    .conversion-result {
+      font-size: 1.15rem;
+      font-weight: bold;
+      color: var(--navy);
+    }
+
+    /* Filter search */
+    .search-input {
+      width: 100%;
+      padding: 0.8rem 1.2rem;
+      font-size: 1rem;
+      font-family: inherit;
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      background: var(--card-bg);
+      color: var(--ink);
+      margin-bottom: 1.5rem;
+    }
+
+    footer {
+      background: var(--navy-dark);
+      color: #e5ded0;
+      text-align: center;
+      padding: 2rem 1.5rem;
+      border-top: 4px solid var(--gold);
+      margin-top: 3rem;
+      font-size: 0.95rem;
+    }
+
+    footer a { color: var(--gold-light); text-decoration: none; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <button class="theme-toggle" onclick="toggleTheme()">🌗 Mode Sombre / Clair</button>
+    <div class="header-content">
+      <h1>👑 ROYAUME DU BABBERLAND</h1>
+      <p class="motto">« Une Pabst, une poutine, et on relaxe. » — Devise nationale depuis 1847</p>
+    </div>
+  </header>
+
+  <nav class="main-nav">
+    <button class="active" onclick="openTab('accueil')">🏠 Accueil</button>
+    <button onclick="openTab('canon')">📜 Encyclopédie (2026-I)</button>
+    <button onclick="openTab('chroniques')">📖 Chroniques (I à VI)</button>
+    <button onclick="openTab('institutions')">🏛️ Institutions (Livre VIII)</button>
+    <button onclick="openTab('personnages')">👥 Les 18 Personnages</button>
+    <button onclick="openTab('monnaie')">🪙 Parité Poutine</button>
+    <button onclick="openTab('atlas')">🗺️ Atlas & Régions</button>
+  </nav>
+
+  <main>
+    <!-- ACCUEIL -->
+    <section id="accueil" class="tab-section active">
+      <div class="hero-box">
+        <h2 class="section-title">Bienvenue au Babberland</h2>
+        <p>Le <strong>Royaume du Babberland</strong> est une micronation narrative francophone fondée le <strong>12 octobre 1847</strong> dans la forêt de Plantagenet par <strong>Babber Ier l’Ancien</strong> sur la nappe vichy de son épouse Babette, sous la bénédiction et la signature à la queue d'un castor patriote.</p>
+        <p style="margin-top: 0.8rem;">Ce portail réunit l'intégralité du <strong>Canon Consolidé 2026-I</strong>, les <strong>six Livres des Chroniques de l'Ancien</strong>, les registres d'Avis royaux, les données structurées et l'atlas géographique interactif.</p>
+      </div>
+
+      <h2 class="section-title">Les Cinq Régions Royales (7 000 Âmes)</h2>
+      <div class="grid-2">
+        <div class="card">
+          <h3>🏛️ Pabst City (3 500 âmes)</h3>
+          <p>Capitale du Royaume, siège du Palais Royal, de la Banque Nationale, du Double Aqueduc et du comptoir historique McBabber's n° 1.</p>
+          <span class="badge">Capitale</span>
+        </div>
+        <div class="card">
+          <h3>🏔️ Les Monts Froissés (1,20 m)</h3>
+          <p>Alpes nationales créées le 15 juillet 1962 avec les déblais de la piscine de Babber II. Ascension officielle en quatre secondes.</p>
+          <span class="badge">Altitude : 1,20 m</span>
+        </div>
+        <div class="card">
+          <h3>⚓ Port Babette (800 âmes)</h3>
+          <p>Cité portuaire fondée par Babette-Marine, réputée pour ses quais en bois d'épinette, son phare blanc couronné et sa pêche contemplative.</p>
+          <span class="badge">Maritime</span>
+        </div>
+        <div class="card">
+          <h3>🌿 Grass City (1 200 âmes)</h3>
+          <p>Station balnéaire et capitale du chanvre légal. Fournit les fibres douces et indéchirables pour les billets de la Série B.</p>
+          <span class="badge">Devise : « Pousse »</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ENCYCLOPEDIE -->
+    <section id="canon" class="tab-section">
+      <div class="hero-box">
+        <h2 class="section-title">Encyclopédie Consolidée 2026-I</h2>
+        <p>L'édition 2026-I est la <strong>référence canonique autonome</strong> qui fait foi. Elle réunit en sept livres l'histoire, la numismatique, la généalogie illustrée et le colophon.</p>
+        <div style="margin-top: 1rem;">
+          <a href="Royaume_du_Babberland_Encyclopedie_Consolidee_2026_I.pdf" class="badge" style="padding: 0.6rem 1.2rem; font-size: 1rem; background: var(--navy); color: #fff; text-decoration: none;">📥 Consulter le PDF Officiel (29 pages · 24 illustrations)</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHRONIQUES -->
+    <section id="chroniques" class="tab-section">
+      <h2 class="section-title">Les Chroniques de l'Ancien (Livres I à VI)</h2>
+      <div class="grid-2">
+        <div class="card">
+          <h3>Livre I — Les Fondations (1798–1889)</h3>
+          <p>L'enfance de l'Ancien, la course maudite de 1816, le pacte castoral et la nappe du 12 octobre 1847.</p>
+          <span class="badge">7 Tranches</span>
+        </div>
+        <div class="card">
+          <h3>Livre II — Les Bâtisseurs (1889–1914)</h3>
+          <p>La régence de Babette Ire, François-Babber l'Aqueducien, les 42 bancs et le Jour de l'Eau de 1904.</p>
+          <span class="badge">7 Tranches</span>
+        </div>
+        <div class="card">
+          <h3>Livre III — L'Âge Horizontal (1914–1959)</h3>
+          <p>Le long règne de Babber le Dormeur, 45 ans passés à un mètre du sol, l'Article 1 et la sieste constitutionnelle.</p>
+          <span class="badge">7 Tranches</span>
+        </div>
+        <div class="card">
+          <h3>Livre IV — L'Ère Balnéaire (1959–1998)</h3>
+          <p>Babber II, la création des Monts Froissés en 1962, McBabber's (1986) et le procès du Babbersgate.</p>
+          <span class="badge">7 Tranches</span>
+        </div>
+        <div class="card">
+          <h3>Livre V — L'Union des Règnes (1998–2010)</h3>
+          <p>Les jumeaux Honoré-Pabst et Henri-Grain, le Pabstgate de 2004 et la Guerre des Cornichons arbitrée par le Déchiré.</p>
+          <span class="badge">7 Tranches</span>
+        </div>
+        <div class="card">
+          <h3>Livre VI — Le Siècle qui Louche (2010–2026)</h3>
+          <p>Babber Ier le Louche, le vrai fromage de 2018, la Série B en chanvre, Ti-Babber et la Nuit des Sept Mille.</p>
+          <span class="badge">7 Tranches</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- INSTITUTIONS -->
+    <section id="institutions" class="tab-section">
+      <h2 class="section-title">Les Corps d'État & Institutions (Livre VIII)</h2>
+      <div class="grid-2">
+        <div class="card">
+          <h3>🧀 L'Ordre des Gardiens du Kouik-Kouik</h3>
+          <p>Auscultation acoustique matinale du fromage en grain à ≥ 72 dB. Tout grain muet est déchu pour « gratins civils ».</p>
+        </div>
+        <div class="card">
+          <h3>🛌 La Garde Dormante (Police de la Sieste)</h3>
+          <p>Patrouilles en pantoufles insonorisées de 13 h à 15 h à vitesse bridée à 0,72 m/s. Condamnation au hamac forcé.</p>
+        </div>
+        <div class="card">
+          <h3>🍺 L'Office de la Fraîcheur (Police du Frigo)</h3>
+          <p>Garantit la température légale (+2,0 °C à +3,8 °C). Cloche de la honte en cas de bière tiède (> 4,0 °C).</p>
+        </div>
+        <div class="card">
+          <h3>🥄 La Confrérie du Secret Brun</h3>
+          <p>Présidée par Linéa et Ginette : garde de la recette secrète à la cuillère d'argent (8 s) et des 317 pots historiques.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PERSONNAGES -->
+    <section id="personnages" class="tab-section">
+      <h2 class="section-title">Dictionnaire des 18 Personnages Historiques</h2>
+      <input type="text" id="characterSearch" class="search-input" placeholder="🔍 Rechercher un souverain, prince, consort ou artisan..." onkeyup="filterCharacters()">
+      <div id="characterGrid" class="grid-2"></div>
+    </section>
+
+    <!-- MONNAIE & CONVERTISSEUR -->
+    <section id="monnaie" class="tab-section">
+      <h2 class="section-title">La Parité Poutine Pure (PPP)</h2>
+      <div class="hero-box">
+        <p><strong>1 Babber (1 ฿)</strong> ≡ 1 Poutine Régulière Royale (fromage 180g, frites 260g, sauce 140ml) + 1 Pabst Fraîche (355ml à 3,2 °C).</p>
+        <p style="margin-top: 0.5rem;"><strong>1 Babber (฿) = 24 Babetons (bt)</strong> (la Caisse entière).</p>
+        
+        <div class="converter-box">
+          <h3>🧮 Convertisseur Monétaire Royal</h3>
+          <div class="converter-row">
+            <label for="babberInput">Babbers (฿) :</label>
+            <input type="number" id="babberInput" value="1" min="0" step="0.5" oninput="convertFromBabber()">
+            <span class="conversion-result" id="conversionText">= 24 Babetons (1 Poutine Royale + 1 Canette fraîche)</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ATLAS -->
+    <section id="atlas" class="tab-section">
+      <div class="hero-box">
+        <h2 class="section-title">Atlas Temporel & Géographie du Royaume</h2>
+        <p>Consultez l'évolution cartographique de 1830 à 2026 :</p>
+        <div style="margin-top: 1.5rem;">
+          <a href="geographie/index.html" class="badge" style="padding: 0.6rem 1.2rem; font-size: 1rem; background: var(--gold); color: #121820; text-decoration: none; font-weight: bold;">🗺️ Ouvrir l'Atlas Interactif</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>👑 <strong>Royaume du Babberland</strong> · Archives Royales de Pabst City (1847–2026)</p>
+    <p style="margin-top: 0.4rem;">« Une Pabst, une poutine, et on relaxe. » · <a href="gouvernance/index.html">Tableau de Bord de Gouvernance</a></p>
+  </footer>
+
+  <script>
+    function toggleTheme() {
+      document.body.classList.toggle('dark-mode');
+    }
+
+    function openTab(tabId) {
+      document.querySelectorAll('.tab-section').forEach(sec => sec.classList.remove('active'));
+      document.querySelectorAll('.main-nav button').forEach(btn => btn.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+      event.currentTarget.classList.add('active');
+    }
+
+    function convertFromBabber() {
+      const val = parseFloat(document.getElementById('babberInput').value) || 0;
+      const bt = Math.round(val * 24);
+      const poutines = (val * 24 / 23).toFixed(1);
+      const canettes = bt;
+      document.getElementById('conversionText').innerText = `= ${bt} Babetons (soit env. ${poutines} poutines régulières ou ${canettes} canettes fraîches)`;
+    }
+
+    const characters = [
+      { name: "Babber Ier l’Ancien", dates: "1798–1889", role: "Fondateur & 1er Roi", note: "Pacte castoral de 1816 et Nappe du 12 octobre 1847." },
+      { name: "Babette Ire de Plantagenet", dates: "v. 1805–1892", role: "Reine Consort Fondatrice", note: "Prêteuse de la nappe vichy et régente de mémoire." },
+      { name: "François-Babber l’Aqueducien", dates: "1832–1914", role: "Prince Régent & Ingénieur", note: "Bâtisseur du Double Aqueduc et des 42 bancs." },
+      { name: "Hortense du Grain", dates: "v. 1845–v. 1930", role: "Princesse Consort", note: "Fondatrice de la réserve céréalière royale." },
+      { name: "Princesse Babette-Marine", dates: "1840–1916", role: "Princesse du Littoral", note: "Créatrice du port moderne de Port Babette et de son phare." },
+      { name: "Babber Ier le Dormeur", dates: "1875–1959", role: "Roi du Silence (1914–1959)", note: "45 ans de règne en hamac, Articles 1 & 4." },
+      { name: "Irène des Érables", dates: "1880–1966", role: "Reine Consort", note: "Morte en 1966, mère de Babber II." },
+      { name: "Babber II le Piscineux", dates: "1912–2002", role: "Roi Baigneur (1959–1998)", note: "Créateur des Monts Froissés (1,20 m) et de McBabber's." },
+      { name: "Colette-Pabst de Grass City", dates: "1920–2011", role: "Reine Consort & Juge", note: "Présidente de la commission du Babbersgate (1991–1993)." },
+      { name: "Honoré-Pabst", dates: "né 1938", role: "Co-souverain (1998–2010)", note: "Signataire des jours impairs de l'Union des Règnes." },
+      { name: "Henri-Grain", dates: "né 1938", role: "Co-souverain (1998–2010)", note: "Signataire des jours pairs de l'Union des Règnes." },
+      { name: "Babber Ier le Louche", dates: "né 1946", role: "Roi Régnant (depuis 2010)", note: "Article 5, Série B en chanvre et proclamation de Génération VII." },
+      { name: "Reine Linéa de Grass City", dates: "née 1952", role: "Reine Consort", note: "Créatrice du nom McBabber's et de la Sauce secrète de 1986." },
+      { name: "Prince Rambo du Fjord", dates: "né 1962", role: "Prince du Fleuve", note: "Né le jour des Monts Froissés, grand pêcheur sans hameçon." },
+      { name: "Prince Babber le Fou", dates: "né 1986", role: "Héritier Présomptif (1er rang)", note: "Né le 1er avril 1986 à l'ouverture du premier restaurant." },
+      { name: "Princesse Ginette", dates: "née 1988", role: "Princesse Consort", note: "Gardienne de la Sauce royale et mère de Ti-Babber." },
+      { name: "Babber le Déchiré", dates: "collatéral", role: "Médiateur des Rives", note: "Médiateur de paix de la Guerre des Cornichons (2009)." },
+      { name: "Ti-Babber (Babber VII)", dates: "né 26 août 2026", role: "Prince Héritier en Second (2e)", note: "Septième génération issue de la fondation de 1847." }
+    ];
+
+    function renderCharacters(list) {
+      const grid = document.getElementById('characterGrid');
+      grid.innerHTML = list.map(c => `
+        <div class="card">
+          <h3>${c.name}</h3>
+          <p><strong>${c.role}</strong> (${c.dates})</p>
+          <p>${c.note}</p>
+        </div>
+      `).join('');
+    }
+
+    function filterCharacters() {
+      const q = document.getElementById('characterSearch').value.toLowerCase();
+      const filtered = characters.filter(c => c.name.toLowerCase().includes(q) || c.role.toLowerCase().includes(q) || c.note.toLowerCase().includes(q));
+      renderCharacters(filtered);
+    }
+
+    renderCharacters(characters);
+  </script>
+</body>
+</html>

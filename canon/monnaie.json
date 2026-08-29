@@ -1,0 +1,19 @@
+{
+  "monnaie_nationale": "Babber",
+  "symbole": "฿",
+  "fractionnaire": "Babeton",
+  "symbole_fractionnaire": "bt",
+  "regime": "Parité Poutine Pure (PPP)",
+  "formule_etalon": "1 ฿ = 1 Poutine Régulière Royale + 1 Pabst Fraîche (355 ml)",
+  "fractions": [
+    {"valeur_bt": 24, "valeur_b": 1.0, "nom": "Le Babber Bimétallique", "unite_populaire": "La Caisse"},
+    {"valeur_bt": 12, "valeur_b": 0.5, "nom": "Le Demi-Babber", "unite_populaire": "La Douzaine"},
+    {"valeur_bt": 6, "valeur_b": 0.25, "nom": "Le Quart de Babber", "unite_populaire": "Le Six-Pack"},
+    {"valeur_bt": 2, "valeur_b": 0.0833, "nom": "La Paire de Babetons", "unite_populaire": "La Paire"},
+    {"valeur_bt": 1, "valeur_b": 0.0416, "nom": "Le Babeton Simple", "unite_populaire": "La Canette"}
+  ],
+  "series_fiduciaires": [
+    {"serie": "A", "annee": 2023, "composition": "Chanvre de Grass City et lin royal"},
+    {"serie": "B", "annee": 2026, "composition": "Chanvre pur indéchirable résistant au lavage"}
+  ]
+}

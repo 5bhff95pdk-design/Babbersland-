@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "Si vous citez le corpus canonique du Babberland, veuillez utiliser ces métadonnées."
+authors:
+  - family-names: Foster
+    given-names: Luc
+    affiliation: "Chancellerie Royale de Pabst City"
+  - name: "Maison Royale de Babber"
+title: "Royaume du Babberland : Archives Narratives, Numismatiques et Iconographiques"
+version: 2026.1
+date-released: 2026-08-26
+url: "https://github.com/5bhff95pdk-design/Babbersland-"
+keywords:
+  - "babberland"
+  - "worldbuilding"
+  - "quebec-satire"
+  - "castor-chill"
+  - "parite-poutine"
