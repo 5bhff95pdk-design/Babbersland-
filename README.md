@@ -74,7 +74,7 @@ Tout passe par `make`, qui installe ses propres dépendances dans un venv — le
 ```bash
 make env          # python3 -m venv .venv + pip install -r requirements.txt
 make tout         # arbre → hymne → PDF → CONTRÔLES → empreinte (l'ordre est un contrôle, voir E-21)
-make controle     # les six contrôles, sans rien régénérer
+make controle     # les sept contrôles, sans rien régénérer
 make scelle       # gel des archives G et H + scellé des 28 maîtres d'illustration
 ```
 
@@ -102,11 +102,13 @@ make empreinte    # grave l'empreinte sémantique dans gouvernance/pdf_fingerpri
 
 ```bash
 make controle     # ou, individuellement :
+python .venv/bin/python -m py_compile sources/*.py
 python .venv/bin/python sources/check_continuity.py
 python .venv/bin/python sources/check_canon.py
 python .venv/bin/python sources/check_pdf.py
 python .venv/bin/python sources/pdf_fingerprint.py --check
 python .venv/bin/python sources/check_geography.py
+python .venv/bin/python sources/check_portal.py
 make scelle
 ```
 
@@ -114,6 +116,7 @@ make scelle
 - **`check_canon.py`** (sans dépendance, constat E-19) fait la **parité des données** : `canon/*.json` contre 2026-I, la Chronologie maîtresse et le Registre des personnages — 18 fiches, sommes de population, échelle monétaire 24 Babetons, événements datés, **arithmétique des six successions** (durée annoncée = soustraction des bornes, chaîne continue, mort = fin de règne). Sa règle : dans un dossier nommé `canon`, une affirmation est soit **attestée** par le corpus, soit **inscrite dans `propositions_declarées`** avec sa source — 1 500 âmes de la forêt et le 12 octobre 1904 y sont, tant que l'Avis n° 7 n'a pas parlé.
 - **`check_pdf.py`** (`pypdf`) ouvre le PDF publié et **apparie chaque planche à sa légende, page par page**, sur le md5 du dérivé réellement embarqué : deux portraits intervertis, une planche de trop, une légende sans image sont des échecs (constats E-18, E-22). L'attendu vient du canon, pas du générateur ; la transformée d'image est unique (`sources/babberland_images.py`), partagée par le générateur et les contrôles.
 - **`pdf_fingerprint.py --check`** compare l'artefact publié à l'empreinte gravée : le PDF n'est pas reproductible à l'octet (ReportLab nomme ses XObject aléatoirement), donc on compare ce que le lecteur voit — pages, texte, et **hachés d'images ordonnés page à page**. L'empreinte n'est plus un ensemble trié : permuter deux illustrations la modifie (E-18).
+- **`check_portal.py`** (sans dépendance, constat C1) fait la **parité du portail racine** : `index.html` contre `canon/personnages.json` — chaque fiche du dictionnaire doit correspondre à *exactement une* fiche du canon et porter les **mêmes années de vie** (peu importe la rédaction : « né le 15 juillet 1962 » ≡ « né 1962 », « Babber Ier le Dormeur » ≡ « Babber le Dormeur »). C'est ce qui a pris le portail en flagrant délit de quatre dates contradictoires avec le canon.
 - **`make scelle`** vérifie `gouvernance/ARCHIVE.sha256` (archives 2026-G et 2026-H) **et** `gouvernance/ICONOGRAPHIE.sha256` (les 28 maîtres, scellés par leur nom). Ce second scellé est la réponse au seul résidu que la chaîne assume : réengraver *les deux* après une permutation reste un acte éditorial, lisible dans le diff, et qui demande un Avis.
 
 Les mêmes contrôles sont enchaînés à chaque push sur `main` et à chaque pull request par le workflow `sources/github_actions_continuite.yml` : arbre régénéré identique au bit près, régénération du volume, artéfact, empreinte de fraîcheur, scellé des archives, PDF déposé en pièce jointe de relecture.
@@ -125,7 +128,7 @@ make workflows    # copie sources/github_actions_continuite.yml → .github/work
                   # et retire au passage le talon invalide main.yml
 ```
 
-13 étapes, YAML validé, chacune rejouée localement. Le fichier `.github/workflows/continuite.yml` **ne peut
+15 étapes, YAML validé, chacune rejouée localement. Le fichier `.github/workflows/continuite.yml` **ne peut
 pas sortir d'une App** : GitHub refuse qu'un jeton dépourvu du droit `workflows` crée ou modifie
 `.github/workflows/*` (constat **E-17**). Le dépôt versionne donc le modèle, pas sa copie — un humain au
 tableau de bord pousse l'installation, ou merge ce gabarit en y ajoutant le fichier en une étape.

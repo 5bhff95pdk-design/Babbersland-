@@ -2,6 +2,14 @@
 
 Toutes les modifications notables apportées au dépôt du **Royaume du Babberland** sont consignées dans ce document.
 
+## [2026-IV] — 2026-08-30 (passe d'audit — constats C1/C5)
+### Corrigé
+* **Portail racine** : quatre dates du « Dictionnaire des 18 Personnages » alignées sur le canon (`canon/personnages.json` et 2026-I) — Babette Ire **1804**–1892, Hortense du Grain **1840–1922**, Babette-Marine **1836**–1916, Irène des Érables **1882**–1966.
+* **Nouveau contrôle** `sources/check_portal.py` (constat C1) : parité du portail contre `canon/personnages.json` — chaque fiche du dictionnaire doit correspondre à *exactement une* fiche du canon et porter les mêmes années de vie. Branché dans `make controle` et dans le workflow de CI (15 étapes), rejoué avec succès en local.
+* **Compilation** : `python -m py_compile sources/*.py` entre dans `make controle` et dans la CI (détection d'erreur de syntaxe, constat C7).
+* **Convertisseur monétaire** (`index.html`) : affichage reformulé selon le modèle réel — *« 24 Babetons, soit 1 poutine royale (23 bt) et 1 canette (1 bt) »* — au lieu d'un « environ X poutines » opaque (constat C5).
+* `README.md` : « les six contrôles » → sept, liste des commandes à jour, workflow « 13 étapes » → 15, paragraphe `check_portal.py`.
+
 ## [2026-IV] — 2026-08-29
 ### Ajouté
 * **Hymne national** : `gouvernance/HYMNE_NATIONAL.md` — « Debout, tout doucement », six couplets et un refrain, protocole d'exécution (jamais entre 13 h et 15 h, jamais en courant, ♩ = 60), partition ABC du refrain et table des sources canoniques de chaque couplet. Statut **proposé, non décrété** ; projet d'**Avis royal n° 8** instruit au Registre.
