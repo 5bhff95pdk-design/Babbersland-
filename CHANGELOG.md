@@ -2,6 +2,27 @@
 
 Toutes les modifications notables apportées au dépôt du **Royaume du Babberland** sont consignées dans ce document.
 
+## [2026-VI] — 2026-08-29, intégrée au 30 août (rejeu de la PR #16, en conflit avec les PR #17–19)
+### Ajouté — le contrôle des chroniques
+* **`sources/check_chroniques.py`** (sans dépendance, câblé dans `make controle` et dans la CI) : l'arithmétique interne des chroniques. Sept grandeurs récurrentes (bancs, canaux, arches, villes, régions, kilomètres, population) sont confrontées d'un volume à l'autre, et les **73 cotes d'archives** déclarées en annexe sont comparées deux à deux. Contrat E-19 : une divergence est **résolue ou déclarée** ; une déclaration qui ne décrit plus rien d'observable est une faute.
+* **`gouvernance/DIVERGENCES_CHRONIQUES.md`** : le registre que lit ce contrôle. **10 divergences déclarées** — les bancs (40 contre 42, plus deux homonymes : les bancs d'écoliers et les trois bancs publics de l'amende), la population (11 en 1847, 214 au recensement de 1850, 5 en délégation, 800/1 200/3 500 au canon, **7 000 en 2026**) et **huit cotes d'archives en collision**.
+* **Trois constats nouveaux, mesurés** : (1) la **cote G-1** est en collision entre le Livre III et le Livre IV — F-02 ne l'avait pas vue ; (2) le **total national de 7 000 âmes ne figure pas dans 2026-I**, qui ne donne que trois villes (5 500 âmes urbaines) : le chiffre le plus cité du Royaume repose sur une chronique proposée ; (3) la **courbe démographique n'est consignée nulle part** — rien ne relie 214 (1850) à 7 000 (2026).
+* **Batterie portée à 20 scénarios (20/20)** : trois fautes nouvelles sont refusées par `check_chroniques` — un banc de plus dans le Livre III, une cote réattribuée par le Livre V, une déclaration devenue obsolète — et une quatrième édition, la même divergence **dûment déclarée**, est acceptée : le contrat « résolue ou déclarée » est éprouvé dans les deux sens.
+
+### Rapatrié
+* **`RAPPORT_AUDIT_2026_III.md`** (constats **F-01 → F-23**), seul exemplaire existant, qui dormait dans la PR #11 en conflit avec `main`. Bandeau de statut **historique** ajouté : F-01 est pris en charge par la PR #16, F-02 et F-03 sont renvoyés à l'Avis royal n° 7 par le registre des divergences (F-03, la généalogie castorale, y est déclarée hors contrôle automatique — la Chancellerie ne corrige pas la prose d'une chronique par décret d'outillage).
+
+### Ajouté — vignettes du portail
+* **`sources/generate_vignettes.py` + `make vignettes`** : vignettes WebP de 640 px dérivées de **chacun des 77 clichés** de `images/realistes/` (le script globbe le dossier, l'inventaire suit la galerie 2026-V), déterministes au bit près (`images/vignettes/`), **220,1 Mio → 4,65 Mio** (−98 %). La motivation d'origine était mesurée sur l'ancienne page du portail (16 planches, **44 Mio → 0,9 Mio**) ; le portail 2026-V (77 photos en taille pleine) branchera ces vignettes dans un suivi. Les maîtres ne sont pas touchés : les scellés d'iconographie restent intacts.
+
+## [2026-V] — 2026-08-29, intégré au 30 août (rejeu de la PR #16)
+### Modifié — CI (ticket R0.4)
+* **Gabarit uni avec les étapes de main (15) : 18 étapes au total** — l'**hymne national** (`sources/generate_hymne.py` + `git diff --exit-code` sur `audio/hymne_national_babberland.wav`), les **chroniques** (`sources/check_chroniques.py`) et les **vignettes** (`sources/generate_vignettes.py`) manquaient à la CI. Depuis l'Avis royal n° 8, l'enregistrement de référence fait partie de `make tout` ; il était le seul produit de la chaîne que la CI ne contrôlait pas. Reproductibilité au bit près vérifiée localement (graine 1847, bibliothèque standard seule).
+* **Blocage ré-mesuré** (E-17 / F-01) : l'installation échoue, des **deux** côtés — `git push` rejeté (« refusing to allow a GitHub App to create or update workflow … without `workflows` permission ») et API *contents* en **403** « Resource not accessible by integration ». Le poussage du reste de la branche, lui, passe : le manque est bien limité au droit `workflows`.
+* **Documentation** : `README.md` (§ Activation) et `make workflows` donnent les deux voies de sortie — trois commandes avec un jeton humain, ou l'octroi du droit *Workflows : Read and write* à l'App depuis `github.com/settings/installations`.
+### Signalé (relevé lors de l'activation)
+* La PR **#11** (audit AUD-2026-III, 18 fichiers) est en **conflit** avec `main` et héberge le seul exemplaire de `RAPPORT_AUDIT_2026_III.md` (constats **F-01 → F-23**, dont la contradiction inter-volumes F-03 et les cotes d'archives en collision F-02 entre les deux rédactions du Livre II). **Rapatrié** : voir **[2026-VI]**.
+
 ## [2026-V] — 2026-08-30 (galerie photoréaliste — les 18 figures)
 ### Ajouté
 * **Huit portraits photoréalistes** versés à `images/realistes/` : Hortense du Grain, Irène des Érables, Babber II le Piscineux, Honoré-Pabst & Henri-Grain, Babber le Fou, Ginette de Port Babette, Babber le Déchiré, Ti-Babber. Les **18 figures du canon** ont désormais chacune un cliché.

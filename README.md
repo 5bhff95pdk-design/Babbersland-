@@ -74,13 +74,13 @@ Tout passe par `make`, qui installe ses propres dépendances dans un venv — le
 ```bash
 make env          # python3 -m venv .venv + pip install -r requirements.txt
 make tout         # arbre → hymne → PDF → CONTRÔLES → empreinte (l'ordre est un contrôle, voir E-21)
-make controle     # les sept contrôles, sans rien régénérer
+make controle     # les huit contrôles, sans rien régénérer
 make scelle       # gel des archives G et H + scellé des 28 maîtres d'illustration
 ```
 
-Buts disponibles : `env`, `arbre`, `carte`, `hymne`, `pdf`, `empreinte`, `controle`, `scelle`, `iconographie`, `batterie`, `workflows`, `tout`, `propre`.
+Buts disponibles : `env`, `arbre`, `carte`, `hymne`, `vignettes`, `pdf`, `empreinte`, `controle`, `scelle`, `iconographie`, `batterie`, `workflows`, `tout`, `propre`.
 
-`make batterie` ne contrôle pas le dépôt : il **malmène seize copies isolées** de son arbre (naissances fausses, deux portraits permutés, archive gelée raturée, générateur syntaxiquement cassé) et vérifie que la chaîne refuse — puis qu'elle accepte trois éditions légitimes. C'est la seule preuve que les contrôles ont des dents ; elle dure une minute et ne fait pas partie de `controle`, puisqu'elle réécrit des scellés dans ses laboratoires.
+`make batterie` ne contrôle pas le dépôt : il **malmène seize copies isolées** de son arbre (naissances fausses, deux portraits permutés, archive gelée raturée, générateur syntaxiquement cassé, un banc de plus non déclaré, une cote réattribuée, une déclaration obsolète) et vérifie que la chaîne refuse — puis qu'elle accepte quatre éditions légitimes. C'est la seule preuve que les contrôles ont des dents ; elle dure une minute et ne fait pas partie de `controle`, puisqu'elle réécrit des scellés dans ses laboratoires.
 **Graver l'empreinte n'est jamais une vérification** : `empreinte` clôt la chaîne et consigne un assentiment ;
 la CI, elle, ne fait que `--check`. Un changement d'empreinte voulu se dit à l'Avis. Hors venv : `make PY=python3 …`. Les générateurs cherchent les polices DejaVu sur Linux, macOS et Windows (`BABBERLAND_FONT_DIR` pour forcer un répertoire). L'atlas géographique (`make carte`) est **hors canon** : il ne rentre pas dans `make tout` ni dans le PDF, tant qu'un Avis ne l'a pas ratifié. L'hymne national (`make hymne`), décrété par l'Avis royal n° 8, **entre dans `make tout`** : son enregistrement de référence (`audio/`) se régénère au bit près, partition lue dans le dossier officiel.
 
@@ -105,6 +105,7 @@ make controle     # ou, individuellement :
 python .venv/bin/python -m py_compile sources/*.py
 python .venv/bin/python sources/check_continuity.py
 python .venv/bin/python sources/check_canon.py
+python .venv/bin/python sources/check_chroniques.py
 python .venv/bin/python sources/check_pdf.py
 python .venv/bin/python sources/pdf_fingerprint.py --check
 python .venv/bin/python sources/check_geography.py
@@ -114,6 +115,7 @@ make scelle
 
 - **`check_continuity.py`** (sans dépendance) vérifie les titres historiques, l'ordre de succession, les sept livres, les équivalences monétaires, les dates maîtresses, tous les liens d'illustrations, les ancres d'illustrations du générateur (chaque ancre doit exister telle quelle dans 2026-I, faute de quoi l'illustration disparaît silencieusement du PDF), la **couverture** — chaque image promise par 2026-I doit être servie ou expressément exclue par `<!-- hors-PDF: images/x.png — motif -->` — et le bandeau de statut des chroniques.
 - **`check_canon.py`** (sans dépendance, constat E-19) fait la **parité des données** : `canon/*.json` contre 2026-I, la Chronologie maîtresse et le Registre des personnages — 18 fiches, sommes de population, échelle monétaire 24 Babetons, événements datés, **arithmétique des six successions** (durée annoncée = soustraction des bornes, chaîne continue, mort = fin de règne). Sa règle : dans un dossier nommé `canon`, une affirmation est soit **attestée** par le corpus, soit **inscrite dans `propositions_declarées`** avec sa source — 1 500 âmes de la forêt et le 12 octobre 1904 y sont, tant que l'Avis n° 7 n'a pas parlé.
+- **`check_chroniques.py`** (sans dépendance) fait l'**arithmétique interne des chroniques** : sept grandeurs récurrentes (bancs, canaux, arches, villes, régions, kilomètres, population) confrontées d'un volume à l'autre, et les **cotes d'archives** — la même cote `Q-3` ou `A-34` ne peut pas désigner deux documents différents sans que la collision soit écrite. Sa règle, celle d'E-19 : une divergence est **résolue ou déclarée** dans `gouvernance/DIVERGENCES_CHRONIQUES.md`, et une déclaration qui ne décrit plus rien d'observable est elle-même une faute. Il porte les constats **F-02** (huit cotes en collision, dont une que l'audit n'avait pas vue) et **F-03** (généalogie castorale, déclarée hors contrôle automatique).
 - **`check_pdf.py`** (`pypdf`) ouvre le PDF publié et **apparie chaque planche à sa légende, page par page**, sur le md5 du dérivé réellement embarqué : deux portraits intervertis, une planche de trop, une légende sans image sont des échecs (constats E-18, E-22). L'attendu vient du canon, pas du générateur ; la transformée d'image est unique (`sources/babberland_images.py`), partagée par le générateur et les contrôles.
 - **`pdf_fingerprint.py --check`** compare l'artefact publié à l'empreinte gravée : le PDF n'est pas reproductible à l'octet (ReportLab nomme ses XObject aléatoirement), donc on compare ce que le lecteur voit — pages, texte, et **hachés d'images ordonnés page à page**. L'empreinte n'est plus un ensemble trié : permuter deux illustrations la modifie (E-18).
 - **`check_portal.py`** (sans dépendance, constat C1) fait la **parité du portail racine** : `index.html` contre `canon/personnages.json` — chaque fiche du dictionnaire doit correspondre à *exactement une* fiche du canon et porter les **mêmes années de vie** (peu importe la rédaction : « né le 15 juillet 1962 » ≡ « né 1962 », « Babber Ier le Dormeur » ≡ « Babber le Dormeur »). C'est ce qui a pris le portail en flagrant délit de quatre dates contradictoires avec le canon.
@@ -128,10 +130,28 @@ make workflows    # copie sources/github_actions_continuite.yml → .github/work
                   # et retire au passage le talon invalide main.yml
 ```
 
-15 étapes, YAML validé, chacune rejouée localement. Le fichier `.github/workflows/continuite.yml` **ne peut
-pas sortir d'une App** : GitHub refuse qu'un jeton dépourvu du droit `workflows` crée ou modifie
-`.github/workflows/*` (constat **E-17**). Le dépôt versionne donc le modèle, pas sa copie — un humain au
-tableau de bord pousse l'installation, ou merge ce gabarit en y ajoutant le fichier en une étape.
+**18 étapes**, YAML validé, chacune rejouée localement : polices, dépendances, compilation,
+continuité, parité des données, parité du portail, **chroniques**, atlas, arbre, **hymne (Avis
+royal n° 8)**, **vignettes**, régénération du volume, artéfact apparié, fraîcheur, scellés,
+pièce jointe.
+
+Le fichier `.github/workflows/continuite.yml` **ne peut pas sortir d'une App** : GitHub refuse qu'un jeton
+dépourvu du droit `workflows` crée ou modifie `.github/workflows/*` (constats **E-17** et **F-01**, mesuré
+à nouveau le 29 août 2026 — refus à la fois par `git push` et par l'API *contents*). Le dépôt versionne
+donc le modèle, pas sa copie. Deux façons de lever le blocage :
+
+```bash
+# (a) avec un jeton humain — trois commandes, dans un clone à vous
+make workflows
+git add .github/workflows/continuite.yml && git commit -m "CI : installation du workflow de continuité"
+git push
+
+# (b) sans y toucher : accorder le droit à l'App, puis demander sa réexécution
+#     github.com/settings/installations → Arena → Permissions du dépôt → Workflows : Read and write
+```
+
+Tant que l'une des deux n'a pas eu lieu, **les contrôles ne tournent que si on les lance** (`make controle`) :
+aucune vérification automatique ne protège `main`.
 
 ## Atlas géographique (proposé, non décrété)
 
