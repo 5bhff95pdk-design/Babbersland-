@@ -7,7 +7,7 @@
 
 ## 🌟 Vue d'ensemble
 
-Afin de donner vie au Royaume du Babberland, **quarante-quatre (44)** photographies ultra-réalistes en haute définition sont versées au portail interactif (`index.html`).
+Afin de donner vie au Royaume du Babberland, **cinquante-deux (52)** photographies ultra-réalistes en haute définition sont versées au portail interactif (`index.html`).
 
 La campagne 2026-V complète la série 2026-II : les **18 figures du canon** ont désormais chacune un cliché, puis les **cinq régions** et les **offices du Livre VIII**. Les photographies capturent les lieux canoniques, les figures historiques, l'architecture, la numismatique et l'humour caractéristique de la nation.
 
@@ -15,7 +15,7 @@ Ces images sont **hors volume 2026-I et hors scellé `ICONOGRAPHIE.sha256`** : e
 
 ---
 
-## 🖼️ Inventaire Complet de la Galerie (44 Photos)
+## 🖼️ Inventaire Complet de la Galerie (52 Photos)
 
 ### Série 2026-II (16)
 
@@ -80,12 +80,20 @@ Ces images sont **hors volume 2026-I et hors scellé `ICONOGRAPHIE.sha256`** : e
 | `images/realistes/conseil_des_sages.png` | **Conseil des Sages** | Fauteuil berçant, sénateur castor. |
 | `images/realistes/hamac_force.png` | **Hamac Forcé** | Peine de lèse-quiétude, 13 h–15 h. |
 | `images/realistes/hymne_debout_tout_doucement.png` | **Hymne national** | « Debout, tout doucement », Avis n° 8. |
+| `images/realistes/nappe_vichy_constitution.png` | **Nappe de 1847** | Vichy, parchemin, plume, queue du castor. |
+| `images/realistes/champs_orge_du_grain.png` | **Champs d'orge** | Réserve céréalière, houblon, soleil couchant. |
+| `images/realistes/station_repos_1984.png` | **Station de repos** | Trois rocking-chairs, 1984. |
+| `images/realistes/ouverture_mcbabbers_1986.png` | **Ouverture 1986** | 1er avril, 15 h 01, naissance du Fou. |
+| `images/realistes/babbersgate_317_pots.png` | **Babbersgate** | 317 pots, Colette-Pabst, 1991. |
+| `images/realistes/pabstgate_2004.png` | **Pabstgate** | Cloche de la honte, glaçon d'infamie. |
+| `images/realistes/sieste_constitutionnelle.png` | **Sieste constitutionnelle** | Article 4, village entier. |
+| `images/realistes/fauteuil_retrouve.png` | **Fauteuil retrouvé** | Rocking-chair d'État, Livre VI. |
 
 ---
 
 ## 🌐 Intégration Web
 
-Les 44 photographies sont consultables dans le portail :
+Les 52 photographies sont consultables dans le portail :
 
 - **Fichier principal** : `index.html`
 - **Onglet dédié** : `📸 Galerie Photos Réalistes` (filtres : Tous · Personnages · Lieux · Institutions · Table & Monnaie)
