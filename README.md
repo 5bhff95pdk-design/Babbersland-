@@ -27,6 +27,7 @@ L'édition **2026-I** intègre directement les corrections et ne nécessite aucu
 | `gouvernance/CODE_DE_LA_FRAICHEUR_ET_PARITE_POUTINE.md` | Code de la Fraîcheur (R2.4), Parité Poutine chiffrée (R2.3) et calendrier national (R2.5) |
 | `gouvernance/GUIDE_GASTRONOMIQUE_ET_JEUX_LENTS.md` | Guide des 3 Spatules royales, Jeux Lents de Pabst City, bestiaire national et marine |
 | `gouvernance/REGISTRE_DES_PERSONNAGES.md` | Registre d'autorité des 18 personnages historiques du canon (R2.9) |
+| `gouvernance/HYMNE_NATIONAL.md` | Hymne national « Debout, tout doucement » (**décrété par l'Avis royal n° 8**, 29 août 2026) : six couplets, protocole d'exécution, partition ABC et enregistrement de référence (`make hymne`) |
 | `canon/` | Données structurées JSON : personnages, monnaie, lieux, événements (R3.3) |
 | `gouvernance/ARCHIVE.md` | Politique d'archivage : ce qui est gelé, ce qui ne l'est pas, comment dégeler |
 | `gouvernance/ARCHIVE.sha256` | Scellés des archives 2026-G et 2026-H, vérifiés par la CI et par `make scelle` |
@@ -72,16 +73,16 @@ Tout passe par `make`, qui installe ses propres dépendances dans un venv — le
 
 ```bash
 make env          # python3 -m venv .venv + pip install -r requirements.txt
-make tout         # arbre → PDF → CONTRÔLES → empreinte (l'ordre est un contrôle, voir E-21)
+make tout         # arbre → hymne → PDF → CONTRÔLES → empreinte (l'ordre est un contrôle, voir E-21)
 make controle     # les six contrôles, sans rien régénérer
 make scelle       # gel des archives G et H + scellé des 28 maîtres d'illustration
 ```
 
-Buts disponibles : `env`, `arbre`, `carte`, `pdf`, `empreinte`, `controle`, `scelle`, `iconographie`, `batterie`, `workflows`, `tout`, `propre`.
+Buts disponibles : `env`, `arbre`, `carte`, `hymne`, `pdf`, `empreinte`, `controle`, `scelle`, `iconographie`, `batterie`, `workflows`, `tout`, `propre`.
 
 `make batterie` ne contrôle pas le dépôt : il **malmène seize copies isolées** de son arbre (naissances fausses, deux portraits permutés, archive gelée raturée, générateur syntaxiquement cassé) et vérifie que la chaîne refuse — puis qu'elle accepte trois éditions légitimes. C'est la seule preuve que les contrôles ont des dents ; elle dure une minute et ne fait pas partie de `controle`, puisqu'elle réécrit des scellés dans ses laboratoires.
 **Graver l'empreinte n'est jamais une vérification** : `empreinte` clôt la chaîne et consigne un assentiment ;
-la CI, elle, ne fait que `--check`. Un changement d'empreinte voulu se dit à l'Avis. Hors venv : `make PY=python3 …`. Les générateurs cherchent les polices DejaVu sur Linux, macOS et Windows (`BABBERLAND_FONT_DIR` pour forcer un répertoire). L'atlas géographique (`make carte`) est **hors canon** : il ne rentre pas dans `make tout` ni dans le PDF, tant qu'un Avis ne l'a pas ratifié.
+la CI, elle, ne fait que `--check`. Un changement d'empreinte voulu se dit à l'Avis. Hors venv : `make PY=python3 …`. Les générateurs cherchent les polices DejaVu sur Linux, macOS et Windows (`BABBERLAND_FONT_DIR` pour forcer un répertoire). L'atlas géographique (`make carte`) est **hors canon** : il ne rentre pas dans `make tout` ni dans le PDF, tant qu'un Avis ne l'a pas ratifié. L'hymne national (`make hymne`), décrété par l'Avis royal n° 8, **entre dans `make tout`** : son enregistrement de référence (`audio/`) se régénère au bit près, partition lue dans le dossier officiel.
 
 ## Régénération de l'encyclopédie PDF
 

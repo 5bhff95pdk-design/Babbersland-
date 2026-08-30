@@ -44,6 +44,7 @@ La capitale, **Pabst City**, accueille le Palais royal, la Banque nationale et l
 | **Couleurs** | Bleu roi et or. |
 | **Devise populaire** | « Une Pabst, une poutine, et on relaxe. » |
 | **Devise héraldique** | « Unité · Travail · 1847 ». |
+| **Hymne national** | « Debout, tout doucement » — six couplets et un refrain sur l'air des tablées du Double Aqueduc ; tempo ♩ = 60, jamais chanté entre 13 h et 15 h ni en courant. Promulgué par l'Avis royal n° 8 le 29 août 2026. |
 | **Étalon monétaire** | La Parité Poutine, garantie par la réserve de fromage en grain. |
 
 ## Lois fondamentales
