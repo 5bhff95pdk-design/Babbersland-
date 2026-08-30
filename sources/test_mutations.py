@@ -2,8 +2,8 @@
 """Batterie de mutations de la chaîne de contrôle (RC-2026-III-01, lot C0).
 
 Répondre à « le verrou tient-il ? » ne se fait pas en lisant le code : on **casse**
-une copie du dépôt et l'on regarde qui bronche. Ce script rejoue quatorze altérations
-qui doivent être refusées et trois éditions qui doivent être laissées passer.
+une copie du dépôt et l'on regarde qui bronche. Ce script rejoue seize altérations
+qui doivent être refusées et quatre éditions qui doivent être laissées passer.
 
 Chaque scénario travaille sur sa propre copie de l'arbre (hors dépôt, hors `.git`,
 hors `.venv`) : la référence n'est jamais touchée, même quand un scénario régénère
@@ -31,6 +31,7 @@ PY = sys.executable
 CONTROLES = [
     "sources/check_continuity.py",
     "sources/check_canon.py",
+    "sources/check_chroniques.py",
     "sources/check_pdf.py",
     "sources/pdf_fingerprint.py --check",
     "sources/check_geography.py",
@@ -38,6 +39,8 @@ CONTROLES = [
 LEGENDE_ANCRE = ('("images/ginette_de_port_babette.png", '
                  '"La Princesse Ginette et le Grand Sauciériste d’Or."),')
 PORTRAIT_ANCRE = "* 🖼️ *Portrait officiel : `images/roger_bontemps.png`*"
+COTE_LIVRE_V = ("| **UR-1998** | Décret d'ouverture de l'Union des Règnes : alternance des "
+                "signatures et vacance ministérielle | 1 |")
 
 
 def courir(labo: Path, commande: str) -> tuple[int, str]:
@@ -129,7 +132,27 @@ FAUTES: list[tuple[str, object, object]] = [
          + '\nprint("parenthèse non fermée →\n', encoding="utf-8"), vue_controles),
     ("M17 · chronique qui se déclare adoptée sans Avis n° 7",
      lambda d: editer(d, "chroniques/LIVRE_VI_LE_SIECLE_QUI_LOUCHE.md", "proposés", "adoptés"), vue_controles),
+    ("P4 · un banc de plus dans le Livre III (divergence non déclarée)",
+     lambda d: editer(d, "chroniques/LIVRE_III_LAGE_HORIZONTAL.md",
+                      "ses quarante bancs", "ses cinquante et un bancs"), vue_controles),
+    ("P5 · cote H-1 réattribuée par le Livre V, sans déclaration",
+     lambda d: editer(d, "chroniques/LIVRE_V_LUNION_DES_REGNES.md", COTE_LIVRE_V,
+                      COTE_LIVRE_V + "\n| **H-1** | Registre des audiences de l'Union (1998–2010) | 1 |"),
+     vue_controles),
+    ("M18 · déclaration obsolète : les 42 bancs du registre deviennent 43",
+     lambda d: editer(d, "gouvernance/DIVERGENCES_CHRONIQUES.md",
+                      '"grandeur":"bancs","valeurs":[2,3,40,42]',
+                      '"grandeur":"bancs","valeurs":[2,3,40,43]'), vue_controles),
 ]
+
+# Une divergence nouvelle que le registre déclare doit passer : c'est le contrat
+# « résolue ou déclarée », éprouvé dans les deux sens.
+def divergence_nouvelle_declares(labo: Path) -> None:
+    editer(labo, "chroniques/LIVRE_III_LAGE_HORIZONTAL.md",
+           "ses quarante bancs", "ses cinquante et un bancs")
+    editer(labo, "gouvernance/DIVERGENCES_CHRONIQUES.md",
+           '"grandeur":"bancs","valeurs":[2,3,40,42]',
+           '"grandeur":"bancs","valeurs":[2,3,40,42,51]')
 
 # ── ce que la chaîne doit laisser passer ─────────────────────────────────────
 JUSTES: list[tuple[str, object]] = [
@@ -152,6 +175,8 @@ JUSTES: list[tuple[str, object]] = [
                 editer(d, "sources/generate_encyclopedie_2026_i.py", LEGENDE_ANCRE,
                        ajouter_planche("Portrait bis de la cour.")),
                 regenerer(d))),
+    ("V3 · divergence nouvelle surgie ET déclarée au registre : la chaîne laisse passer",
+     divergence_nouvelle_declares),
 ]
 
 

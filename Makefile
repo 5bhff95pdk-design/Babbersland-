@@ -1,5 +1,5 @@
 # Chancellerie royale — chaîne de production du volume 2026-I.
-# Buts : env · arbre · carte · hymne · pdf · empreinte · controle · scelle · iconographie · tout · propre
+# Buts : env · arbre · carte · hymne · vignettes · pdf · empreinte · controle · scelle · iconographie · tout · propre
 # Hors venv, remplacer PY=.venv/bin/python par PY=python3 (make PY=python3).
 
 PY      ?= .venv/bin/python
@@ -7,7 +7,7 @@ VENV    ?= .venv
 PDF     := Royaume_du_Babberland_Encyclopedie_Consolidee_2026_I.pdf
 
 .DEFAULT_GOAL := tout
-.PHONY: env arbre carte hymne pdf empreinte controle scelle iconographie batterie workflows tout propre
+.PHONY: env arbre carte hymne vignettes pdf empreinte controle scelle iconographie batterie workflows tout propre
 
 env: ## crée le venv et y épingle les dépendances (contournement PEP 668, constat E-11)
 	@test -x $(PY) || python3 -m venv $(VENV)
@@ -23,6 +23,9 @@ carte: ## atlas géographique (proposé, non décrété) : SVG, PNG, HTML
 
 hymne: ## hymne national (décrété, Avis royal n° 8) : enregistrement de référence du refrain
 	$(PY) sources/generate_hymne.py
+
+vignettes: ## vignettes WebP du portail (les maîtres PNG ne sont pas touchés, les scellés non plus)
+	$(PY) sources/generate_vignettes.py
 
 pdf: $(PDF) ## régénère l'encyclopédie PDF 2026-I
 
@@ -51,9 +54,10 @@ scelle: ## vérifie le gel des archives G et H et des maîtres d'illustration (E
 	@sha256sum --check --quiet gouvernance/ICONOGRAPHIE.sha256 \
 	  && echo "maîtres d'illustration conformes au scellé ($$(grep -c . gouvernance/ICONOGRAPHIE.sha256) lignes)"
 
-controle: ## continuité, parité des données, artéfact publié, fraîcheur, géographie, archives
+controle: ## continuité, parité des données, chroniques, artéfact publié, fraîcheur, géographie, archives
 	$(PY) sources/check_continuity.py
 	$(PY) sources/check_canon.py
+	$(PY) sources/check_chroniques.py
 	$(PY) sources/check_pdf.py
 	$(PY) sources/pdf_fingerprint.py --check
 	$(PY) sources/check_geography.py
@@ -67,7 +71,7 @@ controle: ## continuité, parité des données, artéfact publié, fraîcheur, g
 batterie: env
 	$(PY) sources/test_mutations.py
 
-tout: arbre hymne pdf controle empreinte ## la chaîne complète
+tout: arbre hymne vignettes pdf controle empreinte ## la chaîne complète
 	@echo "2026-I régénérée et contrôlée."
 
 propre: ## nettoyages mineurs

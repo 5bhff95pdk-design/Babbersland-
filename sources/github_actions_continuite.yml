@@ -41,6 +41,9 @@ jobs:
       - name: Parité des données structurées (canon/*.json contre 2026-I, Chronologie, Registre)
         run: python sources/check_canon.py
 
+      - name: Chroniques (grandeurs chiffrées, cotes d'archives, registre des divergences)
+        run: python sources/check_chroniques.py
+
       - name: Atlas géographique (proposé, non décrété)
         run: |
           python sources/generate_map.py
@@ -58,6 +61,11 @@ jobs:
         run: |
           python sources/generate_hymne.py
           git diff --exit-code --stat -- audio/hymne_national_babberland.wav
+
+      - name: Vignettes du portail (dérivées des maîtres, déterministes)
+        run: |
+          python sources/generate_vignettes.py
+          git diff --exit-code --stat -- images/vignettes
 
       - name: Régénération de l'encyclopédie 2026-I
         run: python sources/generate_encyclopedie_2026_i.py

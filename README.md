@@ -11,6 +11,7 @@ Archives narratives et iconographiques du Royaume du Babberland.
 3. **`CHRONOLOGIE_MAITRESSE_1847_2026.md`** — registre chronologique détaillé, avec règnes, sources et contrôles de continuité.
 4. **`images/`** — portraits, numismatique et arbre généalogique illustré.
 5. **`geographie/`** — atlas temporel (proposé, non décrété) : analyse, roadmap, carte SVG/PNG, page `index.html`.
+6. **`index.html`** — portail royal : le canon et la galerie « réaliste », servis en **vignettes WebP** (`make vignettes`, 0,9 Mio au lieu de 44 Mio) ; les maîtres PNG restent à un clic et ne sont pas touchés.
 
 L'édition **2026-I** intègre directement les corrections et ne nécessite aucune règle de préséance documentaire.
 
@@ -29,6 +30,8 @@ L'édition **2026-I** intègre directement les corrections et ne nécessite aucu
 | `gouvernance/REGISTRE_DES_PERSONNAGES.md` | Registre d'autorité des 18 personnages historiques du canon (R2.9) |
 | `gouvernance/HYMNE_NATIONAL.md` | Hymne national « Debout, tout doucement » (**décrété par l'Avis royal n° 8**, 29 août 2026) : six couplets, protocole d'exécution, partition ABC et enregistrement de référence (`make hymne`) |
 | `canon/` | Données structurées JSON : personnages, monnaie, lieux, événements (R3.3) |
+| `RAPPORT_AUDIT_2026_III.md` | Audit AUD-2026-III (constats **F-01 → F-23**), **rapatrié de la PR #11** où il dormait en conflit avec `main` : statut **historique**, on le lit pour la méthode et pour ce qui reste ouvert |
+| `gouvernance/DIVERGENCES_CHRONIQUES.md` | Registre des divergences des chroniques, lu par `check_chroniques.py` : bancs (40 contre 42), population, huit cotes d'archives en collision, généalogie castorale (F-03) |
 | `gouvernance/ARCHIVE.md` | Politique d'archivage : ce qui est gelé, ce qui ne l'est pas, comment dégeler |
 | `gouvernance/ARCHIVE.sha256` | Scellés des archives 2026-G et 2026-H, vérifiés par la CI et par `make scelle` |
 | `gouvernance/ICONOGRAPHIE.sha256` | Scellés des 28 maîtres d'illustration, par leur nom (E-18) |
@@ -78,7 +81,7 @@ make controle     # les six contrôles, sans rien régénérer
 make scelle       # gel des archives G et H + scellé des 28 maîtres d'illustration
 ```
 
-Buts disponibles : `env`, `arbre`, `carte`, `hymne`, `pdf`, `empreinte`, `controle`, `scelle`, `iconographie`, `batterie`, `workflows`, `tout`, `propre`.
+Buts disponibles : `env`, `arbre`, `carte`, `hymne`, `vignettes`, `pdf`, `empreinte`, `controle`, `scelle`, `iconographie`, `batterie`, `workflows`, `tout`, `propre`.
 
 `make batterie` ne contrôle pas le dépôt : il **malmène seize copies isolées** de son arbre (naissances fausses, deux portraits permutés, archive gelée raturée, générateur syntaxiquement cassé) et vérifie que la chaîne refuse — puis qu'elle accepte trois éditions légitimes. C'est la seule preuve que les contrôles ont des dents ; elle dure une minute et ne fait pas partie de `controle`, puisqu'elle réécrit des scellés dans ses laboratoires.
 **Graver l'empreinte n'est jamais une vérification** : `empreinte` clôt la chaîne et consigne un assentiment ;
@@ -104,6 +107,7 @@ make empreinte    # grave l'empreinte sémantique dans gouvernance/pdf_fingerpri
 make controle     # ou, individuellement :
 python .venv/bin/python sources/check_continuity.py
 python .venv/bin/python sources/check_canon.py
+python .venv/bin/python sources/check_chroniques.py
 python .venv/bin/python sources/check_pdf.py
 python .venv/bin/python sources/pdf_fingerprint.py --check
 python .venv/bin/python sources/check_geography.py
@@ -111,6 +115,7 @@ make scelle
 ```
 
 - **`check_continuity.py`** (sans dépendance) vérifie les titres historiques, l'ordre de succession, les sept livres, les équivalences monétaires, les dates maîtresses, tous les liens d'illustrations, les ancres d'illustrations du générateur (chaque ancre doit exister telle quelle dans 2026-I, faute de quoi l'illustration disparaît silencieusement du PDF), la **couverture** — chaque image promise par 2026-I doit être servie ou expressément exclue par `<!-- hors-PDF: images/x.png — motif -->` — et le bandeau de statut des chroniques.
+- **`check_chroniques.py`** (sans dépendance) fait l'**arithmétique interne des chroniques** : sept grandeurs récurrentes (bancs, canaux, arches, villes, régions, kilomètres, population) confrontées d'un volume à l'autre, et les **cotes d'archives** — la même cote `Q-3` ou `A-34` ne peut pas désigner deux documents différents sans que la collision soit écrite. Sa règle, celle d'E-19 : une divergence est **résolue ou déclarée** dans `gouvernance/DIVERGENCES_CHRONIQUES.md`, et une déclaration qui ne décrit plus rien d'observable est elle-même une faute. Il porte les constats **F-02** (huit cotes en collision, dont une que l'audit n'avait pas vue) et **F-03** (généalogie castorale, déclarée hors contrôle automatique).
 - **`check_canon.py`** (sans dépendance, constat E-19) fait la **parité des données** : `canon/*.json` contre 2026-I, la Chronologie maîtresse et le Registre des personnages — 18 fiches, sommes de population, échelle monétaire 24 Babetons, événements datés, **arithmétique des six successions** (durée annoncée = soustraction des bornes, chaîne continue, mort = fin de règne). Sa règle : dans un dossier nommé `canon`, une affirmation est soit **attestée** par le corpus, soit **inscrite dans `propositions_declarées`** avec sa source — 1 500 âmes de la forêt et le 12 octobre 1904 y sont, tant que l'Avis n° 7 n'a pas parlé.
 - **`check_pdf.py`** (`pypdf`) ouvre le PDF publié et **apparie chaque planche à sa légende, page par page**, sur le md5 du dérivé réellement embarqué : deux portraits intervertis, une planche de trop, une légende sans image sont des échecs (constats E-18, E-22). L'attendu vient du canon, pas du générateur ; la transformée d'image est unique (`sources/babberland_images.py`), partagée par le générateur et les contrôles.
 - **`pdf_fingerprint.py --check`** compare l'artefact publié à l'empreinte gravée : le PDF n'est pas reproductible à l'octet (ReportLab nomme ses XObject aléatoirement), donc on compare ce que le lecteur voit — pages, texte, et **hachés d'images ordonnés page à page**. L'empreinte n'est plus un ensemble trié : permuter deux illustrations la modifie (E-18).
@@ -125,8 +130,9 @@ make workflows    # copie sources/github_actions_continuite.yml → .github/work
                   # et retire au passage le talon invalide main.yml
 ```
 
-**14 étapes**, YAML validé, chacune rejouée localement : continuité, parité des données, atlas, arbre,
-**hymne (Avis royal n° 8)**, régénération du volume, artéfact apparié, fraîcheur, scellés, pièce jointe.
+**16 étapes**, YAML validé, chacune rejouée localement : continuité, parité des données, **chroniques**,
+atlas, arbre, **hymne (Avis royal n° 8)**, **vignettes**, régénération du volume, artéfact apparié,
+fraîcheur, scellés, pièce jointe.
 
 Le fichier `.github/workflows/continuite.yml` **ne peut pas sortir d'une App** : GitHub refuse qu'un jeton
 dépourvu du droit `workflows` crée ou modifie `.github/workflows/*` (constats **E-17** et **F-01**, mesuré
