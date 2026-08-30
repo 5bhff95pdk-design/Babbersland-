@@ -554,21 +554,24 @@
     }
 
     function convertFromBabber() {
+      // 1 Babber = 24 Babetons = 1 Poutine Royale (23 bt) + 1 Canette (1 bt).
       const val = parseFloat(document.getElementById('babberInput').value) || 0;
       const bt = Math.round(val * 24);
-      const poutines = (val * 24 / 23).toFixed(1);
-      const canettes = bt;
-      document.getElementById('conversionText').innerText = `= ${bt} Babetons (soit env. ${poutines} poutines régulières ou ${canettes} canettes fraîches)`;
+      const poutines = Math.floor(bt / 23);
+      const canettes = bt % 23;
+      const pl = (n, s) => `${n} ${s}${n > 1 ? 's' : ''}`;
+      document.getElementById('conversionText').innerText =
+        `= ${bt} Babetons, soit ${pl(poutines, 'poutine royale')} et ${pl(canettes, 'canette')}`;
     }
 
     const characters = [
       { name: "Babber Ier l’Ancien", dates: "1798–1889", role: "Fondateur & 1er Roi", note: "Pacte castoral de 1816 et Nappe du 12 octobre 1847." },
-      { name: "Babette Ire de Plantagenet", dates: "v. 1805–1892", role: "Reine Consort Fondatrice", note: "Prêteuse de la nappe vichy et régente de mémoire." },
+      { name: "Babette Ire de Plantagenet", dates: "1804–1892", role: "Reine Consort Fondatrice", note: "Prêteuse de la nappe vichy et régente de mémoire." },
       { name: "François-Babber l’Aqueducien", dates: "1832–1914", role: "Prince Régent & Ingénieur", note: "Bâtisseur du Double Aqueduc et des 42 bancs." },
-      { name: "Hortense du Grain", dates: "v. 1845–v. 1930", role: "Princesse Consort", note: "Fondatrice de la réserve céréalière royale." },
-      { name: "Princesse Babette-Marine", dates: "1840–1916", role: "Princesse du Littoral", note: "Créatrice du port moderne de Port Babette et de son phare." },
+      { name: "Hortense du Grain", dates: "1840–1922", role: "Princesse Consort", note: "Fondatrice de la réserve céréalière royale." },
+      { name: "Princesse Babette-Marine", dates: "1836–1916", role: "Princesse du Littoral", note: "Créatrice du port moderne de Port Babette et de son phare." },
       { name: "Babber Ier le Dormeur", dates: "1875–1959", role: "Roi du Silence (1914–1959)", note: "45 ans de règne en hamac, Articles 1 & 4." },
-      { name: "Irène des Érables", dates: "1880–1966", role: "Reine Consort", note: "Morte en 1966, mère de Babber II." },
+      { name: "Irène des Érables", dates: "1882–1966", role: "Reine Consort", note: "Morte en 1966, mère de Babber II." },
       { name: "Babber II le Piscineux", dates: "1912–2002", role: "Roi Baigneur (1959–1998)", note: "Créateur des Monts Froissés (1,20 m) et de McBabber's." },
       { name: "Colette-Pabst de Grass City", dates: "1920–2011", role: "Reine Consort & Juge", note: "Présidente de la commission du Babbersgate (1991–1993)." },
       { name: "Honoré-Pabst", dates: "né 1938", role: "Co-souverain (1998–2010)", note: "Signataire des jours impairs de l'Union des Règnes." },

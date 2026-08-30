@@ -48,12 +48,14 @@ scelle: ## vérifie le gel des archives G et H et des maîtres d'illustration (E
 	@sha256sum --check --quiet gouvernance/ICONOGRAPHIE.sha256 \
 	  && echo "maîtres d'illustration conformes au scellé ($$(grep -c . gouvernance/ICONOGRAPHIE.sha256) lignes)"
 
-controle: ## continuité, parité des données, artéfact publié, fraîcheur, géographie, archives
+controle: ## continuité, parité des données, parité du portail, artéfact, fraîcheur, géographie, archives
+	$(PY) -m py_compile sources/*.py
 	$(PY) sources/check_continuity.py
 	$(PY) sources/check_canon.py
 	$(PY) sources/check_pdf.py
 	$(PY) sources/pdf_fingerprint.py --check
 	$(PY) sources/check_geography.py
+	$(PY) sources/check_portal.py
 	$(MAKE) --no-print-directory scelle
 
 # L'ordre est un contrôle, pas une commodité (constat E-21) : graver l'empreinte AVANT
