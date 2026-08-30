@@ -7,7 +7,7 @@
 
 ## 🌟 Vue d'ensemble
 
-Afin de donner vie au Royaume du Babberland, **soixante-deux (62)** photographies ultra-réalistes en haute définition sont versées au portail interactif (`index.html`).
+Afin de donner vie au Royaume du Babberland, **soixante-huit (68)** photographies ultra-réalistes en haute définition sont versées au portail interactif (`index.html`).
 
 La campagne 2026-V complète la série 2026-II : les **18 figures du canon** ont désormais chacune un cliché, puis les **cinq régions** et les **offices du Livre VIII**. Les photographies capturent les lieux canoniques, les figures historiques, l'architecture, la numismatique et l'humour caractéristique de la nation.
 
@@ -15,7 +15,7 @@ Ces images sont **hors volume 2026-I et hors scellé `ICONOGRAPHIE.sha256`** : e
 
 ---
 
-## 🖼️ Inventaire Complet de la Galerie (62 Photos)
+## 🖼️ Inventaire Complet de la Galerie (68 Photos)
 
 ### Série 2026-II (16)
 
@@ -98,12 +98,18 @@ Ces images sont **hors volume 2026-I et hors scellé `ICONOGRAPHIE.sha256`** : e
 | `images/realistes/canal_double_aqueduc.png` | **Deux canaux** | Eau et Pabst, bancs le long du chemin. |
 | `images/realistes/thermometre_maitre_1898.png` | **Thermomètre Maître** | Étalon 1898, caves de la Banque. |
 | `images/realistes/castor_patriote.png` | **Castor Patriote** | Signataire à la queue. |
+| `images/realistes/douane_laissez_aller.png` | **Douane** | Laissez-aller, rocking-chair, barrière levée. |
+| `images/realistes/trois_spatules_royales.png` | **Trois Spatules** | Guide gastronomique, louche couronnée. |
+| `images/realistes/mariage_louche_linea_1978.png` | **Mariage 1978** | Le Louche et Linéa, invités assis. |
+| `images/realistes/bapteme_ti_babber.png` | **Baptême** | Ti-Babber, linge vichy, 26 août 2026. |
+| `images/realistes/traite_des_cornichons_2009.png` | **Traité 2009** | Le Déchiré arbitre, pouce levé. |
+| `images/realistes/cloche_de_la_honte.png` | **Cloche de la Honte** | Zinc, glaçon, thermomètre. |
 
 ---
 
 ## 🌐 Intégration Web
 
-Les 62 photographies sont consultables dans le portail :
+Les 68 photographies sont consultables dans le portail :
 
 - **Fichier principal** : `index.html`
 - **Onglet dédié** : `📸 Galerie Photos Réalistes` (filtres : Tous · Personnages · Lieux · Institutions · Table & Monnaie)
