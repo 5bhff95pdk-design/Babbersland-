@@ -152,7 +152,7 @@ w: Ba- bers, de- bout ! Mais dou- ce- ment — Le Ro- yau- me n'est pas pres- s�
 ### 1. Posture
 
 * On chante **debout** ; l'appui sur un support autorisé (hamac tendu, barrière, banc des quarante-deux) n'est pas une faute ;
-  *l'hymne tranche en faveur de la seconde rédaction du Livre II — quarante-deux bancs, non quarante — au motif qu'elle est aussi celle qui en compte le plus, donc la plus confortable ;*
+  *l'hymne reprend l'édition fusionnée du Livre II — Les Bâtisseurs, sous-titré « Le Silence et l'Aqueduc » — et ses quarante-deux bancs, désormais le seul compte éditorial retenu ;*
 * **Main droite sur le cœur, main gauche sur la chope** ;
 * Les mineurs et les conducteurs posent la chope de soda au sol — la loi fondamentale n° 2 ne s'exprime pas en chœur.
 
