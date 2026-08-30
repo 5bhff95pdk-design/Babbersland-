@@ -2,6 +2,16 @@
 
 Toutes les modifications notables apportées au dépôt du **Royaume du Babberland** sont consignées dans ce document.
 
+## [2026-VII] — 2026-08-30 (portail sur vignettes + runbook LFS)
+### Corrigé — le script du portail 2026-V était mort
+* **Bug de syntaxe JavaScript** dans le tableau de la galerie (ligne du Prince Babber le Fou, fragment `u.png` en trop) : le bloc `<script>` entier ne se parsertait pas — dictionnaire des personnages, galerie 77 photos et convertisseur monétaire étaient inopérants dans le portail publié. Corrigé ; syntaxe vérifiée (`node --check`) et rendu simulé avec stub DOM (18 cartes personnages + 77 cartes galerie, zéro référence manquante).
+### Ajouté — le portail charge les vignettes (R1.6, moitié « écran »)
+* `index.html` : les grilles (personnages, galerie, tuiles de chroniques et de régions) affichent désormais les **vignettes WebP** de 640 px (`images/vignettes/`) ; le **maître pleine taille reste un clic plus loin**, dans la visionneuse. Poids de diffusion de la page : **≈ 220 Mio → ≈ 7 Mio** (un héros en taille pleine conservé). Le héros et les lightbox ne bougent pas ; `check_portal.py` et `make controle` restent verts.
+### Ajouté — runbook LFS (R1.6, moitié « hors dépôt »)
+* **`gouvernance/LFS_MIGRATION.md`** : la procédure complète du passage des binaires en Git LFS (≈ 330 Mio de candidats : 220 Mio de galerie, 78 Mio de maîtres, 22,9 Mio de PDF, 4 Mio d'audio, 4,7 Mio de vignettes), les **mesures du jour** (batch LFS HTTP 200 ; upload des objets vers `github-cloud.s3.amazonaws.com` en **SSL_ERROR_SYSCALL** et upload d'assets vers `uploads.github.com` en **EOF** — le CDN de GitHub est inaccessible depuis l'environnement d'agent) et deux options : **A′** (prospective, ≈ 230 Mio, recommandée si plan gratuit — bande passante LFS : 1 Gio/mois) et **B** (réécriture de l'historique, ≈ 340 Mio → < 5 Mio, **à avis**). La migration n'est pas engagée ici : des pointeurs sans objets casseraient tous les autres clones.
+* **`make lfs`** : exécute la variante A′ (track + commit), s'arrête avant le push — l'étape réseau qui reste.
+* `README.md` : section « Binaires lourds et Git LFS (R1.6) » ; `ROADMAP_2026_II.md` : R1.6 portée à « moitié livrée ».
+
 ## [2026-VI] — 2026-08-29, intégrée au 30 août (rejeu de la PR #16, en conflit avec les PR #17–19)
 ### Ajouté — le contrôle des chroniques
 * **`sources/check_chroniques.py`** (sans dépendance, câblé dans `make controle` et dans la CI) : l'arithmétique interne des chroniques. Sept grandeurs récurrentes (bancs, canaux, arches, villes, régions, kilomètres, population) sont confrontées d'un volume à l'autre, et les **73 cotes d'archives** déclarées en annexe sont comparées deux à deux. Contrat E-19 : une divergence est **résolue ou déclarée** ; une déclaration qui ne décrit plus rien d'observable est une faute.
