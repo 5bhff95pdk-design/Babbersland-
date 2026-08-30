@@ -12,6 +12,8 @@ Périmètre : `Makefile`, `sources/*.py` (8 scripts, 2 018 lignes), `canon/*.jso
 `gouvernance/ARCHIVE.sha256`, artefact publié 2026-I, pages HTML, chaîne de production complète.
 Suite logique des constats E-01 → E-17 (`RAPPORT_DE_REVISION_2026_I.md`, `RAPPORT_ANALYSE_2026_II.md`).
 
+> **Mise à jour éditoriale du 30 août 2026.** Ce rapport conserve ci-dessous la mesure historique de l'état où deux rédactions du Livre II coexistaient. Depuis cette émission, elles ont été fusionnées dans `chroniques/LIVRE_II_LES_BATISSEURS.md` sous le sous-titre *Le Silence et l'Aqueduc* ; `chroniques/LIVRE_II_LE_SILENCE_ET_L_AQUEDUC.md` a été supprimé après intégration. Le compte de **42 bancs** est désormais unique. Cette résolution ne réécrit pas les constats de la contre-expertise et ne ratifie pas le texte dans le canon ; elle ferme seulement la concurrence éditoriale.
+
 ---
 
 ## 1. Verdict
@@ -298,9 +300,11 @@ sémantique → `make empreinte` + Avis au Registre, dans le même commit.
 7. **monnaie** : 1 Babber = 24 Babetons, l'échelle 24/12/6/2/1 est régulière, la Série B est datée 2026.
 8. **succession** : Fou premier, Ti-Babber second, Déchiré collatéral, aucun conflit d'âge ou de
    filiation relevé sur les 18 figures (dont Babette-Marine, 1836, fille cadette d'un père né 1798).
-9. **chroniques** : sept livres, bandeau de statut conforme ; les deux rédactions du Livre II
-   coexistent **assumées et déclarées** (40 vs 42 bancs, signalé au README) — un désaccord
-   documenté n'est pas une incohérence.
+9. **chroniques** : sept livres, bandeau de statut conforme ; au moment de la contre-expertise,
+   les deux rédactions du Livre II étaient **assumées et déclarées** (40 vs 42 bancs, signalé au
+   README) — un désaccord documenté n'était pas une incohérence. **Décision ultérieure :** cette
+   coexistence a été résolue le 30 août 2026 par fusion dans l'édition unique *Les Bâtisseurs —
+   Le Silence et l'Aqueduc*, qui retient 42 bancs.
 10. **licence, citation, changelog** : présents ; `CITATION.cff` se lit ; 0 lien mort sur les 86 fichiers.
 
 ---

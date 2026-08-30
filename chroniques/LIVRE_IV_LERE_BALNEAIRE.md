@@ -217,7 +217,7 @@ Il restait à savoir qui, désormais, présiderait une commission d'enquête si 
 
 ## 5. 1966 · L'état du royaume
 
-À la mort d'Irène, le Royaume avait cent dix-neuf ans, deux canaux, quarante bancs, trois villes, un phare, une chaîne de montagnes d'un mètre vingt, une Banque nationale de soixante-neuf ans qui n'avait toujours rien prêté, et une population officielle de deux cent quatorze humains que le recensement de 1850 continuait de certifier contre toute vraisemblance.
+À la mort d'Irène, le Royaume avait cent dix-neuf ans, deux canaux, quarante-deux bancs, trois villes, un phare, une chaîne de montagnes d'un mètre vingt, une Banque nationale de soixante-neuf ans qui n'avait toujours rien prêté, et une population officielle de deux cent quatorze humains que le recensement de 1850 continuait de certifier contre toute vraisemblance.
 
 Il avait aussi, pour la première fois de son histoire, un tourisme.
 
@@ -311,7 +311,7 @@ On la lui fit. Ce fut une copie du parchemin **Q-1**, tirée sur le papier de ch
 
 Puis on proposa la visite du second canal.
 
-Le programme de deux pages prévoyait quarante minutes pour l'ensemble ; il en prit quatre heures, dont deux passées assis sur le banc nº 40, à regarder couler le canal de bière, pendant que l'interprète traduisait et que le délai filait. À 13 h, la sieste tomba sur la délégation comme sur tout le monde, et l'hôte, qui avait un avion, un pays et un projet de fleuve artificiel à faire traverser un désert, dormit une heure et demie sur un banc public du Babberland, sous l'œil attendri du prince, qui ne plissa même pas les yeux.
+Le programme de deux pages prévoyait quarante minutes pour l'ensemble ; il en prit quatre heures, dont deux passées assis sur le banc nº 42, à regarder couler le canal de bière, pendant que l'interprète traduisait et que le délai filait. À 13 h, la sieste tomba sur la délégation comme sur tout le monde, et l'hôte, qui avait un avion, un pays et un projet de fleuve artificiel à faire traverser un désert, dormit une heure et demie sur un banc public du Babberland, sous l'œil attendri du prince, qui ne plissa même pas les yeux.
 
 Il repartit à 16 h 40, avec ses plans, son fromage, et un retard qu'aucun protocole n'avait prévu.
 
@@ -407,9 +407,9 @@ Le roi le rendit à la Couronne, c'est-à-dire à lui-même, puis le donna au pu
 
 1. **Trois rocking-chairs**, disposés face au Palais, orientés de manière à voir à la fois la route, les montagnes et l'heure qu'il est sans avoir à la regarder ;
 2. **Un distributeur de Pabst fraîche**, alimenté par la cave du Palais, réglé à deux degrés, et relevé trois fois par jour par un employé de la malterie ;
-3. **Un banc**, sans numéro, parce que les quarante bancs de l'aqueduc étaient numérotés et que celui-là n'en faisait pas partie.
+3. **Un banc**, sans numéro, parce que les quarante-deux bancs de l'aqueduc étaient numérotés et que celui-là n'en faisait pas partie.
 
-La station fut inaugurée en avril 1984, sans ruban, sans discours et sans date retenue par le registre, selon la coutume portuaire que le Livre II a déjà décrite. Le premier usage des trois chaises berçantes fut, de l'aveu général, immédiat et permanent.
+La station fut inaugurée en avril 1984, sans ruban, sans discours et sans date retenue par le registre, selon la coutume portuaire que le Livre II fusionné a déjà décrite. Le premier usage des trois chaises berçantes fut, de l'aveu général, immédiat et permanent.
 
 ## 5. Le soir même
 

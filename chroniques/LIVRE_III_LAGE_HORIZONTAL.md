@@ -6,7 +6,7 @@
 
 > **Statut éditorial** — Œuvre de chronique romanesque établie dans le respect des points de continuité fixés par l'**Encyclopédie consolidée 2026-I**. Tant qu'un décret royal ne les aura pas ratifiés, les éléments nouveaux racontés ici demeurent **proposés** : ils ne contredisent aucune règle du canon et ne fixent aucune de ses lacunes volontaires. La naissance de Roger Bontemps, la filiation de Babette-Marine et la valeur chiffrée de la Parité Poutine restent ici ce qu'elles sont au registre : ouvertes. Le canon n'attribue au Dormeur que les articles 1 et 4 ; lorsqu'il est question ici de l'article 3, la chronique le propose et le dit.
 >
-> Le Livre II couvrait 1889–1914. Celui-ci raconte le règne le plus long de l'histoire nationale : quarante-cinq ans passés à un mètre du sol, sans qu'une seule paire de pieds royaux n'ait touché terre en public.
+> Le Livre II — *Les Bâtisseurs*, sous-titré *Le Silence et l'Aqueduc* — couvrait 1889–1914. Celui-ci raconte le règne le plus long de l'histoire nationale : quarante-cinq ans passés à un mètre du sol, sans qu'une seule paire de pieds royaux n'ait touché terre en public.
 >
 > Lecture conseillée : en sept fois, de préférence couchée.
 
@@ -128,7 +128,7 @@ Les seize barges de la flottille, rangées en haie dans la rade, virent la lumi�
 
 On l'enterra au pied du chêne, auprès de son père, de sa mère et de son frère. Sur le cercueil, la famille posa trois objets : le crayon le plus court du monde, une poignée de sable de la rive, et la feuille de 1852 — le dessin d'une adolescente qui avait écrit *Ici, un port. Un jour.* —, parce qu'il faut rendre les promesses à ceux qui les ont tenues.
 
-Le registre ne consigne ni époux ni descendance, et il n'y a rien à ajouter à ce que le Livre I disait déjà, et que le Livre II a répété : **le registre reste, sur ce point, exactement aussi silencieux que la règle le veut.**
+Le registre ne consigne ni époux ni descendance, et il n'y a rien à ajouter à ce que le Livre I disait déjà, et que le Livre II fusionné a répété : **le registre reste, sur ce point, exactement aussi silencieux que la règle le veut.**
 
 ## 5. 1917–1919 · Ce que le Royaume fit de la guerre
 
@@ -152,7 +152,7 @@ Le journaliste écrivit que c'était une réponse d'enfant. Le registre **H-1** 
 
 À l'automne 1919, le Royaume fit le point, comme on le fait après les foins, et le compte fut tenu en une page.
 
-Le pays avait ses deux canaux, ses quarante bancs, son port, son phare allumé, une Banque nationale qui gardait du fromage depuis 1897 et n'avait toujours rien prêté à personne, une école de trois matières et demie, un roi qui n'avait pas marché depuis cinq ans, et une population officielle de deux cent quatorze humains que plus personne ne prenait au sérieux, pas même la Chancellerie.
+Le pays avait ses deux canaux, ses quarante-deux bancs, son port, son phare allumé, une Banque nationale qui gardait du fromage depuis 1897 et n'avait toujours rien prêté à personne, une école de trois matières et demie, un roi qui n'avait pas marché depuis cinq ans, et une population officielle de deux cent quatorze humains que plus personne ne prenait au sérieux, pas même la Chancellerie.
 
 Il avait aussi, sans l'avoir cherché, une réputation.
 
@@ -306,7 +306,7 @@ Le roi répondit :
 
 **La seconde** concernait la bouteille.
 
-On se souvient du **batch Fondateur**, brassé en 1889 pour le vingt et unième jour de l'hommage, apporté à la cabane par Hortense elle-même, et dont il avait été décidé sans vote qu'on ne l'ouvrirait pas — décision confirmée en 1914 par son mari, sur le banc nº 40, le jour de la réception des ouvrages : *« Certaines bières doivent rester pures par principe. »*
+On se souvient du **batch Fondateur**, brassé en 1889 pour le vingt et unième jour de l'hommage, apporté à la cabane par Hortense elle-même, et dont il avait été décidé sans vote qu'on ne l'ouvrirait pas — décision confirmée en 1914 par son mari, sur le banc nº 42, le jour de la réception des ouvrages : *« Certaines bières doivent rester pures par principe. »*
 
 Hortense avait laissé une instruction, une ligne, écrite sur la même feuille que son testament de malterie :
 
@@ -345,7 +345,7 @@ L'entrepôt fut bâti ailleurs, sur un terrain de la Route des Péniches, avec u
 
 ## 3. 1928 · Le coussin de la Lecture
 
-On se souvient que le premier **coussin de velours d'État** rembourré en duvet d'édredon boréal datait de l'hiver 1914–1915, et qu'il était, de tous les objets du Royaume, le seul sur lequel on ne pût s'asseoir sans s'excuser. (*Le Livre II en a fait le récit : Irène des Érables menait alors contre un édredon une guerre patiente, qu'elle gagna.*)
+On se souvient que le premier **coussin de velours d'État** rembourré en duvet d'édredon boréal datait de l'hiver 1914–1915, et qu'il était, de tous les objets du Royaume, le seul sur lequel on ne pût s'asseoir sans s'excuser. (*Le Livre II fusionné en a fait le récit : Irène des Érables menait alors contre un édredon une guerre patiente, qu'elle gagna.*)
 
 Il en fallut un second, et l'on sut pourquoi en 1927.
 
@@ -429,7 +429,7 @@ Il s'appelait **Roger**, et l'on ne lui connaît pas d'autre nom dans les regist
 
 **Ici s'arrête ce que le registre dit de lui.** Il ne consigne ni sa naissance, ni son âge le jour de sa nomination, ni sa famille, ni le lieu d'où il venait ; et l'Archiviste royal, qui a dépouillé le fonds, déclare n'avoir trouvé là-dessus que trois choses : qu'il était majeur, qu'il riait, et qu'il riait fort.
 
-La chronique ne comblera pas ce silence. Le Livre I ne l'a pas fait, le Livre II ne l'a pas fait, et le Livre III ne le fera pas davantage : la date de naissance de Roger Bontemps demeure, ici comme au canon, **non consignée**, et c'est un état du registre, non un oubli. On saura seulement, quand viendra 1984, qu'il était alors un adulte attesté au comptoir du premier McBabber's ; d'ici là, le Royaume garde le droit de ne pas savoir l'âge de son rire.
+La chronique ne comblera pas ce silence. Le Livre I ne l'a pas fait, le Livre II fusionné ne l'a pas fait, et le Livre III ne le fera pas davantage : la date de naissance de Roger Bontemps demeure, ici comme au canon, **non consignée**, et c'est un état du registre, non un oubli. On saura seulement, quand viendra 1984, qu'il était alors un adulte attesté au comptoir du premier McBabber's ; d'ici là, le Royaume garde le droit de ne pas savoir l'âge de son rire.
 
 ## 3. 1930–1936 · Le service public du rire
 
@@ -676,7 +676,7 @@ Et le roi, couché sous le vieux tilleul du jardin, dans le hamac de 1856 dont i
 
 À l'automne 1955, la Chancellerie fit le point, sans triomphe et sans inquiétude, comme on fait le point après les foins.
 
-Le Royaume comptait **trois villes** — Pabst City, Port Babette, Grass City — dont une seule, Grass City, avait une devise qu'on pouvait crier ; **un port**, avec un phare qui avait brillé six ans sans interruption et qui brillait encore ; **un Double Aqueduc** de deux kilomètres et deux canaux, avec quarante bancs dont le nº 1 s'appelait toujours le banc zéro ; **une Banque nationale** vieille de cinquante-huit ans qui gardait son fromage, n'avait jamais rien prêté à personne et n'émettrait pas son premier billet avant soixante-huit ans ; **une école** de trois matières et demie ; **une Constitution** de cinq articles dont deux portaient la signature d'un règne couché ; et **deux cent quatorze sujets officiels**, chiffre de 1850 que personne n'avait eu le courage de corriger, ni l'envie.
+Le Royaume comptait **trois villes** — Pabst City, Port Babette, Grass City — dont une seule, Grass City, avait une devise qu'on pouvait crier ; **un port**, avec un phare qui avait brillé six ans sans interruption et qui brillait encore ; **un Double Aqueduc** de deux kilomètres et deux canaux, avec quarante-deux bancs dont le nº 1 s'appelait toujours le banc zéro ; **une Banque nationale** vieille de cinquante-huit ans qui gardait son fromage, n'avait jamais rien prêté à personne et n'émettrait pas son premier billet avant soixante-huit ans ; **une école** de trois matières et demie ; **une Constitution** de cinq articles dont deux portaient la signature d'un règne couché ; et **deux cent quatorze sujets officiels**, chiffre de 1850 que personne n'avait eu le courage de corriger, ni l'envie.
 
 Il comptait aussi un roi de quatre-vingts ans qui n'avait pas posé les pieds par terre depuis 1914, un héritier de quarante-trois ans qui portait des lunettes de soleil et qui démontait ses propres machines, deux jumeaux de dix-sept ans qui alternaient, un enfant de neuf ans qui plissait les yeux, une petite fille de trois ans qui défaisait des cordes, et une reine consort de soixante-treize ans qui, ayant gagné sa guerre contre un édredon quarante ans plus tôt, en menait une seconde contre un coussin de Lecture qui perdait ses plumes.
 

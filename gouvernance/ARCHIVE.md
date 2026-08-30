@@ -9,6 +9,12 @@ Un document **changé d'état** (une édition remplacée par une consolidation) 
 
 Cette règle répond à un risque propre au projet : l'édition consolidée 2026-I reprend **95 % des lignes narratives du supplément 2026-H** (mesure : 155 des 164 lignes longues). Deux textes éditables racontent donc la même histoire. Sans gel, une retouche d'un seul côté créerait une divergence que plus rien ne signalerait — et le statut même d'archive, qui est la garantie que l'on peut comparer un état antérieur à l'état canonique, deviendrait une simple déclaration d'intention.
 
+## Décision éditoriale ultérieure : Livre II
+
+Le même principe a permis de documenter, sans la prolonger, la coexistence temporaire de deux rédactions du Livre II : *Les Bâtisseurs* et *Le Silence et l'Aqueduc*. Cette coexistence appartient désormais à l'historique de travail, non à l'état éditorial courant. Le **30 août 2026**, les deux textes ont été fusionnés dans `chroniques/LIVRE_II_LES_BATISSEURS.md`, qui porte seul le titre *Livre II — Les Bâtisseurs*, le sous-titre *Le Silence et l'Aqueduc* et le compte retenu de **quarante-deux bancs**.
+
+Le fichier de travail `chroniques/LIVRE_II_LE_SILENCE_ET_L_AQUEDUC.md` a été intégré puis supprimé ; Git conserve la trace de cette étape, mais aucun document courant ne doit le traiter comme une version concurrente. Cette résolution éditoriale ne constitue pas une ratification canonique du Livre II : elle signifie seulement qu'aucun futur Avis n'aura à choisir entre deux rédactions.
+
 ## Documents actuellement scellés
 
 | Document | Rôle | Scellé parce que |
