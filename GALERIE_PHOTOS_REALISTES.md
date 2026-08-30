@@ -7,7 +7,7 @@
 
 ## 🌟 Vue d'ensemble
 
-Afin de donner vie au Royaume du Babberland, **cinquante-deux (52)** photographies ultra-réalistes en haute définition sont versées au portail interactif (`index.html`).
+Afin de donner vie au Royaume du Babberland, **soixante-deux (62)** photographies ultra-réalistes en haute définition sont versées au portail interactif (`index.html`).
 
 La campagne 2026-V complète la série 2026-II : les **18 figures du canon** ont désormais chacune un cliché, puis les **cinq régions** et les **offices du Livre VIII**. Les photographies capturent les lieux canoniques, les figures historiques, l'architecture, la numismatique et l'humour caractéristique de la nation.
 
@@ -15,7 +15,7 @@ Ces images sont **hors volume 2026-I et hors scellé `ICONOGRAPHIE.sha256`** : e
 
 ---
 
-## 🖼️ Inventaire Complet de la Galerie (52 Photos)
+## 🖼️ Inventaire Complet de la Galerie (62 Photos)
 
 ### Série 2026-II (16)
 
@@ -88,12 +88,22 @@ Ces images sont **hors volume 2026-I et hors scellé `ICONOGRAPHIE.sha256`** : e
 | `images/realistes/pabstgate_2004.png` | **Pabstgate** | Cloche de la honte, glaçon d'infamie. |
 | `images/realistes/sieste_constitutionnelle.png` | **Sieste constitutionnelle** | Article 4, village entier. |
 | `images/realistes/fauteuil_retrouve.png` | **Fauteuil retrouvé** | Rocking-chair d'État, Livre VI. |
+| `images/realistes/arches_jumelles_chantier.png` | **Chantier des Arches** | Bancs, déjeuner, maçonnerie, 1898–1901. |
+| `images/realistes/pavillon_des_jumeaux.png` | **Pavillon des Jumeaux** | L'un écrit, l'autre dort, Grass City. |
+| `images/realistes/roger_bontemps.png` | **Roger Bontemps** | Grand Bouffon, hors dictionnaire des 18. |
+| `images/realistes/jeux_lents_pabst_city.png` | **Jeux Lents** | Pétanque, sieste, rocking-chairs. |
+| `images/realistes/chene_du_hamac.png` | **Chêne du Hamac** | Vide 58 ans, gardé par un castor. |
+| `images/realistes/sommet_pabst_ketchup.png` | **Sommet Pabst-Ketchup** | Poignée de main sur une poutine. |
+| `images/realistes/naissance_rambo_1962.png` | **15 juillet 1962** | Piscine, Monts, naissance de Rambo. |
+| `images/realistes/canal_double_aqueduc.png` | **Deux canaux** | Eau et Pabst, bancs le long du chemin. |
+| `images/realistes/thermometre_maitre_1898.png` | **Thermomètre Maître** | Étalon 1898, caves de la Banque. |
+| `images/realistes/castor_patriote.png` | **Castor Patriote** | Signataire à la queue. |
 
 ---
 
 ## 🌐 Intégration Web
 
-Les 52 photographies sont consultables dans le portail :
+Les 62 photographies sont consultables dans le portail :
 
 - **Fichier principal** : `index.html`
 - **Onglet dédié** : `📸 Galerie Photos Réalistes` (filtres : Tous · Personnages · Lieux · Institutions · Table & Monnaie)
