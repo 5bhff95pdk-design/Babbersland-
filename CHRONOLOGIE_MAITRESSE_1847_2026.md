@@ -110,6 +110,7 @@ Cette chronologie consolide les événements des anciens documents **2026-G** et
 | **26 août 2026 — naissance** | Naissance et proclamation de Ti-Babber. | Babber Ier le Louche | Fils de Babber le Fou et de Ginette ; ouverture de la **Génération VII**. Babber le Fou reste premier dans l’ordre de succession ; Ti-Babber occupe le second rang. | H | Prioritaire |
 | **26 août 2026 — état H** | Publication du supplément 2026-H. | Babber Ier le Louche | Le document ajoute Ti-Babber, fixe la branche collatérale du Déchiré et corrige l’histoire de McBabber’s. | H | Archive corrigée |
 | **26 août 2026 — état I** | Publication de l’Encyclopédie consolidée 2026-I. | Babber Ier le Louche | Réunion autonome des matières G et H, de la chronologie corrigée et des sept générations. | I | Canon actuel |
+| **29 août 2026 — hymne** | Promulgation de l’hymne national « Debout, tout doucement » (Avis royal n° 8). | Babber Ier le Louche | Six couplets et un refrain sur l’air des tablées du Double Aqueduc ; ♩ = 60, exécution interdite entre 13 h et 15 h. | I | Canon actuel |
 | **Nuit suivant la proclamation, à 23 h 17** | Nuit des Sept Mille : le dernier mini-McLouche reçoit deux cornichons. | Conseil des Sages | Naissance de la Fête de la Double Garniture ; la date civile exacte n’est pas précisée. | H | Heure confirmée |
 | **2026** | Émission métallique des pièces de 1 Babeton, 6 Babetons, 12 Babetons et 1 Babber. | Banque nationale et Monnaie royale | 1 Babber = 24 Babetons. | H | Confirmé |
 

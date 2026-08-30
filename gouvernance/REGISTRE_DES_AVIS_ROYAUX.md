@@ -90,6 +90,19 @@ Les archives royales ayant conservé des fragments d'Avis commençant à l'Avis 
 
 ---
 
+### ⚜️ AVIS ROYAL N° 8
+**Date de promulgation** : 29 août 2026  
+**Souverain** : Babber Ier le Louche (sur rapport de Luc Foster, Grand Argentier)  
+**Objet** : *De l'Institution de l'Hymne National « Debout, tout doucement » et du Repos qui l'entoure*  
+**Texte** :
+> « Considérant qu'un Royaume sans hymne chante faux dans les congrès internationaux et qu'il y chante surtout trop vite ;  
+> Considérant que la sieste sacrée (13 h–15 h) ne saurait être interrompue, fût-ce par la gloire ;  
+> **Il est décrété** : Art. 1er — l'hymne national du Royaume est « Debout, tout doucement », six couplets et un refrain, sur l'air des tablées du Double Aqueduc ; Art. 2 — l'hymne ne s'exécute jamais entre 13 h et 15 h, ni en courant, ni au-delà de ♩ = 66 — la hâte répréhensible se juge au métronome ; Art. 3 — l'enregistrement de référence est déposé aux archives sous scellé reproductible (`make hymne`, graine 1847) ; Art. 4 — le présent Avis inscrit l'hymne au tableau des Symboles nationaux de 2026-I, l'empreinte du volume étant regravée en dernier, comme toujours. »
+
+*Promulgué le 29 août 2026 sur assentiment oral de Sa Majesté, consigné au procès-verbal de la Chancellerie. Pièce jointe : `gouvernance/HYMNE_NATIONAL.md` (paroles, protocole d'exécution, partition ABC, sources canoniques des couplets).*
+
+---
+
 ## Formulaire Officiel d'Avis Royal
 
 Tout futur projet d'Avis soumis au Conseil des Sages doit comporter obligatoirement :

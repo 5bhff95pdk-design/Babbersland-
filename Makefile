@@ -1,5 +1,5 @@
 # Chancellerie royale — chaîne de production du volume 2026-I.
-# Buts : env · arbre · carte · pdf · empreinte · controle · scelle · iconographie · tout · propre
+# Buts : env · arbre · carte · hymne · pdf · empreinte · controle · scelle · iconographie · tout · propre
 # Hors venv, remplacer PY=.venv/bin/python par PY=python3 (make PY=python3).
 
 PY      ?= .venv/bin/python
@@ -7,7 +7,7 @@ VENV    ?= .venv
 PDF     := Royaume_du_Babberland_Encyclopedie_Consolidee_2026_I.pdf
 
 .DEFAULT_GOAL := tout
-.PHONY: env arbre carte pdf empreinte controle scelle iconographie batterie workflows tout propre
+.PHONY: env arbre carte hymne pdf empreinte controle scelle iconographie batterie workflows tout propre
 
 env: ## crée le venv et y épingle les dépendances (contournement PEP 668, constat E-11)
 	@test -x $(PY) || python3 -m venv $(VENV)
@@ -20,6 +20,9 @@ arbre: ## régénère l'arbre généalogique (déterministe au bit près)
 
 carte: ## atlas géographique (proposé, non décrété) : SVG, PNG, HTML
 	$(PY) sources/generate_map.py
+
+hymne: ## hymne national (décrété, Avis royal n° 8) : enregistrement de référence du refrain
+	$(PY) sources/generate_hymne.py
 
 pdf: $(PDF) ## régénère l'encyclopédie PDF 2026-I
 
@@ -61,7 +64,7 @@ controle: ## continuité, parité des données, artéfact publié, fraîcheur, g
 batterie: env
 	$(PY) sources/test_mutations.py
 
-tout: arbre pdf controle empreinte ## la chaîne complète
+tout: arbre hymne pdf controle empreinte ## la chaîne complète
 	@echo "2026-I régénérée et contrôlée."
 
 propre: ## nettoyages mineurs

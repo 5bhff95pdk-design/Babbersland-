@@ -3,7 +3,7 @@
 # c'est cette empreinte, et non le binaire, que la CI compare.
 # Elle est ordonnée page à page (constat E-18) : permuter deux illustrations
 # la modifie. Graver ici = assumer un changement, pas le contrôler (E-21).
-fingerprint = 708776c8a6734880139a5b876f720949
+fingerprint = e1168ee0842c0f1472bee0939045323a
 pages = 29
 images = 24
 placements = 25
