@@ -7,15 +7,15 @@
 
 ## 🌟 Vue d'ensemble
 
-Afin de donner vie au Royaume du Babberland, **vingt-quatre (24)** photographies ultra-réalistes en haute définition sont versées au portail interactif (`index.html`).
+Afin de donner vie au Royaume du Babberland, **trente-quatre (34)** photographies ultra-réalistes en haute définition sont versées au portail interactif (`index.html`).
 
-La campagne 2026-V complète la série 2026-II : les **18 figures du canon** ont désormais chacune un cliché (huit portraits manquants ont été ajoutés). Les photographies capturent les lieux canoniques, les figures historiques, l'architecture, la numismatique et l'humour caractéristique de la nation.
+La campagne 2026-V complète la série 2026-II : les **18 figures du canon** ont désormais chacune un cliché, puis les **cinq régions** et les **offices du Livre VIII**. Les photographies capturent les lieux canoniques, les figures historiques, l'architecture, la numismatique et l'humour caractéristique de la nation.
 
 Ces images sont **hors volume 2026-I et hors scellé `ICONOGRAPHIE.sha256`** : elles n'entrent pas dans le PDF tant qu'un Avis ne les y fait pas entrer. Consigne reconduite : **aucun lettrage dans l'image**.
 
 ---
 
-## 🖼️ Inventaire Complet de la Galerie (24 Photos)
+## 🖼️ Inventaire Complet de la Galerie (34 Photos)
 
 ### Série 2026-II (16)
 
@@ -51,11 +51,26 @@ Ces images sont **hors volume 2026-I et hors scellé `ICONOGRAPHIE.sha256`** : e
 | `images/realistes/babber_le_dechire.png` | **Babber le Déchiré** | Médiateur des Rives, veste verte au coude déchiré, canif d'érable, pouce levé. |
 | `images/realistes/ti_babber.png` | **Ti-Babber / Babber VII (né le 26 août 2026)** | Berceau d'érable, linge vichy bleu, hochet tourné, circelet à la feuille d'érable. |
 
+### Série 2026-V (10) — lieux, offices et table
+
+| Fichier | Sujet | Description & Ambiance |
+|---|---|---|
+| `images/realistes/grass_city_plage.png` | **Grass City** | Plage du lac, moulin à papier et champs de chanvre légal. Devise : « Pousse ». |
+| `images/realistes/palais_royal_pabst_city.png` | **Palais Royal** | Pierre, colombages, castor sculpté, bancs au jardin, aqueduc en fond. |
+| `images/realistes/cabane_1847_foret_plantagenet.png` | **Cabane de 1847** | Nappe vichy, parchemin, hamac au chêne et castor patriote. |
+| `images/realistes/jour_de_l_eau_1904.png` | **Jour de l'Eau (12 oct. 1904)** | Double canal : eau claire et Pabst. Bancs déjà posés. Castors au pied des arches. |
+| `images/realistes/banque_nationale_reserves.png` | **Banque Nationale** | Coffres bimétalliques, barriques de caillé, Thermomètre Maître de 1898. |
+| `images/realistes/gardiens_kouik_kouik.png` | **Gardiens du Kouik-Kouik** | Stéthoscope de laiton, épreuve de la molaire, grain à ≥ 72 dB. |
+| `images/realistes/police_du_frigo.png` | **Police du Frigo** | Thermomètre plongeant, glaçon d'infamie, cloche de zinc. |
+| `images/realistes/confrerie_secret_brun.png` | **Confrérie du Secret Brun** | Cuillère d'argent : la sauce nappe 8 secondes. |
+| `images/realistes/geometres_monts_froisses.png` | **Géomètres Contemplatifs** | Règle d'érable de 1,20 m au pied des deux tas. |
+| `images/realistes/mcbabbers_cuisine_royale.png` | **Cuisine McBabber's n° 1** | Chaudron de sauce, poutines fumantes, comptoir de bois rond. |
+
 ---
 
 ## 🌐 Intégration Web
 
-Les 24 photographies sont consultables dans le portail :
+Les 34 photographies sont consultables dans le portail :
 
 - **Fichier principal** : `index.html`
 - **Onglet dédié** : `📸 Galerie Photos Réalistes` (filtres : Tous · Personnages · Lieux · Institutions · Table & Monnaie)
