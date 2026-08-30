@@ -46,6 +46,9 @@ jobs:
       - name: Parité du portail racine (index.html contre canon/personnages.json)
         run: python sources/check_portal.py
 
+      - name: Chroniques (grandeurs chiffrées, cotes d'archives, registre des divergences)
+        run: python sources/check_chroniques.py
+
       - name: Atlas géographique (proposé, non décrété)
         run: |
           python sources/generate_map.py
@@ -56,6 +59,18 @@ jobs:
         run: |
           python sources/generate_genealogy.py
           git diff --exit-code --stat -- images/arbre_genealogique_complet.png
+
+      # Décrété par l'Avis royal n° 8 (29 août 2026) : l'enregistrement de référence
+      # fait partie de `make tout`, il doit donc être reproductible au bit près.
+      - name: Hymne national (Avis royal n° 8) — enregistrement de référence
+        run: |
+          python sources/generate_hymne.py
+          git diff --exit-code --stat -- audio/hymne_national_babberland.wav
+
+      - name: Vignettes du portail (dérivées des maîtres, déterministes)
+        run: |
+          python sources/generate_vignettes.py
+          git diff --exit-code --stat -- images/vignettes
 
       - name: Régénération de l'encyclopédie 2026-I
         run: python sources/generate_encyclopedie_2026_i.py

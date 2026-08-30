@@ -7,7 +7,7 @@ VENV    ?= .venv
 PDF     := Royaume_du_Babberland_Encyclopedie_Consolidee_2026_I.pdf
 
 .DEFAULT_GOAL := tout
-.PHONY: env arbre carte hymne pdf empreinte controle scelle iconographie batterie workflows tout propre
+.PHONY: env arbre carte hymne vignettes pdf empreinte controle scelle iconographie batterie workflows tout propre
 
 env: ## crée le venv et y épingle les dépendances (contournement PEP 668, constat E-11)
 	@test -x $(PY) || python3 -m venv $(VENV)
@@ -24,6 +24,9 @@ carte: ## atlas géographique (proposé, non décrété) : SVG, PNG, HTML
 hymne: ## hymne national (décrété, Avis royal n° 8) : enregistrement de référence du refrain
 	$(PY) sources/generate_hymne.py
 
+vignettes: ## vignettes WebP du portail (les maîtres PNG ne sont pas touchés, les scellés non plus)
+	$(PY) sources/generate_vignettes.py
+
 pdf: $(PDF) ## régénère l'encyclopédie PDF 2026-I
 
 $(PDF): ENCYCLOPEDIE_CONSOLIDEE_2026_I.md sources/generate_encyclopedie_2026_i.py sources/babberland_images.py $(wildcard images/*.png)
@@ -35,7 +38,10 @@ empreinte: ## grave l'empreinte sémantique du PDF publié — acte d'assentimen
 workflows: ## installe le modèle de CI dans .github/workflows/ (à committer avec un jeton tenant « workflows »)
 	@mkdir -p .github/workflows && cp sources/github_actions_continuite.yml .github/workflows/continuite.yml \
 	  && rm -f .github/workflows/main.yml \
-	  && echo ".github/workflows/continuite.yml installé, talon main.yml retiré — le pousser nécessite la permission « workflows » pour l'App."
+	  && echo ".github/workflows/continuite.yml installé, talon main.yml retiré." \
+	  && echo "Pour l'activer (constat E-17/F-01 : une App ne peut pas pousser ce fichier) :" \
+	  && echo "    git add .github/workflows/continuite.yml && git commit -m 'CI : installation du workflow' && git push" \
+	  && echo "  ou, sans y toucher : github.com/settings/installations → Arena → Workflows : Read and write."
 
 iconographie: ## scelle les maîtres d'illustration par leur nom (gouvernance/ICONOGRAPHIE.sha256)
 	@cd $(CURDIR) && sha256sum images/*.png > gouvernance/ICONOGRAPHIE.sha256 \
@@ -48,10 +54,11 @@ scelle: ## vérifie le gel des archives G et H et des maîtres d'illustration (E
 	@sha256sum --check --quiet gouvernance/ICONOGRAPHIE.sha256 \
 	  && echo "maîtres d'illustration conformes au scellé ($$(grep -c . gouvernance/ICONOGRAPHIE.sha256) lignes)"
 
-controle: ## continuité, parité des données, parité du portail, artéfact, fraîcheur, géographie, archives
+controle: ## continuité, parité des données, chroniques, parité du portail, artéfact, fraîcheur, géographie, archives
 	$(PY) -m py_compile sources/*.py
 	$(PY) sources/check_continuity.py
 	$(PY) sources/check_canon.py
+	$(PY) sources/check_chroniques.py
 	$(PY) sources/check_pdf.py
 	$(PY) sources/pdf_fingerprint.py --check
 	$(PY) sources/check_geography.py
@@ -66,7 +73,7 @@ controle: ## continuité, parité des données, parité du portail, artéfact, f
 batterie: env
 	$(PY) sources/test_mutations.py
 
-tout: arbre hymne pdf controle empreinte ## la chaîne complète
+tout: arbre hymne vignettes pdf controle empreinte ## la chaîne complète
 	@echo "2026-I régénérée et contrôlée."
 
 propre: ## nettoyages mineurs
