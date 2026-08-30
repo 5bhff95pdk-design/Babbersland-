@@ -1,5 +1,5 @@
 # Chancellerie royale — chaîne de production du volume 2026-I.
-# Buts : env · arbre · carte · hymne · pdf · empreinte · controle · scelle · iconographie · tout · propre
+# Buts : env · arbre · carte · hymne · vignettes · pdf · empreinte · controle · scelle · iconographie · lfs · tout · propre
 # Hors venv, remplacer PY=.venv/bin/python par PY=python3 (make PY=python3).
 
 PY      ?= .venv/bin/python
@@ -7,7 +7,7 @@ VENV    ?= .venv
 PDF     := Royaume_du_Babberland_Encyclopedie_Consolidee_2026_I.pdf
 
 .DEFAULT_GOAL := tout
-.PHONY: env arbre carte hymne vignettes pdf empreinte controle scelle iconographie batterie workflows tout propre
+.PHONY: env arbre carte hymne vignettes pdf empreinte controle scelle iconographie lfs batterie workflows tout propre
 
 env: ## crée le venv et y épingle les dépendances (contournement PEP 668, constat E-11)
 	@test -x $(PY) || python3 -m venv $(VENV)
@@ -42,6 +42,14 @@ workflows: ## installe le modèle de CI dans .github/workflows/ (à committer av
 	  && echo "Pour l'activer (constat E-17/F-01 : une App ne peut pas pousser ce fichier) :" \
 	  && echo "    git add .github/workflows/continuite.yml && git commit -m 'CI : installation du workflow' && git push" \
 	  && echo "  ou, sans y toucher : github.com/settings/installations → Arena → Workflows : Read and write."
+
+lfs: ## R1.6 : prépare le passage des binaires lourds en Git LFS (variante A′ — gouvernance/LFS_MIGRATION.md)
+	@command -v git-lfs >/dev/null 2>&1 || (echo "git-lfs absent : l'installer d'abord, voir gouvernance/LFS_MIGRATION.md" && exit 1)
+	git lfs install
+	git lfs track "images/realistes/*.png" "images/vignettes/*.webp" "audio/*"
+	git add -u .gitattributes
+	git commit -m "LFS : galerie 2026-V, vignettes et audio hors Git (R1.6, variante A′)"
+	@echo "Puis « git push » — étape qui exige l'accès au CDN GitHub (bloqué dans l'environnement d'agent, gouvernance/LFS_MIGRATION.md § 2)."
 
 iconographie: ## scelle les maîtres d'illustration par leur nom (gouvernance/ICONOGRAPHIE.sha256)
 	@cd $(CURDIR) && sha256sum images/*.png > gouvernance/ICONOGRAPHIE.sha256 \

@@ -13,6 +13,8 @@ La campagne 2026-V complète la série 2026-II : les **18 figures du canon** ont
 
 Ces images sont **hors volume 2026-I et hors scellé `ICONOGRAPHIE.sha256`** : elles n'entrent pas dans le PDF tant qu'un Avis ne les y fait pas entrer. Consigne reconduite : **aucun lettrage dans l'image**.
 
+**Diffusion (30 août 2026)** : le portail charge en grille des **vignettes WebP de 640 px** dérivées de ces maîtres (`images/vignettes/`, générées par `make vignettes`, 220 Mio → 4,65 Mio) ; le cliché pleine taille du dossier `images/realistes/` reste **un clic plus loin**, dans la visionneuse. Les maîtres ne sont pas modifiés — le scellé d'iconographie et la sortie prévue en LFS (R1.6, `gouvernance/LFS_MIGRATION.md`) les concernent, pas les vignettes.
+
 ---
 
 ## 🖼️ Inventaire Complet de la Galerie (77 Photos)

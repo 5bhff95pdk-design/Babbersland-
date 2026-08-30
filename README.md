@@ -168,3 +168,19 @@ L'arbre dispose d'une maquette vectorielle éditable (`sources/arbre_genealogiqu
 ```bash
 make arbre        # équivalent de : python .venv/bin/python sources/generate_genealogy.py
 ```
+
+## Binaires lourds et Git LFS (R1.6)
+
+Le portail ne charge plus les maîtres PNG en grille : les **vignettes WebP** (`images/vignettes/`,
+`make vignettes`, 220 Mio → 4,65 Mio) servent les grilles des personnages et de la galerie, et le
+maître pleine taille reste **un clic plus loin**, dans la visionneuse. Le poids de diffusion est
+donc réglé sans bouger les maîtres.
+
+Pour sortir les binaires du magasin Git (≈ 330 Mio de candidats), la procédure est écrite et
+mesurée dans **`gouvernance/LFS_MIGRATION.md`** : options A (prospective) et A′ (variante
+recommandée, ≈ 230 Mio) et B (réécriture de l'historique, à avis). `make lfs` exécute la variante
+A′ — **sauf le `git push`**, qui exige l'accès au CDN de GitHub (mesuré le 30 août 2026 : le
+batch LFS répond 200, l'upload des objets vers le S3 de GitHub est bloqué depuis
+l'environnement d'agent ; la migration n'y est donc pas engagée, et ne le sera jamais depuis cet
+environnement tant que ce blocage durera — un dépôt à pointeurs sans objets casserait tous les
+autres clones).
