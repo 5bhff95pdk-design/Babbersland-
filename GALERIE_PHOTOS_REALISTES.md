@@ -7,7 +7,7 @@
 
 ## 🌟 Vue d'ensemble
 
-Afin de donner vie au Royaume du Babberland, **trente-quatre (34)** photographies ultra-réalistes en haute définition sont versées au portail interactif (`index.html`).
+Afin de donner vie au Royaume du Babberland, **quarante-quatre (44)** photographies ultra-réalistes en haute définition sont versées au portail interactif (`index.html`).
 
 La campagne 2026-V complète la série 2026-II : les **18 figures du canon** ont désormais chacune un cliché, puis les **cinq régions** et les **offices du Livre VIII**. Les photographies capturent les lieux canoniques, les figures historiques, l'architecture, la numismatique et l'humour caractéristique de la nation.
 
@@ -15,7 +15,7 @@ Ces images sont **hors volume 2026-I et hors scellé `ICONOGRAPHIE.sha256`** : e
 
 ---
 
-## 🖼️ Inventaire Complet de la Galerie (34 Photos)
+## 🖼️ Inventaire Complet de la Galerie (44 Photos)
 
 ### Série 2026-II (16)
 
@@ -66,11 +66,26 @@ Ces images sont **hors volume 2026-I et hors scellé `ICONOGRAPHIE.sha256`** : e
 | `images/realistes/geometres_monts_froisses.png` | **Géomètres Contemplatifs** | Règle d'érable de 1,20 m au pied des deux tas. |
 | `images/realistes/mcbabbers_cuisine_royale.png` | **Cuisine McBabber's n° 1** | Chaudron de sauce, poutines fumantes, comptoir de bois rond. |
 
+### Série 2026-V (10) — chroniques, atlas et offices
+
+| Fichier | Sujet | Description & Ambiance |
+|---|---|---|
+| `images/realistes/grande_digue_castors.png` | **Grande Digue** | Castors agrandissant l'ouvrage, 1893–1896. |
+| `images/realistes/premier_coup_de_pelle_1893.png` | **Premier coup de pelle** | Bancs déjà posés ; François-Babber, cercle à bulle. |
+| `images/realistes/fjord_des_futs_peniches.png` | **Fjord des Fûts** | Péniches de caillé et de fûts, phare couronné. Toponyme proposé. |
+| `images/realistes/erabliere_trois_erables.png` | **Trois-Érables** | Cabane à sucre, évaporateur, seaux d'érable. |
+| `images/realistes/serie_b_papier_chanvre.png` | **Série B** | Moulin de Grass City, billets de chanvre au castor. |
+| `images/realistes/guerre_des_cornichons.png` | **Guerre des Cornichons** | Frontière interne, 2007–2009. On discute assis. |
+| `images/realistes/nuit_des_sept_mille.png` | **Nuit des Sept Mille** | 26 août 2026, proclamation de Ti-Babber. |
+| `images/realistes/conseil_des_sages.png` | **Conseil des Sages** | Fauteuil berçant, sénateur castor. |
+| `images/realistes/hamac_force.png` | **Hamac Forcé** | Peine de lèse-quiétude, 13 h–15 h. |
+| `images/realistes/hymne_debout_tout_doucement.png` | **Hymne national** | « Debout, tout doucement », Avis n° 8. |
+
 ---
 
 ## 🌐 Intégration Web
 
-Les 34 photographies sont consultables dans le portail :
+Les 44 photographies sont consultables dans le portail :
 
 - **Fichier principal** : `index.html`
 - **Onglet dédié** : `📸 Galerie Photos Réalistes` (filtres : Tous · Personnages · Lieux · Institutions · Table & Monnaie)

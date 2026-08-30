@@ -5,9 +5,9 @@ Toutes les modifications notables apportées au dépôt du **Royaume du Babberla
 ## [2026-V] — 2026-08-30 (galerie photoréaliste — les 18 figures)
 ### Ajouté
 * **Huit portraits photoréalistes** versés à `images/realistes/` : Hortense du Grain, Irène des Érables, Babber II le Piscineux, Honoré-Pabst & Henri-Grain, Babber le Fou, Ginette de Port Babette, Babber le Déchiré, Ti-Babber. Les **18 figures du canon** ont désormais chacune un cliché.
-* **Dix planches de lieux et d'offices** : Grass City, Palais Royal, Cabane de 1847, Jour de l'Eau 1904, Banque Nationale, Gardiens du Kouik-Kouik, Police du Frigo, Confrérie du Secret Brun, Géomètres Contemplatifs, cuisine de McBabber's.
-* **Portail** (`index.html`) : héro du Double Aqueduc, cartes illustrées des cinq régions, dictionnaire des personnages illustré, chroniques et institutions en planches, galerie filtrable (34 photos) et visionneuse.
-* `GALERIE_PHOTOS_REALISTES.md` : inventaire porté de 16 à 34, statut hors volume 2026-I rappelé.
+* **Vingt planches de lieux, offices et chroniques** : Grass City, Palais Royal, Cabane de 1847, Jour de l'Eau, Banque, Gardiens du Kouik-Kouik, Police du Frigo, Confrérie, Géomètres, cuisine de McBabber's, Grande Digue, premier coup de pelle, Fjord des Fûts, Trois-Érables, Série B, Guerre des Cornichons, Nuit des Sept Mille, Conseil des Sages, Hamac Forcé, hymne national.
+* **Portail** (`index.html`) : héro du Double Aqueduc, cartes illustrées des cinq régions, dictionnaire des personnages illustré, chroniques et institutions en planches, galerie filtrable (44 photos) et visionneuse.
+* `GALERIE_PHOTOS_REALISTES.md` : inventaire porté de 16 à 44, statut hors volume 2026-I rappelé.
 
 ### Non modifié
 * Maîtres scellés `images/*.png`, encyclopédie 2026-I, empreinte PDF et `ICONOGRAPHIE.sha256` — la galerie reste hors canon tant qu'un Avis ne l'y fait pas entrer.
