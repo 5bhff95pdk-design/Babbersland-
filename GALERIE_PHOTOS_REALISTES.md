@@ -7,7 +7,7 @@
 
 ## 🌟 Vue d'ensemble
 
-Afin de donner vie au Royaume du Babberland, **soixante-huit (68)** photographies ultra-réalistes en haute définition sont versées au portail interactif (`index.html`).
+Afin de donner vie au Royaume du Babberland, **soixante-dix-sept (77)** photographies ultra-réalistes en haute définition sont versées au portail interactif (`index.html`).
 
 La campagne 2026-V complète la série 2026-II : les **18 figures du canon** ont désormais chacune un cliché, puis les **cinq régions** et les **offices du Livre VIII**. Les photographies capturent les lieux canoniques, les figures historiques, l'architecture, la numismatique et l'humour caractéristique de la nation.
 
@@ -15,7 +15,7 @@ Ces images sont **hors volume 2026-I et hors scellé `ICONOGRAPHIE.sha256`** : e
 
 ---
 
-## 🖼️ Inventaire Complet de la Galerie (68 Photos)
+## 🖼️ Inventaire Complet de la Galerie (77 Photos)
 
 ### Série 2026-II (16)
 
@@ -104,12 +104,21 @@ Ces images sont **hors volume 2026-I et hors scellé `ICONOGRAPHIE.sha256`** : e
 | `images/realistes/bapteme_ti_babber.png` | **Baptême** | Ti-Babber, linge vichy, 26 août 2026. |
 | `images/realistes/traite_des_cornichons_2009.png` | **Traité 2009** | Le Déchiré arbitre, pouce levé. |
 | `images/realistes/cloche_de_la_honte.png` | **Cloche de la Honte** | Zinc, glaçon, thermomètre. |
+| `images/realistes/phare_blanc_couronne.png` | **Phare couronné** | Port Babette, lanterne à couronne d'or. |
+| `images/realistes/quais_port_babette.png` | **Quais d'épinette** | Fromage, barriques, filets. |
+| `images/realistes/salle_du_hamac.png` | **Salle du hamac** | Trône de soie bleu roi, Livre III. |
+| `images/realistes/place_on_s_assoit.png` | **Place où l'on s'assoit** | Hamacs, rocking-chairs, Pabst City. |
+| `images/realistes/flottille_port_babette.png` | **Flottille** | Crépuscule, filets, phare au loin. |
+| `images/realistes/ginette_sauce_2024.png` | **Ginette, 2024** | Remise du Secret Brun. |
+| `images/realistes/mini_mclouches.png` | **Mini-McLouches** | Jouets de bois, poutine miniature. |
+| `images/realistes/union_des_regnes.png` | **Union des Règnes** | Signature 2024, cuillère d'argent. |
+| `images/realistes/nuit_de_leau.png` | **Jour de l'Eau** | Aqueduc qui se remplit, 1904. |
 
 ---
 
 ## 🌐 Intégration Web
 
-Les 68 photographies sont consultables dans le portail :
+Les 77 photographies sont consultables dans le portail :
 
 - **Fichier principal** : `index.html`
 - **Onglet dédié** : `📸 Galerie Photos Réalistes` (filtres : Tous · Personnages · Lieux · Institutions · Table & Monnaie)
