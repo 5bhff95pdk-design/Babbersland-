@@ -35,7 +35,10 @@ empreinte: ## grave l'empreinte sémantique du PDF publié — acte d'assentimen
 workflows: ## installe le modèle de CI dans .github/workflows/ (à committer avec un jeton tenant « workflows »)
 	@mkdir -p .github/workflows && cp sources/github_actions_continuite.yml .github/workflows/continuite.yml \
 	  && rm -f .github/workflows/main.yml \
-	  && echo ".github/workflows/continuite.yml installé, talon main.yml retiré — le pousser nécessite la permission « workflows » pour l'App."
+	  && echo ".github/workflows/continuite.yml installé, talon main.yml retiré." \
+	  && echo "Pour l'activer (constat E-17/F-01 : une App ne peut pas pousser ce fichier) :" \
+	  && echo "    git add .github/workflows/continuite.yml && git commit -m 'CI : installation du workflow' && git push" \
+	  && echo "  ou, sans y toucher : github.com/settings/installations → Arena → Workflows : Read and write."
 
 iconographie: ## scelle les maîtres d'illustration par leur nom (gouvernance/ICONOGRAPHIE.sha256)
 	@cd $(CURDIR) && sha256sum images/*.png > gouvernance/ICONOGRAPHIE.sha256 \

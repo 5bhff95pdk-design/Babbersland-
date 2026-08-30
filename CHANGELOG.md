@@ -2,6 +2,14 @@
 
 Toutes les modifications notables apportées au dépôt du **Royaume du Babberland** sont consignées dans ce document.
 
+## [2026-V] — 2026-08-29
+### Modifié — CI (ticket R0.4)
+* **Gabarit porté à 14 étapes** : `sources/github_actions_continuite.yml` vérifie désormais l'**hymne national** (`sources/generate_hymne.py` + `git diff --exit-code` sur `audio/hymne_national_babberland.wav`). Depuis l'Avis royal n° 8, l'enregistrement de référence fait partie de `make tout` ; il était le seul produit de la chaîne que la CI ne contrôlait pas. Reproductibilité au bit près vérifiée localement (graine 1847, bibliothèque standard seule).
+* **Blocage ré-mesuré** (E-17 / F-01) : l'installation échoue encore, des **deux** côtés — `git push` rejeté (« refusing to allow a GitHub App to create or update workflow … without `workflows` permission ») et API *contents* en **403** « Resource not accessible by integration ». Le poussage du reste de la branche, lui, passe : le manque est bien limité au droit `workflows`.
+* **Documentation** : `README.md` (§ Activation) et `make workflows` donnent les deux voies de sortie — trois commandes avec un jeton humain, ou l'octroi du droit *Workflows : Read and write* à l'App depuis `github.com/settings/installations`.
+### Signalé (relevé lors de l'activation, non traité ici)
+* La PR **#11** (audit AUD-2026-III, 18 fichiers) est en **conflit** avec `main` et héberge le seul exemplaire de `RAPPORT_AUDIT_2026_III.md` (constats **F-01 → F-23**, dont la contradiction inter-volumes F-03 et les cotes d'archives en collision F-02 entre les deux rédactions du Livre II). À rapatrier avant fermeture, sans quoi l'archive perd un rapport qu'elle cite.
+
 ## [2026-IV] — 2026-08-29
 ### Ajouté
 * **Hymne national** : `gouvernance/HYMNE_NATIONAL.md` — « Debout, tout doucement », six couplets et un refrain, protocole d'exécution (jamais entre 13 h et 15 h, jamais en courant, ♩ = 60), partition ABC du refrain et table des sources canoniques de chaque couplet. Statut **proposé, non décrété** ; projet d'**Avis royal n° 8** instruit au Registre.

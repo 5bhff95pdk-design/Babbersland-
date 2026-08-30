@@ -125,10 +125,26 @@ make workflows    # copie sources/github_actions_continuite.yml → .github/work
                   # et retire au passage le talon invalide main.yml
 ```
 
-13 étapes, YAML validé, chacune rejouée localement. Le fichier `.github/workflows/continuite.yml` **ne peut
-pas sortir d'une App** : GitHub refuse qu'un jeton dépourvu du droit `workflows` crée ou modifie
-`.github/workflows/*` (constat **E-17**). Le dépôt versionne donc le modèle, pas sa copie — un humain au
-tableau de bord pousse l'installation, ou merge ce gabarit en y ajoutant le fichier en une étape.
+**14 étapes**, YAML validé, chacune rejouée localement : continuité, parité des données, atlas, arbre,
+**hymne (Avis royal n° 8)**, régénération du volume, artéfact apparié, fraîcheur, scellés, pièce jointe.
+
+Le fichier `.github/workflows/continuite.yml` **ne peut pas sortir d'une App** : GitHub refuse qu'un jeton
+dépourvu du droit `workflows` crée ou modifie `.github/workflows/*` (constats **E-17** et **F-01**, mesuré
+à nouveau le 29 août 2026 — refus à la fois par `git push` et par l'API *contents*). Le dépôt versionne
+donc le modèle, pas sa copie. Deux façons de lever le blocage :
+
+```bash
+# (a) avec un jeton humain — trois commandes, dans un clone à vous
+make workflows
+git add .github/workflows/continuite.yml && git commit -m "CI : installation du workflow de continuité"
+git push
+
+# (b) sans y toucher : accorder le droit à l'App, puis demander sa réexécution
+#     github.com/settings/installations → Arena → Permissions du dépôt → Workflows : Read and write
+```
+
+Tant que l'une des deux n'a pas eu lieu, **les contrôles ne tournent que si on les lance** (`make controle`) :
+aucune vérification automatique ne protège `main`.
 
 ## Atlas géographique (proposé, non décrété)
 

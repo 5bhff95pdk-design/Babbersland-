@@ -2,8 +2,9 @@ name: Continuité Babberland
 
 # Contrôle à chaque push sur main et sur toute pull request :
 # sources (continuité + couverture des illustrations + parité des données JSON),
-# atlas et arbre déterministes, régénération du PDF canonique, artéfact publié
-# apparié planche à planche, empreinte de fraîcheur ordonnée, gel des archives.
+# atlas, arbre et hymne déterministes, régénération du PDF canonique, artéfact
+# publié apparié planche à planche, empreinte de fraîcheur ordonnée, gel des
+# archives et des maîtres d'illustration.
 #
 # La CI ne grave JAMAIS l'empreinte : elle la compare. Graver et vérifier dans la
 # même commande rendrait la vérification infaillible par construction (constat E-21).
@@ -50,6 +51,13 @@ jobs:
         run: |
           python sources/generate_genealogy.py
           git diff --exit-code --stat -- images/arbre_genealogique_complet.png
+
+      # Décrété par l'Avis royal n° 8 (29 août 2026) : l'enregistrement de référence
+      # fait partie de `make tout`, il doit donc être reproductible au bit près.
+      - name: Hymne national (Avis royal n° 8) — enregistrement de référence
+        run: |
+          python sources/generate_hymne.py
+          git diff --exit-code --stat -- audio/hymne_national_babberland.wav
 
       - name: Régénération de l'encyclopédie 2026-I
         run: python sources/generate_encyclopedie_2026_i.py
