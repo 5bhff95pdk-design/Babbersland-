@@ -9,8 +9,9 @@ Archives narratives et iconographiques du Royaume du Babberland.
 1. **`Royaume_du_Babberland_Encyclopedie_Consolidee_2026_I.pdf`** — encyclopédie illustrée consolidée et référence canonique autonome (24 illustrations après la campagne 2026-II).
 2. **`ENCYCLOPEDIE_CONSOLIDEE_2026_I.md`** — source éditoriale du volume 2026-I ; **c'est elle qui fait foi**, y compris sur la liste des illustrations que le PDF doit montrer.
 3. **`CHRONOLOGIE_MAITRESSE_1847_2026.md`** — registre chronologique détaillé, avec règnes, sources et contrôles de continuité.
-4. **`images/`** — portraits, numismatique et arbre généalogique illustré.
-5. **`geographie/`** — atlas temporel (proposé, non décrété) : analyse, roadmap, carte SVG/PNG, page `index.html`.
+4. **`images/`** — portraits, numismatique et arbre généalogique illustré (28 maîtres du volume 2026-I).
+5. **`images/realistes/`** — galerie photoréaliste du portail (77 clichés, dont les 18 figures du canon) ; hors PDF tant qu'un Avis ne les y fait pas entrer.
+6. **`geographie/`** — atlas temporel (proposé, non décrété) : analyse, roadmap, carte SVG/PNG, page `index.html`.
 
 L'édition **2026-I** intègre directement les corrections et ne nécessite aucune règle de préséance documentaire.
 

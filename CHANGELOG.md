@@ -2,6 +2,16 @@
 
 Toutes les modifications notables apportées au dépôt du **Royaume du Babberland** sont consignées dans ce document.
 
+## [2026-V] — 2026-08-30 (galerie photoréaliste — les 18 figures)
+### Ajouté
+* **Huit portraits photoréalistes** versés à `images/realistes/` : Hortense du Grain, Irène des Érables, Babber II le Piscineux, Honoré-Pabst & Henri-Grain, Babber le Fou, Ginette de Port Babette, Babber le Déchiré, Ti-Babber. Les **18 figures du canon** ont désormais chacune un cliché.
+* **Vingt planches de lieux, offices et chroniques** : Grass City, Palais Royal, Cabane de 1847, Jour de l'Eau, Banque, Gardiens du Kouik-Kouik, Police du Frigo, Confrérie, Géomètres, cuisine de McBabber's, Grande Digue, premier coup de pelle, Fjord des Fûts, Trois-Érables, Série B, Guerre des Cornichons, Nuit des Sept Mille, Conseil des Sages, Hamac Forcé, hymne national.
+* **Portail** (`index.html`) : héro du Double Aqueduc, cartes illustrées des cinq régions, dictionnaire des personnages illustré, chroniques et institutions en planches, galerie filtrable (77 photos) et visionneuse.
+* `GALERIE_PHOTOS_REALISTES.md` : inventaire porté de 16 à 77, statut hors volume 2026-I rappelé.
+
+### Non modifié
+* Maîtres scellés `images/*.png`, encyclopédie 2026-I, empreinte PDF et `ICONOGRAPHIE.sha256` — la galerie reste hors canon tant qu'un Avis ne l'y fait pas entrer.
+
 ## [2026-IV] — 2026-08-30 (passe d'audit — constats C1/C5)
 ### Corrigé
 * **Portail racine** : quatre dates du « Dictionnaire des 18 Personnages » alignées sur le canon (`canon/personnages.json` et 2026-I) — Babette Ire **1804**–1892, Hortense du Grain **1840–1922**, Babette-Marine **1836**–1916, Irène des Érables **1882**–1966.

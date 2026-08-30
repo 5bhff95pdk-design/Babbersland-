@@ -107,7 +107,8 @@
       border-color: var(--gold);
     }
 
-    body.dark-mode nav.main-nav button.active, body.dark-mode nav.main-nav button:hover {
+    body.dark-mode nav.main-nav button.active,
+    body.dark-mode nav.main-nav button:hover {
       background: var(--gold);
       color: #121820;
     }
@@ -191,7 +192,103 @@
       border: 1px solid var(--border);
     }
 
-    /* Converter box */
+    .cover {
+      width: 100%;
+      height: 210px;
+      object-fit: cover;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      margin-bottom: 0.85rem;
+      display: block;
+      cursor: zoom-in;
+      background: var(--parchment);
+    }
+
+    .cover.portrait { object-position: center 18%; height: 240px; }
+
+    .hero-photo-wrap {
+      position: relative;
+      margin: 1.2rem 0 0;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      cursor: zoom-in;
+    }
+
+    .hero-photo-wrap img {
+      width: 100%;
+      height: 380px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .hero-photo-wrap figcaption {
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      padding: 1.4rem 1.2rem 0.9rem;
+      background: linear-gradient(transparent, rgba(10, 23, 38, 0.78));
+      color: #fbf7ee;
+      font-size: 0.95rem;
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .filters button {
+      font-family: inherit;
+      font-size: 0.9rem;
+      padding: 0.35rem 0.85rem;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: var(--card-bg);
+      color: var(--navy);
+      cursor: pointer;
+    }
+
+    .filters button.on {
+      background: var(--navy);
+      color: #fff;
+      border-color: var(--gold);
+    }
+
+    body.dark-mode .filters button.on {
+      background: var(--gold);
+      color: #121820;
+    }
+
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 23, 38, 0.92);
+      z-index: 400;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      cursor: zoom-out;
+    }
+
+    .lightbox.open { display: flex; flex-direction: column; }
+
+    .lightbox img {
+      max-width: min(1200px, 96vw);
+      max-height: 82vh;
+      object-fit: contain;
+      border-radius: 6px;
+      box-shadow: 0 12px 40px rgba(0,0,0,.45);
+    }
+
+    .lightbox p {
+      color: #fbf7ee;
+      margin-top: 0.8rem;
+      text-align: center;
+      max-width: 720px;
+    }
+
     .converter-box {
       background: linear-gradient(135deg, var(--parchment) 0%, var(--card-bg) 100%);
       border: 2px solid var(--gold);
@@ -225,7 +322,6 @@
       color: var(--navy);
     }
 
-    /* Filter search */
     .search-input {
       width: 100%;
       padding: 0.8rem 1.2rem;
@@ -249,6 +345,12 @@
     }
 
     footer a { color: var(--gold-light); text-decoration: none; }
+
+    @media (max-width: 700px) {
+      .header-content h1 { font-size: 1.7rem; }
+      .hero-photo-wrap img { height: 220px; }
+      .cover { height: 180px; }
+    }
   </style>
 </head>
 <body>
@@ -262,14 +364,14 @@
   </header>
 
   <nav class="main-nav">
-    <button class="active" onclick="openTab('accueil')">🏠 Accueil</button>
-    <button onclick="openTab('photos')">📸 Galerie Photos Réalistes</button>
-    <button onclick="openTab('canon')">📜 Encyclopédie (2026-I)</button>
-    <button onclick="openTab('chroniques')">📖 Chroniques (I à VI)</button>
-    <button onclick="openTab('institutions')">🏛️ Institutions (Livre VIII)</button>
-    <button onclick="openTab('personnages')">👥 Les 18 Personnages</button>
-    <button onclick="openTab('monnaie')">🪙 Parité Poutine</button>
-    <button onclick="openTab('atlas')">🗺️ Atlas & Régions</button>
+    <button class="active" onclick="openTab('accueil', this)">🏠 Accueil</button>
+    <button onclick="openTab('photos', this)">📸 Galerie Photos Réalistes</button>
+    <button onclick="openTab('canon', this)">📜 Encyclopédie (2026-I)</button>
+    <button onclick="openTab('chroniques', this)">📖 Chroniques (I à VI)</button>
+    <button onclick="openTab('institutions', this)">🏛️ Institutions (Livre VIII)</button>
+    <button onclick="openTab('personnages', this)">👥 Les 18 Personnages</button>
+    <button onclick="openTab('monnaie', this)">🪙 Parité Poutine</button>
+    <button onclick="openTab('atlas', this)">🗺️ Atlas & Régions</button>
   </nav>
 
   <main>
@@ -278,30 +380,44 @@
       <div class="hero-box">
         <h2 class="section-title">Bienvenue au Babberland</h2>
         <p>Le <strong>Royaume du Babberland</strong> est une micronation narrative francophone fondée le <strong>12 octobre 1847</strong> dans la forêt de Plantagenet par <strong>Babber Ier l’Ancien</strong> sur la nappe vichy de son épouse Babette, sous la bénédiction et la signature à la queue d'un castor patriote.</p>
-        <p style="margin-top: 0.8rem;">Ce portail réunit l'intégralité du <strong>Canon Consolidé 2026-I</strong>, les <strong>six Livres des Chroniques de l'Ancien</strong>, les registres d'Avis royaux, les données structurées, la galerie photo ultra-réaliste et l'atlas géographique interactif.</p>
+        <p style="margin-top: 0.8rem;">Ce portail réunit l'intégralité du <strong>Canon Consolidé 2026-I</strong>, les <strong>six Livres des Chroniques de l'Ancien</strong>, les registres d'Avis royaux, les données structurées, la galerie photo ultra-réaliste (77 clichés, dont les 18 figures du canon) et l'atlas géographique interactif.</p>
+        <figure class="hero-photo-wrap" onclick="openLb('images/realistes/pabst_city_et_double_aqueduc.png','Pabst City et le Double Aqueduc de François-Babber, 1904.')">
+          <img src="images/realistes/pabst_city_et_double_aqueduc.png" alt="Pabst City et le Double Aqueduc en automne" loading="eager">
+          <figcaption>Pabst City · Les Arches Jumelles du Double Aqueduc (1904), forêts d'automne.</figcaption>
+        </figure>
       </div>
 
       <h2 class="section-title">Les Cinq Régions Royales (7 000 Âmes)</h2>
       <div class="grid-2">
-        <div class="card">
+        <div class="card" style="padding: 1rem;">
+          <img class="cover" src="images/realistes/pabst_city_et_double_aqueduc.png" alt="Pabst City" loading="lazy" onclick="openLb(this.src, this.alt)">
           <h3>🏛️ Pabst City (3 500 âmes)</h3>
           <p>Capitale du Royaume, siège du Palais Royal, de la Banque Nationale, du Double Aqueduc et du comptoir historique McBabber's n° 1.</p>
           <span class="badge">Capitale</span>
         </div>
-        <div class="card">
+        <div class="card" style="padding: 1rem;">
+          <img class="cover" src="images/realistes/les_monts_froisses.png" alt="Les Monts Froissés" loading="lazy" onclick="openLb(this.src, this.alt)">
           <h3>🏔️ Les Monts Froissés (1,20 m)</h3>
           <p>Alpes nationales créées le 15 juillet 1962 avec les déblais de la piscine de Babber II. Ascension officielle en quatre secondes.</p>
           <span class="badge">Altitude : 1,20 m</span>
         </div>
-        <div class="card">
+        <div class="card" style="padding: 1rem;">
+          <img class="cover" src="images/realistes/phare_blanc_couronne.png" alt="Le phare blanc couronné de Port Babette" loading="lazy" onclick="openLb(this.src, this.alt)">
           <h3>⚓ Port Babette (800 âmes)</h3>
           <p>Cité portuaire fondée par Babette-Marine, réputée pour ses quais en bois d'épinette, son phare blanc couronné et sa pêche contemplative.</p>
           <span class="badge">Maritime</span>
         </div>
-        <div class="card">
+        <div class="card" style="padding: 1rem;">
+          <img class="cover" src="images/realistes/grass_city_plage.png" alt="Grass City, station balnéaire et champs de chanvre" loading="lazy" onclick="openLb(this.src, this.alt)">
           <h3>🌿 Grass City (1 200 âmes)</h3>
-          <p>Station balnéaire et capitale du chanvre légal. Fournit les fibres douces et indéchirables pour les billets de la Série B.</p>
+          <p>Station balnéaire et capitale du chanvre légal. Fournit les fibres douces et indéchirables pour les billets de la Série B. Devise : « Pousse ».</p>
           <span class="badge">Devise : « Pousse »</span>
+        </div>
+        <div class="card" style="padding: 1rem;">
+          <img class="cover" src="images/realistes/cabane_1847_foret_plantagenet.png" alt="Cabane de 1847, Chêne du Hamac et castor patriote" loading="lazy" onclick="openLb(this.src, this.alt)">
+          <h3>🌲 Forêt de Plantagenet (1 500 âmes)</h3>
+          <p>Sanctuaire de la Fondation : cabane de 1847, Chêne du Hamac royal, nappe vichy et signature à la queue du castor patriote. Population proposée, en attente de l'Avis n° 7.</p>
+          <span class="badge">Proposés, non décrétés</span>
         </div>
       </div>
     </section>
@@ -310,122 +426,10 @@
     <section id="photos" class="tab-section">
       <div class="hero-box">
         <h2 class="section-title">📸 Galerie Photo Ultra-Réaliste du Babberland</h2>
-        <p>Collection photographique haute définition capturant avec réalisme les figures historiques, les lieux légendaires, l'architecture et la gastronomie du Royaume du Babberland.</p>
+        <p>Soixante-dix-sept photographies haute définition : les <strong>18 figures du canon</strong>, les cinq régions, les offices d'État, les chroniques et la table du Royaume. Campagnes 2026-II et 2026-V.</p>
       </div>
-
-      <div class="grid-2">
-        <div class="card" style="padding: 1rem;">
-          <img src="images/realistes/babber_ier_l_ancien.png" alt="Babber Ier l'Ancien" style="width: 100%; border-radius: 6px; border: 1px solid var(--border); margin-bottom: 0.8rem;">
-          <h3>👑 Babber Ier l’Ancien (1798–1889)</h3>
-          <p>Le Père fondateur du Royaume rédigeant la Constitution sur la nappe vichy le 12 octobre 1847, assisté par le castor patriote aux portes de la forêt de Plantagenet.</p>
-          <span class="badge">Portrait Historique</span>
-        </div>
-
-        <div class="card" style="padding: 1rem;">
-          <img src="images/realistes/poutine_royale_et_pabst.png" alt="Poutine Royale et Pabst" style="width: 100%; border-radius: 6px; border: 1px solid var(--border); margin-bottom: 0.8rem;">
-          <h3>🍲 La Poutine Royale & La Pabst Fraîche</h3>
-          <p>Symbole suprême de la Parité Poutine Pure (PPP) : frites dorées croustillantes, fromage en grain kouik-kouik à 72 dB et canette glacée à 3,2 °C.</p>
-          <span class="badge">Gastronomie & Monnaie</span>
-        </div>
-
-        <div class="card" style="padding: 1rem;">
-          <img src="images/realistes/pabst_city_et_double_aqueduc.png" alt="Pabst City et Double Aqueduc" style="width: 100%; border-radius: 6px; border: 1px solid var(--border); margin-bottom: 0.8rem;">
-          <h3>🏛️ Pabst City & Le Double Aqueduc</h3>
-          <p>Vue majestueuse des Arches Jumelles du Double Aqueduc de François-Babber (1904) franchissant la rivière au cœur des forêts d'automne de la capitale.</p>
-          <span class="badge">Architecture & Capitale</span>
-        </div>
-
-        <div class="card" style="padding: 1rem;">
-          <img src="images/realistes/babber_ier_le_louche.png" alt="Babber Ier le Louche" style="width: 100%; border-radius: 6px; border: 1px solid var(--border); margin-bottom: 0.8rem;">
-          <h3>👑 Sa Majesté Babber Ier le Louche</h3>
-          <p>Portrait régnant du Souverain en béret couronné, arborant son regard plissé bienveillant, sa louche d'or et sa canette royale de Pabst.</p>
-          <span class="badge">Roi Régnant</span>
-        </div>
-
-        <div class="card" style="padding: 1rem;">
-          <img src="images/realistes/babber_le_dormeur_hamac.png" alt="Babber le Dormeur dans son hamac" style="width: 100%; border-radius: 6px; border: 1px solid var(--border); margin-bottom: 0.8rem;">
-          <h3>🛌 Babber Ier le Dormeur (1875–1959)</h3>
-          <p>Photographie du Souverain de l'Âge Horizontal dormant sereinement dans son hamac de parade au-dessus du sol pendant ses 45 ans de règne.</p>
-          <span class="badge">Âge Horizontal</span>
-        </div>
-
-        <div class="card" style="padding: 1rem;">
-          <img src="images/realistes/mcbabbers_premier_comptoir_1986.png" alt="McBabber's Premier Comptoir 1986" style="width: 100%; border-radius: 6px; border: 1px solid var(--border); margin-bottom: 0.8rem;">
-          <h3>🍔 McBabber’s — Premier Comptoir (1986)</h3>
-          <p>Cliché vintage d'octobre 1986 montrant la taverne originale en bois rond à l'orée du bois lors de l'inauguration par le Roi Babber II.</p>
-          <span class="badge">Patrimoine Boreal</span>
-        </div>
-
-        <div class="card" style="padding: 1rem;">
-          <img src="images/realistes/port_babette_et_phare.png" alt="Port Babette et Phare Couronné" style="width: 100%; border-radius: 6px; border: 1px solid var(--border); margin-bottom: 0.8rem;">
-          <h3>⚓ Port Babette & Son Phare Couronné</h3>
-          <p>La cité maritime fondée par la Princesse Babette-Marine, ses pontons en épinette et son phare blanc surmonté de la couronne royale au soleil couchant.</p>
-          <span class="badge">Littoral & Port</span>
-        </div>
-
-        <div class="card" style="padding: 1rem;">
-          <img src="images/realistes/les_monts_froisses.png" alt="Les Monts Froissés" style="width: 100%; border-radius: 6px; border: 1px solid var(--border); margin-bottom: 0.8rem;">
-          <h3>🏔️ Les Monts Froissés (1,20 m d'altitude)</h3>
-          <p>Cliché commémoratif au sommet des Alpes nationales créées le 15 juillet 1962 avec les terre-pleins de la piscine royale. Ascension franchie en une enjambée.</p>
-          <span class="badge">Géographie & Humour</span>
-        </div>
-
-        <div class="card" style="padding: 1rem;">
-          <img src="images/realistes/babette_ire_plantagenet.png" alt="Babette Ire de Plantagenet" style="width: 100%; border-radius: 6px; border: 1px solid var(--border); margin-bottom: 0.8rem;">
-          <h3>👵 Reine Babette Ire de Plantagenet</h3>
-          <p>Reine consort fondatrice en 1885 tricotant la nappe vichy sacrée au coin de la fenêtre dans son berceau d'érable.</p>
-          <span class="badge">Fondateurs</span>
-        </div>
-
-        <div class="card" style="padding: 1rem;">
-          <img src="images/realistes/francois_babber_aqueducien.png" alt="François-Babber l'Aqueducien" style="width: 100%; border-radius: 6px; border: 1px solid var(--border); margin-bottom: 0.8rem;">
-          <h3>📐 François-Babber l’Aqueducien (1832–1914)</h3>
-          <p>Le Prince Régent et Grand Ingénieur examinant les plans du Double Aqueduc avec ses instruments d'arpenteur en laiton.</p>
-          <span class="badge">Ingénierie & Bâtisseur</span>
-        </div>
-
-        <div class="card" style="padding: 1rem;">
-          <img src="images/realistes/princesse_babette_marine.png" alt="Princesse Babette-Marine" style="width: 100%; border-radius: 6px; border: 1px solid var(--border); margin-bottom: 0.8rem;">
-          <h3>⚓ Princesse Babette-Marine (1836–1916)</h3>
-          <p>La Princesse des Eaux et du Littoral observant les navires de pêche au port à travers sa longue-vue en cuivre en 1900.</p>
-          <span class="badge">Littoral & Marine</span>
-        </div>
-
-        <div class="card" style="padding: 1rem;">
-          <img src="images/realistes/colette_pabst_babbersgate.png" alt="Colette-Pabst du Babbersgate" style="width: 100%; border-radius: 6px; border: 1px solid var(--border); margin-bottom: 0.8rem;">
-          <h3>⚖️ Reine Colette-Pabst & Le Babbersgate (1991)</h3>
-          <p>La Présidente de la Commission Royale d'enquête présidant avec son marteau de buis face au pot de cornichons scellé à la cire.</p>
-          <span class="badge">Justice & Histoire</span>
-        </div>
-
-        <div class="card" style="padding: 1rem;">
-          <img src="images/realistes/reine_linea_sauce_secrete.png" alt="Reine Linéa et la Sauce Royale" style="width: 100%; border-radius: 6px; border: 1px solid var(--border); margin-bottom: 0.8rem;">
-          <h3>🥄 Reine Linéa & La Sauce Secrète</h3>
-          <p>La Première Gardienne de la Sauce Royale touillant le chaudron d'argent en tablier de chanvre brodé d'or.</p>
-          <span class="badge">Gastronomie Royale</span>
-        </div>
-
-        <div class="card" style="padding: 1rem;">
-          <img src="images/realistes/rambo_du_fjord.png" alt="Prince Rambo du Fjord" style="width: 100%; border-radius: 6px; border: 1px solid var(--border); margin-bottom: 0.8rem;">
-          <h3>🎣 Prince Rambo du Fjord (né en 1962)</h3>
-          <p>Le Grand Pêcheur contemplatif au bord des rapides du fjord avec sa canne en frêne sans hameçon.</p>
-          <span class="badge">Dynastie & Nature</span>
-        </div>
-
-        <div class="card" style="padding: 1rem;">
-          <img src="images/realistes/police_de_la_sieste.png" alt="La Garde Dormante / Police de la Sieste" style="width: 100%; border-radius: 6px; border: 1px solid var(--border); margin-bottom: 0.8rem;">
-          <h3>🛌 La Garde Dormante (Police de la Sieste)</h3>
-          <p>Patrouille royale en pantoufles de velours et bonnets de nuit veillant sur la tranquillité publique pendant les heures légales (13h-15h).</p>
-          <span class="badge">Institutions & Humour</span>
-        </div>
-
-        <div class="card" style="padding: 1rem;">
-          <img src="images/realistes/pieces_monnaie_coffret.png" alt="Pièces de Monnaie Coffret Proof 2026" style="width: 100%; border-radius: 6px; border: 1px solid var(--border); margin-bottom: 0.8rem;">
-          <h3>🪙 Coffret Proof 2026 — Monnaie Royale</h3>
-          <p>Collection numismatique officielle comprenant le Babber bimétallique or/argent au castor couronné et ses Babetons divisionnaires.</p>
-          <span class="badge">Numismatique & Économie</span>
-        </div>
-      </div>
+      <div class="filters" id="galFilters"></div>
+      <div id="galleryGrid" class="grid-2"></div>
     </section>
 
     <!-- ENCYCLOPEDIE -->
@@ -444,31 +448,37 @@
       <h2 class="section-title">Les Chroniques de l'Ancien (Livres I à VI)</h2>
       <div class="grid-2">
         <div class="card">
+          <img class="cover" src="images/realistes/cabane_1847_foret_plantagenet.png" alt="Livre I — Les Fondations" loading="lazy" onclick="openLb(this.src, this.alt)">
           <h3>Livre I — Les Fondations (1798–1889)</h3>
           <p>L'enfance de l'Ancien, la course maudite de 1816, le pacte castoral et la nappe du 12 octobre 1847.</p>
           <span class="badge">7 Tranches</span>
         </div>
         <div class="card">
+          <img class="cover" src="images/realistes/nuit_de_leau.png" alt="Livre II — Le Jour de l'Eau, 1904" loading="lazy" onclick="openLb(this.src, this.alt)">
           <h3>Livre II — Les Bâtisseurs (1889–1914)</h3>
           <p>La régence de Babette Ire, François-Babber l'Aqueducien, les 42 bancs et le Jour de l'Eau de 1904.</p>
           <span class="badge">7 Tranches</span>
         </div>
         <div class="card">
+          <img class="cover" src="images/realistes/salle_du_hamac.png" alt="Livre III — La salle du hamac" loading="lazy" onclick="openLb(this.src, 'Livre III — L\'Âge Horizontal')">
           <h3>Livre III — L'Âge Horizontal (1914–1959)</h3>
           <p>Le long règne de Babber le Dormeur, 45 ans passés à un mètre du sol, l'Article 1 et la sieste constitutionnelle.</p>
           <span class="badge">7 Tranches</span>
         </div>
         <div class="card">
+          <img class="cover" src="images/realistes/ouverture_mcbabbers_1986.png" alt="Livre IV — Ouverture de McBabber's, 1er avril 1986" loading="lazy" onclick="openLb(this.src, this.alt)">
           <h3>Livre IV — L'Ère Balnéaire (1959–1998)</h3>
           <p>Babber II, la création des Monts Froissés en 1962, McBabber's (1986) et le procès du Babbersgate.</p>
           <span class="badge">7 Tranches</span>
         </div>
         <div class="card">
+          <img class="cover" src="images/realistes/pavillon_des_jumeaux.png" alt="Livre V — Le Pavillon des Jumeaux" loading="lazy" onclick="openLb(this.src, this.alt)">
           <h3>Livre V — L'Union des Règnes (1998–2010)</h3>
           <p>Les jumeaux Honoré-Pabst et Henri-Grain, le Pabstgate de 2004 et la Guerre des Cornichons arbitrée par le Déchiré.</p>
           <span class="badge">7 Tranches</span>
         </div>
         <div class="card">
+          <img class="cover" src="images/realistes/union_des_regnes.png" alt="Livre VI — L'Union des Règnes, 2024" loading="lazy" onclick="openLb(this.src, this.alt)">
           <h3>Livre VI — Le Siècle qui Louche (2010–2026)</h3>
           <p>Babber Ier le Louche, le vrai fromage de 2018, la Série B en chanvre, Ti-Babber et la Nuit des Sept Mille.</p>
           <span class="badge">7 Tranches</span>
@@ -480,21 +490,45 @@
     <section id="institutions" class="tab-section">
       <h2 class="section-title">Les Corps d'État & Institutions (Livre VIII)</h2>
       <div class="grid-2">
-        <div class="card">
+        <div class="card" style="padding: 1rem;">
+          <img class="cover" src="images/realistes/gardiens_kouik_kouik.png" alt="Gardiens du Kouik-Kouik" loading="lazy" onclick="openLb(this.src, this.alt)">
           <h3>🧀 L'Ordre des Gardiens du Kouik-Kouik</h3>
           <p>Auscultation acoustique matinale du fromage en grain à ≥ 72 dB. Tout grain muet est déchu pour « gratins civils ».</p>
         </div>
-        <div class="card">
+        <div class="card" style="padding: 1rem;">
+          <img class="cover" src="images/realistes/sieste_constitutionnelle.png" alt="Garde Dormante" loading="lazy" onclick="openLb(this.src, this.alt)">
           <h3>🛌 La Garde Dormante (Police de la Sieste)</h3>
           <p>Patrouilles en pantoufles insonorisées de 13 h à 15 h à vitesse bridée à 0,72 m/s. Condamnation au hamac forcé.</p>
         </div>
-        <div class="card">
+        <div class="card" style="padding: 1rem;">
+          <img class="cover" src="images/realistes/police_du_frigo.png" alt="Office de la Fraîcheur" loading="lazy" onclick="openLb(this.src, this.alt)">
           <h3>🍺 L'Office de la Fraîcheur (Police du Frigo)</h3>
           <p>Garantit la température légale (+2,0 °C à +3,8 °C). Cloche de la honte en cas de bière tiède (> 4,0 °C).</p>
         </div>
-        <div class="card">
+        <div class="card" style="padding: 1rem;">
+          <img class="cover" src="images/realistes/confrerie_secret_brun.png" alt="Confrérie du Secret Brun" loading="lazy" onclick="openLb(this.src, this.alt)">
           <h3>🥄 La Confrérie du Secret Brun</h3>
           <p>Présidée par Linéa et Ginette : garde de la recette secrète à la cuillère d'argent (8 s) et des 317 pots historiques.</p>
+        </div>
+        <div class="card" style="padding: 1rem;">
+          <img class="cover" src="images/realistes/geometres_monts_froisses.png" alt="Géomètres Contemplatifs" loading="lazy" onclick="openLb(this.src, this.alt)">
+          <h3>📏 Les Géomètres Contemplatifs</h3>
+          <p>Mesure trimestrielle des Monts Froissés à la règle d'érable : 1,20 m pile. Toute ascension en moins de quatre secondes est une hâte suspecte.</p>
+        </div>
+        <div class="card" style="padding: 1rem;">
+          <img class="cover" src="images/realistes/banque_nationale_reserves.png" alt="Banque Nationale" loading="lazy" onclick="openLb(this.src, this.alt)">
+          <h3>🏦 La Banque Nationale de Pabst City</h3>
+          <p>Réserve stratégique de fromage en grain, trésor bimétallique et Thermomètre Maître en laiton de 1898.</p>
+        </div>
+        <div class="card" style="padding: 1rem;">
+          <img class="cover" src="images/realistes/conseil_des_sages.png" alt="Conseil des Sages" loading="lazy" onclick="openLb(this.src, this.alt)">
+          <h3>🪵 Le Conseil des Sages</h3>
+          <p>Fauteuil berçant en chêne, sénateur castor, séances de 10 h à 11 h 45. Deux citoyens tirés au sort parmi les meilleurs dormeurs.</p>
+        </div>
+        <div class="card" style="padding: 1rem;">
+          <img class="cover" src="images/realistes/hamac_force.png" alt="Hamac forcé" loading="lazy" onclick="openLb(this.src, this.alt)">
+          <h3>🪢 Le Hamac Forcé</h3>
+          <p>Peine de lèse-quiétude : deux heures sans parole, oreiller de parade, clochette à sourdine.</p>
         </div>
       </div>
     </section>
@@ -510,9 +544,10 @@
     <section id="monnaie" class="tab-section">
       <h2 class="section-title">La Parité Poutine Pure (PPP)</h2>
       <div class="hero-box">
+        <img class="cover" src="images/realistes/pieces_monnaie_coffret.png" alt="Coffret Proof 2026" style="height: 280px;" loading="lazy" onclick="openLb(this.src, this.alt)">
         <p><strong>1 Babber (1 ฿)</strong> ≡ 1 Poutine Régulière Royale (fromage 180g, frites 260g, sauce 140ml) + 1 Pabst Fraîche (355ml à 3,2 °C).</p>
         <p style="margin-top: 0.5rem;"><strong>1 Babber (฿) = 24 Babetons (bt)</strong> (la Caisse entière).</p>
-        
+
         <div class="converter-box">
           <h3>🧮 Convertisseur Monétaire Royal</h3>
           <div class="converter-row">
@@ -541,17 +576,34 @@
     <p style="margin-top: 0.4rem;">« Une Pabst, une poutine, et on relaxe. » · <a href="gouvernance/index.html">Tableau de Bord de Gouvernance</a></p>
   </footer>
 
+  <div class="lightbox" id="lightbox" onclick="closeLb()">
+    <img id="lbImg" alt="">
+    <p id="lbCap"></p>
+  </div>
+
   <script>
     function toggleTheme() {
       document.body.classList.toggle('dark-mode');
     }
 
-    function openTab(tabId) {
+    function openTab(tabId, btn) {
       document.querySelectorAll('.tab-section').forEach(sec => sec.classList.remove('active'));
-      document.querySelectorAll('.main-nav button').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.main-nav button').forEach(b => b.classList.remove('active'));
       document.getElementById(tabId).classList.add('active');
-      event.currentTarget.classList.add('active');
+      (btn || event.currentTarget).classList.add('active');
     }
+
+    function openLb(src, cap) {
+      document.getElementById('lbImg').src = src;
+      document.getElementById('lbCap').textContent = cap || '';
+      document.getElementById('lightbox').classList.add('open');
+    }
+
+    function closeLb() {
+      document.getElementById('lightbox').classList.remove('open');
+    }
+
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLb(); });
 
     function convertFromBabber() {
       // 1 Babber = 24 Babetons = 1 Poutine Royale (23 bt) + 1 Canette (1 bt).
@@ -565,30 +617,31 @@
     }
 
     const characters = [
-      { name: "Babber Ier l’Ancien", dates: "1798–1889", role: "Fondateur & 1er Roi", note: "Pacte castoral de 1816 et Nappe du 12 octobre 1847." },
-      { name: "Babette Ire de Plantagenet", dates: "1804–1892", role: "Reine Consort Fondatrice", note: "Prêteuse de la nappe vichy et régente de mémoire." },
-      { name: "François-Babber l’Aqueducien", dates: "1832–1914", role: "Prince Régent & Ingénieur", note: "Bâtisseur du Double Aqueduc et des 42 bancs." },
-      { name: "Hortense du Grain", dates: "1840–1922", role: "Princesse Consort", note: "Fondatrice de la réserve céréalière royale." },
-      { name: "Princesse Babette-Marine", dates: "1836–1916", role: "Princesse du Littoral", note: "Créatrice du port moderne de Port Babette et de son phare." },
-      { name: "Babber Ier le Dormeur", dates: "1875–1959", role: "Roi du Silence (1914–1959)", note: "45 ans de règne en hamac, Articles 1 & 4." },
-      { name: "Irène des Érables", dates: "1882–1966", role: "Reine Consort", note: "Morte en 1966, mère de Babber II." },
-      { name: "Babber II le Piscineux", dates: "1912–2002", role: "Roi Baigneur (1959–1998)", note: "Créateur des Monts Froissés (1,20 m) et de McBabber's." },
-      { name: "Colette-Pabst de Grass City", dates: "1920–2011", role: "Reine Consort & Juge", note: "Présidente de la commission du Babbersgate (1991–1993)." },
-      { name: "Honoré-Pabst", dates: "né 1938", role: "Co-souverain (1998–2010)", note: "Signataire des jours impairs de l'Union des Règnes." },
-      { name: "Henri-Grain", dates: "né 1938", role: "Co-souverain (1998–2010)", note: "Signataire des jours pairs de l'Union des Règnes." },
-      { name: "Babber Ier le Louche", dates: "né 1946", role: "Roi Régnant (depuis 2010)", note: "Article 5, Série B en chanvre et proclamation de Génération VII." },
-      { name: "Reine Linéa de Grass City", dates: "née 1952", role: "Reine Consort", note: "Créatrice du nom McBabber's et de la Sauce secrète de 1986." },
-      { name: "Prince Rambo du Fjord", dates: "né 1962", role: "Prince du Fleuve", note: "Né le jour des Monts Froissés, grand pêcheur sans hameçon." },
-      { name: "Prince Babber le Fou", dates: "né 1986", role: "Héritier Présomptif (1er rang)", note: "Né le 1er avril 1986 à l'ouverture du premier restaurant." },
-      { name: "Princesse Ginette", dates: "née 1988", role: "Princesse Consort", note: "Gardienne de la Sauce royale et mère de Ti-Babber." },
-      { name: "Babber le Déchiré", dates: "collatéral", role: "Médiateur des Rives", note: "Médiateur de paix de la Guerre des Cornichons (2009)." },
-      { name: "Ti-Babber (Babber VII)", dates: "né 26 août 2026", role: "Prince Héritier en Second (2e)", note: "Septième génération issue de la fondation de 1847." }
+      { name: "Babber Ier l’Ancien", dates: "1798–1889", photo: "images/realistes/babber_ier_l_ancien.png", role: "Fondateur & 1er Roi", note: "Pacte castoral de 1816 et Nappe du 12 octobre 1847." },
+      { name: "Babette Ire de Plantagenet", dates: "1804–1892", photo: "images/realistes/babette_ire_plantagenet.png", role: "Reine Consort Fondatrice", note: "Prêteuse de la nappe vichy et régente de mémoire." },
+      { name: "François-Babber l’Aqueducien", dates: "1832–1914", photo: "images/realistes/francois_babber_aqueducien.png", role: "Prince Régent & Ingénieur", note: "Bâtisseur du Double Aqueduc et des 42 bancs." },
+      { name: "Hortense du Grain", dates: "1840–1922", photo: "images/realistes/hortense_du_grain.png", role: "Princesse Consort", note: "Fondatrice de la réserve céréalière royale." },
+      { name: "Princesse Babette-Marine", dates: "1836–1916", photo: "images/realistes/princesse_babette_marine.png", role: "Princesse du Littoral", note: "Créatrice du port moderne de Port Babette et de son phare." },
+      { name: "Babber Ier le Dormeur", dates: "1875–1959", photo: "images/realistes/babber_le_dormeur_hamac.png", role: "Roi du Silence (1914–1959)", note: "45 ans de règne en hamac, Articles 1 & 4." },
+      { name: "Irène des Érables", dates: "1882–1966", photo: "images/realistes/irene_des_erables.png", role: "Reine Consort", note: "Morte en 1966, mère de Babber II." },
+      { name: "Babber II le Piscineux", dates: "1912–2002", photo: "images/realistes/babber_ii_piscineux.png", role: "Roi Baigneur (1959–1998)", note: "Créateur des Monts Froissés (1,20 m) et de McBabber's." },
+      { name: "Colette-Pabst de Grass City", dates: "1920–2011", photo: "images/realistes/colette_pabst_babbersgate.png", role: "Reine Consort & Juge", note: "Présidente de la commission du Babbersgate (1991–1993)." },
+      { name: "Honoré-Pabst", dates: "né 1938", photo: "images/realistes/honore_pabst_henri_grain.png", role: "Co-souverain (1998–2010)", note: "Signataire des jours impairs de l'Union des Règnes." },
+      { name: "Henri-Grain", dates: "né 1938", photo: "images/realistes/honore_pabst_henri_grain.png", role: "Co-souverain (1998–2010)", note: "Signataire des jours pairs de l'Union des Règnes." },
+      { name: "Babber Ier le Louche", dates: "né 1946", photo: "images/realistes/babber_ier_le_louche.png", role: "Roi Régnant (depuis 2010)", note: "Article 5, Série B en chanvre et proclamation de Génération VII." },
+      { name: "Reine Linéa de Grass City", dates: "née 1952", photo: "images/realistes/reine_linea_sauce_secrete.png", role: "Reine Consort", note: "Créatrice du nom McBabber's et de la Sauce secrète de 1986." },
+      { name: "Prince Rambo du Fjord", dates: "né 1962", photo: "images/realistes/rambo_du_fjord.png", role: "Prince du Fleuve", note: "Né le jour des Monts Froissés, grand pêcheur sans hameçon." },
+      { name: "Prince Babber le Fou", dates: "né 1986", photo: "images/realistes/babber_le_fou.png", role: "Héritier Présomptif (1er rang)", note: "Né le 1er avril 1986 à l'ouverture du premier restaurant." },
+      { name: "Princesse Ginette", dates: "née 1988", photo: "images/realistes/ginette_de_port_babette.png", role: "Princesse Consort", note: "Gardienne de la Sauce royale et mère de Ti-Babber." },
+      { name: "Babber le Déchiré", dates: "collatéral", photo: "images/realistes/babber_le_dechire.png", role: "Médiateur des Rives", note: "Médiateur de paix de la Guerre des Cornichons (2009)." },
+      { name: "Ti-Babber (Babber VII)", dates: "né 26 août 2026", photo: "images/realistes/ti_babber.png", role: "Prince Héritier en Second (2e)", note: "Septième génération issue de la fondation de 1847." }
     ];
 
     function renderCharacters(list) {
       const grid = document.getElementById('characterGrid');
       grid.innerHTML = list.map(c => `
-        <div class="card">
+        <div class="card" style="padding: 1rem;">
+          <img class="cover portrait" src="${c.photo}" alt="${c.name} — ${c.role}" loading="lazy" onclick="openLb(this.src, this.alt)">
           <h3>${c.name}</h3>
           <p><strong>${c.role}</strong> (${c.dates})</p>
           <p>${c.note}</p>
@@ -602,7 +655,123 @@
       renderCharacters(filtered);
     }
 
+    const gallery = [
+      { src: "images/realistes/babber_ier_l_ancien.png", title: "👑 Babber Ier l’Ancien (1798–1889)", text: "Le Père fondateur rédigeant la Constitution sur la nappe vichy le 12 octobre 1847, assisté du castor patriote.", cat: "personnage", badge: "Génération I" },
+      { src: "images/realistes/babette_ire_plantagenet.png", title: "👵 Reine Babette Ire de Plantagenet", text: "Reine consort fondatrice en 1885, tricotant la nappe vichy sacrée au coin de la fenêtre.", cat: "personnage", badge: "Génération I" },
+      { src: "images/realistes/francois_babber_aqueducien.png", title: "📐 François-Babber l’Aqueducien (1832–1914)", text: "Le Prince Régent et Grand Ingénieur examinant les plans du Double Aqueduc.", cat: "personnage", badge: "Génération II" },
+      { src: "images/realistes/hortense_du_grain.png", title: "🌾 Hortense du Grain (1840–1922)", text: "Princesse Consort de l'Aqueduc, épi d'orge et fiole de petit-lait : elle fonda la réserve céréalière.", cat: "personnage", badge: "Génération II · nouveau" },
+      { src: "images/realistes/princesse_babette_marine.png", title: "⚓ Princesse Babette-Marine (1836–1916)", text: "La Princesse des Eaux observant les navires au port à travers sa longue-vue en cuivre.", cat: "personnage", badge: "Génération II" },
+      { src: "images/realistes/babber_le_dormeur_hamac.png", title: "🛌 Babber Ier le Dormeur (1875–1959)", text: "Le Souverain de l'Âge Horizontal dormant dans son hamac de parade pendant 45 ans de règne.", cat: "personnage", badge: "Génération III" },
+      { src: "images/realistes/irene_des_erables.png", title: "🍁 Irène des Érables (1882–1966)", text: "Reine Consort du Silence, châle d'automne et sirop d'érable, à la fenêtre des érables.", cat: "personnage", badge: "Génération III · nouveau" },
+      { src: "images/realistes/babber_ii_piscineux.png", title: "🏊 Babber II le Piscineux (1912–2002)", text: "Roi Baigneur au bord de sa piscine, mini-pelleteuse et Monts Froissés de 1,20 m au fond du jardin.", cat: "personnage", badge: "Génération IV · nouveau" },
+      { src: "images/realistes/colette_pabst_babbersgate.png", title: "⚖️ Reine Colette-Pabst & Le Babbersgate (1991)", text: "Présidente de la Commission royale, marteau de buis et pot de cornichons scellé.", cat: "personnage", badge: "Génération IV" },
+      { src: "images/realistes/honore_pabst_henri_grain.png", title: "✍️ Honoré-Pabst & Henri-Grain (nés 1938)", text: "L'Union des Règnes : l'un signe les jours impairs, l'autre dort les jours pairs. Deux castors assermentés.", cat: "personnage", badge: "Génération V · nouveau" },
+      { src: "images/realistes/babber_ier_le_louche.png", title: "👑 Sa Majesté Babber Ier le Louche", text: "Portrait régnant du Souverain en béret couronné, louche d'or et Pabst à 3,2 °C.", cat: "personnage", badge: "Roi régnant" },
+      { src: "images/realistes/reine_linea_sauce_secrete.png", title: "🥄 Reine Linéa & La Sauce Secrète", text: "Première Gardienne de la Sauce Royale touillant le chaudron d'argent en tablier de chanvre.", cat: "personnage", badge: "Génération V" },
+      { src: "images/realistes/rambo_du_fjord.png", title: "🎣 Prince Rambo du Fjord (né en 1962)", text: "Le Grand Pêcheur contemplatif au bord des rapides, canne en frêne sans hameçon.", cat: "personnage", badge: "Génération V" },
+      { src: "images/realistes/babber_le_fou.png", u.png", title: "🎈 Prince Babber le Fou (né le 1er avril 1986)", text: "Héritier présomptif : spatule de bois, ballon jaune et regard vif. Né à l'ouverture de McBabber's.", cat: "personnage", badge: "Génération VI · nouveau" },
+      { src: "images/realistes/ginette_de_port_babette.png", title: "🫙 Princesse Ginette de Port Babette (née 1988)", text: "Grande Maîtresse de la Sauce : louche d'argent couronnée et pot scellé à la cire, phare à la fenêtre.", cat: "personnage", badge: "Génération VI · nouveau" },
+      { src: "images/realistes/babber_le_dechire.png", title: "👍 Babber le Déchiré", text: "Médiateur des Rives, veste verte au coude déchiré et canif d'érable. Branche collatérale, sans prétention.", cat: "personnage", badge: "Collatéral · nouveau" },
+      { src: "images/realistes/ti_babber.png", title: "🍼 Ti-Babber (Babber VII, né le 26 août 2026)", text: "Prince héritier en second : linge vichy bleu, hochet d'érable et circelet à la feuille d'érable.", cat: "personnage", badge: "Génération VII · nouveau" },
+      { src: "images/realistes/pabst_city_et_double_aqueduc.png", title: "🏛️ Pabst City & Le Double Aqueduc", text: "Les Arches Jumelles de François-Babber (1904) franchissant la rivière au cœur des forêts d'automne.", cat: "lieu", badge: "Capitale" },
+      { src: "images/realistes/palais_royal_pabst_city.png", title: "🏰 Palais Royal de Pabst City", text: "Pierre, colombages, castor sculpté au tympan, bancs au jardin et aqueduc en fond.", cat: "lieu", badge: "Capitale · nouveau" },
+      { src: "images/realistes/port_babette_et_phare.png", title: "⚓ Port Babette & Son Phare Couronné", text: "Cité maritime, pontons d'épinette et phare blanc surmonté de la couronne au soleil couchant.", cat: "lieu", badge: "Littoral" },
+      { src: "images/realistes/grass_city_plage.png", title: "🌿 Grass City — Plage, moulin et chanvre", text: "Station balnéaire, moulin à papier fiduciaire et champs de chanvre légal. Devise : « Pousse ».", cat: "lieu", badge: "1 200 âmes · nouveau" },
+      { src: "images/realistes/cabane_1847_foret_plantagenet.png", title: "🌲 Cabane de 1847 & Chêne du Hamac", text: "Nappe vichy, parchemin blanc, castor patriote et hamac au grand chêne — sanctuaire de la Fondation.", cat: "lieu", badge: "Forêt · nouveau" },
+      { src: "images/realistes/les_monts_froisses.png", title: "🏔️ Les Monts Froissés (1,20 m)", text: "Alpes nationales du 15 juillet 1962, déblais de la piscine royale. Ascension en une enjambée.", cat: "lieu", badge: "Géographie" },
+      { src: "images/realistes/jour_de_l_eau_1904.png", title: "💧 Le Jour de l'Eau (12 octobre 1904)", text: "Les deux canaux coulent : l'eau claire et la Pabst. Bancs déjà posés. Castors au pied des arches.", cat: "lieu", badge: "1904 · nouveau" },
+      { src: "images/realistes/mcbabbers_premier_comptoir_1986.png", title: "🍔 McBabber’s — Premier Comptoir (1986)", text: "Cliché vintage d'octobre 1986 : taverne en bois rond à l'orée du bois, inaugurée par Babber II.", cat: "lieu", badge: "Patrimoine" },
+      { src: "images/realistes/mcbabbers_cuisine_royale.png", title: "🍳 Cuisine de l'enseigne n° 1", text: "Chaudron de sauce, poutines fumantes et canettes glacées derrière le comptoir de bois rond.", cat: "gastronomie", badge: "McBabber's · nouveau" },
+      { src: "images/realistes/police_de_la_sieste.png", title: "🛌 La Garde Dormante (Police de la Sieste)", text: "Patrouille en pantoufles de velours et bonnets de nuit, 13 h–15 h, vitesse 0,72 m/s.", cat: "institution", badge: "Livre VIII" },
+      { src: "images/realistes/gardiens_kouik_kouik.png", title: "🧀 Les Gardiens du Kouik-Kouik", text: "Trois auscultateurs jurés : stéthoscope de laiton, épreuve de la molaire, grain à ≥ 72 dB.", cat: "institution", badge: "Livre VIII · nouveau" },
+      { src: "images/realistes/police_du_frigo.png", title: "🍺 La Police du Frigo", text: "Thermomètre plongeant en laiton, glaçon d'infamie et cloche de zinc : zone canon 2,0–3,8 °C.", cat: "institution", badge: "Livre VIII · nouveau" },
+      { src: "images/realistes/confrerie_secret_brun.png", title: "🥄 La Cérémonie de la Cuillère d'Argent", text: "La sauce doit napper le dos de la cuillère couronnée pendant exactement huit secondes.", cat: "institution", badge: "Livre VIII · nouveau" },
+      { src: "images/realistes/geometres_monts_froisses.png", title: "📏 Les Géomètres Contemplatifs", text: "Règle d'érable de 1,20 m et chronomètre : ni 1,18 m ni 1,22 m, et pas plus vite que quatre secondes.", cat: "institution", badge: "Livre VIII · nouveau" },
+      { src: "images/realistes/banque_nationale_reserves.png", title: "🏦 Voûtes de la Banque Nationale", text: "Coffres de Babbers bimétalliques, barriques de caillé et Thermomètre Maître de 1898.", cat: "institution", badge: "Livre VIII · nouveau" },
+      { src: "images/realistes/poutine_royale_et_pabst.png", title: "🍲 La Poutine Royale & La Pabst Fraîche", text: "Parité Poutine Pure : frites, fromage en grain kouik-kouik à 72 dB et canette glacée à 3,2 °C.", cat: "gastronomie", badge: "PPP" },
+      { src: "images/realistes/pieces_monnaie_coffret.png", title: "🪙 Coffret Proof 2026 — Monnaie Royale", text: "Babber bimétallique or/argent au castor couronné et Babetons divisionnaires.", cat: "gastronomie", badge: "Numismatique" },
+      { src: "images/realistes/grande_digue_castors.png", title: "🦫 La Grande Digue des Castors", text: "Les propriétaires agrandissent eux-mêmes l'ouvrage, 1893–1896. École d'ingénierie castorale.", cat: "lieu", badge: "Livre II · nouveau" },
+      { src: "images/realistes/premier_coup_de_pelle_1893.png", title: "🪓 Le premier coup de pelle (1893)", text: "Les bancs sont déjà posés. François-Babber, cercle à bulle, première pelletée.", cat: "lieu", badge: "Livre II · nouveau" },
+      { src: "images/realistes/fjord_des_futs_peniches.png", title: "🛶 Le Fjord des Fûts", text: "Péniches de caillé et de fûts glacés, phare couronné au crépuscule. Toponyme proposé.", cat: "lieu", badge: "Atlas · nouveau" },
+      { src: "images/realistes/erabliere_trois_erables.png", title: "🍁 L'érablière des Trois-Érables", text: "Cabane à sucre de la forêt de Plantagenet, vapeur d'évaporateur, seaux d'érable.", cat: "lieu", badge: "Forêt · nouveau" },
+      { src: "images/realistes/serie_b_papier_chanvre.png", title: "💵 La Série B en chanvre", text: "Moulin de Grass City : fibres, presse à bras, billets au castor sans lettrage.", cat: "gastronomie", badge: "Monnaie · nouveau" },
+      { src: "images/realistes/guerre_des_cornichons.png", title: "🥒 La Guerre des Cornichons (2007–2009)", text: "Chargement retenu à la frontière interne. On discute assis. Le Déchiré arbitrera.", cat: "lieu", badge: "Livre V · nouveau" },
+      { src: "images/realistes/nuit_des_sept_mille.png", title: "🌙 La Nuit des Sept Mille (26 août 2026)", text: "Proclamation de Ti-Babber : linge vichy, spatules de bois, hamacs dans les érables.", cat: "personnage", badge: "Génération VII · nouveau" },
+      { src: "images/realistes/conseil_des_sages.png", title: "🪵 Le Conseil des Sages", text: "Fauteuil berçant, sénateur castor, deux citoyens tirés au sort parmi les meilleurs dormeurs.", cat: "institution", badge: "Livre VIII · nouveau" },
+      { src: "images/realistes/hamac_force.png", title: "🪢 Le Hamac Forcé", text: "Peine de lèse-quiétude : deux heures sans parole, oreiller de parade, pantoufles de garde.", cat: "institution", badge: "Livre VIII · nouveau" },
+      { src: "images/realistes/hymne_debout_tout_doucement.png", title: "🎵 Debout, tout doucement", text: "Hymne national, Avis n° 8. On ne court pas. On ne chante pas entre 13 h et 15 h. Un castor au premier rang.", cat: "institution", badge: "Avis n° 8 · nouveau" },
+      { src: "images/realistes/nappe_vichy_constitution.png", title: "🪶 La Nappe du 12 octobre 1847", text: "Vichy rouge et blanc, parchemin, plume, et la queue du castor patriote posée pour signer.", cat: "lieu", badge: "Fondation · nouveau" },
+      { src: "images/realistes/champs_orge_du_grain.png", title: "🌾 Les champs d'orge du Grain", text: "Réserve céréalière, houblon en bordure, soleil couchant. Hortense y veille.", cat: "lieu", badge: "Atlas · nouveau" },
+      { src: "images/realistes/station_repos_1984.png", title: "🪑 La station de repos (1984)", text: "Trois rocking-chairs face au Palais, avant McBabber's. On s'y assoit. On n'y court pas.", cat: "lieu", badge: "1984 · nouveau" },
+      { src: "images/realistes/ouverture_mcbabbers_1986.png", title: "🍟 L'ouverture du 1er avril 1986", text: "15 h 01 : l'enseigne s'ouvre, Linéa à la cuisine, naissance de Babber le Fou.", cat: "lieu", badge: "1986 · nouveau" },
+      { src: "images/realistes/babbersgate_317_pots.png", title: "🥒 Les 317 pots du Babbersgate (1991)", text: "Colette-Pabst préside. Les cornichons sont les pièces à conviction.", cat: "institution", badge: "1991 · nouveau" },
+      { src: "images/realistes/pabstgate_2004.png", title: "🔔 Le Pabstgate (2004)", text: "Cloche de la honte, glaçon d'infamie, frigo ouvert : la bière était tiède.", cat: "institution", badge: "2004 · nouveau" },
+      { src: "images/realistes/sieste_constitutionnelle.png", title: "😴 La sieste constitutionnelle", text: "13 h–15 h. Le village entier. Article 4. Un castor dort sur le muret.", cat: "institution", badge: "Article 4 · nouveau" },
+      { src: "images/realistes/fauteuil_retrouve.png", title: "🪵 Le fauteuil retrouvé", text: "Le rocking-chair d'État redescend du grenier. Livre VI, avènement du Louche.", cat: "lieu", badge: "Livre VI · nouveau" },
+      { src: "images/realistes/arches_jumelles_chantier.png", title: "🧱 Le chantier des Arches Jumelles", text: "On pose les bancs, on déjeune, on maçonne. Le Double Aqueduc se lève sans courir.", cat: "lieu", badge: "Livre II · nouveau" },
+      { src: "images/realistes/pavillon_des_jumeaux.png", title: "👥 Le Pavillon des Jumeaux", text: "Grass City : Honoré écrit, Henri dort. Houblon et lac.", cat: "personnage", badge: "Génération V · nouveau" },
+      { src: "images/realistes/roger_bontemps.png", title: "🍷 Roger Bontemps, Grand Bouffon", text: "Louche de bois, vin, gilet rapiécé. Hors des 18 figures, mais indispensable à la taverne.", cat: "personnage", badge: "Hors dictionnaire · nouveau" },
+      { src: "images/realistes/jeux_lents_pabst_city.png", title: "🎯 Les Jeux Lents de Pabst City", text: "Pétanque, concours de sieste, course de rocking-chairs. L'arbitre porte la robe de chambre.", cat: "institution", badge: "Guide gastronomique · nouveau" },
+      { src: "images/realistes/chene_du_hamac.png", title: "🌳 Le Chêne du Hamac", text: "Vide, il attendit 58 ans son maître. Un castor le garde.", cat: "lieu", badge: "Forêt · nouveau" },
+      { src: "images/realistes/sommet_pabst_ketchup.png", title: "🤝 Le Sommet Pabst-Ketchup", text: "Poignée de main sur une poutine. Ruban bleu d'un côté, bouteille rouge de l'autre.", cat: "lieu", badge: "Livre VI · nouveau" },
+      { src: "images/realistes/naissance_rambo_1962.png", title: "👶 Le 15 juillet 1962", text: "Piscine, Monts Froissés, et naissance de Rambo du Fjord. Même après-midi.", cat: "personnage", badge: "1962 · nouveau" },
+      { src: "images/realistes/canal_double_aqueduc.png", title: "🍺 Les deux canaux", text: "À gauche l'eau, à droite la Pabst. Bancs déjà posés le long du chemin.", cat: "lieu", badge: "1904 · nouveau" },
+      { src: "images/realistes/thermometre_maitre_1898.png", title: "🌡️ Le Thermomètre Maître (1898)", text: "Étalon national de la fraîcheur, caves de la Banque, caillé à 15 °C.", cat: "institution", badge: "Fraîcheur · nouveau" },
+      { src: "images/realistes/castor_patriote.png", title: "🦫 Le Castor Patriote", text: "Signataire à la queue. Nappe vichy, encrier, forêt de Plantagenet.", cat: "personnage", badge: "Fondation · nouveau" },
+      { src: "images/realistes/douane_laissez_aller.png", title: "🚪 La douane du laissez-aller", text: "Barrière levée, rocking-chair, on salue. On ne vérifie rien.", cat: "lieu", badge: "Atlas · nouveau" },
+      { src: "images/realistes/trois_spatules_royales.png", title: "🍳 Les Trois Spatules Royales", text: "Guide gastronomique : spatules de bois, louche couronnée, poutine et canette glacée.", cat: "gastronomie", badge: "Table · nouveau" },
+      { src: "images/realistes/mariage_louche_linea_1978.png", title: "💍 Le mariage de 1978", text: "Le Louche et Linéa. Les invités sont assis. La cuillère d'argent est déjà là.", cat: "personnage", badge: "1978 · nouveau" },
+      { src: "images/realistes/bapteme_ti_babber.png", title: "✝️ Le baptême de Ti-Babber", text: "Linge vichy, hochet d'érable, circelet sur l'oreiller. 26 août 2026.", cat: "personnage", badge: "2026 · nouveau" },
+      { src: "images/realistes/traite_des_cornichons_2009.png", title: "🤝 Le Traité des Cornichons (2009)", text: "Le Déchiré arbitre. Pouce levé. Les pots sont sur la table.", cat: "lieu", badge: "Livre V · nouveau" },
+      { src: "images/realistes/cloche_de_la_honte.png", title: "🔔 La Cloche de la Honte", text: "Zinc, glaçon d'infamie, thermomètre. Nature morte de la tiédeur.", cat: "institution", badge: "Fraîcheur · nouveau" },
+      { src: "images/realistes/phare_blanc_couronne.png", title: "🗼 Le phare blanc couronné", text: "Port Babette, soleil couchant, une couronne d'or sur la lanterne.", cat: "lieu", badge: "Maritime · nouveau" },
+      { src: "images/realistes/quais_port_babette.png", title: "⚓ Les quais d'épinette", text: "Fromage en grain, barriques, filets sans hameçon. On s'assoit pour raccommoder.", cat: "lieu", badge: "Port Babette · nouveau" },
+      { src: "images/realistes/salle_du_hamac.png", title: "🛏️ La salle du hamac", text: "Le trône est un hamac de soie bleu roi, à un mètre du sol. Livre III.", cat: "lieu", badge: "Palais · nouveau" },
+      { src: "images/realistes/place_on_s_assoit.png", title: "🪑 La place où l'on s'assoit", text: "Hamacs, rocking-chairs, terrasses. Personne ne reste debout.", cat: "lieu", badge: "Pabst City · nouveau" },
+      { src: "images/realistes/flottille_port_babette.png", title: "⛵ La flottille au crépuscule", text: "Bateaux crème et marine, filets qui sèchent, phare au loin.", cat: "lieu", badge: "Marine · nouveau" },
+      { src: "images/realistes/ginette_sauce_2024.png", title: "🫙 Ginette reçoit la sauce", text: "2024 : le Déchiré remet le Secret Brun. Frites et caillé déjà là.", cat: "personnage", badge: "2024 · nouveau" },
+      { src: "images/realistes/mini_mclouches.png", title: "🪆 Les Mini-McLouches", text: "Figurine de bois, louche, poutine miniature, canette au ruban bleu.", cat: "gastronomie", badge: "Jouets · nouveau" },
+      { src: "images/realistes/union_des_regnes.png", title: "✍️ L'Union des Règnes", text: "Le Déchiré et Ginette signent. La cuillère d'argent tient le parchemin.", cat: "personnage", badge: "2024 · nouveau" },
+      { src: "images/realistes/nuit_de_leau.png", title: "💧 Le Jour de l'Eau", text: "L'aqueduc se remplit. On s'assoit, on regarde, on ne court pas. 1904.", cat: "lieu", badge: "Livre II · nouveau" }
+    ];
+
+    const GAL_FILTERS = [
+      { id: "tous", label: "Tous (77)" },
+      { id: "personnage", label: "Personnages" },
+      { id: "lieu", label: "Lieux" },
+      { id: "institution", label: "Institutions" },
+      { id: "gastronomie", label: "Table & Monnaie" }
+    ];
+
+    let galFilter = "tous";
+
+    function renderFilters() {
+      document.getElementById('galFilters').innerHTML = GAL_FILTERS.map(f =>
+        `<button class="${f.id === galFilter ? 'on' : ''}" onclick="setGalFilter('${f.id}')">${f.label}</button>`
+      ).join('');
+    }
+
+    function setGalFilter(id) {
+      galFilter = id;
+      renderFilters();
+      renderGallery();
+    }
+
+    function renderGallery() {
+      const list = galFilter === "tous" ? gallery : gallery.filter(g => g.cat === galFilter);
+      document.getElementById('galleryGrid').innerHTML = list.map(g => `
+        <div class="card" style="padding: 1rem;">
+          <img class="cover" src="${g.src}" alt="${g.title}" loading="lazy" onclick="openLb(this.src, this.alt)">
+          <h3>${g.title}</h3>
+          <p>${g.text}</p>
+          <span class="badge">${g.badge}</span>
+        </div>
+      `).join('');
+    }
+
     renderCharacters(characters);
+    renderFilters();
+    renderGallery();
   </script>
 </body>
 </html>
