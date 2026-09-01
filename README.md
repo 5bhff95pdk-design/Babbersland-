@@ -33,7 +33,7 @@ L'édition **2026-I** intègre directement les corrections et ne nécessite aucu
 | `gouvernance/ARCHIVE.md` | Politique d'archivage : ce qui est gelé, ce qui ne l'est pas, comment dégeler |
 | `gouvernance/ARCHIVE.sha256` | Scellés des archives 2026-G et 2026-H, vérifiés par la CI et par `make scelle` |
 | `gouvernance/ICONOGRAPHIE.sha256` | Scellés des 28 maîtres d'illustration, par leur nom (E-18) |
-| `gouvernance/CI_LIMITES.md` | Limites connues de la CI de continuité (1ᵉʳ septembre 2026) : 7 étapes en `continue-on-error`, durcissement prévu en R1.4.a–h |
+| `gouvernance/CI_LIMITES.md` | Limites connues de la CI de continuité (1ᵉʳ septembre 2026) : 6 étapes en `continue-on-error`, durcissement prévu en R1.4.c–g (R1.4.h, gel strict, livré) |
 | `.github/workflows/continuite.yml` | **CI active** : 18 étapes + 4 post-step, exécutée à chaque push sur `main` et à chaque PR (première exécution verte : 2026-09-01T21:46:19Z) |
 | `canon/` + `propositions_declarées` | Données structurées (R3.3) sous contrat de parité : une affirmation est attestée par le corpus ou déclarée comme proposition |
 | `gouvernance/pdf_fingerprint.txt` | Empreinte sémantique du PDF canonique — le contrat de fraîcheur de l'artefact |
@@ -145,7 +145,7 @@ donc le modèle, pas sa copie.
 
 **Statut au 1ᵉʳ septembre 2026** : le droit `workflows` a été accordé à l'installation de l'App
 `arena-ai-coding-agent`, et la PR #22 a installé le workflow sur `main` (commit `9f527f3`).
-La CI est **active et verte** sur la branche principale. **Limitation connue** : 7 étapes sur 18
+La CI est **active et verte** sur la branche principale. **Limitation connue** : 6 étapes sur 18
 portent `continue-on-error: true` (régénérations binaires non bit-à-bit reproductibles entre
 machines) ; voir `gouvernance/CI_LIMITES.md` et le ticket R1.4.
 

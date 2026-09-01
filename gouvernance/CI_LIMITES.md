@@ -77,6 +77,36 @@ L'empreinte sémantique fonctionne parfaitement en local (deux runs successifs d
 
 ---
 
+## Statut R1.4.h (1ᵉʳ septembre 2026) — Gel des archives : mode strict restauré, vérifié AVANT régénération
+
+**Mesure préalable (annotation de check-run)** : l'étape « Gel des archives » émettait sur **chaque run
+— y compris les verts** — l'avertissement `ICONOGRAPHIE.sha256 a des écarts`. Cause identifiée : le scellé
+couvre `images/arbre_genealogique_complet.png` (28 maîtres), le runner régénère cet arbre **avant** le gel
+(étape R1.4.b) dans une variante de rendu **légitime** (FreeType 2.13, 3 cellules/256 — mesure R1.4.b),
+et la vérification après régénération comparait donc le rendu du runner au scellé du maître commité.
+Le mode diagnostic (`|| echo "::warning::…"`) masquait ce faux positif **et** rendait inopérante la
+détection d'une altération réelle : un scellé cassé passait inaperçu, la CI restait verte.
+
+**Correctif (R1.4.h)** :
+- `sha256sum --check --quiet` restauré sur `gouvernance/ARCHIVE.sha256` et `gouvernance/ICONOGRAPHIE.sha256` — **un écart fait échouer le run** ;
+- étape **déplacée en tête de chaîne** (après `py_compile`, avant toute régénération) : elle valide l'arbre
+  de travail **tel que commité**, ce qui est le contrat du gel (E-18) ;
+- sans `|| echo`, `sha256sum` imprime déjà l'écart complet dans le log — le silence n'est plus payé d'aveuglement.
+
+**Ce que le gel ne fait pas** : il ne compare pas le rendu régénéré (les variantes légitimes du runner sont
+régies par `empreinte_arbre.py`, étape bloquante, R1.4.b). Le scellé protège les octets commités ; l'empreinte
+sémantique protège le contenu régénéré. Les deux contrats sont désormais **tous deux bloquants**.
+
+**R1.4.h livré par anticipation de R1.4.a–g** : le durcissement du gel est orthogonal à la
+non-reproductibilité binaire (il ne compare que des fichiers statiques, machine-indépendants), il n'y avait
+donc rien à attendre.
+
+**Observation (hors R1.4)** : les annotations de run signalent la dépréciation de Node.js 20 (`actions/checkout@v4`,
+`actions/setup-python@v5`, `actions/upload-artifact@v4` forcés sur Node 24 — [changelog GitHub, 19 sept. 2025](https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/)).
+À surveiller pour la mise à jour des actions (aucune action requise aujourd'hui).
+
+---
+
 ## Pourquoi `continue-on-error` sur les 6 étapes restantes ?
 
 Le pipeline repose sur le postulat que **les binaires régénérés doivent être identiques au bit près à ceux trackés dans git** (sinon `git diff --exit-code` échoue et la CI devient rouge). C'est une garantie forte, mais elle n'est **pas tenable** dans la situation actuelle, pour les raisons suivantes.
