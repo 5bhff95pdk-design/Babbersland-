@@ -20,6 +20,8 @@ arbre: ## régénère l'arbre généalogique (déterministe au bit près)
 
 carte: ## atlas géographique (proposé, non décrété) : SVG, PNG, HTML
 	$(PY) sources/generate_map.py
+	$(PY) sources/check_geography.py
+	$(PY) sources/empreinte_atlas.py --check
 
 hymne: ## hymne national (décrété, Avis royal n° 8) : enregistrement de référence du refrain
 	$(PY) sources/generate_hymne.py
@@ -34,6 +36,9 @@ $(PDF): ENCYCLOPEDIE_CONSOLIDEE_2026_I.md sources/generate_encyclopedie_2026_i.p
 
 empreinte: ## grave l'empreinte sémantique du PDF publié — acte d'assentiment, pas un contrôle
 	$(PY) sources/pdf_fingerprint.py --write
+
+empreinte-atlas: ## grave l'empreinte sémantique de l'Atlas (SVG/PNG/HTML) — analogue à `empreinte`
+	$(PY) sources/empreinte_atlas.py --write
 
 workflows: ## installe le modèle de CI dans .github/workflows/ (à committer avec un jeton tenant « workflows »)
 	@mkdir -p .github/workflows && cp sources/github_actions_continuite.yml .github/workflows/continuite.yml \
@@ -71,6 +76,7 @@ controle: ## continuité, parité des données, chroniques, parité du portail, 
 	$(PY) sources/pdf_fingerprint.py --check
 	$(PY) sources/check_geography.py
 	$(PY) sources/check_portal.py
+	$(PY) sources/empreinte_atlas.py --check
 	$(MAKE) --no-print-directory scelle
 
 # L'ordre est un contrôle, pas une commodité (constat E-21) : graver l'empreinte AVANT

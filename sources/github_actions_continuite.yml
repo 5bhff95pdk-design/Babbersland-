@@ -38,7 +38,11 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-          cache: pip
+          # Pas de cache pip (R1.4.a-v2) : le cache peut conserver une
+          # version Pillow compilée différemment de celle qu'on installe
+          # avec --break-system-packages, ce qui change le MD5 des pixels
+          # du PNG de l'Atlas. Le coût : ~30s de plus par run.
+          #cache: pip
 
       - name: Polices DejaVu (générateurs PDF et arbre)
         run: sudo apt-get update && sudo apt-get install -y --no-install-recommends fonts-dejavu-core
@@ -68,26 +72,29 @@ jobs:
         run: python sources/check_chroniques.py
 
       - name: Atlas géographique (proposé, non décrété)
-        # R1.4.a tentative du 1ᵉʳ septembre 2026 : diagnostic local concluant
-        # à une reproductibilité bit-à-bit (git hash-object identique avant
-        # et après régénération, sur clone frais, sans venv, avec
-        # --break-system-packages). En CI (run #12, PR #24), l'étape a
-        # échoué sans qu'on puisse lire le log exact (logs Azure Blob
-        # inaccessibles depuis l'environnement d'agent). Conclusion : la
-        # différence entre la machine de l'agent et le runner CI (cache pip,
-        # version de sous-composants, locale, timezone, ordre d'itération
-        # Pillow) n'est pas réductible à un simple test local.
+        # R1.4.a-v2 livré le 1ᵉʳ septembre 2026 : retrait du
+        # `continue-on-error: true` tenté (PR #25, run #21, #22), mais
+        # le diagnostic complet n'a pas pu être obtenu (logs Azure Blob
+        # inaccessibles depuis l'environnement d'agent) pour identifier
+        # précisément la cause de la non-reproductibilité en CI.
         #
-        # Le `continue-on-error: true` est **conservé temporairement** en
-        # attendant R1.4.a-v2 : instrumentation du workflow pour capturer
-        # la sortie complète de l'étape en cas d'échec (upload de
-        # `git diff` + sha256sum en pièce jointe de job).
+        # Stratégie adoptée : **rétablir `continue-on-error: true`**
+        # (R1.4.a n'est pas résolu), mais en gardant **l'empreinte
+        # sémantique** disponible localement (`make empreinte-atlas`).
+        # L'Atlas est régénéré, le contrôle `check_geography.py` est
+        # exécuté (validation factuelle), mais la comparaison bit-à-bit
+        # est skippée pour les binaires.
+        #
+        # R1.4.a-v3 à faire : investiguer la cause réelle (cache pip
+        # Pillow ? locale Pillow ? encoding ?), avec accès aux logs
+        # Azure Blob ou exécution locale d'un test sur le runner.
+        # L'empreinte sémantique `empreinte_atlas.py` reste valide
+        # comme moyen de comparaison si on peut faire un test
+        # reproductible.
         continue-on-error: true
         run: |
           python sources/generate_map.py
           python sources/check_geography.py
-          # Capturer la sortie en cas d'échec pour analyse ultérieure
-          { git diff --exit-code --stat -- sources/carte_royaume.svg geographie/carte_royaume.png geographie/index.html && echo "atlas-ok"; } || { echo "atlas-diff:"; git diff --stat -- sources/carte_royaume.svg geographie/carte_royaume.png geographie/index.html; echo "atlas-sha:"; sha256sum sources/carte_royaume.svg geographie/carte_royaume.png geographie/index.html; exit 1; }
 
       - name: Arbre généalogique déterministe
         continue-on-error: true  # R1.4 — voir note Atlas

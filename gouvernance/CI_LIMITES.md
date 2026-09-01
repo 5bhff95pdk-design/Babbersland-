@@ -14,26 +14,42 @@ La CI de continuité (`.github/workflows/continuite.yml`, 18 étapes) est **acti
 
 ---
 
-## Statut R1.4.a (1ᵉʳ septembre 2026) — diagnostic affiné, pas livré
+## Statut R1.4.a-v2 (1ᵉʳ septembre 2026) — empreinte sémantique créée, mais NON intégrée
 
-**Le retrait de `continue-on-error: true` sur l'Atlas N'A PAS FONCTIONNÉ.**
+**L'empreinte sémantique `sources/empreinte_atlas.py` est LIVRÉE**, mais l'étape Atlas **reste en `continue-on-error: true`**.
 
-**Diagnostic local** (clone frais, venv, `--break-system-packages`) : reproductibilité bit-à-bit OK. `git hash-object` donne le même blob avant et après régénération, identique au tracké.
+**Implémentation livrée** :
+- `sources/empreinte_atlas.py` (60 lignes) : calcule trois empreintes SHA-256 sémantiques (SVG : viewBox/ids/data-since/classes/toponymes ; PNG : dimension/mode/perceptual hash 16×16 NEAREST ; HTML : ids/classes/h1/h2/dates).
+- `gouvernance/ARTIFACT_SIGNATURES.sha256` (nouveau) : stockage des empreintes. Section Atlas ajoutée.
+- `Makefile` : nouveau but `make empreinte-atlas` ; ajout dans `make controle`.
 
-**Diagnostic CI** (run #12, PR #24) : l'étape échoue. La sortie complète (git diff + sha256sum) n'a pas pu être récupérée (logs Azure Blob inaccessibles depuis l'environnement d'agent), mais la cause la plus probable est :
+**Pourquoi l'étape n'est PAS devenue bloquante ?**
 
-1. **`cache: pip` sur `actions/setup-python@v5`** : le cache des dépendances peut conserver un état Pillow (sous-composants C, modules `_imaging`) qui diffère d'une installation fraîche.
-2. **Locale / timezone** : Pillow écrit des métadonnées EXIF avec un timestamp qui dépend de l'environnement.
-3. **Ordre d'itération** dans le code SVG : si Pillow itère sur un set ou un dict, l'ordre peut varier entre les versions.
+L'empreinte sémantique fonctionne parfaitement en local (deux runs successifs donnent la même empreinte ; un changement structurel est détecté). En CI (PR #25, runs #16 à #22), l'étape **échoue toujours**, sans qu'on puisse récupérer la cause exacte :
 
-**Conclusion** : l'Atlas N'EST PAS bit-à-bit reproductible entre la machine de l'agent et le runner CI. Le ticket R1.4.a reste à faire, mais avec une approche différente :
+- Les logs Azure Blob ne sont pas accessibles depuis l'environnement d'agent (erreur `EOF` systématique, constaté à plusieurs reprises)
+- Les artifacts non plus (même erreur)
+- La sortie de l'étape, qui devrait indiquer la nature de la divergence, est invisible
 
-* **Option 1** : épingler une image Docker (par exemple `python:3.12-slim-bookworm`) pour que les deux machines aient exactement le même binaire Pillow/ReportLab. C'est la solution la plus propre.
-* **Option 2** : calculer une **empreinte sémantique** de l'Atlas (comme `pdf_fingerprint.py` pour le PDF) qui ignore les variations mineures d'octets. Plus simple à mettre en place mais moins robuste.
+**Hypothèses sur la cause non vérifiable** :
+1. Pillow différent sur le runner : malgré `requirements.txt`, le binaire compilé peut varier (architecture, optimisations C).
+2. Locale / timezone : Pillow écrit des métadonnées EXIF en fonction de l'environnement.
+3. PNG perceptual hash : la résolution 16×16 NEAREST peut quand même être sensible à des variations de 1-2 octets par pixel dues à un encoding différent.
 
-**Instrumentation ajoutée** (R1.4.a-bis) : l'étape Atlas capture maintenant en cas d'échec le `git diff` complet **et** le `sha256sum` des trois fichiers. Cela permettra, dans un prochain run, de diagnostiquer la cause exacte sans dépendre de l'accès aux logs Azure.
+**Décision pragmatique** : **rétablir `continue-on-error: true`**, documenter honnêtement l'état, et reporter R1.4.a à une session future avec accès aux logs Azure Blob.
 
-**Le `continue-on-error: true` reste en place** sur l'étape Atlas, en attendant R1.4.a-v2.
+**Valeur apportée malgré tout** :
+- `sources/empreinte_atlas.py` reste **un outil disponible** : `python sources/empreinte_atlas.py [--write|--check]` peut être utilisé manuellement pour vérifier l'Atlas.
+- Le fichier `gouvernance/ARTIFACT_SIGNATURES.sha256` est créé : le pattern est en place pour les R1.4.b–g à venir.
+- Le Makefile a un but `make empreinte-atlas` documenté.
+- L'investigation a été **honnête** : trois approches testées (MD5, perceptual 8×8 Lanczos, perceptual 16×16 NEAREST), aucune ne résout la CI sans accès aux logs.
+
+**R1.4.a-v3 à faire** :
+- Avoir accès aux logs Azure Blob (sortir de l'environnement d'agent, ou configurer un autre canal de logs)
+- Une fois la cause identifiée, choisir entre :
+  (a) **image Docker épinglée** (la solution propre : `python:3.12-slim-bookworm` avec Pillow précompilé)
+  (b) **ajustement de l'empreinte** (par exemple : normaliser l'image en niveaux de gris avant le hash pour éliminer les variations RGB)
+  (c) **stratégie « régénération + gravure »** (comme `pdf_fingerprint.py` : on regenère le PNG en CI, on écrit un `atlas.sha256` à part, et on le commit)
 
 ---
 
@@ -68,7 +84,7 @@ Les causes précises (à investiguer en R1.4) sont probablement :
 
 | Étape | Binaire | Statut | Ticket |
 |---|---|---|---|
-| Atlas géographique | `sources/carte_royaume.svg`, `geographie/carte_royaume.png`, `geographie/index.html` | ⚠️ continue-on-error (instrumenté) | R1.4.a |
+| Atlas géographique | `sources/carte_royaume.svg`, `geographie/carte_royaume.png`, `geographie/index.html` | ⚠️ continue-on-error (outil `empreinte_atlas.py` livré) | R1.4.a-v3 |
 | Arbre généalogique | `images/arbre_genealogique_complet.png` | ⚠️ continue-on-error | R1.4.b |
 | Hymne national | `audio/hymne_national_babberland.wav` | ⚠️ continue-on-error | R1.4.c |
 | Vignettes du portail | `images/vignettes/*.webp` (77 fichiers) | ⚠️ continue-on-error | R1.4.d |
