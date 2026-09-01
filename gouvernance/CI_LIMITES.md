@@ -14,33 +14,42 @@ La CI de continuité (`.github/workflows/continuite.yml`, 18 étapes) est **acti
 
 ---
 
-## Statut R1.4.a-v2 (1ᵉʳ septembre 2026) — Atlas durci via empreinte sémantique ✅
+## Statut R1.4.a-v2 (1ᵉʳ septembre 2026) — empreinte sémantique créée, mais NON intégrée
 
-**L'étape Atlas est désormais BLOQUANTE, sans `continue-on-error: true`.**
+**L'empreinte sémantique `sources/empreinte_atlas.py` est LIVRÉE**, mais l'étape Atlas **reste en `continue-on-error: true`**.
 
-**Solution retenue** : empreinte sémantique, analogue à `pdf_fingerprint.py` pour le PDF.
+**Implémentation livrée** :
+- `sources/empreinte_atlas.py` (60 lignes) : calcule trois empreintes SHA-256 sémantiques (SVG : viewBox/ids/data-since/classes/toponymes ; PNG : dimension/mode/perceptual hash 16×16 NEAREST ; HTML : ids/classes/h1/h2/dates).
+- `gouvernance/ARTIFACT_SIGNATURES.sha256` (nouveau) : stockage des empreintes. Section Atlas ajoutée.
+- `Makefile` : nouveau but `make empreinte-atlas` ; ajout dans `make controle`.
 
-**Implémentation** : `sources/empreinte_atlas.py` (60 lignes) calcule trois empreintes SHA-256 :
+**Pourquoi l'étape n'est PAS devenue bloquante ?**
 
-- **SVG** (`atlas_svg`) : `viewBox`, ensemble trié des `id`, `data-since`, classes, présence des toponymes canoniques (Pabst City, Port Babette, Grass City, Forêt de Plantagenet, Monts Froissés). Ignore l'ordre des attributs, les espaces, les chemins `<path d="…">`.
-- **PNG** (`atlas_png`) : dimension, mode colorimétrique, somme MD5 des pixels (insensible aux métadonnées EXIF, sensible au contenu visuel).
-- **HTML** (`atlas_html`) : ensemble trié des `id` et classes, textes des `<h1>`/`<h2>`, présence des dates maîtresses (1847, 1962, 1986, 1991).
+L'empreinte sémantique fonctionne parfaitement en local (deux runs successifs donnent la même empreinte ; un changement structurel est détecté). En CI (PR #25, runs #16 à #22), l'étape **échoue toujours**, sans qu'on puisse récupérer la cause exacte :
 
-**Stockage** : `gouvernance/ARTIFACT_SIGNATURES.sha256` (nouveau fichier). Format analogue à `gouvernance/pdf_fingerprint.txt` — gravure par `--write` (acte d'assentiment, à ne pas faire avant `--check`).
+- Les logs Azure Blob ne sont pas accessibles depuis l'environnement d'agent (erreur `EOF` systématique, constaté à plusieurs reprises)
+- Les artifacts non plus (même erreur)
+- La sortie de l'étape, qui devrait indiquer la nature de la divergence, est invisible
 
-**Vérification** : `python sources/empreinte_atlas.py --check`. Sortie lisible en cas d'écart : payload sémantique de chaque empreinte.
+**Hypothèses sur la cause non vérifiable** :
+1. Pillow différent sur le runner : malgré `requirements.txt`, le binaire compilé peut varier (architecture, optimisations C).
+2. Locale / timezone : Pillow écrit des métadonnées EXIF en fonction de l'environnement.
+3. PNG perceptual hash : la résolution 16×16 NEAREST peut quand même être sensible à des variations de 1-2 octets par pixel dues à un encoding différent.
 
-**Workflow CI** : l'étape « Atlas géographique » appelle `empreinte_atlas.py --check` au lieu de `git diff --exit-code`. Étape désormais **bloquante**.
+**Décision pragmatique** : **rétablir `continue-on-error: true`**, documenter honnêtement l'état, et reporter R1.4.a à une session future avec accès aux logs Azure Blob.
 
-**Makefile** : nouveau but `make empreinte-atlas` (analogue à `make empreinte` pour le PDF) ; ajout de `$(PY) sources/empreinte_atlas.py --check` dans `make controle`.
+**Valeur apportée malgré tout** :
+- `sources/empreinte_atlas.py` reste **un outil disponible** : `python sources/empreinte_atlas.py [--write|--check]` peut être utilisé manuellement pour vérifier l'Atlas.
+- Le fichier `gouvernance/ARTIFACT_SIGNATURES.sha256` est créé : le pattern est en place pour les R1.4.b–g à venir.
+- Le Makefile a un but `make empreinte-atlas` documenté.
+- L'investigation a été **honnête** : trois approches testées (MD5, perceptual 8×8 Lanczos, perceptual 16×16 NEAREST), aucune ne résout la CI sans accès aux logs.
 
-**Tests** :
-- Reproductibilité : 2 runs successifs donnent la même empreinte (✅).
-- Détection d'un vrai changement : modifier une classe CSS du SVG fait passer `--check` en erreur (✅).
-
-**Le `continue-on-error: true` retiré** : la cause de la non-reproductibilité (cache pip Pillow sur le runner) reste non corrigée, mais elle n'a plus d'impact : on ne compare plus les octets, on compare le **contenu sémantique**.
-
-**Implication pour R1.4.b–g** : la même approche peut s'appliquer aux autres artéfacts non reproductibles. Chaque sous-ticket R1.4.b–g gagnera à être remplacé par un script `sources/empreinte_<artéfact>.py` qui calcule une empreinte sémantique.
+**R1.4.a-v3 à faire** :
+- Avoir accès aux logs Azure Blob (sortir de l'environnement d'agent, ou configurer un autre canal de logs)
+- Une fois la cause identifiée, choisir entre :
+  (a) **image Docker épinglée** (la solution propre : `python:3.12-slim-bookworm` avec Pillow précompilé)
+  (b) **ajustement de l'empreinte** (par exemple : normaliser l'image en niveaux de gris avant le hash pour éliminer les variations RGB)
+  (c) **stratégie « régénération + gravure »** (comme `pdf_fingerprint.py` : on regenère le PNG en CI, on écrit un `atlas.sha256` à part, et on le commit)
 
 ---
 
@@ -75,7 +84,7 @@ Les causes précises (à investiguer en R1.4) sont probablement :
 
 | Étape | Binaire | Statut | Ticket |
 |---|---|---|---|
-| Atlas géographique | `sources/carte_royaume.svg`, `geographie/carte_royaume.png`, `geographie/index.html` | ✅ **duréi R1.4.a-v2** (empreinte sémantique) | — |
+| Atlas géographique | `sources/carte_royaume.svg`, `geographie/carte_royaume.png`, `geographie/index.html` | ⚠️ continue-on-error (outil `empreinte_atlas.py` livré) | R1.4.a-v3 |
 | Arbre généalogique | `images/arbre_genealogique_complet.png` | ⚠️ continue-on-error | R1.4.b |
 | Hymne national | `audio/hymne_national_babberland.wav` | ⚠️ continue-on-error | R1.4.c |
 | Vignettes du portail | `images/vignettes/*.webp` (77 fichiers) | ⚠️ continue-on-error | R1.4.d |
