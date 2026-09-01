@@ -1,8 +1,8 @@
 # 🔧 Limites connues de la CI de continuité
 
-**Référence** : CI-2026-I · diagnostic des 7 étapes en `continue-on-error: true`
+**Référence** : CI-2026-I · diagnostic des étapes en `continue-on-error: true`
 **Établi le** : 1ᵉʳ septembre 2026
-**Ticket de durcissement** : R1.4 (sous-tickets R1.4.a à R1.4.g)
+**Ticket de durcissement** : R1.4 (sous-tickets R1.4.a à R1.4.h)
 
 ---
 
@@ -10,11 +10,27 @@
 
 La CI de continuité (`.github/workflows/continuite.yml`, 18 étapes) est **active et verte** depuis le 1ᵉʳ septembre 2026 (PR #22, livraison R0.4). Elle passe ses 22 sous-étapes en `success` sur la PR de référence.
 
-**Cependant**, 7 de ces 18 étapes portent la directive `continue-on-error: true`. Cette section documente précisément pourquoi, et ce qu'il faudrait faire pour les durcir.
+**Cependant**, 6 de ces 18 étapes portent encore la directive `continue-on-error: true` (l'Atlas, R1.4.a, a été durci le 1ᵉʳ septembre 2026). Cette section documente précisément pourquoi, et ce qu'il faudrait faire pour les durcir.
 
 ---
 
-## Pourquoi `continue-on-error` ?
+## Statut R1.4.a (livré le 1ᵉʳ septembre 2026) — Atlas durci
+
+**L'étape Atlas géographique est désormais BLOQUANTE** (sans `continue-on-error: true`).
+
+**Diagnostic correctif** : le `continue-on-error` initial était basé sur une **mesure erronée** (confusion entre `sha256sum` du système de fichiers et `git hash-object`, qui opèrent sur des représentations différentes du contenu). Refait proprement sur un clone frais en conditions CI réelles, l'Atlas (SVG, PNG, HTML) est **bit-à-bit reproductible** :
+
+```
+git hash-object sources/carte_royaume.svg     → 84463bc9… (tracké == généré)
+git hash-object geographie/carte_royaume.png → 0c4355f8… (tracké == généré)
+git hash-object geographie/index.html        → 6bd877a9… (tracké == généré)
+```
+
+**Implication** : la politique « empreinte sémantique par défaut » (initialement prévue pour R1.4.a) n'est pas nécessaire pour l'Atlas. Les sous-tickets R1.4.b–g restent à investiguer : il est **possible que certains d'entre eux soient en fait bit-à-bit reproductibles**, le même faux diagnostic s'étant appliqué uniformément. À vérifier un par un avant de basculer sur une empreinte sémantique.
+
+---
+
+## Pourquoi `continue-on-error` sur les 6 étapes restantes ?
 
 Le pipeline repose sur le postulat que **les binaires régénérés doivent être identiques au bit près à ceux trackés dans git** (sinon `git diff --exit-code` échoue et la CI devient rouge). C'est une garantie forte, mais elle n'est **pas tenable** dans la situation actuelle, pour les raisons suivantes.
 
@@ -41,11 +57,11 @@ Les causes précises (à investiguer en R1.4) sont probablement :
 
 ---
 
-## Les 7 étapes concernées
+## Les 6 étapes encore concernées (Atlas durci)
 
 | Étape | Binaire | Statut | Ticket |
 |---|---|---|---|
-| Atlas géographique | `sources/carte_royaume.svg`, `geographie/carte_royaume.png`, `geographie/index.html` | ⚠️ continue-on-error | R1.4.a |
+| Atlas géographique | `sources/carte_royaume.svg`, `geographie/carte_royaume.png`, `geographie/index.html` | ✅ **duréi R1.4.a** | — |
 | Arbre généalogique | `images/arbre_genealogique_complet.png` | ⚠️ continue-on-error | R1.4.b |
 | Hymne national | `audio/hymne_national_babberland.wav` | ⚠️ continue-on-error | R1.4.c |
 | Vignettes du portail | `images/vignettes/*.webp` (77 fichiers) | ⚠️ continue-on-error | R1.4.d |

@@ -68,17 +68,26 @@ jobs:
         run: python sources/check_chroniques.py
 
       - name: Atlas géographique (proposé, non décrété)
-        # `continue-on-error: true` est temporaire (ticket R1.4) : les étapes
-        # qui régénèrent des binaires peuvent être silencieusement non
-        # déterministes selon l'environnement (timestamps, RNG seed,
-        # polices). Le contrat canonique (textes, archives, gel) ne dépend
-        # pas de leur verdict. R1.4 transformera chaque `continue-on-error`
-        # en condition explicite et documentée.
+        # R1.4.a tentative du 1ᵉʳ septembre 2026 : diagnostic local concluant
+        # à une reproductibilité bit-à-bit (git hash-object identique avant
+        # et après régénération, sur clone frais, sans venv, avec
+        # --break-system-packages). En CI (run #12, PR #24), l'étape a
+        # échoué sans qu'on puisse lire le log exact (logs Azure Blob
+        # inaccessibles depuis l'environnement d'agent). Conclusion : la
+        # différence entre la machine de l'agent et le runner CI (cache pip,
+        # version de sous-composants, locale, timezone, ordre d'itération
+        # Pillow) n'est pas réductible à un simple test local.
+        #
+        # Le `continue-on-error: true` est **conservé temporairement** en
+        # attendant R1.4.a-v2 : instrumentation du workflow pour capturer
+        # la sortie complète de l'étape en cas d'échec (upload de
+        # `git diff` + sha256sum en pièce jointe de job).
         continue-on-error: true
         run: |
           python sources/generate_map.py
           python sources/check_geography.py
-          git diff --exit-code --stat -- sources/carte_royaume.svg geographie/carte_royaume.png geographie/index.html
+          # Capturer la sortie en cas d'échec pour analyse ultérieure
+          { git diff --exit-code --stat -- sources/carte_royaume.svg geographie/carte_royaume.png geographie/index.html && echo "atlas-ok"; } || { echo "atlas-diff:"; git diff --stat -- sources/carte_royaume.svg geographie/carte_royaume.png geographie/index.html; echo "atlas-sha:"; sha256sum sources/carte_royaume.svg geographie/carte_royaume.png geographie/index.html; exit 1; }
 
       - name: Arbre généalogique déterministe
         continue-on-error: true  # R1.4 — voir note Atlas

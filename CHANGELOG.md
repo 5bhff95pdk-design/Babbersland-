@@ -2,6 +2,16 @@
 
 Toutes les modifications notables apportées au dépôt du **Royaume du Babberland** sont consignées dans ce document.
 
+## [2026-IX] — 2026-09-01 (R1.4.a — Atlas géographique durci)
+### Corrigé — l'étape Atlas était faussement diagnostiquée
+* **Diagnostic refait** sur un clone frais en conditions CI réelles (`--break-system-packages`, sans venv). L'Atlas (SVG, PNG, HTML) est en fait **bit-à-bit reproductible** : `git hash-object` donne le même blob avant et après régénération, identique au blob tracké.
+* Le `continue-on-error: true` de l'étape Atlas (R0.4) était basé sur une **mesure erronée** (confusion entre `sha256sum` du système de fichiers et `git hash-object`).
+* **L'étape est désormais BLOQUANTE**. 6 autres étapes restent en `continue-on-error: true` (Arbre, Hymne, Vignettes, Régénération PDF, Artéfact, Fraîcheur), à réinvestiquer en R1.4.b–g.
+### Mis à jour
+* `gouvernance/CI_LIMITES.md` : nouvelle section « Statut R1.4.a (livré le 1ᵉʳ septembre 2026) — Atlas durci » expliquant le faux diagnostic et la méthode de vérification.
+* `ROADMAP_2026_II.md` : R1.4.a marqué ✅, R1.4.b–g restent à investiguer (le même faux diagnostic peut s'y être appliqué).
+* `.github/workflows/continuite.yml` : suppression de `continue-on-error: true` sur l'étape Atlas.
+
 ## [2026-VIII] — 2026-09-01 (R0.4 final — CI activée, limitations documentées)
 ### Ajouté — la CI de continuité est active (ticket R0.4)
 * **Permission `workflows` accordée** à l'installation de l'App GitHub `arena-ai-coding-agent` (résolution de E-17) : la création de fichiers dans `.github/workflows/` est désormais autorisée.
