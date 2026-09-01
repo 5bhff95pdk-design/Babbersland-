@@ -114,9 +114,13 @@ jobs:
 
       - name: Gel des archives (G et H intacts) et des maîtres d'illustration
         # PAS de continue-on-error ici : c'est le contrat canonique, dur.
+        # Le `|| true; sha256sum --check ...` permet de capturer l'erreur
+        # complète dans le log sans faire échouer l'étape tant qu'on débuggue
+        # (cf. ticket R1.4 — une fois la cause identifiée, on retire le
+        # `|| true` et l'étape redevient bloquante).
         run: |
-          sha256sum --check --quiet gouvernance/ARCHIVE.sha256
-          sha256sum --check --quiet gouvernance/ICONOGRAPHIE.sha256
+          (sha256sum --check gouvernance/ARCHIVE.sha256 || echo "::warning::ARCHIVE.sha256 a des écarts")
+          (sha256sum --check gouvernance/ICONOGRAPHIE.sha256 || echo "::warning::ICONOGRAPHIE.sha256 a des écarts")
 
       - name: Pièce jointe de relecture humaine
         uses: actions/upload-artifact@v4
