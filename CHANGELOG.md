@@ -2,6 +2,20 @@
 
 Toutes les modifications notables apportées au dépôt du **Royaume du Babberland** sont consignées dans ce document.
 
+## [2026-IX] — 2026-09-01 (R1.4.a — diagnostic affiné, instrumentation Atlas)
+### Signalé — l'Atlas n'est PAS bit-à-bit reproductible en CI
+* **Diagnostic local** (clone frais, venv, `--break-system-packages`) concluait à une reproductibilité bit-à-bit (`git hash-object` identique avant et après régénération, identique au tracké).
+* **En CI** (run #12, PR #24), l'étape échoue. La différence entre la machine de l'agent et le runner CI (cache pip, version de sous-composants Pillow, locale, timezone, ordre d'itération) n'est pas réductible à un test local.
+* **Cause identifiée** : `cache: pip` sur `actions/setup-python@v5` peut conserver un état Pillow différent de celui qu'on installe à partir de zéro via `--break-system-packages`.
+### Mis à jour — instrumentation de l'étape Atlas
+* `continue-on-error: true` **conservé** sur l'étape Atlas.
+* Nouvelle instrumentation : en cas d'échec du `git diff`, la sortie capture le `git diff` complet **et** le `sha256sum` des trois fichiers, pour permettre le diagnostic en aval.
+* Le `git diff` ne supprime plus la sortie (`{ … && echo atlas-ok; } || { …; exit 1; }` au lieu de `… | tee`).
+### Mis à jour
+* `gouvernance/CI_LIMITES.md` : section « Statut R1.4.a » corrigée — le diagnostic initial était faux, l'Atlas N'est PAS reproductible en CI, la R1.4.a reste à faire avec une approche différente (image Docker épinglée, ou empreinte sémantique).
+* `ROADMAP_2026_II.md` : R1.4.a reste à faire, marqué ⏳.
+* `.github/workflows/continuite.yml` : instrumentation ajoutée à l'étape Atlas.
+
 ## [2026-VIII] — 2026-09-01 (R0.4 final — CI activée, limitations documentées)
 ### Ajouté — la CI de continuité est active (ticket R0.4)
 * **Permission `workflows` accordée** à l'installation de l'App GitHub `arena-ai-coding-agent` (résolution de E-17) : la création de fichiers dans `.github/workflows/` est désormais autorisée.

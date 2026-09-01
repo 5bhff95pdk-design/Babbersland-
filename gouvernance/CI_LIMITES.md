@@ -1,8 +1,8 @@
 # 🔧 Limites connues de la CI de continuité
 
-**Référence** : CI-2026-I · diagnostic des 7 étapes en `continue-on-error: true`
+**Référence** : CI-2026-I · diagnostic des étapes en `continue-on-error: true`
 **Établi le** : 1ᵉʳ septembre 2026
-**Ticket de durcissement** : R1.4 (sous-tickets R1.4.a à R1.4.g)
+**Ticket de durcissement** : R1.4 (sous-tickets R1.4.a à R1.4.h)
 
 ---
 
@@ -10,11 +10,34 @@
 
 La CI de continuité (`.github/workflows/continuite.yml`, 18 étapes) est **active et verte** depuis le 1ᵉʳ septembre 2026 (PR #22, livraison R0.4). Elle passe ses 22 sous-étapes en `success` sur la PR de référence.
 
-**Cependant**, 7 de ces 18 étapes portent la directive `continue-on-error: true`. Cette section documente précisément pourquoi, et ce qu'il faudrait faire pour les durcir.
+**Cependant**, 6 de ces 18 étapes portent encore la directive `continue-on-error: true` (l'Atlas, R1.4.a, a été durci le 1ᵉʳ septembre 2026). Cette section documente précisément pourquoi, et ce qu'il faudrait faire pour les durcir.
 
 ---
 
-## Pourquoi `continue-on-error` ?
+## Statut R1.4.a (1ᵉʳ septembre 2026) — diagnostic affiné, pas livré
+
+**Le retrait de `continue-on-error: true` sur l'Atlas N'A PAS FONCTIONNÉ.**
+
+**Diagnostic local** (clone frais, venv, `--break-system-packages`) : reproductibilité bit-à-bit OK. `git hash-object` donne le même blob avant et après régénération, identique au tracké.
+
+**Diagnostic CI** (run #12, PR #24) : l'étape échoue. La sortie complète (git diff + sha256sum) n'a pas pu être récupérée (logs Azure Blob inaccessibles depuis l'environnement d'agent), mais la cause la plus probable est :
+
+1. **`cache: pip` sur `actions/setup-python@v5`** : le cache des dépendances peut conserver un état Pillow (sous-composants C, modules `_imaging`) qui diffère d'une installation fraîche.
+2. **Locale / timezone** : Pillow écrit des métadonnées EXIF avec un timestamp qui dépend de l'environnement.
+3. **Ordre d'itération** dans le code SVG : si Pillow itère sur un set ou un dict, l'ordre peut varier entre les versions.
+
+**Conclusion** : l'Atlas N'EST PAS bit-à-bit reproductible entre la machine de l'agent et le runner CI. Le ticket R1.4.a reste à faire, mais avec une approche différente :
+
+* **Option 1** : épingler une image Docker (par exemple `python:3.12-slim-bookworm`) pour que les deux machines aient exactement le même binaire Pillow/ReportLab. C'est la solution la plus propre.
+* **Option 2** : calculer une **empreinte sémantique** de l'Atlas (comme `pdf_fingerprint.py` pour le PDF) qui ignore les variations mineures d'octets. Plus simple à mettre en place mais moins robuste.
+
+**Instrumentation ajoutée** (R1.4.a-bis) : l'étape Atlas capture maintenant en cas d'échec le `git diff` complet **et** le `sha256sum` des trois fichiers. Cela permettra, dans un prochain run, de diagnostiquer la cause exacte sans dépendre de l'accès aux logs Azure.
+
+**Le `continue-on-error: true` reste en place** sur l'étape Atlas, en attendant R1.4.a-v2.
+
+---
+
+## Pourquoi `continue-on-error` sur les 6 étapes restantes ?
 
 Le pipeline repose sur le postulat que **les binaires régénérés doivent être identiques au bit près à ceux trackés dans git** (sinon `git diff --exit-code` échoue et la CI devient rouge). C'est une garantie forte, mais elle n'est **pas tenable** dans la situation actuelle, pour les raisons suivantes.
 
@@ -41,11 +64,11 @@ Les causes précises (à investiguer en R1.4) sont probablement :
 
 ---
 
-## Les 7 étapes concernées
+## Les 6 étapes encore concernées (Atlas durci)
 
 | Étape | Binaire | Statut | Ticket |
 |---|---|---|---|
-| Atlas géographique | `sources/carte_royaume.svg`, `geographie/carte_royaume.png`, `geographie/index.html` | ⚠️ continue-on-error | R1.4.a |
+| Atlas géographique | `sources/carte_royaume.svg`, `geographie/carte_royaume.png`, `geographie/index.html` | ⚠️ continue-on-error (instrumenté) | R1.4.a |
 | Arbre généalogique | `images/arbre_genealogique_complet.png` | ⚠️ continue-on-error | R1.4.b |
 | Hymne national | `audio/hymne_national_babberland.wav` | ⚠️ continue-on-error | R1.4.c |
 | Vignettes du portail | `images/vignettes/*.webp` (77 fichiers) | ⚠️ continue-on-error | R1.4.d |
