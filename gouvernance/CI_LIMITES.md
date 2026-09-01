@@ -10,7 +10,7 @@
 
 La CI de continuité (`.github/workflows/continuite.yml`, 18 étapes) est **active et verte** depuis le 1ᵉʳ septembre 2026 (PR #22, livraison R0.4). Elle passe ses 22 sous-étapes en `success` sur la PR de référence.
 
-**Cependant**, 6 de ces 18 étapes portent encore la directive `continue-on-error: true` (l'Atlas, R1.4.a, a été durci le 1ᵉʳ septembre 2026). Cette section documente précisément pourquoi, et ce qu'il faudrait faire pour les durcir.
+**Cependant**, 5 de ces 18 étapes portent encore la directive `continue-on-error: true` (l'Atlas, R1.4.a, puis l'Arbre, R1.4.b, ont été durcis le 1ᵉʳ septembre 2026 — l'Arbre **bloquant**, l'Atlas conservant une étape tolérante avec outil d'empreinte livré). Cette section documente précisément pourquoi, et ce qu'il faudrait faire pour les durcir.
 
 ---
 
@@ -53,13 +53,37 @@ L'empreinte sémantique fonctionne parfaitement en local (deux runs successifs d
 
 ---
 
-## Pourquoi `continue-on-error` sur les 6 étapes restantes ?
+## Statut R1.4.b (1ᵉʳ septembre 2026) — Arbre durci, étape BLOQUANTE (modèle « variantes acceptées »)
+
+**Première mesure réelle du runner CI, obtenue grâce aux annotations de check-run.** Les journaux d'étape transitent par Azure Blob (`productionresultssa*.blob.core.windows.net`), injoignable depuis l'environnement d'agent — c'est ce qui a bloqué l'investigation R1.4.a-v2. Le script d'empreinte émet donc son diagnostic sous forme d'annotations de workflow (`::notice`, `::error`), que l'API Checks (`/check-runs/{id}/annotations`) sert depuis GitHub.
+
+**La mesure (PR #26)** : entre la machine de référence et le runner `ubuntu-latest`, la grille moyennée 16×16 quantifiée en 16 niveaux diverge sur **3 cellules sur 256, chacune d'un seul niveau** (~16 unités RVB) — cellules dans les zones de texte, assises sur une frontière de quantification. Cause : versions FreeType différentes (2.12 / Debian 12 ↔ 2.13 / Ubuntu 24.04), l'antialiasing des glyphes décale quelques pixels. Par ailleurs une mutation témoin « titre d'un nœud gommé » ne bouge que **2 cellules d'un niveau**. **Bruit de rendu légitime et retouche de contenu se chevauchent : aucun seuil de tolérance (≤ N cellules à Δ ≤ 1) ne les sépare sans rendre le contrôle aveugle aux retouches fines.**
+
+**Modèle retenu — variantes acceptées** : on grave dans `gouvernance/ARTIFACT_SIGNATURES.sha256` **l'ensemble des chaînes de rendu observées** (`size|mode|16x16box-md5|ink-millième`) :
+
+- `arbre_variante_reference-locale` — machine de référence (bac à sable de l'agent) ;
+- `arbre_variante_ci-ubuntu-24.04-py3.12` — runner CI (charge copiée depuis l'annotation du run) ;
+- `arbre_png` — sha256 de l'ensemble trié (tête de contrat à une ligne).
+
+`--check` exige l'**appartenance exacte** à l'ensemble : retouche de contenu (même 2 cellules) → variante inédite → **échec** ; nouveau FreeType légitime → variante inédite → échec **diagnostiqué par annotation** (grille complète incluse), puis accepté explicitement par `empreinte_arbre.py --accepter '<charge>' <étiquette>` — acte d'assentiment tracé dans git. Jamais de bascule silencieuse ; jamais d'aveuglement.
+
+**Validation (rejouée sur le modèle final)** : régénération conforme à « reference-locale » (code 0) ; mutations « nœud ajouté » (8 cellules) et « titre gommé » (2 cellules) détectées (code 1) — y compris le titre gommé, qu'une tolérance chiffrée aurait laissé passer ; 1 pixel et bruit ±2 sur 300 px conformes (même grille — la protection bit à bit du fichier tracké reste celle d'`ICONOGRAPHIE.sha256`, E-18) ; charge mal formée refusée par `--accepter` (code 1).
+
+**Intégration** : étape CI bloquante (`continue-on-error` retiré, `empreinte_arbre.py --check` remplace `git diff --exit-code`) ; but `make empreinte-arbre` (acte d'assentiment, variante `reference-locale`) ; `--check` dans `make controle`.
+
+**Cérémonie lors d'un changement de contenu** : éditer `generate_genealogy.py` → `make arbre` → `make empreinte-arbre` → pousser → lire l'annotation CI → `--accepter` la charge du runner → pousser. Deux poussées par changement de contenu : c'est le prix, connu, de l'assentiment double-machine tant que R1.2 (matrice multi-OS) n'existe pas.
+
+**Ce que R1.4.b apporte aussi à R1.4.a-v3** : le canal annotation + grille détaillée est directement réutilisable pour diagnostiquer l'Atlas (même douleur d'investigation).
+
+---
+
+## Pourquoi `continue-on-error` sur les 5 étapes restantes ?
 
 Le pipeline repose sur le postulat que **les binaires régénérés doivent être identiques au bit près à ceux trackés dans git** (sinon `git diff --exit-code` échoue et la CI devient rouge). C'est une garantie forte, mais elle n'est **pas tenable** dans la situation actuelle, pour les raisons suivantes.
 
 ### Cause racine : non-reproductibilité multi-machines
 
-Les 6 artéfacts principaux (Atlas SVG/PNG/HTML, Arbre PNG, Hymne WAV, PDF encyclopédique) sont **reproductibles par run** sur une même machine — deux invocations successives sur la même machine donnent le même SHA. Mais ils ne sont **pas bit-à-bit identiques** entre machines :
+Les artéfacts régénérés (Atlas SVG/PNG/HTML, Arbre PNG, Hymne WAV, PDF encyclopédique) sont **reproductibles par run** sur une même machine — deux invocations successives sur la même machine donnent le même SHA. Mais ils ne sont **pas garantis bit-à-bit identiques** entre machines :
 
 | Machine | Pillow | ReportLab | Système | SHA des artéfacts |
 |---|---|---|---|---|
@@ -80,12 +104,12 @@ Les causes précises (à investiguer en R1.4) sont probablement :
 
 ---
 
-## Les 6 étapes encore concernées (Atlas durci)
+## Les 5 étapes encore concernées (Atlas et Arbre durcis)
 
 | Étape | Binaire | Statut | Ticket |
 |---|---|---|---|
 | Atlas géographique | `sources/carte_royaume.svg`, `geographie/carte_royaume.png`, `geographie/index.html` | ⚠️ continue-on-error (outil `empreinte_atlas.py` livré) | R1.4.a-v3 |
-| Arbre généalogique | `images/arbre_genealogique_complet.png` | ⚠️ continue-on-error | R1.4.b |
+| Arbre généalogique | `images/arbre_genealogique_complet.png` | ✅ **bloquant** (empreinte sémantique gravée, diagnostic intégré) | R1.4.b — livré |
 | Hymne national | `audio/hymne_national_babberland.wav` | ⚠️ continue-on-error | R1.4.c |
 | Vignettes du portail | `images/vignettes/*.webp` (77 fichiers) | ⚠️ continue-on-error | R1.4.d |
 | Régénération encyclopédie | `Royaume_du_Babberland_Encyclopedie_Consolidee_2026_I.pdf` | ⚠️ continue-on-error | R1.4.e |
@@ -136,4 +160,5 @@ La situation est analogue à un wiki : on ne « gèle » pas un export PDF en v�
 
 ---
 
-*Document établi à Pabst City, le 1ᵉʳ septembre 2026, par l'agent Arena.ai (session `arena/01a05e26-babbersland`).*
+*Document établi à Pabst City, le 1ᵉʳ septembre 2026, par l'agent Arena.ai (session `arena/01a05e26-babbersland`).*  
+*Statut R1.4.b ajouté le même jour (session `arena/01a05f15-babbersland`) : l'Arbre est durci et bloquant via empreinte sémantique tolérante.*

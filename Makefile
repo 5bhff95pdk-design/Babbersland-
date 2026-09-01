@@ -1,5 +1,5 @@
 # Chancellerie royale — chaîne de production du volume 2026-I.
-# Buts : env · arbre · carte · hymne · vignettes · pdf · empreinte · controle · scelle · iconographie · lfs · tout · propre
+# Buts : env · arbre · carte · hymne · vignettes · pdf · empreinte · empreinte-atlas · empreinte-arbre · controle · scelle · iconographie · lfs · tout · propre
 # Hors venv, remplacer PY=.venv/bin/python par PY=python3 (make PY=python3).
 
 PY      ?= .venv/bin/python
@@ -40,6 +40,9 @@ empreinte: ## grave l'empreinte sémantique du PDF publié — acte d'assentimen
 empreinte-atlas: ## grave l'empreinte sémantique de l'Atlas (SVG/PNG/HTML) — analogue à `empreinte`
 	$(PY) sources/empreinte_atlas.py --write
 
+empreinte-arbre: ## grave l'empreinte sémantique de l'Arbre (PNG) — acte d'assentiment, comme `empreinte`
+	$(PY) sources/empreinte_arbre.py --write
+
 workflows: ## installe le modèle de CI dans .github/workflows/ (à committer avec un jeton tenant « workflows »)
 	@mkdir -p .github/workflows && cp sources/github_actions_continuite.yml .github/workflows/continuite.yml \
 	  && rm -f .github/workflows/main.yml \
@@ -77,6 +80,7 @@ controle: ## continuité, parité des données, chroniques, parité du portail, 
 	$(PY) sources/check_geography.py
 	$(PY) sources/check_portal.py
 	$(PY) sources/empreinte_atlas.py --check
+	$(PY) sources/empreinte_arbre.py --check
 	$(MAKE) --no-print-directory scelle
 
 # L'ordre est un contrôle, pas une commodité (constat E-21) : graver l'empreinte AVANT

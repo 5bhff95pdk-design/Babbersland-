@@ -96,11 +96,23 @@ jobs:
           python sources/generate_map.py
           python sources/check_geography.py
 
-      - name: Arbre généalogique déterministe
-        continue-on-error: true  # R1.4 — voir note Atlas
+      - name: Arbre généalogique (variantes de rendu acceptées, bloquant)
+        # R1.4.b (1ᵉʳ septembre 2026) : `git diff --exit-code` et
+        # `continue-on-error: true` remplacés par l'empreinte sémantique
+        # « variantes acceptées » de sources/empreinte_arbre.py.
+        # Mesure PR #26 : entre la machine de référence et le runner, le
+        # rendu diverge sur 3 cellules 16x16 d'un niveau de quantification
+        # (FreeType 2.12 vs 2.13) — pile dans la zone où vit la plus
+        # petite retouche de contenu (2 cellules). Aucune tolérance
+        # chiffrée ne sépare les deux : on accepte donc EXACTEMENT les
+        # variantes gravées dans gouvernance/ARTIFACT_SIGNATURES.sha256
+        # (reference-locale, ci-ubuntu-24.04-py3.12) ; toute autre est
+        # une dérive bloquante, diagnostiquée par annotation de check-run
+        # (canal lisible — les journaux Azure Blob ne le sont pas depuis
+        # l'environnement d'agent, douleur R1.4.a-v2).
         run: |
           python sources/generate_genealogy.py
-          git diff --exit-code --stat -- images/arbre_genealogique_complet.png
+          python sources/empreinte_arbre.py --check
 
       # Décrété par l'Avis royal n° 8 (29 août 2026) : l'enregistrement de référence
       # fait partie de `make tout`, il doit donc être reproductible au bit près.

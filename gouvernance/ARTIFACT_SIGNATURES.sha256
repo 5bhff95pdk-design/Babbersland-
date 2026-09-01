@@ -11,3 +11,20 @@
 atlas_svg = fe1e95c5298c1748b845b5609cd23b3db8d2e29b315f2394f7c8e9485f8b29e0
 atlas_png = 354e0fe58d89d2433c5782deae9e51019dbd59da517fd6d044c7d21e9aae0c65
 atlas_html = d34401c3be7ee033a15a7e7d2cbf82a76f9473b74089e9ef9fed135df2cc50ae
+
+# === ARBRE GÉNÉALOGIQUE ===
+# Signé par sources/empreinte_arbre.py — modèle « variantes acceptées ».
+# Le PNG est bit-stable par machine mais PAS entre machines (FreeType
+# 2.12 vs 2.13 : antialiasing des glyphes). Mesure PR #26 : 3 cellules
+# 16x16 sur 256 divergent d'1 niveau entre bac à sable et runner —
+# zone qui chevauche la plus petite retouche de contenu (2 cellules).
+# On accepte donc EXACTEMENT les rendus observés (ci-dessous), sans
+# tolérance chiffrée : toute autre variante est une dérive à trancher.
+#   - size/mode : géométrie du canevas (1600x1000, RGB) ;
+#   - 16x16box  : moyennage BOX 16x16, canaux quantifiés en 16 niveaux ;
+#   - ink       : proportion de pixels sombres (luminance < 100), au millième.
+# Nouvelle machine légitime ? Lire l'annotation CI, puis
+# `python sources/empreinte_arbre.py --accepter '<charge>' <étiquette>`.
+arbre_png = ec9a36231d2a8a4b9cb6f3180aed8e63e2b712bedc6d8bee9878c89142d1caf5
+arbre_variante_ci-ubuntu-24.04-py3.12 = size:1600x1000|mode:RGB|16x16box:a586e3355260ebe42e4b49e59bee4547|ink:0.131
+arbre_variante_reference-locale = size:1600x1000|mode:RGB|16x16box:45e876bf246090e1529901c43d950697|ink:0.131
