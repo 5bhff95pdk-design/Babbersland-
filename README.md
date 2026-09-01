@@ -33,6 +33,8 @@ L'édition **2026-I** intègre directement les corrections et ne nécessite aucu
 | `gouvernance/ARCHIVE.md` | Politique d'archivage : ce qui est gelé, ce qui ne l'est pas, comment dégeler |
 | `gouvernance/ARCHIVE.sha256` | Scellés des archives 2026-G et 2026-H, vérifiés par la CI et par `make scelle` |
 | `gouvernance/ICONOGRAPHIE.sha256` | Scellés des 28 maîtres d'illustration, par leur nom (E-18) |
+| `gouvernance/CI_LIMITES.md` | Limites connues de la CI de continuité (1ᵉʳ septembre 2026) : 7 étapes en `continue-on-error`, durcissement prévu en R1.4.a–h |
+| `.github/workflows/continuite.yml` | **CI active** : 18 étapes + 4 post-step, exécutée à chaque push sur `main` et à chaque PR (première exécution verte : 2026-09-01T21:46:19Z) |
 | `canon/` + `propositions_declarées` | Données structurées (R3.3) sous contrat de parité : une affirmation est attestée par le corpus ou déclarée comme proposition |
 | `gouvernance/pdf_fingerprint.txt` | Empreinte sémantique du PDF canonique — le contrat de fraîcheur de l'artefact |
 | `gouvernance/index.html` | Version visuelle du rapport et de la roadmap (page autonome) |
@@ -135,10 +137,18 @@ continuité, parité des données, parité du portail, **chroniques**, atlas, ar
 royal n° 8)**, **vignettes**, régénération du volume, artéfact apparié, fraîcheur, scellés,
 pièce jointe.
 
-Le fichier `.github/workflows/continuite.yml` **ne peut pas sortir d'une App** : GitHub refuse qu'un jeton
-dépourvu du droit `workflows` crée ou modifie `.github/workflows/*` (constats **E-17** et **F-01**, mesuré
-à nouveau le 29 août 2026 — refus à la fois par `git push` et par l'API *contents*). Le dépôt versionne
-donc le modèle, pas sa copie. Deux façons de lever le blocage :
+Le fichier `.github/workflows/continuite.yml` **ne peut pas sortir d'une App sans le droit `workflows`** :
+GitHub refuse qu'un tel jeton crée ou modifie `.github/workflows/*` (constats **E-17** et **F-01**, mesuré
+à plusieurs reprises — refus à la fois par `git push` et par l'API *contents*). Le dépôt versionne
+donc le modèle, pas sa copie.
+
+**Statut au 1ᵉʳ septembre 2026** : le droit `workflows` a été accordé à l'installation de l'App
+`arena-ai-coding-agent`, et la PR #22 a installé le workflow sur `main` (commit `9f527f3`).
+La CI est **active et verte** sur la branche principale. **Limitation connue** : 7 étapes sur 18
+portent `continue-on-error: true` (régénérations binaires non bit-à-bit reproductibles entre
+machines) ; voir `gouvernance/CI_LIMITES.md` et le ticket R1.4.
+
+Pour les sessions futures (par exemple, si le droit est révoqué par erreur), la voie de secours est :
 
 ```bash
 # (a) avec un jeton humain — trois commandes, dans un clone à vous
@@ -149,9 +159,6 @@ git push
 # (b) sans y toucher : accorder le droit à l'App, puis demander sa réexécution
 #     github.com/settings/installations → Arena → Permissions du dépôt → Workflows : Read and write
 ```
-
-Tant que l'une des deux n'a pas eu lieu, **les contrôles ne tournent que si on les lance** (`make controle`) :
-aucune vérification automatique ne protège `main`.
 
 ## Atlas géographique (proposé, non décrété)
 
