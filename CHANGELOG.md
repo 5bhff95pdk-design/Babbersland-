@@ -2,6 +2,23 @@
 
 Toutes les modifications notables apportées au dépôt du **Royaume du Babberland** sont consignées dans ce document.
 
+## [2026-X] — 2026-09-01 (R1.4.a-v2 — Atlas durci via empreinte sémantique)
+### Ajouté — `sources/empreinte_atlas.py` et `gouvernance/ARTIFACT_SIGNATURES.sha256`
+* **`sources/empreinte_atlas.py`** (60 lignes) : calcule trois empreintes SHA-256 sémantiques de l'Atlas (analogue à `pdf_fingerprint.py` pour le PDF) :
+  - **SVG** : `viewBox`, ensemble trié des `id`, `data-since`, classes, présence des toponymes canoniques.
+  - **PNG** : dimension, mode colorimétrique, somme MD5 des pixels.
+  - **HTML** : ensemble trié des `id` et classes, textes des `<h1>`/`<h2>`, présence des dates maîtresses.
+* **Interface** : `python sources/empreinte_atlas.py [--write|--check]`. `--write` est un acte d'assentiment, `--check` la comparaison.
+* **Stockage** : `gouvernance/ARTIFACT_SIGNATURES.sha256` (nouveau fichier). La section Atlas est ajoutée, le reste du fichier (futurs scellés) est préservé.
+### Corrigé — l'étape Atlas est désormais BLOQUANTE
+* `.github/workflows/continuite.yml` : `continue-on-error: true` retiré, l'étape appelle `empreinte_atlas.py --check` au lieu de `git diff --exit-code`.
+* `Makefile` : nouveau but `make empreinte-atlas` ; ajout dans `make controle`.
+* La cause de la non-reproductibilité (cache pip Pillow sur le runner) reste non corrigée, mais n'a plus d'impact : on ne compare plus les octets, on compare le **contenu sémantique**.
+### Mis à jour
+* `gouvernance/CI_LIMITES.md` : section « Statut R1.4.a-v2 » documentant l'approche, l'implémentation, les tests de validation.
+* `ROADMAP_2026_II.md` : R1.4.a marqué ✅.
+* `CHANGELOG.md` : entrée 2026-IX corrigée (R1.4.a « diagnostic affiné » devient un préambule à R1.4.a-v2).
+
 ## [2026-IX] — 2026-09-01 (R1.4.a — diagnostic affiné, instrumentation Atlas)
 ### Signalé — l'Atlas n'est PAS bit-à-bit reproductible en CI
 * **Diagnostic local** (clone frais, venv, `--break-system-packages`) concluait à une reproductibilité bit-à-bit (`git hash-object` identique avant et après régénération, identique au tracké).

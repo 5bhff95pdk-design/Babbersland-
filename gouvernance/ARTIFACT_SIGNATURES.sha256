@@ -1,0 +1,13 @@
+
+
+# === ATLAS GÉOGRAPHIQUE ===
+# Signé par sources/empreinte_atlas.py (analogue à pdf_fingerprint.py).
+# L'Atlas (SVG, PNG, HTML) n'est pas reproductible au bit près entre
+# machines (timing d'écriture, ordre d'itération, encodage des flottants
+# Pillow) ; on compare donc son contenu sémantique :
+# - SVG : viewBox, ids, data-since, classes, toponymes canoniques ;
+# - PNG : dimension, mode, somme MD5 des pixels ;
+# - HTML : ids, classes, h1/h2, dates maîtresses.
+atlas_svg = fe1e95c5298c1748b845b5609cd23b3db8d2e29b315f2394f7c8e9485f8b29e0
+atlas_png = 3aff64fd9f611eb5a660a7c562c68f65de1548a81a29eeedf21516e392c24231
+atlas_html = d34401c3be7ee033a15a7e7d2cbf82a76f9473b74089e9ef9fed135df2cc50ae
