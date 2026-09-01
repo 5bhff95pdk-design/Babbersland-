@@ -10,7 +10,7 @@
 
 La CI de continuité (`.github/workflows/continuite.yml`, 18 étapes) est **active et verte** depuis le 1ᵉʳ septembre 2026 (PR #22, livraison R0.4). Elle passe ses 22 sous-étapes en `success` sur la PR de référence.
 
-**Cependant**, 5 de ces 18 étapes portent encore la directive `continue-on-error: true` (l'Atlas, R1.4.a, puis l'Arbre, R1.4.b, ont été durcis le 1ᵉʳ septembre 2026 — l'Arbre **bloquant**, l'Atlas conservant une étape tolérante avec outil d'empreinte livré). Cette section documente précisément pourquoi, et ce qu'il faudrait faire pour les durcir.
+**Cependant**, 6 de ces 18 étapes portent encore la directive `continue-on-error: true` au soir du 1ᵉʳ septembre 2026 : l'Arbre (R1.4.b) a été durci dans la journée (étape **bloquante**), l'Atlas (R1.4.a) garde son mode tolérant avec outil d'empreinte livré. (Rectificatif de comptage au passage : ce document annonçait « 6 » alors que le workflow en comptait 7 — la roadmap R0.4 disait juste ; après R1.4.b il en reste réellement 6.) Cette section documente précisément pourquoi, et ce qu'il faudrait faire pour les durcir.
 
 ---
 
@@ -77,7 +77,7 @@ L'empreinte sémantique fonctionne parfaitement en local (deux runs successifs d
 
 ---
 
-## Pourquoi `continue-on-error` sur les 5 étapes restantes ?
+## Pourquoi `continue-on-error` sur les 6 étapes restantes ?
 
 Le pipeline repose sur le postulat que **les binaires régénérés doivent être identiques au bit près à ceux trackés dans git** (sinon `git diff --exit-code` échoue et la CI devient rouge). C'est une garantie forte, mais elle n'est **pas tenable** dans la situation actuelle, pour les raisons suivantes.
 
@@ -104,7 +104,7 @@ Les causes précises (à investiguer en R1.4) sont probablement :
 
 ---
 
-## Les 5 étapes encore concernées (Atlas et Arbre durcis)
+## Les 6 étapes encore concernées (Arbre durci, Atlas en attente)
 
 | Étape | Binaire | Statut | Ticket |
 |---|---|---|---|
