@@ -2,15 +2,19 @@
 
 Toutes les modifications notables apportées au dépôt du **Royaume du Babberland** sont consignées dans ce document.
 
-## [2026-IX] — 2026-09-01 (R1.4.a — Atlas géographique durci)
-### Corrigé — l'étape Atlas était faussement diagnostiquée
-* **Diagnostic refait** sur un clone frais en conditions CI réelles (`--break-system-packages`, sans venv). L'Atlas (SVG, PNG, HTML) est en fait **bit-à-bit reproductible** : `git hash-object` donne le même blob avant et après régénération, identique au blob tracké.
-* Le `continue-on-error: true` de l'étape Atlas (R0.4) était basé sur une **mesure erronée** (confusion entre `sha256sum` du système de fichiers et `git hash-object`).
-* **L'étape est désormais BLOQUANTE**. 6 autres étapes restent en `continue-on-error: true` (Arbre, Hymne, Vignettes, Régénération PDF, Artéfact, Fraîcheur), à réinvestiquer en R1.4.b–g.
+## [2026-IX] — 2026-09-01 (R1.4.a — diagnostic affiné, instrumentation Atlas)
+### Signalé — l'Atlas n'est PAS bit-à-bit reproductible en CI
+* **Diagnostic local** (clone frais, venv, `--break-system-packages`) concluait à une reproductibilité bit-à-bit (`git hash-object` identique avant et après régénération, identique au tracké).
+* **En CI** (run #12, PR #24), l'étape échoue. La différence entre la machine de l'agent et le runner CI (cache pip, version de sous-composants Pillow, locale, timezone, ordre d'itération) n'est pas réductible à un test local.
+* **Cause identifiée** : `cache: pip` sur `actions/setup-python@v5` peut conserver un état Pillow différent de celui qu'on installe à partir de zéro via `--break-system-packages`.
+### Mis à jour — instrumentation de l'étape Atlas
+* `continue-on-error: true` **conservé** sur l'étape Atlas.
+* Nouvelle instrumentation : en cas d'échec du `git diff`, la sortie capture le `git diff` complet **et** le `sha256sum` des trois fichiers, pour permettre le diagnostic en aval.
+* Le `git diff` ne supprime plus la sortie (`{ … && echo atlas-ok; } || { …; exit 1; }` au lieu de `… | tee`).
 ### Mis à jour
-* `gouvernance/CI_LIMITES.md` : nouvelle section « Statut R1.4.a (livré le 1ᵉʳ septembre 2026) — Atlas durci » expliquant le faux diagnostic et la méthode de vérification.
-* `ROADMAP_2026_II.md` : R1.4.a marqué ✅, R1.4.b–g restent à investiguer (le même faux diagnostic peut s'y être appliqué).
-* `.github/workflows/continuite.yml` : suppression de `continue-on-error: true` sur l'étape Atlas.
+* `gouvernance/CI_LIMITES.md` : section « Statut R1.4.a » corrigée — le diagnostic initial était faux, l'Atlas N'est PAS reproductible en CI, la R1.4.a reste à faire avec une approche différente (image Docker épinglée, ou empreinte sémantique).
+* `ROADMAP_2026_II.md` : R1.4.a reste à faire, marqué ⏳.
+* `.github/workflows/continuite.yml` : instrumentation ajoutée à l'étape Atlas.
 
 ## [2026-VIII] — 2026-09-01 (R0.4 final — CI activée, limitations documentées)
 ### Ajouté — la CI de continuité est active (ticket R0.4)
