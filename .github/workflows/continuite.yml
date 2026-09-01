@@ -96,15 +96,20 @@ jobs:
           python sources/generate_map.py
           python sources/check_geography.py
 
-      - name: Arbre généalogique (empreinte sémantique gravée, bloquante)
-        # R1.4.b (1ᵉʳ septembre 2026) : le `git diff --exit-code` binaire et
-        # le `continue-on-error: true` sont remplacés par l'empreinte
-        # sémantique. Même traitement que l'Atlas, mais avec une conception
-        # plus tolérante (moyennage BOX + quantification en 16 niveaux au
-        # lieu de l'échantillonnage NEAREST — voir la docstring de
-        # sources/empreinte_arbre.py) et un diagnostic complet imprimé par
-        # le script en cas de divergence (la douleur de R1.4.a-v2 était de
-        # ne rien pouvoir investiguer depuis l'environnement d'agent).
+      - name: Arbre généalogique (variantes de rendu acceptées, bloquant)
+        # R1.4.b (1ᵉʳ septembre 2026) : `git diff --exit-code` et
+        # `continue-on-error: true` remplacés par l'empreinte sémantique
+        # « variantes acceptées » de sources/empreinte_arbre.py.
+        # Mesure PR #26 : entre la machine de référence et le runner, le
+        # rendu diverge sur 3 cellules 16x16 d'un niveau de quantification
+        # (FreeType 2.12 vs 2.13) — pile dans la zone où vit la plus
+        # petite retouche de contenu (2 cellules). Aucune tolérance
+        # chiffrée ne sépare les deux : on accepte donc EXACTEMENT les
+        # variantes gravées dans gouvernance/ARTIFACT_SIGNATURES.sha256
+        # (reference-locale, ci-ubuntu-24.04-py3.12) ; toute autre est
+        # une dérive bloquante, diagnostiquée par annotation de check-run
+        # (canal lisible — les journaux Azure Blob ne le sont pas depuis
+        # l'environnement d'agent, douleur R1.4.a-v2).
         run: |
           python sources/generate_genealogy.py
           python sources/empreinte_arbre.py --check

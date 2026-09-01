@@ -53,27 +53,27 @@ L'empreinte sémantique fonctionne parfaitement en local (deux runs successifs d
 
 ---
 
-## Statut R1.4.b (1ᵉʳ septembre 2026) — Arbre durci, étape BLOQUANTE
+## Statut R1.4.b (1ᵉʳ septembre 2026) — Arbre durci, étape BLOQUANTE (modèle « variantes acceptées »)
 
-**Leçon retenue de R1.4.a-v2** : l'échec de l'Atlas en CI tenait à deux faiblesses qu'on ne reproduit pas ici : (1) l'échantillonnage NEAREST (un pixel source par cellule, sensible au basculement d'un antialiasing) et (2) l'absence de diagnostic exploitable dans le log en cas d'échec.
+**Première mesure réelle du runner CI, obtenue grâce aux annotations de check-run.** Les journaux d'étape transitent par Azure Blob (`productionresultssa*.blob.core.windows.net`), injoignable depuis l'environnement d'agent — c'est ce qui a bloqué l'investigation R1.4.a-v2. Le script d'empreinte émet donc son diagnostic sous forme d'annotations de workflow (`::notice`, `::error`), que l'API Checks (`/check-runs/{id}/annotations`) sert depuis GitHub.
 
-**Approche** : `sources/empreinte_arbre.py` (~85 lignes) calcule une empreinte SHA-256 sémantique de `images/arbre_genealogique_complet.png` :
+**La mesure (PR #26)** : entre la machine de référence et le runner `ubuntu-latest`, la grille moyennée 16×16 quantifiée en 16 niveaux diverge sur **3 cellules sur 256, chacune d'un seul niveau** (~16 unités RVB) — cellules dans les zones de texte, assises sur une frontière de quantification. Cause : versions FreeType différentes (2.12 / Debian 12 ↔ 2.13 / Ubuntu 24.04), l'antialiasing des glyphes décale quelques pixels. Par ailleurs une mutation témoin « titre d'un nœud gommé » ne bouge que **2 cellules d'un niveau**. **Bruit de rendu légitime et retouche de contenu se chevauchent : aucun seuil de tolérance (≤ N cellules à Δ ≤ 1) ne les sépare sans rendre le contrôle aveugle aux retouches fines.**
 
-- **`size`/`mode`** : géométrie du canevas (1600×1000, RGB) ;
-- **`16x16box`** : moyennage **BOX** à 16×16 cellules (~100×62 px chacune), chaque canal quantifié en 16 niveaux. Le moyennage absorbe les basculements d'antialiasing et de tramage d'un pixel ; la quantification absorbe les écarts de quelques unités RVB entre builds de Pillow ;
-- **`ink`** : proportion de pixels sombres (luminance < 100) au millième — détecte un libellé nettement raccourci ou allongé (le signal « texte » qu'un moyennage seul pourrait diluer).
+**Modèle retenu — variantes acceptées** : on grave dans `gouvernance/ARTIFACT_SIGNATURES.sha256` **l'ensemble des chaînes de rendu observées** (`size|mode|16x16box-md5|ink-millième`) :
 
-**Validation locale (rejouée dans la session)** :
-- test positif : régénération → `--check` conforme, code 0 ; bit-stabilité locale confirmée (`md5sum` identique entre deux générations) ;
-- test négatif « nœud ajouté » (rectangle + 8 traits de texte) : **divergence détectée**, code 1 ;
-- test négatif « titre gommé » (libellé de Génération I effacé) : **divergence détectée**, code 1 ;
-- tests de tolérance : 1 pixel retouché, bruit ±2 sur 300 pixels : **conformes** (comme prévu — la comparaison est structurelle, pas pixel à pixel).
+- `arbre_variante_reference-locale` — machine de référence (bac à sable de l'agent) ;
+- `arbre_variante_ci-ubuntu-24.04-py3.12` — runner CI (charge copiée depuis l'annotation du run) ;
+- `arbre_png` — sha256 de l'ensemble trié (tête de contrat à une ligne).
 
-**Intégration** : étape CI « Arbre généalogique (empreinte sémantique gravée, bloquante) » — `continue-on-error: true` **retiré**, `empreinte_arbre.py --check` remplace `git diff --exit-code`. En cas de divergence, le script imprime la charge générée, le sha256 du fichier et la version de Pillow : le diagnostic est lisible **dans le log de l'étape**, sans dépendre des logs Azure Blob. But `make empreinte-arbre` (gravure = acte d'assentiment) ; `empreinte_arbre.py --check` ajouté à `make controle`.
+`--check` exige l'**appartenance exacte** à l'ensemble : retouche de contenu (même 2 cellules) → variante inédite → **échec** ; nouveau FreeType légitime → variante inédite → échec **diagnostiqué par annotation** (grille complète incluse), puis accepté explicitement par `empreinte_arbre.py --accepter '<charge>' <étiquette>` — acte d'assentiment tracé dans git. Jamais de bascule silencieuse ; jamais d'aveuglement.
 
-**Stockage** : nouvelle section `# === ARBRE GÉNÉALOGIQUE ===` dans `gouvernance/ARTIFACT_SIGNATURES.sha256` (la section Atlas est préservée par le script, et réciproquement).
+**Validation (rejouée sur le modèle final)** : régénération conforme à « reference-locale » (code 0) ; mutations « nœud ajouté » (8 cellules) et « titre gommé » (2 cellules) détectées (code 1) — y compris le titre gommé, qu'une tolérance chiffrée aurait laissé passer ; 1 pixel et bruit ±2 sur 300 px conformes (même grille — la protection bit à bit du fichier tracké reste celle d'`ICONOGRAPHIE.sha256`, E-18) ; charge mal formée refusée par `--accepter` (code 1).
 
-**Parc de tolérance assumé** : un changement de texte de largeur comparable (une lettre contre une lettre) n'est pas détecté ici — il l'est par la revue de `generate_genealogy.py` et, pour les données nominales, par `canon/personnages.json` + `check_canon.py`. R1.7 (source unique de l'arbre) resserrera ce partage.
+**Intégration** : étape CI bloquante (`continue-on-error` retiré, `empreinte_arbre.py --check` remplace `git diff --exit-code`) ; but `make empreinte-arbre` (acte d'assentiment, variante `reference-locale`) ; `--check` dans `make controle`.
+
+**Cérémonie lors d'un changement de contenu** : éditer `generate_genealogy.py` → `make arbre` → `make empreinte-arbre` → pousser → lire l'annotation CI → `--accepter` la charge du runner → pousser. Deux poussées par changement de contenu : c'est le prix, connu, de l'assentiment double-machine tant que R1.2 (matrice multi-OS) n'existe pas.
+
+**Ce que R1.4.b apporte aussi à R1.4.a-v3** : le canal annotation + grille détaillée est directement réutilisable pour diagnostiquer l'Atlas (même douleur d'investigation).
 
 ---
 
