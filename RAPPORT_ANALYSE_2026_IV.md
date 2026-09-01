@@ -158,8 +158,8 @@ Le seul verrou qui n'était pas fermé est le dernier : le gel des archives n'é
 | Étape déplacée **en tête de chaîne** (après `py_compile`, avant toute régénération) | ✅ Fait — condition du strict, voir ci-dessous |
 | Modèle `sources/github_actions_continuite.yml` | ✅ Synchronisé avec la copie installée (diff vide) |
 | Documentation (README « 7 → 6 étapes », ROADMAP R1.4.h ✅, CI_LIMITES § R1.4.h, CHANGELOG 2026-XII) | ✅ Fait |
-| Contrôles locaux (`make controle`) | ✅ 12/12 verts après changement (à rejouer) |
-| CI sur la branche de travail | ⏳ Attendue (PR → `main`) |
+| Contrôles locaux (`make controle`) | ✅ 12/12 verts après changement |
+| CI sur la branche de travail | ✅ **Verte** — run pull_request `33569884539` (2e5a2bd) : étape 7 « Gel des archives » (strict, avant régénération) **success**, étape 13 « Arbre » (bloquante) **success**, aucune annotation `a des écarts` ; les seules annotations restantes sont la dépréciation Node.js 20 et le notice `charge=… connue=ci-ubuntu-24.04-py3.12` (conformité R1.4.b) |
 
 **Pourquoi le déplacement en tête de chaîne, et pas seulement le retrait du `|| echo` ?** La correction naïve — retirer les `|| echo` sans bouger l'étape — aurait rendu la CI **rouge permanente** : le runner régénère l'arbre généalogique (couvert par `ICONOGRAPHIE.sha256`) dans une variante de rendu légitime (FreeType 2.13, 3 cellules/256 — mesure R1.4.b), et la vérification post-régénération comparait donc un fichier différent du scellé. Mesure à l'appui : l'annotation `ICONOGRAPHIE.sha256 a des écarts` est présente sur **chaque run, y compris les verts** (vérifié sur le run #33568899178). Le contrat du gel (E-18) porte sur les octets **commités**, pas sur le rendu régénéré — l'étape doit donc le vérifier **avant** que la chaîne ne touche aux fichiers. Le rendu régénéré a son propre contrat bloquant : `empreinte_arbre.py --check` (R1.4.b).
 
