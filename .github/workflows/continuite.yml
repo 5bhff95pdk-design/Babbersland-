@@ -96,11 +96,18 @@ jobs:
           python sources/generate_map.py
           python sources/check_geography.py
 
-      - name: Arbre généalogique déterministe
-        continue-on-error: true  # R1.4 — voir note Atlas
+      - name: Arbre généalogique (empreinte sémantique gravée, bloquante)
+        # R1.4.b (1ᵉʳ septembre 2026) : le `git diff --exit-code` binaire et
+        # le `continue-on-error: true` sont remplacés par l'empreinte
+        # sémantique. Même traitement que l'Atlas, mais avec une conception
+        # plus tolérante (moyennage BOX + quantification en 16 niveaux au
+        # lieu de l'échantillonnage NEAREST — voir la docstring de
+        # sources/empreinte_arbre.py) et un diagnostic complet imprimé par
+        # le script en cas de divergence (la douleur de R1.4.a-v2 était de
+        # ne rien pouvoir investiguer depuis l'environnement d'agent).
         run: |
           python sources/generate_genealogy.py
-          git diff --exit-code --stat -- images/arbre_genealogique_complet.png
+          python sources/empreinte_arbre.py --check
 
       # Décrété par l'Avis royal n° 8 (29 août 2026) : l'enregistrement de référence
       # fait partie de `make tout`, il doit donc être reproductible au bit près.

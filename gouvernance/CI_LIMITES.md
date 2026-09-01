@@ -10,7 +10,7 @@
 
 La CI de continuité (`.github/workflows/continuite.yml`, 18 étapes) est **active et verte** depuis le 1ᵉʳ septembre 2026 (PR #22, livraison R0.4). Elle passe ses 22 sous-étapes en `success` sur la PR de référence.
 
-**Cependant**, 6 de ces 18 étapes portent encore la directive `continue-on-error: true` (l'Atlas, R1.4.a, a été durci le 1ᵉʳ septembre 2026). Cette section documente précisément pourquoi, et ce qu'il faudrait faire pour les durcir.
+**Cependant**, 5 de ces 18 étapes portent encore la directive `continue-on-error: true` (l'Atlas, R1.4.a, puis l'Arbre, R1.4.b, ont été durcis le 1ᵉʳ septembre 2026 — l'Arbre **bloquant**, l'Atlas conservant une étape tolérante avec outil d'empreinte livré). Cette section documente précisément pourquoi, et ce qu'il faudrait faire pour les durcir.
 
 ---
 
@@ -53,13 +53,37 @@ L'empreinte sémantique fonctionne parfaitement en local (deux runs successifs d
 
 ---
 
-## Pourquoi `continue-on-error` sur les 6 étapes restantes ?
+## Statut R1.4.b (1ᵉʳ septembre 2026) — Arbre durci, étape BLOQUANTE
+
+**Leçon retenue de R1.4.a-v2** : l'échec de l'Atlas en CI tenait à deux faiblesses qu'on ne reproduit pas ici : (1) l'échantillonnage NEAREST (un pixel source par cellule, sensible au basculement d'un antialiasing) et (2) l'absence de diagnostic exploitable dans le log en cas d'échec.
+
+**Approche** : `sources/empreinte_arbre.py` (~85 lignes) calcule une empreinte SHA-256 sémantique de `images/arbre_genealogique_complet.png` :
+
+- **`size`/`mode`** : géométrie du canevas (1600×1000, RGB) ;
+- **`16x16box`** : moyennage **BOX** à 16×16 cellules (~100×62 px chacune), chaque canal quantifié en 16 niveaux. Le moyennage absorbe les basculements d'antialiasing et de tramage d'un pixel ; la quantification absorbe les écarts de quelques unités RVB entre builds de Pillow ;
+- **`ink`** : proportion de pixels sombres (luminance < 100) au millième — détecte un libellé nettement raccourci ou allongé (le signal « texte » qu'un moyennage seul pourrait diluer).
+
+**Validation locale (rejouée dans la session)** :
+- test positif : régénération → `--check` conforme, code 0 ; bit-stabilité locale confirmée (`md5sum` identique entre deux générations) ;
+- test négatif « nœud ajouté » (rectangle + 8 traits de texte) : **divergence détectée**, code 1 ;
+- test négatif « titre gommé » (libellé de Génération I effacé) : **divergence détectée**, code 1 ;
+- tests de tolérance : 1 pixel retouché, bruit ±2 sur 300 pixels : **conformes** (comme prévu — la comparaison est structurelle, pas pixel à pixel).
+
+**Intégration** : étape CI « Arbre généalogique (empreinte sémantique gravée, bloquante) » — `continue-on-error: true` **retiré**, `empreinte_arbre.py --check` remplace `git diff --exit-code`. En cas de divergence, le script imprime la charge générée, le sha256 du fichier et la version de Pillow : le diagnostic est lisible **dans le log de l'étape**, sans dépendre des logs Azure Blob. But `make empreinte-arbre` (gravure = acte d'assentiment) ; `empreinte_arbre.py --check` ajouté à `make controle`.
+
+**Stockage** : nouvelle section `# === ARBRE GÉNÉALOGIQUE ===` dans `gouvernance/ARTIFACT_SIGNATURES.sha256` (la section Atlas est préservée par le script, et réciproquement).
+
+**Parc de tolérance assumé** : un changement de texte de largeur comparable (une lettre contre une lettre) n'est pas détecté ici — il l'est par la revue de `generate_genealogy.py` et, pour les données nominales, par `canon/personnages.json` + `check_canon.py`. R1.7 (source unique de l'arbre) resserrera ce partage.
+
+---
+
+## Pourquoi `continue-on-error` sur les 5 étapes restantes ?
 
 Le pipeline repose sur le postulat que **les binaires régénérés doivent être identiques au bit près à ceux trackés dans git** (sinon `git diff --exit-code` échoue et la CI devient rouge). C'est une garantie forte, mais elle n'est **pas tenable** dans la situation actuelle, pour les raisons suivantes.
 
 ### Cause racine : non-reproductibilité multi-machines
 
-Les 6 artéfacts principaux (Atlas SVG/PNG/HTML, Arbre PNG, Hymne WAV, PDF encyclopédique) sont **reproductibles par run** sur une même machine — deux invocations successives sur la même machine donnent le même SHA. Mais ils ne sont **pas bit-à-bit identiques** entre machines :
+Les artéfacts régénérés (Atlas SVG/PNG/HTML, Arbre PNG, Hymne WAV, PDF encyclopédique) sont **reproductibles par run** sur une même machine — deux invocations successives sur la même machine donnent le même SHA. Mais ils ne sont **pas garantis bit-à-bit identiques** entre machines :
 
 | Machine | Pillow | ReportLab | Système | SHA des artéfacts |
 |---|---|---|---|---|
@@ -80,12 +104,12 @@ Les causes précises (à investiguer en R1.4) sont probablement :
 
 ---
 
-## Les 6 étapes encore concernées (Atlas durci)
+## Les 5 étapes encore concernées (Atlas et Arbre durcis)
 
 | Étape | Binaire | Statut | Ticket |
 |---|---|---|---|
 | Atlas géographique | `sources/carte_royaume.svg`, `geographie/carte_royaume.png`, `geographie/index.html` | ⚠️ continue-on-error (outil `empreinte_atlas.py` livré) | R1.4.a-v3 |
-| Arbre généalogique | `images/arbre_genealogique_complet.png` | ⚠️ continue-on-error | R1.4.b |
+| Arbre généalogique | `images/arbre_genealogique_complet.png` | ✅ **bloquant** (empreinte sémantique gravée, diagnostic intégré) | R1.4.b — livré |
 | Hymne national | `audio/hymne_national_babberland.wav` | ⚠️ continue-on-error | R1.4.c |
 | Vignettes du portail | `images/vignettes/*.webp` (77 fichiers) | ⚠️ continue-on-error | R1.4.d |
 | Régénération encyclopédie | `Royaume_du_Babberland_Encyclopedie_Consolidee_2026_I.pdf` | ⚠️ continue-on-error | R1.4.e |
@@ -136,4 +160,5 @@ La situation est analogue à un wiki : on ne « gèle » pas un export PDF en v�
 
 ---
 
-*Document établi à Pabst City, le 1ᵉʳ septembre 2026, par l'agent Arena.ai (session `arena/01a05e26-babbersland`).*
+*Document établi à Pabst City, le 1ᵉʳ septembre 2026, par l'agent Arena.ai (session `arena/01a05e26-babbersland`).*  
+*Statut R1.4.b ajouté le même jour (session `arena/01a05f15-babbersland`) : l'Arbre est durci et bloquant via empreinte sémantique tolérante.*

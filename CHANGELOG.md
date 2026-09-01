@@ -2,6 +2,26 @@
 
 Toutes les modifications notables apportées au dépôt du **Royaume du Babberland** sont consignées dans ce document.
 
+## [2026-XI] — 2026-09-01 (R1.4.b — Arbre durci via empreinte sémantique, étape BLOQUANTE)
+### Ajouté — `sources/empreinte_arbre.py`
+* **`sources/empreinte_arbre.py`** (~85 lignes) : empreinte SHA-256 sémantique de `images/arbre_genealogique_complet.png`, conçue **plus tolérante** que celle de l'Atlas — leçon de R1.4.a-v2 (l'échantillonnage NEAREST prélève 1 pixel par cellule et peut basculer sur un bord de glyphe entre machines) :
+  - `size`/`mode` : géométrie du canevas (1600×1000, RGB) ;
+  - `16x16box` : moyennage **BOX** à 16×16 cellules, canaux quantifiés en 16 niveaux (absorbe antialiasing et tramage ; détecte déplacements, couleurs, ajout/retrait de texte) ;
+  - `ink` : proportion de pixels sombres (luminance < 100) au millième (détecte un libellé nettement raccourci ou allongé).
+* **Interface** : `python sources/empreinte_arbre.py [--write|--check]` — `--write` est un acte d'assentiment, `--check` la comparaison. En cas de divergence, le script imprime charge générée, sha256 du fichier et version Pillow : le diagnostic est lisible **dans le log de l'étape CI** (la douleur de R1.4.a-v2 était de ne rien pouvoir investiguer).
+* **Stockage** : section `# === ARBRE GÉNÉALOGIQUE ===` dans `gouvernance/ARTIFACT_SIGNATURES.sha256` (la section Atlas est préservée, et réciproquement).
+### Corrigé — l'étape Arbre est désormais BLOQUANTE
+* `.github/workflows/continuite.yml` et modèle `sources/github_actions_continuite.yml` : `continue-on-error: true` **retiré**, `empreinte_arbre.py --check` remplace `git diff --exit-code -- images/arbre_genealogique_complet.png`.
+* `Makefile` : nouveau but `make empreinte-arbre` ; `empreinte_arbre.py --check` ajouté à `make controle` ; en-tête des buts mis à jour.
+### Validé — batterie sur copies
+* Test positif : régénération → conforme (code 0) ; bit-stabilité locale confirmée par `md5sum`.
+* Tests négatifs : nœud supplémentaire et titre de Génération I gommé → **divergence détectée** (code 1).
+* Tests de tolérance : 1 pixel retouché, bruit ±2 sur 300 pixels → conformes (comparaison structurelle, pas pixel à pixel).
+### Mis à jour
+* `gouvernance/CI_LIMITES.md` : section « Statut R1.4.b » (approche, validation, parc de tolérance assumé) ; le tableau passe de 6 à 5 étapes en `continue-on-error`.
+* `ROADMAP_2026_II.md` : R1.4.b marqué ✅ ; billet « Reste ouvert » actualisé (restent R1.4.c–h ; suite narrative : Livre VII, les Livres I–VI étant livrés).
+* `README.md` : `gouvernance/ARTIFACT_SIGNATURES.sha256` (Atlas **et** Arbre) indexé dans la table Gouvernance.
+
 ## [2026-X] — 2026-09-01 (R1.4.a-v2 — Atlas durci via empreinte sémantique)
 ### Ajouté — `sources/empreinte_atlas.py` et `gouvernance/ARTIFACT_SIGNATURES.sha256`
 * **`sources/empreinte_atlas.py`** (60 lignes) : calcule trois empreintes SHA-256 sémantiques de l'Atlas (analogue à `pdf_fingerprint.py` pour le PDF) :

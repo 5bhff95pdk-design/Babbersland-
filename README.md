@@ -37,6 +37,7 @@ L'édition **2026-I** intègre directement les corrections et ne nécessite aucu
 | `.github/workflows/continuite.yml` | **CI active** : 18 étapes + 4 post-step, exécutée à chaque push sur `main` et à chaque PR (première exécution verte : 2026-09-01T21:46:19Z) |
 | `canon/` + `propositions_declarées` | Données structurées (R3.3) sous contrat de parité : une affirmation est attestée par le corpus ou déclarée comme proposition |
 | `gouvernance/pdf_fingerprint.txt` | Empreinte sémantique du PDF canonique — le contrat de fraîcheur de l'artefact |
+| `gouvernance/ARTIFACT_SIGNATURES.sha256` | Empreintes sémantiques des artéfacts régénérés : Atlas (SVG/PNG/HTML, R1.4.a) et Arbre généalogique (PNG, R1.4.b — étape CI bloquante) ; gravure par `make empreinte-atlas` / `make empreinte-arbre` |
 | `gouvernance/index.html` | Version visuelle du rapport et de la roadmap (page autonome) |
 | `geographie/ANALYSE.md` | GEO-2026-II-01 : ce que le canon situe, ce que le temps interdit, E-16.c en proposition |
 | `geographie/ROADMAP.md` | Feuille de route géographique (G0 livré, G2 = Avis n° 7, hors 2026-I) |

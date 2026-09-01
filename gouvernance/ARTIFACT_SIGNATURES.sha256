@@ -11,3 +11,15 @@
 atlas_svg = fe1e95c5298c1748b845b5609cd23b3db8d2e29b315f2394f7c8e9485f8b29e0
 atlas_png = 354e0fe58d89d2433c5782deae9e51019dbd59da517fd6d044c7d21e9aae0c65
 atlas_html = d34401c3be7ee033a15a7e7d2cbf82a76f9473b74089e9ef9fed135df2cc50ae
+
+# === ARBRE GÉNÉALOGIQUE ===
+# Signé par sources/empreinte_arbre.py (analogue à empreinte_atlas.py).
+# Le PNG est bit-stable en local mais peut diverger entre machines
+# (rendu Pillow/polices — douleur R1.4.a-v2 de l'Atlas). On compare
+# donc son contenu sémantique, pas ses octets :
+# - size/mode : géométrie du canevas (1600x1000, RGB) ;
+# - 16x16box  : moyennage BOX 16x16, canaux quantifiés en 16 niveaux
+#   (tolère antialiasing et tramage, détecte structures et couleurs) ;
+# - ink       : proportion de pixels sombres au millième
+#   (détecte un libellé nettement raccourci ou allongé).
+arbre_png = ff22ecc420403b231f53051b645e3dd8647058dd5a4b8b36fbc106e16889d8ca
