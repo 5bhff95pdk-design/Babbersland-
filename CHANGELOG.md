@@ -2,6 +2,24 @@
 
 Toutes les modifications notables apportées au dépôt du **Royaume du Babberland** sont consignées dans ce document.
 
+## [2026-XII] — 2026-09-01 (R1.4.h — Gel des archives : mode strict restauré, vérifié avant régénération)
+
+### Corrigé — `RAPPORT_ANALYSE_2026_IV.md`, constat C-01
+* **Constat** : l'étape CI « Gel des archives (G et H intacts) et des maîtres d'illustration » ne pouvait pas échouer — `sha256sum --check … || echo "::warning::…"` ; et aucun contrôleur Python ne vérifie les scellés (le seul verrou réel était `make scelle`, local).
+* **Mesure (annotation de check-run du run #33568899178)** : `ICONOGRAPHIE.sha256 a des écarts` est émis sur **chaque run, y compris les verts** — faux positif structurel : le scellé couvre `images/arbre_genealogique_complet.png`, le runner régénère l'arbre (étape R1.4.b) en une variante légitime (FreeType 2.13, R1.4.b) avant le gel, et la vérification post-régénération comparait le rendu du runner au maître commité. Le `|| true` masquait donc le diagnostic **et** la garde.
+* **Correctif** : `sha256sum --check --quiet` restauré (un écart = échec du run) ; étape **déplacée en tête de chaîne** (après `py_compile`, avant toute régénération) pour valider l'arbre de travail tel que commité (contrat du gel, E-18) ; le rendu régénéré reste régi par `empreinte_arbre.py` (R1.4.b).
+* **Réfutation honnête** : la correction « naïve » (retirer `|| true` sans déplacer l'étape) aurait rendu la CI **rouge permanente** — l'étape échoue sur le rendu du runner. Le déplacement n'est pas une commodité, il est la condition du strict.
+* **Validation** : `py_compile` + YAML parsé (18 étapes, gel strict en position 6) + scellés vérifiés localement (`make scelle` : G/H intactes, 28 maîtres conformes) ; la preuve bloquante viendra du run CI de cette PR sur `main`.
+
+### Fait — `RAPPORT_ANALYSE_2026_IV.md` (RA-2026-IV-01)
+* Nouveau rapport d'analyse du 1ᵉʳ septembre 2026 : `make controle` 12/12, batterie 20/20, état distant vérifié ; constats C-01 (gel non bloquant), C-02 (README « 7 étapes » → 6), C-03 (comptages « 22 sous-étapes / 4 post-step » inexpliqués), C-04 (DeprecationWarning Pillow `getdata()`, Pillow 14, 2027-10-15).
+
+### Corrigé — documentation (suites du rapport)
+* `README.md` : « 7 étapes » → « 6 étapes » (constat C-02) ; ligne CI_LIMITES de la table de gouvernance mise à jour (R1.4.c–g restants, R1.4.h livré).
+* `ROADMAP_2026_II.md` : R1.4.h ✅ (livré), limitation connue « 7 étapes » → « 6 étapes », section « Reste ouvert » mise à jour (restent R1.4.c–g).
+* `gouvernance/CI_LIMITES.md` : section « Statut R1.4.h » (mesure, cause, correctif, ce que le gel ne fait pas) ; note sur la dépréciation Node.js 20.
+* `.github/workflows/continuite.yml` et modèle `sources/github_actions_continuite.yml` : identiques (mis à jour ensemble).
+
 ## [2026-XI] — 2026-09-01 (R1.4.b — Arbre durci via « variantes acceptées », étape BLOQUANTE)
 ### Le chemin, honnêtement (trois étapes en une journée)
 1. **v1** : empreinte unique (moyennage BOX 16×16 quantifié, encre), étape rendue bloquante — **CI rouge** sur le runner.

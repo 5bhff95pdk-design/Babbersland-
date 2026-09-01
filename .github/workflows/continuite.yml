@@ -59,6 +59,27 @@ jobs:
       - name: Compilation des sources (py_compile)
         run: python -m py_compile sources/*.py
 
+      - name: Gel des archives (G et H intacts) et des maîtres d'illustration
+        # R1.4.h (1ᵉʳ septembre 2026) : le contrat est redevenu STRICT — un écart
+        # de scellé fait échouer le run.
+        #
+        # Placement : AVANT toute régénération, sur l'arbre de travail tel que
+        # commité. Ce n'est pas une commodité : le runner régénère l'arbre
+        # généalogique (`images/arbre_genealogique_complet.png`, couvert par
+        # ICONOGRAPHIE.sha256) avec un rendu légitimement différent (FreeType
+        # 2.12 ↔ 2.13, 3 cellules/256 — mesure R1.4.b). Vérifier le scellé
+        # APRÈS régénération produisait un faux positif — c'est ce que le mode
+        # diagnostic `|| echo "::warning::…"` masquait : l'annotation
+        # « ICONOGRAPHIE.sha256 a des écarts » était posée sur chaque run,
+        # y compris les verts.
+        #
+        # Le scellé protège les octets COMMITÉS (E-18) ; le rendu régénéré est
+        # régi par son propre contrat : empreinte_arbre.py (étape bloquante,
+        # variantes acceptées, R1.4.b).
+        run: |
+          sha256sum --check --quiet gouvernance/ARCHIVE.sha256
+          sha256sum --check --quiet gouvernance/ICONOGRAPHIE.sha256
+
       - name: Continuité des sources (canon, chronologie, archives, chroniques, ancres, silences)
         run: python sources/check_continuity.py
 
@@ -139,16 +160,6 @@ jobs:
       - name: Fraîcheur du PDF publié (empreinte sémantique ordonnée, gravée au dépôt)
         continue-on-error: true  # R1.4 — voir note Atlas
         run: python sources/pdf_fingerprint.py --check
-
-      - name: Gel des archives (G et H intacts) et des maîtres d'illustration
-        # PAS de continue-on-error ici : c'est le contrat canonique, dur.
-        # Le `|| true; sha256sum --check ...` permet de capturer l'erreur
-        # complète dans le log sans faire échouer l'étape tant qu'on débuggue
-        # (cf. ticket R1.4 — une fois la cause identifiée, on retire le
-        # `|| true` et l'étape redevient bloquante).
-        run: |
-          (sha256sum --check gouvernance/ARCHIVE.sha256 || echo "::warning::ARCHIVE.sha256 a des écarts")
-          (sha256sum --check gouvernance/ICONOGRAPHIE.sha256 || echo "::warning::ICONOGRAPHIE.sha256 a des écarts")
 
       - name: Pièce jointe de relecture humaine
         uses: actions/upload-artifact@v4
