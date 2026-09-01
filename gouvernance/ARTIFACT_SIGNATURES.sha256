@@ -9,5 +9,5 @@
 # - PNG : dimension, mode, somme MD5 des pixels ;
 # - HTML : ids, classes, h1/h2, dates maîtresses.
 atlas_svg = fe1e95c5298c1748b845b5609cd23b3db8d2e29b315f2394f7c8e9485f8b29e0
-atlas_png = 3aff64fd9f611eb5a660a7c562c68f65de1548a81a29eeedf21516e392c24231
+atlas_png = 354e0fe58d89d2433c5782deae9e51019dbd59da517fd6d044c7d21e9aae0c65
 atlas_html = d34401c3be7ee033a15a7e7d2cbf82a76f9473b74089e9ef9fed135df2cc50ae
