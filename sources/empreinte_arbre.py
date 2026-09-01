@@ -26,6 +26,13 @@ de l'Atlas :
    texte et des filets), arrondie au millième. Détecte : un libellé
    nettement raccourci ou allongé (changement du volume de texte).
 
+Sous GitHub Actions, `--check` émet en outre la charge produite comme
+**annotation du check-run** (`::notice`, et `::error` détaillée — grille
+16×16 complète, sha256 du fichier, version Pillow — en cas de
+divergence). C'est le seul canal de retour lisible depuis
+l'environnement d'agent : les journaux d'étape transitent par Azure
+Blob, qui n'y est pas joignable (douleur documentée de R1.4.a-v2).
+
 Ce qui protège le contenu nomme par nomme est ailleurs et le reste :
 `canon/personnages.json` + `check_canon.py` (parité des données) et la
 revue humaine de `generate_genealogy.py`. R1.7 (source unique de
@@ -40,6 +47,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import os
 import re
 import sys
 from pathlib import Path
@@ -59,6 +67,37 @@ STAMP = ROOT / "gouvernance" / "ARTIFACT_SIGNATURES.sha256"
 # Seuil de luminance pour l'encre (texte '#3a2109', filets '#59320b' :
 # luminances ~35-100 ; le papier '#f5e6bd' est à ~225, les cadres dorés > 120).
 SEUIL_ENCRE = 100
+
+
+def grille_quantifiee() -> str:
+    """Grille 16×16 quantifiée lisible, pour le diagnostic en cas de divergence.
+
+    Chaque pixel moyenné devient trois nombres (R,G,B en niveaux 0-15),
+    séparés par des points ; les cellules par des virgules. ~2,3 ko : tient
+    dans une annotation de check GitHub, ce qui permet de lire enfin ce que
+    le runner a réellement produit (les logs Azure Blob, eux, sont
+    inaccessibles depuis l'environnement d'agent — douleur R1.4.a-v2).
+    """
+    if not HAS_PIL or not PNG.is_file():
+        return "indisponible"
+    img = Image.open(PNG).convert("RGB").resize((16, 16), Image.BOX)
+    data = img.tobytes()
+    cells = []
+    for i in range(0, len(data), 3):
+        cells.append(f"{data[i]//16}.{data[i+1]//16}.{data[i+2]//16}")
+    return ",".join(cells)
+
+
+def _annoter(niveau: str, titre: str, message: str) -> None:
+    """Émet une annotation de workflow lisible via l'API Checks.
+
+    Sous GitHub Actions, `::notice`/`::error` deviennent des annotations
+    du check-run — le SEUL canal lisible depuis l'environnement d'agent
+    (les journaux d'étape transitent par Azure Blob, inaccessible).
+    """
+    if os.environ.get("GITHUB_ACTIONS") == "true":
+        safe = message.replace("\n", " ").replace("\r", " ")
+        print(f"::{niveau} title={titre}::{safe}")
 
 
 def arbre_semantic() -> tuple[str, str]:
@@ -139,6 +178,13 @@ def main(argv: list[str] | None = None) -> int:
                   "lancer `python sources/empreinte_arbre.py --write`")
             return 1
         engraved = m.group(1)
+
+        # Trace systématique en CI (notice) : chaque run laisse la charge
+        # réellement produite par le runner dans une annotation lisible via
+        # l'API Checks — avant même toute divergence.
+        _annoter("notice", "empreinte-arbre",
+                 f"charge={arbre_payload} sha256={arbre_hash}")
+
         if engraved == arbre_hash:
             print(f"Arbre à jour : PNG={arbre_hash[:8]}… ({arbre_payload})")
             return 0
@@ -150,12 +196,23 @@ def main(argv: list[str] | None = None) -> int:
         print(f"  gravé  : {engraved}")
         print()
         print(f"  charge générée : {arbre_payload}")
+        if HAS_PIL:
+            import PIL
+            pillow_ver = PIL.__version__
+            print(f"  Pillow : {pillow_ver}")
+        else:
+            pillow_ver = "absente"
         if PNG.is_file():
             raw = hashlib.sha256(PNG.read_bytes()).hexdigest()
             print(f"  sha256 du fichier : {raw}")
-        if HAS_PIL:
-            import PIL
-            print(f"  Pillow : {PIL.__version__}")
+        else:
+            raw = "absent"
+        grille = grille_quantifiee()
+        print(f"  grille 16x16 : {grille}")
+        _annoter("error", "empreinte-arbre-divergence",
+                 f"grave={engraved} != genere={arbre_hash} | "
+                 f"charge={arbre_payload} | sha256fichier={raw} | "
+                 f"pillow={pillow_ver} | grille={grille}")
         print()
         print("Si l'écart est un bruit de rendu CI (et NON un vrai changement),")
         print("le diagnostic ci-dessus doit le montrer : comparer la charge au")
