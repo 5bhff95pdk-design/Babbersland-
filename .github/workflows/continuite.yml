@@ -38,7 +38,13 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y --no-install-recommends fonts-dejavu-core
 
       - name: Dépendances épinglées
-        run: python -m pip install -r requirements.txt
+        # `--break-system-packages` est nécessaire sur les runners Ubuntu
+        # récents : PEP 668 refuse les installations système. `--user` ne
+        # résoudrait rien car le `python` invoqué ensuite n'aurait pas ces
+        # paquets dans son `sys.path`. L'image de CI est jetable ; ce n'est
+        # pas une machine de production, la contamination du système n'est
+        # pas un risque.
+        run: python -m pip install --break-system-packages -r requirements.txt
 
       - name: Compilation des sources (py_compile)
         run: python -m py_compile sources/*.py
