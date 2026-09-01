@@ -22,6 +22,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          # fetch-depth: 0 indispensable : le contrôle Atlas (et les autres
+          # étapes qui vérifient un diff binaire d'arborescence) comparent
+          # l'arbre généré à l'arbre git. Sans l'historique complet, git
+          # ne peut pas calculer le diff de référence.
+          fetch-depth: 0
 
       - uses: actions/setup-python@v5
         with:
