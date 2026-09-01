@@ -28,6 +28,12 @@ jobs:
           # l'arbre généré à l'arbre git. Sans l'historique complet, git
           # ne peut pas calculer le diff de référence.
           fetch-depth: 0
+          # Sur les PRs, checkout le head de la PR (refs/pull/N/head), pas
+          # le merge commit (refs/pull/N/merge). Sans cela, l'arbre vu par
+          # les contrôles n'est pas celui qu'on vient de pousser, et
+          # `git diff` produit des différences parasites qui font échouer
+          # le scellé des archives.
+          ref: ${{ github.event.pull_request.head.ref || github.ref }}
 
       - uses: actions/setup-python@v5
         with:
