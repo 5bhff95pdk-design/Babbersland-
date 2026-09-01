@@ -21,7 +21,7 @@ Toutes les modifications notables apportées au dépôt du **Royaume du Babberla
 * Tolérances assumées : 1 pixel retouché, bruit ±2 sur 300 pixels → conformes (même grille) ; la protection bit à bit du fichier tracké reste celle d'`ICONOGRAPHIE.sha256` (E-18).
 * Charge invalide → refusée (code 1).
 ### Mis à jour
-* `gouvernance/CI_LIMITES.md` : section « Statut R1.4.b » réécrite (mesure chiffrée, modèle variantes, cérémonie d'acceptation) ; le tableau passe de 6 à 5 étapes en `continue-on-error`.
+* `gouvernance/CI_LIMITES.md` : section « Statut R1.4.b » réécrite (mesure chiffrée, modèle variantes, cérémonie d'acceptation) ; comptage rectifié — le workflow comptait **7** étapes en `continue-on-error` (ce document en annonçait 6, la roadmap disait juste) et n'en compte plus que **6** après R1.4.b.
 * `ROADMAP_2026_II.md` : R1.4.b marqué ✅ ; billet « Reste ouvert » actualisé (restent R1.4.c–h ; suite narrative : Livre VII, les Livres I–VI étant livrés).
 * `README.md` : `gouvernance/ARTIFACT_SIGNATURES.sha256` (Atlas **et** Arbre) indexé dans la table Gouvernance.
 
