@@ -85,10 +85,21 @@ jobs:
         # - HTML : ids, classes, h1/h2, dates maîtresses.
         # Voir `gouvernance/CI_LIMITES.md` § « Statut R1.4.a » et
         # `sources/empreinte_atlas.py` pour le détail.
+        #
+        # La sortie complète est capturée dans `atlas_check.log` et
+        # uploadée en artifact à la fin du job (R1.4.a-v2 diagnostic).
         run: |
           python sources/generate_map.py
           python sources/check_geography.py
-          python sources/empreinte_atlas.py --check
+          python sources/empreinte_atlas.py --check > atlas_check.log 2>&1
+          cat atlas_check.log
+      - name: Artifact de diagnostic Atlas
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: atlas-check-${{ github.run_id }}
+          path: atlas_check.log
+          if-no-files-found: ignore
 
       - name: Arbre généalogique déterministe
         continue-on-error: true  # R1.4 — voir note Atlas
