@@ -10,7 +10,11 @@
       "dates": "1798–1889",
       "regne": "1847–1889",
       "attributs": ["Béret royal", "Nappe vichy", "Chêne du Hamac"],
-      "statut": "direct"
+      "statut": "direct",
+      "citation": "Courir est un crime contre l'humanité.",
+      "biographie": "Fondateur du Royaume le 12 octobre 1847 sur la nappe vichy de son épouse Babette, scellé par le Pacte castoral de 1816.",
+      "anecdote": "A régné pendant 42 ans suspendu dans son hamac au Chêne du Hamac à Pabst City.",
+      "lieu_residence": "Pabst City (Forêt de Plantagenet)"
     },
     {
       "id": "babette_1_plantagenet",
@@ -19,8 +23,12 @@
       "titre": "Reine Consort et Régente morale",
       "dates": "1804–1892",
       "regne": "1889–1892 (régence)",
-      "attributs": ["Nappe vichy originelle", "Panier d'osier"],
-      "statut": "consort"
+      "attributs": ["Nappe vichy originelle", "Panier d'osier", "Chaise berçante"],
+      "statut": "consort",
+      "citation": "Une maison sans rocking-chair est une cage sans oiseau.",
+      "biographie": "Prêteuse de la nappe vichy rouge et blanche de la fondation et régente morale de 1889 à 1892.",
+      "anecdote": "Assise dans son rocking-chair face à la baie, elle entretenait la mémoire et les traditions de la fondation.",
+      "lieu_residence": "Port Babette"
     },
     {
       "id": "francois_babber",
@@ -29,8 +37,12 @@
       "titre": "Prince Régent et Grand Ingénieur",
       "dates": "1832–1914",
       "regne": "1892–1914 (régence de fait)",
-      "attributs": ["Cercle à bulle", "Double Aqueduc"],
-      "statut": "direct"
+      "attributs": ["Cercle à bulle", "Double Aqueduc", "Truelle d'argent"],
+      "statut": "direct",
+      "citation": "Posez d'abord les bancs. La tranchée attendra.",
+      "biographie": "Grand bâtisseur du Double Aqueduc (1882–1904) acheminant l'eau et la bière Pabst. Refusa l'ordinal II par modestie.",
+      "anecdote": "Fit installer 42 bancs d'épinette le long du tracé du canal avant le premier coup de pelle.",
+      "lieu_residence": "Pabst City / Plaine de l'Aqueduc"
     },
     {
       "id": "hortense_du_grain",
@@ -38,8 +50,12 @@
       "generation": 2,
       "titre": "Princesse Consort de l'Aqueduc",
       "dates": "1840–1922",
-      "attributs": ["Épi d'orge", "Réserve de grain"],
-      "statut": "consort"
+      "attributs": ["Épi d'orge", "Réserve de grain", "Fiole de petit-lait"],
+      "statut": "consort",
+      "citation": "Sans bon grain, la mousse n'est qu'un vain murmure.",
+      "biographie": "Fondatrice de la réserve céréalière royale assurant le maltage d'orge de la Pabst nationale.",
+      "anecdote": "Inspectait les silos à dos de mule au pas de promenade pour garantir le séchage parfait de l'orge.",
+      "lieu_residence": "Le Grain (Vallée de l'Orge)"
     },
     {
       "id": "babette_marine",
@@ -47,8 +63,12 @@
       "generation": 2,
       "titre": "Princesse des Eaux et du Littoral",
       "dates": "1836–1916",
-      "attributs": ["Boussole sans aiguille", "Phare blanc"],
-      "statut": "collateral_root"
+      "attributs": ["Boussole sans aiguille", "Phare blanc", "Longue-vue"],
+      "statut": "collateral_root",
+      "citation": "Le vent souffle où il veut, mais le port reste assis.",
+      "biographie": "Créatrice des quais et du Phare Blanc de Port Babette, souche de la branche collatérale des médiateurs.",
+      "anecdote": "Utilisait une boussole de cuivre dont le cadran portait uniquement le mot 'Ici'.",
+      "lieu_residence": "Port Babette"
     },
     {
       "id": "babber_le_dormeur",
@@ -58,7 +78,11 @@
       "dates": "1875–1959",
       "regne": "1914–1959",
       "attributs": ["Hamac de parade", "Coussin d'édredon", "Articles 1 & 4"],
-      "statut": "direct"
+      "statut": "direct",
+      "citation": "Le trône le plus stable est celui qui se balance entre deux arbres.",
+      "biographie": "Roi du Silence pendant 45 ans, ne posant jamais le pied à terre en public et promulguant les Articles 1 et 4.",
+      "anecdote": "Promulgua la sieste constitutionnelle obligatoire de 13 h à 15 h pour préserver la paix nationale.",
+      "lieu_residence": "Palais Horizontal de Pabst City"
     },
     {
       "id": "irene_des_erables",
@@ -66,8 +90,12 @@
       "generation": 3,
       "titre": "Reine Consort du Silence",
       "dates": "1882–1966",
-      "attributs": ["Châle d'automne", "Feuille d'érable"],
-      "statut": "consort"
+      "attributs": ["Châle d'automne", "Feuille d'érable", "Herbier royal"],
+      "statut": "consort",
+      "citation": "Le silence est le tapis de velours du sommeil du Roi.",
+      "biographie": "Reine consort de Babber le Dormeur, gardienne de la quiétude du Palais et mère de Babber II.",
+      "anecdote": "Faisait tricoter des chaussons de feutre pour les chiens du Palais afin d'éviter tout bruit de coussinets pendant la sieste.",
+      "lieu_residence": "Forêt des Érables / Pabst City"
     },
     {
       "id": "babber_2_piscineux",
@@ -77,7 +105,11 @@
       "dates": "1912–2002",
       "regne": "1959–1998",
       "attributs": ["Transat d'épinette", "Piscine", "Monts Froissés"],
-      "statut": "direct"
+      "statut": "direct",
+      "citation": "Une montagne de un mètre vingt offre la même vue sur les étoiles qu'un sommet de quatre mille mètres.",
+      "biographie": "Créateur des Monts Froissés (1,20 m) le 15 juillet 1962 avec les déblais de sa piscine et ratificateur de McBabber's.",
+      "anecdote": "Hissait son transat au sommet des Monts Froissés chaque été avec un piolet miniature en buis.",
+      "lieu_residence": "Domaine des Monts Froissés"
     },
     {
       "id": "colette_pabst",
@@ -85,8 +117,12 @@
       "generation": 4,
       "titre": "Reine Consort et Présidente de Justice",
       "dates": "1920–2011",
-      "attributs": ["Commission Babbersgate", "Lunettes d'écaille"],
-      "statut": "consort"
+      "attributs": ["Commission Babbersgate", "Lunettes d'écaille", "Marteau de buis"],
+      "statut": "consort",
+      "citation": "La justice doit être aussi claire que la bière fraîche.",
+      "biographie": "Présidente de la Commission royale d'enquête du Babbersgate (1991–1993) ayant réglé l'affaire des 317 pots de cornichons.",
+      "anecdote": "Faisait goûter un cornichon à chaque témoin du Babbersgate avant de recueillir son témoignage.",
+      "lieu_residence": "Grass City / Pabst City"
     },
     {
       "id": "honore_pabst",
@@ -96,7 +132,11 @@
       "dates": "né en 1938",
       "regne": "1998–2010 (co-règne)",
       "attributs": ["Plume d'oie des jours impairs", "Gilet gris"],
-      "statut": "direct"
+      "statut": "direct",
+      "citation": "Les jours impairs ont une poésie particulière.",
+      "biographie": "Co-souverain jumeau d'Henri-Grain, signant les actes officiels et décrets les jours impairs du calendrier.",
+      "anecdote": "Régna en parfaite harmonie fraternelle pendant 12 ans grâce à l'alternance stricte des jours.",
+      "lieu_residence": "Pavillon des Jumeaux (Grass City)"
     },
     {
       "id": "henri_grain",
@@ -105,8 +145,12 @@
       "titre": "Co-souverain (Union des Règnes)",
       "dates": "né en 1938",
       "regne": "1998–2010 (co-règne)",
-      "attributs": ["Plume des jours pairs", "Gilet gris"],
-      "statut": "direct"
+      "attributs": ["Plume des jours pairs", "Gilet gris", "Fiole de sable"],
+      "statut": "direct",
+      "citation": "L'équilibre du monde repose sur la régularité des jours pairs.",
+      "biographie": "Co-souverain jumeau d'Honoré-Pabst, exerçant le pouvoir royal tous les jours pairs avec sa fiole de sable sécheur d'encre.",
+      "anecdote": "Reprenait les séances du Conseil passées minuit pour transformer les questions des jours impairs en solutions des jours pairs.",
+      "lieu_residence": "Pavillon des Jumeaux (Le Grain)"
     },
     {
       "id": "babber_1_louche",
@@ -116,7 +160,11 @@
       "dates": "né en 1946",
       "regne": "depuis 2010 (Prince 1984–2009)",
       "attributs": ["Regard plissé bienveillant", "Article 5", "Pabst 3,2 °C"],
-      "statut": "current_king"
+      "statut": "current_king",
+      "citation": "Le Roi a toujours raison, surtout lorsqu'il a tort.",
+      "biographie": "Roi régnant depuis 2010 en invoquant l'Article 5, garant de la température obligatoire de la Pabst (3,2 °C) et des billets en chanvre.",
+      "anecdote": "Vérifie chaque matin la température de sa canette avec le thermomètre maître en cristal avant le salut royal.",
+      "lieu_residence": "Château Royal de Pabst City"
     },
     {
       "id": "linea_grass_city",
@@ -125,7 +173,11 @@
       "titre": "Reine Consort et Gardienne de la Sauce",
       "dates": "née en 1952",
       "attributs": ["Cuillère d'argent", "Recette secrète 1986", "Nom McBabber's"],
-      "statut": "consort"
+      "statut": "consort",
+      "citation": "Une poutine sans sauce est comme un royaume sans roi.",
+      "biographie": "Créatrice du nom McBabber's et inventrice de la formule de la Sauce Brun Secrète en 1986.",
+      "anecdote": "Écrivit la recette originelle de la sauce brune au verso d'un ticket de caisse en 1986.",
+      "lieu_residence": "Grass City / Pabst City"
     },
     {
       "id": "rambo_du_fjord",
@@ -134,7 +186,11 @@
       "titre": "Prince du Fleuve",
       "dates": "né le 15 juillet 1962",
       "attributs": ["Canne sans hameçon", "Veste de flanelle rouge"],
-      "statut": "direct"
+      "statut": "direct",
+      "citation": "Saluer un poisson dans l'eau vaut mieux que l'attraper.",
+      "biographie": "Né le jour même de la création des Monts Froissés, pêcheur contemplatif et protecteur des rapides.",
+      "anecdote": "Pêche avec une canne en frêne brut sans fil ni hameçon pour laisser les poissons nager en paix.",
+      "lieu_residence": "Fjord du Castor"
     },
     {
       "id": "babber_le_fou",
@@ -143,7 +199,11 @@
       "titre": "Prince Héritier (1er successible)",
       "dates": "né le 1er avril 1986",
       "attributs": ["Né à l'ouverture de McBabber's", "Spatule de bois"],
-      "statut": "heir_apparent"
+      "statut": "heir_apparent",
+      "citation": "Le fromage doit faire couic-couic sous la dent pour recevoir l'onction.",
+      "biographie": "Né à 15 h 01 lors de l'ouverture du premier McBabber's en 1986, premier héritier dans l'ordre de succession au trône.",
+      "anecdote": "Reçut à sa naissance un berceau en bois d'érable orné d'une spatule royale en épinette.",
+      "lieu_residence": "Pabst City"
     },
     {
       "id": "ginette_port_babette",
@@ -152,7 +212,11 @@
       "titre": "Princesse Consort et Dame de la Sauce",
       "dates": "née en 1988",
       "attributs": ["Pot scellé", "Cuillère d'argent de transmission"],
-      "statut": "consort"
+      "statut": "consort",
+      "citation": "La sauce mijote à son rythme : vouloir la presser, c'est brusquer l'océan.",
+      "biographie": "Princesse consort héritière et Grande Maîtresse de la Sauce Royale depuis la transmission sacrée de 2024.",
+      "anecdote": "Prépara 500 litres de Sauce Brun Secrète bénie par le Castor Patriote pour fêter la naissance de Ti-Babber.",
+      "lieu_residence": "Port Babette"
     },
     {
       "id": "babber_le_dechire",
@@ -161,7 +225,11 @@
       "titre": "Médiateur des Rives (Branche collatérale)",
       "dates": "branche Babette-Marine",
       "attributs": ["Veste à coude déchiré", "Traité des Cornichons 2009"],
-      "statut": "collateral"
+      "statut": "collateral",
+      "citation": "Une manche déchirée se rafraîchit au vent, un peuple fâché se réconcilie en s'asseyant.",
+      "biographie": "Ermite et médiateur itinérant de la branche Babette-Marine, artisan de la paix lors de la Guerre des Cornichons (2009).",
+      "anecdote": "Refusa toujours de faire recoudre sa coudière déchirée car elle lui apportait la brise fraîche de la rivière.",
+      "lieu_residence": "Rives du Fleuve"
     },
     {
       "id": "ti_babber",
@@ -170,7 +238,11 @@
       "titre": "Prince Héritier en Second (2e successible)",
       "dates": "né le 26 août 2026",
       "attributs": ["Linge vichy", "Chiffre VII générationnel"],
-      "statut": "second_heir"
+      "statut": "second_heir",
+      "citation": "Areu...",
+      "biographie": "Né le 26 août 2026 à 14 h 22 à Port Babette, proclamé à 15 h 01 lors de la Nuit des Sept Mille.",
+      "anecdote": "S'endormit profondément au premier coup de cloche de 15 h 00, prouvant sa haute vocation de dormeur royal.",
+      "lieu_residence": "Port Babette / Pabst City"
     }
   ]
 }
