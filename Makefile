@@ -33,7 +33,15 @@ vignettes: ## vignettes WebP du portail (les maîtres PNG ne sont pas touchés, 
 
 pdf: $(PDF) ## régénère l'encyclopédie PDF 2026-I
 
+# Garde-fou des buts qui ne passent PAS par `controle` : le venv n'est pas garanti
+# (il n'est pas dans le dépôt, et certains environnements ne le persistaient pas —
+# mesure du 2 sept. 2026, 23:47 : `make controle` échouait sur la RÉGÉNÉRATION du
+# livré avec un `No such file or directory` muet, parce que seul `controle` portait
+# le test). Un message par but, même formule partout.
+ENV-GARDE = @test -x $(PY) || { echo "Le venv est absent : lancer « make env » d'abord (constat E-11)."; exit 1; }
+
 $(PDF): ENCYCLOPEDIE_CONSOLIDEE_2026_I.md sources/generate_encyclopedie_2026_i.py sources/babberland_images.py $(wildcard images/*.png)
+	$(ENV-GARDE)
 	$(PY) sources/generate_encyclopedie_2026_i.py
 
 empreinte: ## grave l'empreinte sémantique du PDF publié — acte d'assentiment, pas un contrôle
@@ -106,7 +114,7 @@ scelle: ## gel des archives G et H, des maîtres, de la galerie (R1.9) + parité
 # seul le mode d'obtention change. Sans ce lien, `make controle` échouait sur un clone
 # propre (FileNotFoundError dans check_pdf.py) — mesure du 2 sept. 2026.
 controle: $(PDF) ## continuité, silences (R2.7), parité des données, chroniques, portail, artéfact, fraîcheur, manifeste (R1.3), géographie, quatre sceaux d'artéfacts, archives
-	@test -x $(PY) || { echo "Le venv est absent : lancer « make env » d'abord (constat E-11)."; exit 1; }
+	$(ENV-GARDE)
 	$(PY) -m py_compile sources/*.py
 	$(PY) sources/check_continuity.py
 	$(PY) sources/check_silences.py
