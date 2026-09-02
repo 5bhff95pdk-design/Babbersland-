@@ -85,8 +85,8 @@ chaîne ne demande plus aux artéfacts d'être **les mêmes octets**, elle leur 
   propre à ce projet n'est pas la faute dans le texte, c'est le **contrôle émasculé** : C-01
   (un `|| echo` qui rend une étape infaillible) a survécu à quatre audits avant d'être vu.
 * Un job **distinct**, à horaire (lundi 03:17 UTC) et à la demande (`workflow_dispatch`) :
-  la batterie coûte 2 min 26 s (mesure du 1ᵉʳ septembre 2026, 24 scénarios, `time make
-  batterie`), réécrit des scellés dans ses laboratoires et n'a rien à dire d'un commit qui
+  la batterie coûte 2 min 26 s (mesure du 1ᵉʳ septembre 2026, 24 scénarios à ce moment-là —
+  25 et 2 min 29 s après P1c, plus bas ; `time make batterie`), réécrit des scellés dans ses laboratoires et n'a rien à dire d'un commit qui
   ne touche ni sources ni artéfacts — elle n'a donc rien à faire sur chaque push.
 * **Deux pas de plus que le script local** : la preuve que l'isolation est vraie
   (`git diff --quiet` + `git status` sur l'arbre de référence, après la course) et que les
@@ -130,6 +130,38 @@ chaîne ne demande plus aux artéfacts d'être **les mêmes octets**, elle leur 
   lot, sorti de la charge pour cette raison, n'y figure plus que comme signalement.
 * `make controle` : **12 vérifications + les scellés, 0 échec** ; YAML des deux workflows
   validé au parseur (18 et 7 étapes, 0 `continue-on-error`).
+
+### Mesuré (acte II du canari) — la fraîcheur du PDF, et ce que le runner a vraiment dit
+* **Run #33574244756** : les six étapes durcies **passent toutes** sur le runner — dont les deux
+  charges neuves, **identiques à la référence locale** : vignettes `grilles:b0bb7402…` (le contenu
+  décodé ne dépend pas de l'encodeur, c'était la thèse du ticket) et hymne
+  `frames:1598625|…|crete:0.720`. Reste la fraîcheur du PDF, rouge, avec
+  `pages:29|images:24|placements:25` conformes et le seul `fingerprint` dans l'inconnu.
+* **Refus de conclure là-dessus** : le diagnostic a été ajouté (`texte=` et `disposition=` dans les
+  deux annotations), un run de plus a été demandé, et la mesure est tombée —
+  `texte=8296cf53ba12` **identique** des deux côtés, `disposition` `cd6fdb58…` contre `7f47b597…`.
+  Cause nommée : `derive_bytes()` encode en JPEG `quality=78, optimize, progressive`, donc le
+  bitstream appartient à la libjpeg du moteur, et `page_image_hashes()` hachait **ces octets-là**.
+  Le PDF était le dernier artéfact de la chaîne signé sur ses **conteneurs** et non sur son
+  **contenu**.
+* **Deux actes, distincts** : (1) `texte` devient un **champ contracté** de
+  `gouvernance/pdf_fingerprint.txt` (comparé, machine-indépendant — la table du canari le prouve),
+  `disposition` y est consignée en commentaire, informative et non comparée, et l'écart est
+  **nommé** : `CONTENU : … à corriger, pas à accepter` si le texte bouge, `EMBALLAGE` si seul
+  l'empreinte combinée bouge. Accepter une variante ne peut plus effacer une dérive de texte.
+  (2) `pdf_variante_ci-ubuntu-24.04-py3.12` acceptée **sur ces nombres**, dans `PDF CANONIQUE`.
+* **Une limite nouvelle, déclarée en ticket** : **R1.10** (signature du PDF par **identité** de
+  planches plutôt que par haché de leurs octets — la voie qui rendrait la variante inutile, avec
+  son contre-poids écrit : ce que le scellé des maîtres devrait alors garantir).
+* Re-gravure de `pdf_fingerprint.txt` (acte d'assentiment) : `fingerprint`, `pages`, `images`,
+  `placements` **inchangés**, deux lignes ajoutées. Le volume publié, lui, n'a pas été touché.
+* **Et le garde-fou, mesuré** : la clause ne valait pas d'être écrite sans qu'on la teste au
+  pire usage — accepter une divergence de texte comme si c'était un rendu. Nouveau scénario
+  **P1c** dans la batterie : une date du volume est altérée, le volume est réimprimé, la charge
+  inédite est **acceptée à la main comme une variante**, et `pdf_fingerprint.py --check` refuse
+  quand même (`variante_acceptée_mais_texte_divergent`). Batterie **25/25 en 2 min 29 s** —
+  avec une vue de contrôle dédiée (`vue_frais`), pour qu'un scénario de garde-fou ne soit jamais
+  validé par un contrôle voisin du sien.
 
 ### Documenté — constats C-02, C-03, C-04 du rapport RA-2026-IV-01
 * **C-02** (achevé) : le README n'annonce plus « 7 étapes » tolérantes.

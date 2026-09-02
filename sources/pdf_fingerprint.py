@@ -151,8 +151,14 @@ def main(argv: list[str] | None = None) -> int:
             "# c'est cette empreinte, et non le binaire, que la CI compare.\n"
             "# Elle est ordonnée page à page (constat E-18) : permuter deux illustrations\n"
             "# la modifie. Graver ici = assumer un changement, pas le contrôler (E-21).\n"
+            "# `texte` est CONTRACTÉ : le texte extrait, normalisé, ne dépend d'aucune\n"
+            "# machine (mesure du 1ᵉʳ septembre 2026 : runner et référence donnent le\n"
+            "# même md5). `disposition` est INFORMATIVE — les hachés de flux embarquent le\n"
+            "# bitstream JPEG produit par la libjpeg du moteur, donc varie d'un\n"
+            "# environnement sans que l'image change. Elle n'est pas comparée, elle se lit.\n"
             f"fingerprint = {digest}\npages = {pages}\nimages = {images}\n"
-            f"placements = {placements}\n",
+            f"placements = {placements}\ntexte = {parties['texte']}\n"
+            f"# disposition = {parties['disposition']}\n",
             encoding="utf-8",
         )
         print(f"Empreinte gravée dans {STAMP.relative_to(ROOT)} : {digest}")
@@ -164,7 +170,7 @@ def main(argv: list[str] | None = None) -> int:
             return 1
         fields = dict(re.findall(r"^(\w+) = (\S+)$", STAMP.read_text(encoding="utf-8"), flags=re.M))
         current = {"fingerprint": digest, "pages": str(pages), "images": str(images),
-                   "placements": str(placements)}
+                   "placements": str(placements), "texte": parties["texte"]}
         drift = {k: (fields.get(k), v) for k, v in current.items() if k in fields and fields[k] != v}
         connues = {v: k for k, v in variantes.items()}
         if not drift:
@@ -176,6 +182,18 @@ def main(argv: list[str] | None = None) -> int:
             return 0
         # Pas conforme au contrat de référence : seul un environnement de rendu
         # **déjà accepté** peut légitimer l'écart (R1.4.g). Sinon, c'est bloquant.
+        if charge in connues and "texte" in drift:
+            # Le digest correspond à une variante acceptée, mais le texte extrait, lui,
+            # n'est plus celui du contrat : ce n'est plus un rendu d'ailleurs, c'est un
+            # volume différent. La porte de la variante se referme ici, expressément.
+            print("PDF : l'empreinte correspond à une variante acceptée, MAIS le texte "
+                  "extrait diverge du contrat gravé — une variante d'environnement "
+                  "n'excuse pas un changement de texte. Refusé, et tracé comme tel.")
+            annoter("error", "empreinte-pdf-divergence",
+                    f"variante_acceptée_mais_texte_divergent | charge={charge} | "
+                    f"texte={parties['texte'][:12]} gravé={fields.get('texte', 'absent')[:12]} | "
+                    "une variante d'environnement ne couvre pas le texte : régénérer et re-graver")
+            return 1
         if charge in connues:
             annoter("notice", "empreinte-pdf",
                     f"charge={charge} connue=variante-acceptee:{connues[charge]}")
@@ -185,9 +203,19 @@ def main(argv: list[str] | None = None) -> int:
                   "et l'écart doit se résorber par `make pdf` puis `make empreinte`.")
             return 0
         detail = (" | ".join(f"{k}={v}" for k, (g, v) in drift.items())
-                  + f" | texte={parties['texte'][:12]} disposition={parties['disposition'][:12]}"
-                  + f" | gravé texte={fields.get('empreinte_texte', 'absent')[:12]}"
-                  f" disposition={fields.get('empreinte_disposition', 'absent')[:12]}")
+                  + f" | texte={parties['texte'][:12]} disposition={parties['disposition'][:12]}")
+        # La distinction est utile : un écart de `texte` est une dérive du volume, un
+        # écart limité à `fingerprint` relève de l'encodeur. Le nommer évite de graver
+        # une variante là où il fallait corriger un texte.
+        if "texte" in drift:
+            nature = "CONTENU : le texte extrait du volume a changé — à corriger, pas à accepter"
+        elif set(drift) == {"fingerprint"}:
+            nature = ("EMBALLAGE : texte, pages, images et placements conformes — seuls les "
+                      "octets des flux JPEG embarqués diffèrent (libjpeg du moteur)")
+        else:
+            nature = "STRUCTURE : " + ", ".join(sorted(drift))
+        print(f"  nature de l'écart : {nature}")
+        detail += f" | nature={nature}"
         print("PDF publié divergent du contrat gravé :")
         for field, (engraved, actual) in drift.items():
             print(f"- {field} : publié {actual} != gravé {engraved}")

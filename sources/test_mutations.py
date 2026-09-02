@@ -2,13 +2,14 @@
 """Batterie de mutations de la chaîne de contrôle (RC-2026-III-01, lot C0).
 
 Répondre à « le verrou tient-il ? » ne se fait pas en lisant le code : on **casse**
-une copie du dépôt et l'on regarde qui bronche. Ce script rejoue dix-neuf altérations
-qui doivent être refusées et cinq éditions qui doivent être laissées passer.
+une copie du dépôt et l'on regarde qui bronche.
 
-Vingt fautes à refuser, quatre éditions légitimes à laisser passer — dont la
+**Vingt fautes à refuser, cinq éditions légitimes à laisser passer** — dont la
 cérémonie d'acceptation d'une variante de rendu (V4), qui teste l'autre sens du
 contrat : une dérive d'environnement se RÉSOUT par un acte tracé, elle ne se subit
-pas par tolérance.
+pas par tolérance. Et son envers, P1c : une dérive de CONTENU présentée comme un
+rendu doit être refusée **même après acceptation explicite de la variante** — la
+porte ouverte par V4 ne doit pas devenir une porte de service.
 
 Chaque scénario travaille sur sa propre copie de l'arbre (hors dépôt, hors `.git`,
 hors `.venv`) : la référence n'est jamais touchée, même quand un scénario régénère
@@ -114,6 +115,17 @@ def regenerer(labo: Path, sceller: bool = True) -> None:
         courir(labo, f"make --no-print-directory PY={PY} iconographie")
 
 
+def vue_frais(labo: Path) -> tuple[bool, str]:
+    """Un seul contrôle, et lui seul : celui dont un scénario prouve le garde-fou.
+
+    Là où `vue_controles` répond « qui bronche en premier », celle-ci répond « est-ce
+    que LUI bronche » — sans quoi un scénario de garde-fou serait validé par un contrôle
+    voisin et ne prouverait rien du mécanisme visé.
+    """
+    rc, dernier = courir(labo, f"{PY} sources/pdf_fingerprint.py --check")
+    return rc != 0, f"pdf_fingerprint --check → {dernier}"
+
+
 def vue_controles(labo: Path) -> tuple[bool, str]:
     for controle in CONTROLES:
         rc, dernier = courir(labo, f"{PY} {controle}")
@@ -123,6 +135,26 @@ def vue_controles(labo: Path) -> tuple[bool, str]:
     if rc:
         return True, f"scelle → {dernier}"
     return False, "rien ne bronche"
+
+
+def _accepter_comme_rendu(labo: Path) -> None:
+    """Le pire usage imaginable de `--accepter` : couvrir une dérive de CONTENU.
+
+    On réimprime le volume après avoir changé une date, on lit la charge que le contrôle
+    produit, on l'accepte sous une étiquette de rendu — et le sceau doit refuser quand
+    même, parce que le texte extrait, lui, n'est plus celui du contrat. C'est la clause
+    qui empêche la porte ouverte par R1.4.g (variantes d'environnement) de devenir une
+    porte de service : la variante dit « ce rendu-là est légitime ailleurs », jamais
+    « ce texte-là est le bon ».
+    """
+    courir(labo, f"{PY} sources/generate_encyclopedie_2026_i.py")
+    rc, out = sortie(labo, f"{PY} sources/pdf_fingerprint.py --check")
+    assert rc != 0, "la charge du volume altéré aurait dû être refusée avant acceptation"
+    produites = [ligne.split(":", 1)[1].strip() for ligne in out.splitlines()
+                 if ligne.strip().startswith("produite")]
+    assert produites, f"aucune charge produite dans le diagnostic : {out[:300]}"
+    courir(labo, f"{PY} sources/pdf_fingerprint.py --accepter "
+                 f"'{produites[0]}' batterie-fausse-variante-de-rendu")
 
 
 def ajouter_planche(legende: str) -> str:
@@ -143,6 +175,9 @@ FAUTES: list[tuple[str, object, object]] = [
     ("P1b · permutation, volume et empreinte gravés à nouveau, scellé des maîtres oublié",
      lambda d: (intervertir(d, "babber_le_fou.png", "babber_le_dormeur.png"),
                 regenerer(d, sceller=False)), vue_controles),
+    ("P1c · texte du volume altéré, réimprimé, et sa divergence ACCEPTÉE comme variante : le refus tient",
+     lambda d: (editer(d, "ENCYCLOPEDIE_CONSOLIDEE_2026_I.md", "1875–1959", "1875–1958"),
+                _accepter_comme_rendu(d)), vue_frais),
     ("P2 · planche insérée au volume sans promesse du canon",
      faute_planche_sans_promesse, vue_controles),
     ("P3 · naissance imposée à Roger Bontemps (silence sanctifié n° 2)",

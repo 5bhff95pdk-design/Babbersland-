@@ -220,12 +220,44 @@ de variantes n'excuse qu'un **rendu** observé ailleurs (runner d'abord, matrice
 multi-OS de R1.2 ensuite). `--check` pose son `::notice charge=… connue=…` à chaque
 run : la divergence du runner est mesurée, pas supposée.
 
-**Ce qui reste ouvert, loyalement** : l'empreinte du PDF retient le nombre de pages.
-Une pagination qui divergerait entre machines (métriques de police) n'est pas un
-changement de contenu, mais elle changerait l'empreinte — auquel cas le run devient
-rouge **avec la charge dans l'annotation**, et la variante s'accepte. C'est le prix
-connu de l'assentiment double-machine ; R1.2 (image épinglée ou matrice) le ferait
-disparaître en amont, et non en aval.
+**Mesure du canari (run #33574438077)** — le PDF était le seul des sept artéfacts dont
+la chaîne n'avait pas encore lu le runner. Deux poussées ont été nécessaires pour obtenir
+le verdict, et c'est le bon prix : la première n'aurait autorisé qu'une inférence.
+
+| | référence locale | runner `ubuntu-24.04 / py3.12` |
+|---|---|---|
+| `pages` · `images` · `placements` | 29 · 24 · 25 | **identiques** |
+| `texte` — md5 du texte extrait, normalisé | `8296cf53ba12…` | **identique** |
+| `disposition` — md5 des hachés de flux, ordonnés | `cd6fdb581a48…` | `7f47b59780a5…` |
+| `fingerprint` — l'empreinte, qui combine tout | `e1168ee0842c…` | `1a76a0e8ee10…` |
+
+**Ce que la table établit** : le volume que le runner imprime porte le **même texte**, aux
+**mêmes pages**, avec les **mêmes planches aux mêmes endroits** — c'est mesuré, pas supposé.
+**Ce qu'elle n'établit pas** : l'identité des *pixels*. Les hachés de flux embarquent le
+bitstream JPEG, donc la libjpeg de l'environnement (`derive_bytes()` encode en
+`quality=78, optimize=True, progressive=True`), et l'on sait par le canari de l'Atlas que les
+rasters des deux machines ne sont pas bit à bit identiques. La divergence de `disposition` est
+**cohérente** avec un simple ré-encodage ; elle n'en est pas la preuve.
+
+**Deux actes, distincts et tous deux tracés :**
+
+1. **Contrat durci là où c'était gratuit** : `texte` entre dans `gouvernance/pdf_fingerprint.txt`
+   comme champ **comparé** (il est machine-indépendant — la table le prouve) ; `disposition` y est
+   consignée en **commentaire**, informative, jamais comparée. Un écart est alors **nommé** :
+   `CONTENU : le texte extrait du volume a changé — à corriger, pas à accepter`, ou
+   `EMBALLAGE : … seules les octets des flux diffèrent`. **Accepter une variante ne peut plus
+   effacer une dérive de texte**, même cachée dans l'empreinte combinée.
+2. **Variante acceptée sur mesure** : `pdf_variante_ci-ubuntu-24.04-py3.12`, charge
+   `fingerprint:1a76a0e8ee10dec621d0534e4612b01b|pages:29|images:24|placements:25`.
+
+**Ce qui reste ouvert, loyalement** : l'empreinte du PDF retient le nombre de pages — une
+pagination divergente (métriques de police) se tratarait de la même façon, mesurer puis accepter
+ou corriger. Deux voies rendraient la variante inutile en amont : **R1.2** (image épinglée ou
+matrice multi-OS), ou **R1.10** (déclarée ci-dessous, non livrée) : signer le volume par
+**identité de planches** — l'image décodée résolue contre les maîtres — plutôt que par le haché
+de leurs octets, ce qui est machine-indépendant par construction, comme le sont devenus les
+vignettes. Ce que R1.10 coûterait est écrit là, pas ici : une retouche de pixels re-scellée ne
+bougerait plus l'empreinte du volume.
 
 ---
 
@@ -301,7 +333,7 @@ Les causes précises (à investiguer en R1.4) sont probablement :
 | Vignettes du portail | `images/vignettes/*.webp` (77 fichiers) | `nb\|largeur\|grilles` sur contenu décodé (poids signalé, non contracté) | ✅ **bloquant** | R1.4.d — livré |
 | Régénération encyclopédie | `Royaume_du_Babberland_Encyclopedie_Consolidee_2026_I.pdf` | (aucune comparaison : l'étape produit) | ✅ **bloquant** sur échec du générateur | R1.4.e — livré |
 | Artéfact publié (planches) | dérivée du PDF | pages, flux, légendes, appariement | ✅ **bloquant** | R1.4.f — livré |
-| Fraîcheur du PDF | dérivée de l'empreinte sémantique | `pdf_fingerprint.txt` + variantes `PDF CANONIQUE` | ✅ **bloquant** | R1.4.g — livré |
+| Fraîcheur du PDF | dérivée de l'empreinte sémantique | `pdf_fingerprint.txt` (+ `texte` comparé) et variantes `PDF CANONIQUE` | ✅ **bloquant**, variante du runner gravée sur mesure | R1.4.g — livré ; R1.10 déclarée |
 
 **Aucune des 18 étapes du workflow ne porte plus `continue-on-error`.** Le durcissement
 a une contrepartie, déclarée : la chaîne peut désormais être rouge pour un rendu

@@ -67,3 +67,14 @@ vignettes_variante_reference-locale = nb:77|largeur:640|grilles:b0bb7402eac27fb3
 atlas_lot = 078eb1b68c6b061047a0db6f2d862e8f77fdccbfef612e4636767fcf3bf95c13
 atlas_variante_ci-ubuntu-24.04-py3.12 = svg:d6aab963c7ea953c|html:10ab30af34f9c925|taille:1600x1100|mode:RGB|16x16box:00eaea478bdf40bb116b31e29c35c804|encre:0.325
 atlas_variante_reference-locale = svg:d6aab963c7ea953c|html:10ab30af34f9c925|taille:1600x1100|mode:RGB|16x16box:55aacd600ec5d674968d464dff7bf113|encre:0.325
+
+# === PDF CANONIQUE ===
+# Signé par sources/pdf_fingerprint.py --accepter — variantes d'environnement (R1.4.g).
+# Le contrat canonique du volume reste la valeur unique de
+# gouvernance/pdf_fingerprint.txt (gravée par `make empreinte`). Cette section
+# n'accepte que des VARIANTES DE RENDU d'un autre environnement (runner CI,
+# matrice multi-OS R1.2) : la charge compare l'empreinte ordonnée, le nombre de
+# pages, d'illustrations et de placements. Accepter une variante n'est JAMAIS
+# excuser une dérive sur la machine de référence : là, on régénère et on re-grave.
+pdf_variantes_acceptees = f0ca28998ece73d5350045b52cb4a98eed52db125566209324bba1bdf70fa412
+pdf_variante_ci-ubuntu-24.04-py3.12 = fingerprint:1a76a0e8ee10dec621d0534e4612b01b|pages:29|images:24|placements:25
