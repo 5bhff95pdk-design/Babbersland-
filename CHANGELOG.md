@@ -92,7 +92,7 @@ Chronologie, dont le § VIII est mis en conformité (*Dates non consignées par 
 entrées cotées S1–S7 + F1). `make controle` **vert** — 13 vérifications, 4 empreintes, 4 scellés.
 `make batterie` **31/31** (27 → 31 scénarios).
 
-### Suivi — une variante de rendu à réaccepter (connu, documenté, tracé)
+### Suivi — une variante de rendu à réaccepter (connu, documenté, tracé — **exécuté le jour même**)
 
 La réimpression du volume **périme la variante PDF acceptée** `ci-ubuntu-24.04-py3.12`
 (`fingerprint:1a76a0e8…`, R1.4.g) : la charge d'un rendu dépend du texte, et le texte a changé.
@@ -100,6 +100,11 @@ Le runner refusera au premier run, et c'est le comportement voulu — la cérém
 existe pour ça (`pdf_fingerprint.py --accepter '<charge>' <étiquette>`, lue dans l'annotation du
 run). Consigné dans `gouvernance/CI_LIMITES.md`. Ce n'est pas une régression : c'est le prix
 connu, deux poussées par changement de contenu, tant que R1.2 (matrice multi-OS) n'existe pas.
+
+**Fait le jour même** : run **#33644149960** refusé comme annoncé, annotation lue
+(`nature=EMBALLAGE` — texte et pagination conformes, seuls les octets JPEG diffèrent), charge
+acceptée à la main. Seconde poussée : **run #33644538835, CI verte, 21 étapes**, garde des
+silences comprise.
 
 ### Docs
 

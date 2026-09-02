@@ -335,7 +335,7 @@ parce qu'une promesse de contrôle y tenait lieu de contrôle.
 deux sens ; perce-ment des sept silences sur 2026-I et la Chronologie ; attestation de la
 fixation F1 **et** son rétro-contrôle arithmétique ; chasse aux lacunes non décrétées.
 
-### ⚠️ Variante PDF périmée — cérémonie d'acceptation à reprendre au premier run
+### Variante PDF périmée puis réacceptée — cérémonie rejouée le jour même (clôturé)
 
 La réimpression du volume du 2 septembre 2026 (canon modifié par l'Avis royal n° 10 : la
 fixation « au quatrième degré » inscrite en Génération VI) **change la charge du PDF**, donc
@@ -355,6 +355,17 @@ d'environnement n'excuse pas un changement de texte (`pdf_fingerprint.py`, garde
 
 Ce n'est pas une régression : c'est le prix connu, **deux poussées par changement de contenu**,
 tant que R1.2 (matrice multi-OS) n'existe pas — prix déjà payé pour l'Arbre le 1ᵉʳ septembre.
+
+**Exécuté le 2 septembre 2026** (run **#33644149960**) : le premier run a refusé, comme annoncé ;
+l'annotation `empreinte-pdf-divergence` portait `nature=EMBALLAGE` — *texte, pages, images et
+placements conformes, seuls les octets des flux JPEG embarqués diffèrent (libjpeg du moteur)* —,
+seule nature que le rite autorise à accepter. Charge acceptée à la main sous la même étiquette :
+
+```
+pdf_variante_ci-ubuntu-24.04-py3.12 = fingerprint:72d2f6a43fa2bd29f100bfd7dcce5b1a|pages:29|images:24|placements:25
+```
+
+Seconde poussée : **run #33644538835, CI verte, 21 étapes** — la garde des silences comprise.
 
 ## Mémoire : pourquoi ces étapes étaient tolérantes (état du 1ᵉʳ septembre 2026)
 
