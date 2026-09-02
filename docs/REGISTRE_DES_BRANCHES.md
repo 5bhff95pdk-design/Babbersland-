@@ -17,7 +17,7 @@ Vérification préalable, menée avant toute suppression :
 | Ce qui a été mesuré | Résultat |
 |---|---|
 | Bout de branche ancêtre de `main` (donc réellement fusionné) | **0 sur 33** |
-| Arborescence du bout de branche identique à `main` (dernière en date) | **identique à 0 octet près** |
+| Écart de contenu entre `main` et le bout le plus récent (`01a06265`) | **aucun fichier en écart** — mesuré par `git diff --stat origin/main origin/arena/01a06265…` → 0 ligne ; donc rien de non rendu, mais **pas** une identité d'objets (l'identité d'arbres n'a pas été vérifiée : le SHA du bout est introuvable depuis le garbage-collect qui a suivi la suppression des refs) |
 | Contenu d'une branche ancienne comparé à `main` | `+42 lignes / −19 675` : un **état antérieur**, pas du travail en attente |
 | Commits hors de `main` | **107** (104 conservés au bundle, 2 élagués pour cause de filtre, 1 hors périmètre) |
 | Date d'auteur ↔ date de commit | **confondues sur toute la ligne** (`14:56:49` partout sur `main`) |
@@ -96,18 +96,16 @@ conservé ici comme cote, non comme référence vivante.*
 
 ---
 
-## IV. Procédure de restauration
+## IV. Ce que l'archive couvre, et ce qu'elle ne couvre pas
 
-```bash
-git clone docs/archives/babberland-histoire-texte-2026-09-02.bundle restauration && cd restauration
-git branch -a                                   # 33 têtes, sous refs/remotes/origin/arena/*
-git show origin/arena/01a053cc-babbersland:sources/check_portal.py   # n'importe quel fichier texte
-git checkout -b restauration/01a053cc origin/arena/01a053cc-babbersland
-```
+| Reprise | État |
+|---|---|
+| Le **texte** des 104 commits (sources, contrôleurs, canon, gouvernance) | **garanti** — le bundle est dans le dépôt, il ne dépend d'aucun objet de GitHub |
+| Les **binaires** d'une campagne (planches, retouches) | **non garanti** — les refs étant supprimées, la survie des objets dépend du garbage-collect de GitHub, hors de contrôle. Un `git fetch origin <sha>` peut encore marcher ; il ne faut pas l'inscrire dans une procédure |
+| La restauration d'une branche | `git checkout -b restauration/<cote> origin/arena/<cote>` dans le clone du bundle — texte seul |
 
-Tant que GitHub n'a pas garbage-collecté les anciennes refs, les **binaires** d'une campagne
-restent aussi récupérables par SHA (`git fetch origin <sha>`) : le bundle, lui, ne contient que le
-texte. Après collecte, le texte reste ; l'image se régénère par la chaîne (`make tout`).
+Après collecte, le texte reste ; l'image se régénère par la chaîne (`make tout`), et c'est bien
+pourquoi le dépôt garde les **sources** des artéfacts plutôt que seulement leurs rendus.
 
 ---
 
@@ -125,6 +123,19 @@ texte. Après collecte, le texte reste ; l'image se régénère par la chaîne (
    ou un passage en LFS (A′, Avis n° 9) y change quelque chose.
 
 ---
+
+## VI. Après la fusion (constat du même jour)
+
+Le nettoiement a été fondu dans `main` par **PR #36, squash `a4e8e8f`**, à 23:46 UTC ; CI de
+`main` **verte** (25 étapes, aucune rouge) — c'est-à-dire que le gel des archives, les scellés
+des 28 maîtres et de la galerie, et la parité modèle ↔ workflow ont tous passé **avec le livré
+hors du dépôt**, qui est donc bien regagné à chaque course et non à chaque commit.
+
+Surcroît de rangement : la branche de session `arena/01a062c4-babbersland` a été supprimée à son
+tour après la fusion (arbre identique au squash, donc rien à y reprendre) — `origin` ne porte plus
+que `main`. **Une branche de travail qui survit à sa propre fusion est une branche qui n'est plus
+du travail.** Le réglage `delete_branch_on_merge` (§ V.1) reste à cocher pour que ce nettoyage ne
+soit pas à refaire.
 
 *Registre établi à Pabst City le 2 septembre 2026, sans aucune hâte.*
 *Il ne scelle rien : il atteste qu'on n'a rien jeté.*
