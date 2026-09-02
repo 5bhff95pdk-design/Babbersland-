@@ -453,7 +453,7 @@ Pour chaque sous-ticket, le travail consiste à :
 
 ## Le « Gel des archives » : un cas à part
 
-L'étape **« Gel des archives (G et H intacts) et des maîtres d'illustration »** est **sans** `continue-on-error: true` depuis le 30 août 2026 (cf. RAPPORT_DE_CONTRE_EXPERTISE_2026_III.md, constat E-23). Elle est passée **provisoirement en mode diagnostic** dans la livraison R0.4 finale, pour permettre de lire le diff exact sans bloquer la CI.
+L'étape **« Gel des archives (G et H intacts) et des maîtres d'illustration »** est **sans** `continue-on-error: true` depuis le 30 août 2026 (cf. docs/clos/RAPPORT_DE_CONTRE_EXPERTISE_2026_III.md, constat E-23). Elle est passée **provisoirement en mode diagnostic** dans la livraison R0.4 finale, pour permettre de lire le diff exact sans bloquer la CI.
 
 **Statut au 1ᵉʳ septembre 2026** : `gouvernance/ARCHIVE.sha256` valide sur la machine de l'agent. Le diagnostic en CI (run #8) a montré qu'il validait également après que les 6 régénérations eurent tourné. **L'hypothèse principale est que les 6 régénérations modifient les maîtres PNG trackés (cf. section précédente), et que le scellé `ICONOGRAPHIE.sha256` n'est pas impacté** (puisque les fichiers trackés sont restés intacts — c'est le SHA qui changeait).
 

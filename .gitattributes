@@ -1,2 +1,7 @@
-*.pdf binary
+# Déclaration « binaire » explicite (constat E-05 : éviter toute normalisation de
+# fins de ligne et tout diff texte sur les artéfacts produits par la chaîne).
+# Les PDF n'ont plus besoin d'être listés ici depuis que le volume 2026-I est un
+# livré non suivi (.gitignore) — le 2026-G, lui, reste scellé et suivi.
 *.png binary
+*.webp binary
+docs/archives/*.bundle binary

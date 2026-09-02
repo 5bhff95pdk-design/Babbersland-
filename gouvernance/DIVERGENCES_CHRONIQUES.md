@@ -1,7 +1,7 @@
 # ⚖️ REGISTRE DES DIVERGENCES DES CHRONIQUES
 
 **Chancellerie royale · Pabst City** — établi le 29 août 2026, à la suite du rapatriement de
-l'audit `RAPPORT_AUDIT_2026_III.md` (constats **F-02** et **F-03**, restés dans une pull request en
+l'audit `docs/clos/RAPPORT_AUDIT_2026_III.md` (constats **F-02** et **F-03**, restés dans une pull request en
 conflit) et de la revue du corpus du 29 août 2026. **Révisé le 30 août 2026** : l'édition fusionnée
 unique du Livre II (quarante-deux bancs retenus, `LIVRE_II_LE_SILENCE_ET_L_AQUEDUC.md` intégré puis
 supprimé) a modifié le champ d'observation — dix déclarations devenues inexactes ont été relues,

@@ -1,6 +1,6 @@
 # 🗄️ POLITIQUE D'ARCHIVAGE DU ROYAUME DU BABBERLAND
 
-**Référence** : GOU-2026-II-01 · complémentaire du rapport `RAPPORT_ANALYSE_2026_II.md` (constats E-12, E-13)
+**Référence** : GOU-2026-II-01 · complémentaire du rapport `docs/clos/RAPPORT_ANALYSE_2026_II.md` (constats E-12, E-13)
 **Liste de contrôle machine** : `gouvernance/ARCHIVE.sha256` — vérifiée à chaque push par la CI
 
 ## Principe

@@ -1,3 +1,16 @@
 __pycache__/
 *.pyc
 .venv/
+
+# Le PDF canonique 2026-I est un LIVRÉ, pas une source : il est régénéré par la
+# chaîne, vérifié par empreinte sémantique (gouvernance/pdf_fingerprint.txt), et
+# publié en pièce jointe de la Release. Sa sortie du dépôt (nettoiement du
+# 2 septembre 2026) rend 7,0 Mio à chaque clone sans rien retirer au contrat.
+#
+# Ce que ça change pour un clone neuf : le PDF n'y est plus. `make controle`
+# l'exige et va le chercher lui-même (règle `pdf: $(PDF)` du Makefile), donc la
+# chaîne reste verte sans geste supplémentaire — mais il faut `make env` avant,
+# comme pour tout le reste. Le volume 2026-G, lui, RESTA suivi : scellé par
+# gouvernance/ARCHIVE.sha256 et régénérable par rien, il n'a pas d'autre preuve
+# d'intégrité que ses octets (constat E-12).
+Royaume_du_Babberland_Encyclopedie_Consolidee_2026_I.pdf
