@@ -2,16 +2,27 @@ name: Continuité Babberland
 
 # Contrôle à chaque push sur main et sur toute pull request :
 # sources (continuité + couverture des illustrations + parité des données JSON),
-# atlas et arbre déterministes, régénération du PDF canonique, artéfact publié
-# apparié planche à planche, empreinte de fraîcheur ordonnée, gel des archives.
+# quatre sceaux d'artéfacts régénérés (Atlas, Arbre, Hymne, Vignettes),
+# régénération du PDF canonique, artéfact publié apparié planche à planche,
+# empreinte de fraîcheur ordonnée, gel des archives.
 #
 # La CI ne grave JAMAIS l'empreinte : elle la compare. Graver et vérifier dans la
 # même commande rendrait la vérification infaillible par construction (constat E-21).
+#
+# Depuis R1.4.c–g (1ᵉʳ septembre 2026), plus aucune étape n'est tolérante : chaque
+# artéfact a un contrat SÉMANTIQUE (charge gravée en variantes acceptées, voir
+# sources/sceaux.py) au lieu d'une comparaison d'octets — c'est ce qui rend le
+# blocage supportable. La preuve que ces contrôles mordent se joue ailleurs :
+# workflow `batterie.yml`, à horaire.
+#
+# `workflow_dispatch` : un run manuel à la demande (avant une Release, après un
+# changement de police sur les runners, ou pour relire une annotation de divergence).
 
 on:
   push:
     branches: [main]
   pull_request:
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -20,6 +31,9 @@ jobs:
   controles:
     name: Sources, données, artéfacts et empreinte
     runs-on: ubuntu-latest
+    # Un run qui s'éternise n'est pas un run qui vérifie : 20 minutes couvrent
+    # la chaîne complète (police + dépendances + 6 régénérations) avec de la marge.
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
         with:
@@ -92,30 +106,25 @@ jobs:
       - name: Chroniques (grandeurs chiffrées, cotes d'archives, registre des divergences)
         run: python sources/check_chroniques.py
 
-      - name: Atlas géographique (proposé, non décrété)
-        # R1.4.a-v2 livré le 1ᵉʳ septembre 2026 : retrait du
-        # `continue-on-error: true` tenté (PR #25, run #21, #22), mais
-        # le diagnostic complet n'a pas pu être obtenu (logs Azure Blob
-        # inaccessibles depuis l'environnement d'agent) pour identifier
-        # précisément la cause de la non-reproductibilité en CI.
+      - name: Atlas géographique (proposé, non décrété) — bloquant
+        # R1.4.a-v3 (1ᵉʳ septembre 2026) : l'étape appelait `generate_map.py` puis
+        # `check_geography.py`, sous `continue-on-error`, SANS jamais consulter
+        # l'empreinte livée en v2. Le contrat existait donc dans le dépôt et pas
+        # dans la chaîne — exactement la classe de défaut E-09 (une vérification
+        # qui ne vérifie rien). L'empreinte est reprise sur le modèle de l'Arbre
+        # (variantes acceptées, composante fautive nommée dans l'annotation), et
+        # l'étape devient bloquante.
         #
-        # Stratégie adoptée : **rétablir `continue-on-error: true`**
-        # (R1.4.a n'est pas résolu), mais en gardant **l'empreinte
-        # sémantique** disponible localement (`make empreinte-atlas`).
-        # L'Atlas est régénéré, le contrôle `check_geography.py` est
-        # exécuté (validation factuelle), mais la comparaison bit-à-bit
-        # est skippée pour les binaires.
-        #
-        # R1.4.a-v3 à faire : investiguer la cause réelle (cache pip
-        # Pillow ? locale Pillow ? encoding ?), avec accès aux logs
-        # Azure Blob ou exécution locale d'un test sur le runner.
-        # L'empreinte sémantique `empreinte_atlas.py` reste valide
-        # comme moyen de comparaison si on peut faire un test
-        # reproductible.
-        continue-on-error: true
+        # Le PNG n'est plus comparé par échantillonnage NEAREST 16×16 (un pixel lu
+        # sur cent : trop fragile, c'est pourquoi v2 n'osait pas brancher l'étape)
+        # mais par moyennage BOX quantifié sur 16 niveaux + proportion d'encre.
+        # Une région retirée, un fond changé, un calage temporel faux bloquent ;
+        # l'antialiasing d'un autre FreeType ne bloque plus — ou alors il s'accepte,
+        # en connaissance de cause, par `--accepter`.
         run: |
           python sources/generate_map.py
           python sources/check_geography.py
+          python sources/empreinte_atlas.py --check
 
       - name: Arbre généalogique (variantes de rendu acceptées, bloquant)
         # R1.4.b (1ᵉʳ septembre 2026) : `git diff --exit-code` et
@@ -136,29 +145,52 @@ jobs:
           python sources/empreinte_arbre.py --check
 
       # Décrété par l'Avis royal n° 8 (29 août 2026) : l'enregistrement de référence
-      # fait partie de `make tout`, il doit donc être reproductible au bit près.
-      - name: Hymne national (Avis royal n° 8) — enregistrement de référence
-        continue-on-error: true  # R1.4 — voir note Atlas
+      # fait partie de `make tout`, il doit donc être reproductible.
+      #
+      # R1.4.c (1ᵉʳ septembre 2026) : `git diff --exit-code` comparait des OCTETS. La
+      # synthèse n'utilise que la bibliothèque standard (graine 1847), mais un ULP
+      # de `math.sin` dans une autre libm — ou un chunk RIFF ajouté par une autre
+      # version de `wave` — change le fichier sans changer une note. La charge
+      # compare donc ce qui s'entend : géométrie du signal, enveloppe RMS par
+      # fenêtre de 250 ms, PCM replié sur 8 bits, amplitude crête. L'audit RIFF
+      # promis par le ticket est fait : le WAV ne contient que `fmt ` et `data`,
+      # aucun horodatage (tout chunk hors de ce paire est signalé au diagnostic).
+      - name: Hymne national (Avis royal n° 8) — enregistrement de référence, bloquant
         run: |
           python sources/generate_hymne.py
-          git diff --exit-code --stat -- audio/hymne_national_babberland.wav
+          python sources/empreinte_hymne.py --check
+          python sources/empreinte_hymne.py --chunks
 
-      - name: Vignettes du portail (dérivées des maîtres, déterministes)
-        continue-on-error: true  # R1.4 — voir note Atlas
+      # R1.4.d (1ᵉʳ septembre 2026) : idem pour les 77 vignettes WebP, dérivées de
+      # `images/realistes/*.png`. Le `git diff` avait un angle mort de plus : une
+      # vignette périmée que la machine de référence reproduit à l'identique passait.
+      # La charge compare le CONTENU DÉCODÉ (grille 8×8 par vignette, lot haché),
+      # donc un ré-encodage libwebp différent n'est pas une faute, tandis qu'un
+      # maître oublié de régénérer en est une.
+      - name: Vignettes du portail (dérivées des maîtres) — bloquant
         run: |
           python sources/generate_vignettes.py
-          git diff --exit-code --stat -- images/vignettes
+          python sources/empreinte_vignettes.py --check
 
-      - name: Régénération de l'encyclopédie 2026-I
-        continue-on-error: true  # R1.4 — voir note Atlas
+      # R1.4.e–g (1ᵉʳ septembre 2026) : les trois étapes de la chaîne du PDF
+      # portaient `continue-on-error: true  # R1.4 — voir note Atlas`, par
+      # héritage — le motif invoqué (non-reproductibilité binaire) ne les
+      # concernait pas : elles ne comparent pas des octets. Une étape qui
+      # régénère sans vérifier peut donc échouer en silence, et deux `--check`
+      # bloquants pouvaient dire vrai sans que le run bronche. Retirés.
+      - name: Régénération de l'encyclopédie 2026-I — bloquant
         run: python sources/generate_encyclopedie_2026_i.py
 
-      - name: Artéfact publié (illustrations appariées à leur légende, planche par planche)
-        continue-on-error: true  # R1.4 — voir note Atlas
+      - name: Artéfact publié (illustrations appariées à leur légende, planche par planche) — bloquant
         run: python sources/check_pdf.py
 
-      - name: Fraîcheur du PDF publié (empreinte sémantique ordonnée, gravée au dépôt)
-        continue-on-error: true  # R1.4 — voir note Atlas
+      # Le contrat de référence est l'empreinte gravée par `make empreinte`.
+      # Un rendu d'un autre environnement qui diverge (pagination sensible aux
+      # polices) ne rend pas la chaîne rouge par surprise : il la rend rouge par
+      # annotation, puis s'accepte à la main dans la section `PDF CANONIQUE` de
+      # gouvernance/ARTIFACT_SIGNATURES.sha256 (R1.4.g). Rien de tout cela
+      # n'excuse une dérive sur la machine de référence : là, on re-grave.
+      - name: Fraîcheur du PDF publié (empreinte sémantique ordonnée, gravée au dépôt) — bloquant
         run: python sources/pdf_fingerprint.py --check
 
       - name: Pièce jointe de relecture humaine

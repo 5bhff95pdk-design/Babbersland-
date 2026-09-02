@@ -165,4 +165,31 @@ Le seul verrou qui n'était pas fermé est le dernier : le gel des archives n'é
 
 ---
 
-*Rapport rédigé le 1ᵉʳ septembre 2026 — dépôt `5bhff95pdk-design/Babbersland-`, commit `6aecaa5`. Toutes les mesures citées ont été exécutées dans ce clone : `make controle` (12/12), `make batterie` (20/20), installation du venv épinglé, inspection du workflow et interrogation de l'API GitHub (`gh`).*
+---
+
+## 9. Suivi d'exécution — recommandations 2, 3, 4 et 5 (vague « verrouiller », 1ᵉʳ septembre 2026, dernière heure)
+
+| # | Recommandation | État |
+|---|---|---|
+| 1 | Rendre l'étape « Gel des archives » bloquante | ✅ **Fait le jour même** (§ 8, R1.4.h) |
+| 2 | README : « 7 étapes » → « 6 » | ✅ **Fait** (C-02, PR #28) — puis rendu caduc par la suite : il reste **0** étape tolérante |
+| 3 | Clarifier ou supprimer « 22 sous-étapes / 4 post-step » | ✅ **Fait** — **suppression**, pas réexplication (C-03). Mesure au parseur YAML : `continuite.yml` = **18 étapes** (16 nommées + `actions/checkout` + `actions/setup-python`), **aucune** section `post:`. Les sous-étapes créées par le runner ne sont pas une grandeur du projet : un compte invérifiable est un compte qui mentira tout seul |
+| 4 | Poursuivre R1.4.a-v3 pour rendre l'Atlas bloquant | ✅ **Fait, par un autre chemin que celui prévu.** Le ticket proposait (a) image Docker épinglée, (b) empreinte normalisée, (c) régénération + gravure. **Aucune** de ces trois voies n'a été prise : (a) gèle une machine pour un problème de sens, (b) cherche un seuil que la mesure R1.4.b a montré inexistant, (c) graverait en CI (E-21). Le défaut réel était ailleurs : **l'étape n'appelait jamais l'empreinte** — elle régénérait, vérifiait les données, et jetait. R1.4.a-v3 branche `empreinte_atlas.py --check` dans l'étape, remplace l'échantillonnage NEAREST 16×16 par le moyennage BOX de l'Arbre, et adopte les variantes acceptées. La cause racine de la non-reproductibilité **reste non identifiée** et n'est plus une condition de rien |
+| 5 | `getdata()` de `empreinte_atlas.py` avant Pillow 14 | ✅ **Fait** (C-04) — éliminé par la réécriture (`tobytes()`), sans attendre 2027 |
+
+**Élargi au périmètre annoncé (les six sous-tickets R1.4 restants), livré le même soir :**
+
+| Constat / risque du rapport | Ce qui a été fait |
+|---|---|
+| Risque n° 1 — « 5 des 6 étapes tolérantes couvrent toute la chaîne du PDF ; la CI peut être verte alors que le PDF publié serait périmé » | **R1.4.e, f, g** : les trois `continue-on-error` retirés. La régénération, qui ne comparait rien (un générateur qui plante passait), échoue désormais le run ; `check_pdf.py` et la fraîcheur deviennent bloquants. Le PDF reçoit une section de **variantes d'environnement** (`PDF CANONIQUE`), hiérarchisée : `pdf_fingerprint.txt` reste LE contrat canonique |
+| « La garantie forte vient aujourd'hui de `make controle` local » | **`gouvernance/CI_LIMITES.md`** n'a plus de sens comme distinction : la garantie locale et la garantie GitHub sont désormais la même chaîne, 18 étapes bloquantes. `make controle` compte **douze** vérifications (contre dix avant ce soir) dont **quatre sceaux d'artéfacts**, plus les scellés |
+| Cause racine non identifiée (polices, locale, Pillow) | Traitées **par construction** : plus aucune étape ne compare des octets d'artéfact régénéré. Le bruit de rendu d'un environnement se **grave** (`--accepter`, assentiment tracé), il ne se tolère plus en silence |
+| La batterie, seule preuve que les contrôles mordent, locale et volontaire | **Nouveau workflow `batterie.yml`** : lundi 03:17 UTC + `workflow_dispatch`. Vingt-quatre scénarios (19 fautes refusées, 5 éditions acceptées) sur copies isolées, puis preuve que l'arbre de référence est resté intact (`git diff --quiet`) et que les scellés n'ont pas bougé. Un contrôle émasculé — la classe C-01, qui a survécu à quatre audits — ne survit plus à une semaine |
+| Constats nouveaux non demandés, découverts en route | **Déclarés en tickets, pas en notes** : R1.8 (parité modèle `sources/github_actions_*.yml` ↔ workflow installé — rien ne la vérifie) et R1.9 (`images/realistes/`, 211 Mio, scellé par rien : `ICONOGRAPHIE.sha256` ne couvre que les 28 maîtres de `images/`) |
+
+**Verdict après suivi** : la réserve technique C-01 est close **et** sa classe de défaut est close — non par un correctif de plus, mais parce qu'il ne reste plus une seule étape qui puisse avertir au lieu d'échouer.
+
+**Mesures consignées** : `make controle` **12/12 + scellés, 0 échec** ; `make batterie` **24/24 en 2 min 26 s** ; charges mesurées sur les trois fautes nouvelles (Atlas : `16x16box` + `encre` ; hymne : `profil` + `pcm8`, `frames` intact ; vignettes : `grilles`) ; section `ARBRE GÉNÉALOGIQUE` du scellé **inchangée octet pour octet** après passage sur la mécanique commune `sources/sceaux.py`.
+
+*Rapport rédigé le 1ᵉʳ septembre 2026 — dépôt `5bhff95pdk-design/Babbersland-`, commit `6aecaa5`. Toutes les mesures citées ont été exécutées dans ce clone : `make controle` (12/12), `make batterie` (20/20), installation du venv épinglé, inspection du workflow et interrogation de l'API GitHub (`gh`).*  
+*§ 9 ajouté le 1ᵉʳ septembre 2026, dernière heure (session `arena/01a05f55-babbersland`) : R1.4 clos, CI intégralement bloquante, batterie à horaires.*

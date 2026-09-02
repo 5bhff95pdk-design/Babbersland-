@@ -1,0 +1,66 @@
+name: Batterie de mutations — les contrôles ont-ils des dents ?
+
+# Ce que la CI normale ne peut pas prouver.
+#
+# `continuite.yml` démontre que les contrôles **acceptent** l'état du dépôt. Elle ne
+# démontre pas qu'ils sont capables de **refuser** quoi que ce soit : un contrôle
+# rendu inoffensif — un `|| echo` de trop (constat C-01, corrigé en R1.4.h), une
+# étape qui régénère sans comparer (R1.4.e), une expression régulière qui ne matche
+# plus rien — laisse la chaîne verte indéfiniment. C'est la classe de défaillance la
+# plus coûteuse pour ce projet, parce qu'elle est silencieuse ET qu'elle est
+# vérifiable par la seule exécution.
+#
+# `sources/test_mutations.py` isole vingt copies de l'arbre, en casse seize (fautes
+# qui doivent être refusées) et laisse quatre en édition légitime (qui doivent passer),
+# puis rend son verdict. La référence n'est jamais touchée — le dernier pas de ce
+# workflow le prouve, au lieu de le promettre.
+#
+# Pourquoi un workflow distinct, et à horaire : la batterie coûte une minute et des
+# poussières, réécrit des scellés dans ses laboratoires et n'a rien à dire sur un
+# commit qui ne touche ni les sources ni les artéfacts. Elle tourne donc le lundi
+# à 03:17 UTC (heure creuse, avant la séance d'atelier), et à la demande.
+
+on:
+  schedule:
+    - cron: "17 3 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  batterie:
+    name: Seize fautes refusées, quatre éditions acceptées
+    runs-on: ubuntu-latest
+    # Vingt copies d'arbre, dont quatre chaînes complètes `make controle` et des
+    # régénérations de PDF : large. Mieux vaut un rouge franc qu'un hang.
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Polices DejaVu (les scénarios régénèrent arbre, atlas et PDF)
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends fonts-dejavu-core
+
+      - name: Dépendances épinglées
+        run: python -m pip install --break-system-packages -r requirements.txt
+
+      - name: Batterie de mutations (16 fautes attendues refusées, 4 éditions légitimes acceptées)
+        run: python sources/test_mutations.py
+
+      - name: La référence est restée intacte (la batterie ne casse que ses copies)
+        # Un laboratoire qui touche la paillasse n'est plus un laboratoire : ce
+        # contrôle est là pour que l'isolation reste une propriété vérifiée, pas
+        # une intention. `git status` ignore .venv et __pycache__ (.gitignore).
+        run: |
+          git diff --quiet || { echo "::error::la batterie a modifié l'arbre de référence"; git status --short; git diff --stat; exit 1; }
+          test -z "$(git ls-files --others --exclude-standard)" || { echo "::error::fichiers non désirés apparus dans l'arbre de référence"; git ls-files --others --exclude-standard; exit 1; }
+          echo "arbre de référence intact."
+
+      - name: Les scellés n'ont pas bougé
+        run: |
+          sha256sum --check --quiet gouvernance/ARCHIVE.sha256
+          sha256sum --check --quiet gouvernance/ICONOGRAPHIE.sha256

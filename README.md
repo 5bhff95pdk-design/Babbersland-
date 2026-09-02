@@ -33,11 +33,12 @@ L'édition **2026-I** intègre directement les corrections et ne nécessite aucu
 | `gouvernance/ARCHIVE.md` | Politique d'archivage : ce qui est gelé, ce qui ne l'est pas, comment dégeler |
 | `gouvernance/ARCHIVE.sha256` | Scellés des archives 2026-G et 2026-H, vérifiés par la CI et par `make scelle` |
 | `gouvernance/ICONOGRAPHIE.sha256` | Scellés des 28 maîtres d'illustration, par leur nom (E-18) |
-| `gouvernance/CI_LIMITES.md` | Limites connues de la CI de continuité (1ᵉʳ septembre 2026) : 6 étapes en `continue-on-error`, durcissement prévu en R1.4.c–g (R1.4.h, gel strict, livré) |
-| `.github/workflows/continuite.yml` | **CI active** : 18 étapes + 4 post-step, exécutée à chaque push sur `main` et à chaque PR (première exécution verte : 2026-09-01T21:46:19Z) |
+| `gouvernance/CI_LIMITES.md` | Journal des limites de la CI de continuité : R1.4.a à R1.4.h **tous livrés** — 18 étapes, **aucune** en `continue-on-error` ; causes, mesures et ceremony d'acceptation y restent écrites |
+| `.github/workflows/continuite.yml` | **CI active, entièrement bloquante** : 18 étapes à chaque push sur `main`, à chaque PR et à la demande (`workflow_dispatch`) (première exécution verte : 2026-09-01T21:46:19Z) |
+| `.github/workflows/batterie.yml` | **Batterie de mutations à horaires** : lundi 03:17 UTC + exécution manuelle. Vingt-quatre scénarios sur copies isolées (19 fautes à refuser, 5 éditions légitimes à accepter), puis preuve que l'arbre de référence est resté intact. C'est le contrôle du contrôle |
 | `canon/` + `propositions_declarées` | Données structurées (R3.3) sous contrat de parité : une affirmation est attestée par le corpus ou déclarée comme proposition |
 | `gouvernance/pdf_fingerprint.txt` | Empreinte sémantique du PDF canonique — le contrat de fraîcheur de l'artefact |
-| `gouvernance/ARTIFACT_SIGNATURES.sha256` | Empreintes sémantiques des artéfacts régénérés : Atlas (SVG/PNG/HTML, R1.4.a) et Arbre généalogique (PNG, R1.4.b — modèle « variantes acceptées », étape CI bloquante) ; gravure par `make empreinte-atlas` / `make empreinte-arbre`, acceptation d'une variante de rendu par `sources/empreinte_arbre.py --accepter` |
+| `gouvernance/ARTIFACT_SIGNATURES.sha256` | Sceaux sémantiques des **quatre** artéfacts régénérés — Atlas (R1.4.a-v3), Arbre (R1.4.b), Hymne (R1.4.c), Vignettes (R1.4.d) — plus la section `PDF CANONIQUE` (R1.4.g) qui enregistre les variantes de rendu acceptées du volume. Modèle unique partout : **variantes acceptées**, gravées par `make empreinte-<artéfact>`, acceptées par `sources/empreinte_<artéfact>.py --accepter '<charge>' <étiquette>`, vérifiées en CI. Mécanique commune : `sources/sceaux.py` |
 | `gouvernance/index.html` | Version visuelle du rapport et de la roadmap (page autonome) |
 | `geographie/ANALYSE.md` | GEO-2026-II-01 : ce que le canon situe, ce que le temps interdit, E-16.c en proposition |
 | `geographie/ROADMAP.md` | Feuille de route géographique (G0 livré, G2 = Avis n° 7, hors 2026-I) |
@@ -77,13 +78,23 @@ Tout passe par `make`, qui installe ses propres dépendances dans un venv — le
 ```bash
 make env          # python3 -m venv .venv + pip install -r requirements.txt
 make tout         # arbre → hymne → PDF → CONTRÔLES → empreinte (l'ordre est un contrôle, voir E-21)
-make controle     # les huit contrôles, sans rien régénérer
+make controle     # douze contrôles + les scellés, sans rien régénérer
 make scelle       # gel des archives G et H + scellé des 28 maîtres d'illustration
 ```
 
-Buts disponibles : `env`, `arbre`, `carte`, `hymne`, `vignettes`, `pdf`, `empreinte`, `controle`, `scelle`, `iconographie`, `batterie`, `workflows`, `tout`, `propre`.
+Buts disponibles : `env`, `arbre`, `carte`, `hymne`, `vignettes`, `pdf`, `empreinte`,
+`empreinte-atlas`, `empreinte-arbre`, `empreinte-hymne`, `empreinte-vignettes`,
+`controle`, `scelle`, `iconographie`, `lfs`, `batterie`, `workflows`, `tout`, `propre`.
 
-`make batterie` ne contrôle pas le dépôt : il **malmène seize copies isolées** de son arbre (naissances fausses, deux portraits permutés, archive gelée raturée, générateur syntaxiquement cassé, un banc de plus non déclaré, une cote réattribuée, une déclaration obsolète) et vérifie que la chaîne refuse — puis qu'elle accepte quatre éditions légitimes. C'est la seule preuve que les contrôles ont des dents ; elle dure une minute et ne fait pas partie de `controle`, puisqu'elle réécrit des scellés dans ses laboratoires.
+**Quatre actes d'assentiment, pas quatre vérifications.** `make empreinte-<artéfact>`
+grave la charge sémantique de l'artéfact régénéré dans
+`gouvernance/ARTIFACT_SIGNATURES.sha256` ; la CI, elle, ne fait que `--check`. Un
+changement de rendu voulu se grave ici et se dit à l'Avis ; une variante venue d'un
+autre environnement (runner CI, puis matrice multi-OS R1.2) s'accepte par
+`--accepter '<charge>' <étiquette>` après lecture de l'annotation — jamais en silence.
+
+`make batterie` ne contrôle pas le dépôt : il **malmène vingt-quatre copies isolées** de son arbre (naissances fausses, deux portraits permutés, archive gelée raturée, générateur syntaxiquement cassé, un banc de plus non déclaré, une cote réattribuée, une déclaration obsolète, **un PNG d'Atlas noyé d'encre**, **un hymne rejoué sur une autre graine**, **une photographie réaliste retouchée puis ses vignettes régénérées**) et vérifie que la chaîne refuse — puis qu'elle accepte **cinq** éditions légitimes, dont la cérémonie d'acceptation d'une variante de rendu (V4 : on observe la charge, on l'accepte à la main, la chaîne laisse passer). C'est la seule preuve que les contrôles ont des dents ; elle coûte **2 min 26 s** (mesure du
+1ᵉʳ septembre 2026, 24 scénarios) et ne fait pas partie de `controle`, puisqu'elle réécrit des scellés dans ses laboratoires — mais **elle a un horaire en CI** : `.github/workflows/batterie.yml`, le lundi à 03:17 UTC et à la demande. Un contrôle émasculé (la classe du constat C-01, qui a survécu à quatre audits) ne survit plus à une semaine.
 **Graver l'empreinte n'est jamais une vérification** : `empreinte` clôt la chaîne et consigne un assentiment ;
 la CI, elle, ne fait que `--check`. Un changement d'empreinte voulu se dit à l'Avis. Hors venv : `make PY=python3 …`. Les générateurs cherchent les polices DejaVu sur Linux, macOS et Windows (`BABBERLAND_FONT_DIR` pour forcer un répertoire). L'atlas géographique (`make carte`) est **hors canon** : il ne rentre pas dans `make tout` ni dans le PDF, tant qu'un Avis ne l'a pas ratifié. L'hymne national (`make hymne`), décrété par l'Avis royal n° 8, **entre dans `make tout`** : son enregistrement de référence (`audio/`) se régénère au bit près, partition lue dans le dossier officiel.
 
@@ -113,6 +124,10 @@ python .venv/bin/python sources/check_pdf.py
 python .venv/bin/python sources/pdf_fingerprint.py --check
 python .venv/bin/python sources/check_geography.py
 python .venv/bin/python sources/check_portal.py
+python .venv/bin/python sources/empreinte_atlas.py --check
+python .venv/bin/python sources/empreinte_arbre.py --check
+python .venv/bin/python sources/empreinte_hymne.py --check
+python .venv/bin/python sources/empreinte_vignettes.py --check
 make scelle
 ```
 
@@ -129,25 +144,39 @@ Les mêmes contrôles sont enchaînés à chaque push sur `main` et à chaque pu
 **Activation** — le gabarit est tenu à jour, son installation reste un **acte de publication** :
 
 ```bash
-make workflows    # copie sources/github_actions_continuite.yml → .github/workflows/continuite.yml
+make workflows    # sources/github_actions_continuite.yml → .github/workflows/continuite.yml
+                  # sources/github_actions_batterie.yml   → .github/workflows/batterie.yml
                   # et retire au passage le talon invalide main.yml
 ```
 
-**18 étapes**, YAML validé, chacune rejouée localement : polices, dépendances, compilation,
+**18 étapes**, YAML validé au parseur, chacune rejouée localement : polices, dépendances,
+compilation, **gel des archives et des maîtres** (placé avant toute régénération, R1.4.h),
 continuité, parité des données, parité du portail, **chroniques**, atlas, arbre, **hymne (Avis
-royal n° 8)**, **vignettes**, régénération du volume, artéfact apparié, fraîcheur, scellés,
-pièce jointe.
+royal n° 8)**, **vignettes**, régénération du volume, artéfact apparié, fraîcheur, pièce jointe.
+
+**Aucune étape n'est tolérante depuis R1.4.a-v3 et R1.4.c–g (1ᵉʳ septembre 2026).** Chacune des
+quatre régénérations binaires est désormais régie par une **charge sémantique en variantes
+acceptées** (`sources/sceaux.py`) plutôt que par une comparaison d'octets : le bruit de rendu
+d'un environnement se grave, le reste bloque. Conséquence assumée : la chaîne peut être rouge
+pour un rendu jamais observé — la recette est la même pour les quatre artéfacts, lire
+l'annotation `charge=… connue=NON`, juger de la composante fautive, puis `--accepter` (bruit)
+ou régénérer et re-graver (contenu).
 
 Le fichier `.github/workflows/continuite.yml` **ne peut pas sortir d'une App sans le droit `workflows`** :
 GitHub refuse qu'un tel jeton crée ou modifie `.github/workflows/*` (constats **E-17** et **F-01**, mesuré
-à plusieurs reprises — refus à la fois par `git push` et par l'API *contents*). Le dépôt versionne
-donc le modèle, pas sa copie.
+à plusieurs reprises — refus à la fois par `git push` et par l'API *contents*). Le dépôt versionne donc
+**les modèles** (`sources/github_actions_*.yml`) **et** leurs copies installées. Ce que la chaîne
+ne fait pas encore : vérifier mécaniquement que les deux concordent — `make workflows` les écrit
+côte à côte et le diff de revue fait foi. Limite connue, à durcir (une comparaison de deux lignes
+dans `make controle`).
 
 **Statut au 1ᵉʳ septembre 2026** : le droit `workflows` a été accordé à l'installation de l'App
 `arena-ai-coding-agent`, et la PR #22 a installé le workflow sur `main` (commit `9f527f3`).
-La CI est **active et verte** sur la branche principale. **Limitation connue** : 6 étapes sur 18
-portent `continue-on-error: true` (régénérations binaires non bit-à-bit reproductibles entre
-machines) ; voir `gouvernance/CI_LIMITES.md` et le ticket R1.4.
+La CI est **active et verte** sur la branche principale, **18 étapes bloquantes sur 18**. La
+limitation qui fermait le volume (six étapes tolérantes, parce que les régénérations binaires
+ne sont pas reproductibles au bit près entre machines) est levée par R1.4.a-v3 et R1.4.c–g :
+le contrat n'est plus l'égalité des octets mais la charge sémantique. Ce qui reste connu et
+dit : voir `gouvernance/CI_LIMITES.md`.
 
 Pour les sessions futures (par exemple, si le droit est révoqué par erreur), la voie de secours est :
 

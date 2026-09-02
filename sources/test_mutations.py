@@ -2,12 +2,18 @@
 """Batterie de mutations de la chaîne de contrôle (RC-2026-III-01, lot C0).
 
 Répondre à « le verrou tient-il ? » ne se fait pas en lisant le code : on **casse**
-une copie du dépôt et l'on regarde qui bronche. Ce script rejoue seize altérations
-qui doivent être refusées et quatre éditions qui doivent être laissées passer.
+une copie du dépôt et l'on regarde qui bronche. Ce script rejoue dix-neuf altérations
+qui doivent être refusées et cinq éditions qui doivent être laissées passer.
+
+Vingt fautes à refuser, quatre éditions légitimes à laisser passer — dont la
+cérémonie d'acceptation d'une variante de rendu (V4), qui teste l'autre sens du
+contrat : une dérive d'environnement se RÉSOUT par un acte tracé, elle ne se subit
+pas par tolérance.
 
 Chaque scénario travaille sur sa propre copie de l'arbre (hors dépôt, hors `.git`,
 hors `.venv`) : la référence n'est jamais touchée, même quand un scénario régénère
-le PDF et regrave les scellés.
+le PDF et regrave les scellés — et le workflow `batterie.yml` le vérifie après coup
+par `git diff --quiet`, au lieu de le promettre.
 
     make batterie          # ou : python .venv/bin/python sources/test_mutations.py
 
@@ -25,9 +31,12 @@ from pathlib import Path
 RACINE = Path(__file__).resolve().parent.parent
 PY = sys.executable
 
-# Les cinq temps que la CI exécute, plus le scellé : un scénario est « bloqué » dès
-# que l'un d'eux refuse, et l'on consigne lequel — la valeur du contrôle est dans sa
-# parole, pas dans son verdict.
+# Les temps que la CI exécute, plus les quatre sceaux d'artéfacts, plus le gel des
+# archives : un scénario est « bloqué » dès que l'un d'eux refuse, et l'on consigne
+# lequel — la valeur du contrôle est dans sa parole, pas dans son verdict.
+# R1.4.c–g (1ᵉʳ septembre 2026) : les quatre empreintes entrent dans la liste. Sans
+# elles, la batterie prouverait les dents des contrôles d'hier et non de ceux
+# qu'on vient de rendre bloquants.
 CONTROLES = [
     "sources/check_continuity.py",
     "sources/check_canon.py",
@@ -35,6 +44,10 @@ CONTROLES = [
     "sources/check_pdf.py",
     "sources/pdf_fingerprint.py --check",
     "sources/check_geography.py",
+    "sources/empreinte_atlas.py --check",
+    "sources/empreinte_arbre.py --check",
+    "sources/empreinte_hymne.py --check",
+    "sources/empreinte_vignettes.py --check",
 ]
 LEGENDE_ANCRE = ('("images/ginette_de_port_babette.png", '
                  '"La Princesse Ginette et le Grand Sauciériste d’Or."),')
@@ -47,6 +60,36 @@ def courir(labo: Path, commande: str) -> tuple[int, str]:
     r = subprocess.run(f"cd {labo} && {commande}", shell=True, capture_output=True, text=True)
     lignes = (r.stdout + r.stderr).strip().splitlines()
     return r.returncode, (lignes[-1] if lignes else "")
+
+
+def sortie(labo: Path, commande: str) -> tuple[int, str]:
+    """Comme `courir`, mais rend toute la sortie — utile pour relire une charge produite."""
+    r = subprocess.run(f"cd {labo} && {commande}", shell=True, capture_output=True, text=True)
+    return r.returncode, r.stdout + r.stderr
+
+
+def retoucher(labo: Path, relatif: str, zone: tuple[int, int, int, int]) -> None:
+    """Peint un rectangle noir sur une image : la plus petite retouche de rendu qui tienne.
+
+    Quelques pixels sur une planche de 3 Mio ne changent ni le nombre de pages d'un
+    PDF ni la population d'un canon — mais ils changent une charge sémantique, et
+    c'est précisément ce qu'on veut prouver : le sceau voit ce que les textes ne
+    voient pas.
+    """
+    script = ("import sys;from PIL import Image,ImageDraw;"
+              "p=sys.argv[1];z=tuple(int(v) for v in sys.argv[2:6]);"
+              "im=Image.open(p).convert('RGB');ImageDraw.Draw(im).rectangle(z,fill=(0,0,0));"
+              "im.save(p)")
+    x0, y0, x1, y1 = zone
+    r = subprocess.run(f'{PY} -c "{script}" {relatif} {x0} {y0} {x1} {y1}',
+                       shell=True, cwd=labo, capture_output=True, text=True)
+    assert r.returncode == 0, f"retouche impossible sur {relatif} : {r.stderr.strip()[:200]}"
+
+
+def regenerer_seulement(labo: Path, script: str) -> None:
+    """Régénère un artéfact sans retoucher l'empreinte : le contrat doit hurler."""
+    rc, dernier = courir(labo, f"{PY} sources/{script}")
+    assert rc == 0, f"{script} a échoué : {dernier[:200]}"
 
 
 def editer(labo: Path, relatif: str, old: str, new: str) -> None:
@@ -143,6 +186,18 @@ FAUTES: list[tuple[str, object, object]] = [
      lambda d: editer(d, "gouvernance/DIVERGENCES_CHRONIQUES.md",
                       '"grandeur":"bancs","valeurs":[3,42,82]',
                       '"grandeur":"bancs","valeurs":[3,42,83]'), vue_controles),
+    ("A2 · PNG de l'Atlas retouché (une région noyée d'encre), textes intacts",
+     lambda d: retoucher(d, "geographie/carte_royaume.png", (700, 900, 900, 980)),
+     vue_controles),
+    ("H1 · hymne rejoué sur une autre graine : même partition, même durée, même promesse",
+     lambda d: (editer(d, "sources/generate_hymne.py", "GRAINE = 1847", "GRAINE = 1848"),
+                regenerer_seulement(d, "generate_hymne.py")),
+     vue_controles),
+    ("J1 · photographie réaliste retouchée ET vignettes régénérées : seul le sceau des "
+     "vignettes a des yeux",
+     lambda d: (retoucher(d, "images/realistes/babber_ier_l_ancien.png", (40, 40, 260, 200)),
+                regenerer_seulement(d, "generate_vignettes.py")),
+     vue_controles),
 ]
 
 # Une divergence nouvelle que le registre déclare doit passer : c'est le contrat
@@ -153,6 +208,27 @@ def divergence_nouvelle_declares(labo: Path) -> None:
     editer(labo, "gouvernance/DIVERGENCES_CHRONIQUES.md",
            '"grandeur":"bancs","valeurs":[3,42,82]',
            '"grandeur":"bancs","valeurs":[3,42,43,82]')
+
+def ceremony_acceptation(labo: Path) -> None:
+    """L'autre moitié du contrat : une dérive de rendu se résout, elle ne se subit pas.
+
+    On régénère l'hymne sur une graine étrangère (un autre environnement de rendu,
+    simulé), on lit la charge que le contrôle a produite dans son message d'échec,
+    on l'accepte explicitement sous une étiquette — et la chaîne doit alors passer.
+    Si `--accepter` n'existait pas, ce scénario prouverait qu'il manque ; s'il
+    n'était qu'un `|| true` déguisé, il prouverait qu'il est inutile. Là, il prouve
+    ce qu'il est : une porte qui ne s'ouvre que de l'intérieur, et qui laisse une trace.
+    """
+    editer(labo, "sources/generate_hymne.py", "GRAINE = 1847", "GRAINE = 1849")
+    regenerer_seulement(labo, "generate_hymne.py")
+    rc, out = sortie(labo, f"{PY} sources/empreinte_hymne.py --check")
+    assert rc != 0, "le contrôle aurait dû refuser la charge inédite"
+    produites = [ligne.split(":", 1)[1].strip() for ligne in out.splitlines()
+                 if ligne.strip().startswith("produite")]
+    assert produites, f"aucune charge produite dans le diagnostic : {out[:300]}"
+    courir(labo, f"{PY} sources/empreinte_hymne.py --accepter "
+                 f"'{produites[0]}' batterie-environnement-etranger")
+
 
 # ── ce que la chaîne doit laisser passer ─────────────────────────────────────
 JUSTES: list[tuple[str, object]] = [
@@ -177,6 +253,8 @@ JUSTES: list[tuple[str, object]] = [
                 regenerer(d))),
     ("V3 · divergence nouvelle surgie ET déclarée au registre : la chaîne laisse passer",
      divergence_nouvelle_declares),
+    ("V4 · rendu d'un autre environnement OBSERVÉ puis ACCEPTÉ à la main : la chaîne laisse passer",
+     ceremony_acceptation),
 ]
 
 

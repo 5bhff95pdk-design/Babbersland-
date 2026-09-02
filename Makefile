@@ -7,7 +7,7 @@ VENV    ?= .venv
 PDF     := Royaume_du_Babberland_Encyclopedie_Consolidee_2026_I.pdf
 
 .DEFAULT_GOAL := tout
-.PHONY: env arbre carte hymne vignettes pdf empreinte controle scelle iconographie lfs batterie workflows tout propre
+.PHONY: env arbre carte hymne vignettes pdf empreinte empreinte-atlas empreinte-arbre empreinte-hymne empreinte-vignettes controle scelle iconographie lfs batterie workflows tout propre
 
 env: ## crée le venv et y épingle les dépendances (contournement PEP 668, constat E-11)
 	@test -x $(PY) || python3 -m venv $(VENV)
@@ -43,12 +43,19 @@ empreinte-atlas: ## grave l'empreinte sémantique de l'Atlas (SVG/PNG/HTML) — 
 empreinte-arbre: ## grave l'empreinte sémantique de l'Arbre (PNG) — acte d'assentiment, comme `empreinte`
 	$(PY) sources/empreinte_arbre.py --write
 
-workflows: ## installe le modèle de CI dans .github/workflows/ (à committer avec un jeton tenant « workflows »)
+empreinte-hymne: ## grave la charge sémantique de l'enregistrement de référence (R1.4.c)
+	$(PY) sources/empreinte_hymne.py --write
+
+empreinte-vignettes: ## grave la charge sémantique des vignettes du portail (R1.4.d)
+	$(PY) sources/empreinte_vignettes.py --write
+
+workflows: ## installe les deux modèles de CI dans .github/workflows/ (à committer avec un jeton tenant « workflows »)
 	@mkdir -p .github/workflows && cp sources/github_actions_continuite.yml .github/workflows/continuite.yml \
+	  && cp sources/github_actions_batterie.yml .github/workflows/batterie.yml \
 	  && rm -f .github/workflows/main.yml \
-	  && echo ".github/workflows/continuite.yml installé, talon main.yml retiré." \
-	  && echo "Pour l'activer (constat E-17/F-01 : une App ne peut pas pousser ce fichier) :" \
-	  && echo "    git add .github/workflows/continuite.yml && git commit -m 'CI : installation du workflow' && git push" \
+	  && echo ".github/workflows/continuite.yml et batterie.yml installés, talon main.yml retiré." \
+	  && echo "Pour les activer (constat E-17/F-01 : une App ne peut pas pousser ce fichier) :" \
+	  && echo "    git add .github/workflows && git commit -m 'CI : installation des workflows' && git push" \
 	  && echo "  ou, sans y toucher : github.com/settings/installations → Arena → Workflows : Read and write."
 
 lfs: ## R1.6 : prépare le passage des binaires lourds en Git LFS (variante A′ — gouvernance/LFS_MIGRATION.md)
@@ -70,7 +77,7 @@ scelle: ## vérifie le gel des archives G et H et des maîtres d'illustration (E
 	@sha256sum --check --quiet gouvernance/ICONOGRAPHIE.sha256 \
 	  && echo "maîtres d'illustration conformes au scellé ($$(grep -c . gouvernance/ICONOGRAPHIE.sha256) lignes)"
 
-controle: ## continuité, parité des données, chroniques, parité du portail, artéfact, fraîcheur, géographie, archives
+controle: ## continuité, parité des données, chroniques, portail, artéfact, fraîcheur, géographie, quatre sceaux d'artéfacts, archives
 	$(PY) -m py_compile sources/*.py
 	$(PY) sources/check_continuity.py
 	$(PY) sources/check_canon.py
@@ -81,13 +88,20 @@ controle: ## continuité, parité des données, chroniques, parité du portail, 
 	$(PY) sources/check_portal.py
 	$(PY) sources/empreinte_atlas.py --check
 	$(PY) sources/empreinte_arbre.py --check
+	$(PY) sources/empreinte_hymne.py --check
+	$(PY) sources/empreinte_vignettes.py --check
 	$(MAKE) --no-print-directory scelle
 
 # L'ordre est un contrôle, pas une commodité (constat E-21) : graver l'empreinte AVANT
 # de la vérifier rend `--check` infaillible par construction. `empreinte` reste donc
 # l'acte d'assentiment qui TERMINE la chaîne — jamais celui qui l'ouvre.
-# La batterie casse des COPIES du dépôt : la référence n'est jamais touchée.
-# Volontairement hors de `controle` et hors de la CI — elle coûte une minute et réécrit des scellés.
+# La batterie casse des COPIES du dépôt : la référence n'est jamais touchée — et le
+# workflow `batterie.yml` le vérifie (`git diff --quiet` après la course), au lieu de
+# le promettre. Volontairement hors de `controle` : elle coûte 2 min 26 s (mesure du
+# 1ᵉʳ sept. 2026, 24 scénarios) et réécrit
+# des scellés dans ses laboratoires. Elle court à HORAIRES en CI (lundi 03:17 UTC,
+# plus `workflow_dispatch`) — pas à chaque push, mais assez souvent pour qu'un
+# contrôle émasculé ne survive pas une semaine (classe de défaut C-01).
 batterie: env
 	$(PY) sources/test_mutations.py
 
