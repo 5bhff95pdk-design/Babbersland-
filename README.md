@@ -6,7 +6,7 @@ Archives narratives et iconographiques du Royaume du Babberland.
 
 ## Référence officielle actuelle
 
-1. **`Royaume_du_Babberland_Encyclopedie_Consolidee_2026_I.pdf`** — encyclopédie illustrée consolidée et référence canonique autonome (24 illustrations après la campagne 2026-II).
+1. **`Royaume_du_Babberland_Encyclopedie_Consolidee_2026_I.pdf`** — encyclopédie illustrée consolidée et référence canonique autonome (24 illustrations après la campagne 2026-II). **Ce fichier n'est plus suivi par le dépôt** (nettoiement du 2 septembre 2026) : il est régit par la règle `pdf:` du Makefile, contrôlé par son empreinte sémantique `gouvernance/pdf_fingerprint.txt`, et son exemplaire de référence est publié en pièce jointe de la Release. C'est le volume 2 (ci-dessous) qui fait foi.
 2. **`ENCYCLOPEDIE_CONSOLIDEE_2026_I.md`** — source éditoriale du volume 2026-I ; **c'est elle qui fait foi**, y compris sur la liste des illustrations que le PDF doit montrer.
 3. **`CHRONOLOGIE_MAITRESSE_1847_2026.md`** — registre chronologique détaillé, avec règnes, sources et contrôles de continuité.
 4. **`images/`** — portraits, numismatique et arbre généalogique illustré : **28 maîtres scellés** par `ICONOGRAPHIE.sha256`, dont **24 entrent dans le volume 2026-I** ; les 4 planches de chantier des chroniques restent hors volume par statut (voir « Ce que la chaîne vérifie »).
@@ -19,9 +19,9 @@ L'édition **2026-I** intègre directement les corrections et ne nécessite aucu
 
 | Document | Objet |
 |---|---|
-| `RAPPORT_DE_REVISION_2026_I.md` | Révision générale du 27 août 2026 (RR-2026-I-01) : réserve E-01 levée, contrôles étendus |
-| `RAPPORT_ANALYSE_2026_II.md` | Audit technique, éditorial et documentaire (RA-2026-II-01) : constats E-07 à E-16, mesures reproductibles |
-| `RAPPORT_DE_CONTRE_EXPERTISE_2026_III.md` | Contre-expertise RC-2026-III-01 : mutations rejouées (E-18 à E-28) ; lot C0 appliqué le 29 août, suivi d'exécution en §6 |
+| `docs/clos/RAPPORT_DE_REVISION_2026_I.md` | Révision générale du 27 août 2026 (RR-2026-I-01) : réserve E-01 levée, contrôles étendus |
+| `docs/clos/RAPPORT_ANALYSE_2026_II.md` | Audit technique, éditorial et documentaire (RA-2026-II-01) : constats E-07 à E-16, mesures reproductibles |
+| `docs/clos/RAPPORT_DE_CONTRE_EXPERTISE_2026_III.md` | Contre-expertise RC-2026-III-01 : mutations rejouées (E-18 à E-28) ; lot C0 appliqué le 29 août, suivi d'exécution en §6 |
 | `ROADMAP_2026_II.md` | Feuille de route en quatre horizons, 28 tickets, risques et indicateurs |
 | `gouvernance/LIVRE_VIII_INSTITUTIONS.md` | Proposition Livre VIII (R2.1) : Les 5 corps d'État, gardiens du caillé, police de la sieste |
 | `gouvernance/REGISTRE_DES_AVIS_ROYAUX.md` | Registre officiel des Avis royaux (R2.2) : restauration des décrets n° 1 à 4 et suite, jusqu'à l'**Avis n° 10** (2 sept. 2026, clôture des lacunes : sept silences jurés, une fixation) |

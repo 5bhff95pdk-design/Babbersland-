@@ -4,6 +4,8 @@
 
 PY      ?= .venv/bin/python
 VENV    ?= .venv
+# Le PDF est un LIVRÉ, non une source : hors du dépôt depuis le nettoiement du 2 sept. 2026,
+# régit par la règle `$(PDF): ENCYCLOPEDIE…` ci-dessous, contrôlé par empreinte, publié en Release.
 PDF     := Royaume_du_Babberland_Encyclopedie_Consolidee_2026_I.pdf
 
 .DEFAULT_GOAL := tout
@@ -97,7 +99,14 @@ scelle: ## gel des archives G et H, des maîtres, de la galerie (R1.9) + parité
 	  && echo "workflows installés fidèles à leurs modèles (2 comparaisons octet à octet)" \
 	  || (echo "workflow installé désaligné de son modèle : relancer « make workflows » et committer (R1.8)" && exit 1)
 
-controle: ## continuité, silences (R2.7), parité des données, chroniques, portail, artéfact, fraîcheur, manifeste (R1.3), géographie, quatre sceaux d'artéfacts, archives
+# Le PDF est désormais une DÉPENDANCE de `controle` et non plus un fichier qui traîne
+# dans le dépôt : depuis le nettoiement du 2 septembre 2026, le livré n'est plus suivi
+# (`.gitignore`), donc un clone neuf ne le contient pas. La règle `$(PDF): …` le
+# régénère ici, exactement comme le fait la CI — le contrat de fraîcheur ne change pas,
+# seul le mode d'obtention change. Sans ce lien, `make controle` échouait sur un clone
+# propre (FileNotFoundError dans check_pdf.py) — mesure du 2 sept. 2026.
+controle: $(PDF) ## continuité, silences (R2.7), parité des données, chroniques, portail, artéfact, fraîcheur, manifeste (R1.3), géographie, quatre sceaux d'artéfacts, archives
+	@test -x $(PY) || { echo "Le venv est absent : lancer « make env » d'abord (constat E-11)."; exit 1; }
 	$(PY) -m py_compile sources/*.py
 	$(PY) sources/check_continuity.py
 	$(PY) sources/check_silences.py

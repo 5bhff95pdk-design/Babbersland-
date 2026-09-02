@@ -1,7 +1,7 @@
 # 🗺️ ROADMAP ÉDITORIALE ET TECHNIQUE — ROYAUME DU BABBERLAND
 
 **Référence** : RM-2026-II · Feuille de route en quatre horizons
-**Établie le** : 27 août 2026, en complément de `RAPPORT_ANALYSE_2026_II.md` (RA-2026-II-01)
+**Établie le** : 27 août 2026, en complément de `docs/clos/RAPPORT_ANALYSE_2026_II.md` (RA-2026-II-01)
 **Hypothèse de cadence** : une session d'agent ou une séance d'atelier par livrable, soit ≈ 1 ticket de l'horizon 0 par jour, ≈ 1 horizon 2 « livre » par semaine
 **Convention de priorité** : `P1` bloque la crédibilité du volume publié · `P2` bloque l'industrialisation · `P3` enrichit le canon · `P4` diffuse
 
