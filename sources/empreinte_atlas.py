@@ -131,6 +131,20 @@ def charge_courante() -> str | None:
             f"|{rendu}")
 
 
+def grille_quantifiee() -> str:
+    """Grille 16×16 du rendu, lisible : c\'est elle qui distingue un bruit d\'une retouche.
+
+    Repris tel quel de l\'Arbre (R1.4.b), où il a déjà prouvé son usage : la divergence
+    se **mesure** (combien de cellules, de combien de niveaux) au lieu de se deviner.
+    ~2,3 ko : tient dans une annotation de check-run, seul canal lisible ici.
+    """
+    if not HAS_PIL or not PNG.is_file():
+        return "indisponible"
+    data = Image.open(PNG).convert("RGB").resize((16, 16), Image.BOX).tobytes()
+    return ",".join(f"{data[i] // 16}.{data[i + 1] // 16}.{data[i + 2] // 16}"
+                    for i in range(0, len(data), 3))
+
+
 def diagnostic() -> str:
     parts = [f"SVG {sha256(SVG)[:12]}… {len(SVG.read_bytes()):,} o" if SVG.is_file() else "SVG absent",
              f"HTML {sha256(HTML)[:12]}… {len(HTML.read_bytes()):,} o" if HTML.is_file() else "HTML absent"]
@@ -138,6 +152,7 @@ def diagnostic() -> str:
         parts.append(f"PNG {sha256(PNG)[:12]}… {len(PNG.read_bytes()):,} o")
     payload = svg_payload()
     parts.append(f"payload SVG (extrait) : {payload[:700]}")
+    parts.append(f"grille={grille_quantifiee()}")
     return " ; ".join(parts)
 
 
