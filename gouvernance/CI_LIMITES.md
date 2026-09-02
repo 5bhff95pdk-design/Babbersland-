@@ -1,21 +1,23 @@
 # 🔧 Limites connues de la CI de continuité
 
 **Référence** : CI-2026-I · diagnostic des étapes en `continue-on-error: true`
-**Établi le** : 1ᵉʳ septembre 2026 · **dernier état** : 1ᵉʳ septembre 2026 (R1.8 et R1.9 livrés à la suite de R1.4)
-**Ticket de durcissement** : R1.4 (sous-tickets R1.4.a à R1.4.h) — **les huit sont livrés** ; les deux bornes nées en route (R1.8, R1.9) le sont aussi
+**Établi le** : 1ᵉʳ septembre 2026 · **dernier état** : 1ᵉʳ septembre 2026 (R1.3 — manifeste des livrables — ajouté à la CI, après R1.4, R1.8 et R1.9)
+**Ticket de durcissement** : R1.4 (sous-tickets R1.4.a à R1.4.h) — **les huit sont livrés** ; les bornes nées en route (R1.8, R1.9) le sont aussi, et R1.3 (manifeste des livrables) a rejoint la chaîne
 
 **État mesuré le 1ᵉʳ septembre 2026, tard en soirée** : `sources/github_actions_continuite.yml` compte
-**19 étapes** (17 nommées + `actions/checkout` + `actions/setup-python`), **0** portant
-`continue-on-error`. La 19ᵉ est la **parité modèle ↔ workflow installé** (R1.8) ; le gel
-en tête de chaîne couvre désormais aussi `gouvernance/GALERIE.sha256` (R1.9). Le compte
-est pris au parseur YAML, pas au grep : une étape tolérante de trop dans ce document
-coûterait moins cher qu'une étape tolérante de trop dans le workflow.
+**20 étapes** (18 nommées + `actions/checkout` + `actions/setup-python`), **0** portant
+`continue-on-error`. Le **manifeste des livrables** (R1.3, `check_manifest.py --check`) a
+rejoint la chaîne entre le gel en tête et la parité modèle ↔ workflow installé (R1.8) ; la
+**parité** reste d'actualité, simplement précédée de cette nouvelle vérification. Le gel en tête
+couvre, lui, aussi `gouvernance/GALERIE.sha256` (R1.9). Le compte est pris au parseur YAML, pas
+au grep : une étape tolérante de trop dans ce document coûterait moins cher qu'une étape
+tolérante de trop dans le workflow.
 
 ---
 
 ## Contexte
 
-La CI de continuité (`.github/workflows/continuite.yml`, 18 étapes) est **active et verte** depuis le 1ᵉʳ septembre 2026 (PR #22, livraison R0.4).
+La CI de continuité (`.github/workflows/continuite.yml`) est **active et verte** depuis le 1ᵉʳ septembre 2026 (PR #22, livraison R0.4, 18 étapes à l'époque). Elle en compte **20** depuis R1.3 (manifeste des livrables).
 
 **Historique du comptage** (le constat C-03 de RA-2026-IV-01 mérite sa ligne, parce que
 le débat des « 6 contre 7 » a déjà coûté une PR) : ce document parlait de « 22
@@ -423,4 +425,4 @@ La situation est analogue à un wiki : on ne « gèle » pas un export PDF en v�
 *Document établi à Pabst City, le 1ᵉʳ septembre 2026, par l'agent Arena.ai (session `arena/01a05e26-babbersland`).*  
 *Statut R1.4.b ajouté le même jour (session `arena/01a05f15-babbersland`) : l'Arbre est durci et bloquant via empreinte sémantique tolérante.*  
 *Statuts R1.4.a-v3 et R1.4.c–g ajoutés le 1ᵉʳ septembre 2026 (session `arena/01a05f55-babbersland`) : les sept artéfacts régénérés ont un contrat sémantique en variantes acceptées, la CI les appelle tous, et **plus aucune étape n'est tolérante**. La batterie de mutations, elle, a trouvé un horaire : workflow `batterie.yml`.*  
-*Statuts R1.8 et R1.9 ajoutés le 1ᵉʳ septembre 2026 (session `arena/01a05f96-babbersland`) : les deux bornes nées de la vague R1.4 sont fermées — la galerie photoréaliste est scellée (`GALERIE.sha256`, 77 lignes, vérifiée en tête de chaîne) et la parité modèle ↔ workflow installé est une étape bloquante (19ᵉ du workflow). Batterie portée à **27 scénarios** (J1bis, W1), chacun jugé par le seul mécanisme qu'il prouve.*
+*Statuts R1.8 et R1.9 ajoutés le 1ᵉʳ septembre 2026 (session `arena/01a05f96-babbersland`) : les deux bornes nées de la vague R1.4 sont fermées — la galerie photoréaliste est scellée (`GALERIE.sha256`, 77 lignes, vérifiée en tête de chaîne) et la parité modèle ↔ workflow installé est une étape bloquante (19ᵉ du workflow). Batterie portée à **27 scénarios** (J1bis, W1), chacun jugé par le seul mécanisme qu'il prouve.*  \n*Statut R1.3 ajouté le 1ᵉʳ septembre 2026 (session `arena/01a05fce-babbersland`) : le manifeste des livrables (`gouvernance/MANIFEST.sha256`, `make manifest`, `check_manifest.py --check`) scelle les octets du corpus canonique livré — 2026-I, la chronologie maîtresse et la source vectorielle de l'arbre — que rien ne scellait ; le PDF et les images restent délégués à leurs contrats sémantiques et à `ICONOGRAPHIE`/`GALERIE`. Étape CI bloquante dédiée ; le workflow passe de 19 à **20 étapes, 0 tolérante.***
