@@ -35,7 +35,7 @@ hymne_variante_reference-locale = frames:1598625|rate:22050|bits:16|chan:1|profi
 
 # === VIGNETTES DU PORTAIL ===
 # Signé par sources/empreinte_vignettes.py — modèle « variantes acceptées » (R1.4.d).
-# Les 77 vignettes WebP sont DÉRIVÉES de images/realistes/*.png : leurs octets
+# Les 81 vignettes WebP sont DÉRIVÉES de images/realistes/*.png : leurs octets
 # dépendent de libwebp (version, options SIMD), pas du canon. On compare donc le
 # contenu décodé :
 #   nb       : le nombre de vignettes (une promesse du diffuseur, pas un comptage)
@@ -46,8 +46,8 @@ hymne_variante_reference-locale = frames:1598625|rate:22050|bits:16|chan:1|profi
 # Une vignette périmée ou recadrée change `grilles` ; un ré-encodage équivalent
 # ne le change pas. Nouvelle machine légitime ? Lire l'annotation CI, puis
 # `python sources/empreinte_vignettes.py --accepter '<charge>' <étiquette>`.
-vignettes_lot = 1b1432814ddeb5849487dca3a2df0f4b3c07f9d9eeec83c247d3a4921d4b59fc
-vignettes_variante_reference-locale = nb:77|largeur:640|grilles:b0bb7402eac27fb3ed6313b7561955d2
+vignettes_lot = 390381a2b55d64325438097f3b89b16c9ab04c14de90bced52716d20f1478ae7
+vignettes_variante_reference-locale = nb:81|largeur:640|grilles:9834f69316092e7bc30471226cb9fd46
 
 # === ATLAS GÉOGRAPHIQUE ===
 # Signé par sources/empreinte_atlas.py — modèle « variantes acceptées » (R1.4.a-v3).

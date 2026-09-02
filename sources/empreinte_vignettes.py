@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Empreinte sémantique des vignettes WebP du portail (R1.4.d).
 
-Le portail `index.html` sert 77 vignettes dérivées de `images/realistes/*.png` par
+Le portail `index.html` sert 81 vignettes dérivées de `images/realistes/*.png` par
 `sources/generate_vignettes.py`. Tant que la CI les comparait **octet à octet**
 (`git diff --exit-code`), deux défauts cohabitaient :
 
@@ -14,7 +14,7 @@ Le portail `index.html` sert 77 vignettes dérivées de `images/realistes/*.png`
 
 La charge compare donc le **contenu décodé**, et non le conteneur :
 
-- `nb` / `largeur` : la promesse du diffuseur (77 clichés, 640 px de large) ;
+- `nb` / `largeur` : la promesse du diffuseur (81 clichés, 640 px de large) ;
 - `grilles` : pour chaque vignette, la grille 8×8 moyennée (BOX) et quantifiée sur
   16 niveaux, identifiée par son nom de fichier ; l'ensemble trié est haché.
   Une vignette périmée, absente, de travers ou recadrée change ce haché ; un
@@ -23,7 +23,7 @@ Le **poids total** du lot (4,6 Mio au Kio) est imprimé au diagnostic mais n'ent
 dans la charge : un encodeur qui change la taille des fichiers sans changer l'image ne doit
 pas ouvrir une cérémonie d'acceptation. Ce qui se contracte est ce qui se voit.
 
-Le diagnostic de divergence **imprime les 77 grilles** : c'est peu (≈ 800 octets),
+Le diagnostic de divergence **imprime les 81 grilles** : c'est peu (≈ 800 octets),
 ça tient dans une annotation de check-run, et cela permet de comparer deux
 environnements sans accès aux journaux d'étape.
 
@@ -54,7 +54,7 @@ VIGNETTES = ROOT / "images" / "vignettes"
 
 ENTETE = (
     "# Signé par sources/empreinte_vignettes.py — modèle « variantes acceptées » (R1.4.d).\n"
-    "# Les 77 vignettes WebP sont DÉRIVÉES de images/realistes/*.png : leurs octets\n"
+    "# Les 81 vignettes WebP sont DÉRIVÉES de images/realistes/*.png : leurs octets\n"
     "# dépendent de libwebp (version, options SIMD), pas du canon. On compare donc le\n"
     "# contenu décodé :\n"
     "#   nb       : le nombre de vignettes (une promesse du diffuseur, pas un comptage)\n"
