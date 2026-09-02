@@ -9,7 +9,7 @@ Archives narratives et iconographiques du Royaume du Babberland.
 1. **`Royaume_du_Babberland_Encyclopedie_Consolidee_2026_I.pdf`** — encyclopédie illustrée consolidée et référence canonique autonome (24 illustrations après la campagne 2026-II).
 2. **`ENCYCLOPEDIE_CONSOLIDEE_2026_I.md`** — source éditoriale du volume 2026-I ; **c'est elle qui fait foi**, y compris sur la liste des illustrations que le PDF doit montrer.
 3. **`CHRONOLOGIE_MAITRESSE_1847_2026.md`** — registre chronologique détaillé, avec règnes, sources et contrôles de continuité.
-4. **`images/`** — portraits, numismatique et arbre généalogique illustré (28 maîtres du volume 2026-I).
+4. **`images/`** — portraits, numismatique et arbre généalogique illustré : **28 maîtres scellés** par `ICONOGRAPHIE.sha256`, dont **24 entrent dans le volume 2026-I** ; les 4 planches de chantier des chroniques restent hors volume par statut (voir « Ce que la chaîne vérifie »).
 5. **`images/realistes/`** — galerie photoréaliste du portail (83 clichés, dont les 18 figures du canon) ; hors PDF tant qu'un Avis ne les y fait pas entrer.
 6. **`geographie/`** — atlas temporel (proposé, non décrété) : analyse, roadmap, carte SVG/PNG, page `index.html`.
 
@@ -24,7 +24,8 @@ L'édition **2026-I** intègre directement les corrections et ne nécessite aucu
 | `RAPPORT_DE_CONTRE_EXPERTISE_2026_III.md` | Contre-expertise RC-2026-III-01 : mutations rejouées (E-18 à E-28) ; lot C0 appliqué le 29 août, suivi d'exécution en §6 |
 | `ROADMAP_2026_II.md` | Feuille de route en quatre horizons, 28 tickets, risques et indicateurs |
 | `gouvernance/LIVRE_VIII_INSTITUTIONS.md` | Proposition Livre VIII (R2.1) : Les 5 corps d'État, gardiens du caillé, police de la sieste |
-| `gouvernance/REGISTRE_DES_AVIS_ROYAUX.md` | Registre officiel des Avis royaux (R2.2) : restauration des décrets n° 1 à 4 et suite |
+| `gouvernance/REGISTRE_DES_AVIS_ROYAUX.md` | Registre officiel des Avis royaux (R2.2) : restauration des décrets n° 1 à 4 et suite, jusqu'à l'**Avis n° 9** (2 sept. 2026, transport LFS des images lourdes) |
+| `gouvernance/LFS_MIGRATION.md` | Runbook R1.6 du passage en Git LFS — **variante A′ décrétée** par l'Avis n° 9, réécriture de l'historique écartée ; exécution en attente d'une machine ayant accès au CDN GitHub |
 | `gouvernance/CODE_DE_LA_FRAICHEUR_ET_PARITE_POUTINE.md` | Code de la Fraîcheur (R2.4), Parité Poutine chiffrée (R2.3) et calendrier national (R2.5) |
 | `gouvernance/GUIDE_GASTRONOMIQUE_ET_JEUX_LENTS.md` | Guide des 3 Spatules royales, Jeux Lents de Pabst City, bestiaire national et marine |
 | `gouvernance/REGISTRE_DES_PERSONNAGES.md` | Registre d'autorité des 18 personnages historiques du canon (R2.9) |
@@ -35,7 +36,7 @@ L'édition **2026-I** intègre directement les corrections et ne nécessite aucu
 | `gouvernance/ICONOGRAPHIE.sha256` | Scellés des 28 maîtres d'illustration, par leur nom (E-18) |
 | `gouvernance/MANIFEST.sha256` | **R1.3** : manifeste des livrables canoniques — octets du texte qui fait foi (2026-I), de la chronologie et de la source vectorielle de l'arbre. Le PDF et les images restent délégués à leurs propres contrats (`pdf_fingerprint.txt`, `ICONOGRAPHIE`, `GALERIE`). Gravé par `make manifest`, vérifié par `sources/check_manifest.py --check` (CI bloquante) |
 | `gouvernance/CI_LIMITES.md` | Journal des limites de la CI de continuité : R1.4.a à R1.4.h **tous livrés** — 18 étapes à la clôture de R1.4, **aucune** en `continue-on-error` ; causes, mesures et ceremony d'acceptation y restent écrites |
-| `.github/workflows/continuite.yml` | **CI active, entièrement bloquante** : 20 étapes à chaque push sur `main`, à chaque PR et à la demande (`workflow_dispatch`) — les 18 de R1.4 (première exécution verte : 2026-09-01T21:46:19Z), plus la parité modèle ↔ installé (R1.8), le gel élargi à la galerie (R1.9) et le manifeste des livrables (R1.3) |
+| `.github/workflows/continuite.yml` | **CI active, entièrement bloquante** : **20 étapes** (18 nommées + `actions/checkout` + `actions/setup-python`, compte pris au parseur YAML — cf. `CI_LIMITES.md`) à chaque push sur `main`, à chaque PR et à la demande (`workflow_dispatch`) — les 18 de la clôture R1.4 (première exécution verte : 2026-09-01T21:46:19Z), enrichies de la parité modèle ↔ installé (R1.8), du gel élargi à la galerie (R1.9) et du manifeste des livrables (R1.3) |
 | `.github/workflows/batterie.yml` | **Batterie de mutations à horaires** : lundi 03:17 UTC + exécution manuelle. Vingt-quatre scénarios sur copies isolées (19 fautes à refuser, 5 éditions légitimes à accepter), puis preuve que l'arbre de référence est resté intact. C'est le contrôle du contrôle |
 | `canon/` + `propositions_declarées` | Données structurées (R3.3) sous contrat de parité : une affirmation est attestée par le corpus ou déclarée comme proposition |
 | `gouvernance/pdf_fingerprint.txt` | Empreinte sémantique du PDF canonique — le contrat de fraîcheur de l'artefact |
@@ -51,8 +52,8 @@ L'édition **2026-I** intègre directement les corrections et ne nécessite aucu
 - `chroniques/LIVRE_II_LES_BATISSEURS.md` — *Livre II : Les Bâtisseurs (1889–1914)*, sous-titré *Le Silence et l'Aqueduc* : **édition fusionnée unique** de la régence de Babette Ire, du refus de l'ordinal II, du chantier du Double Aqueduc, de la naissance du port, du Jour de l'Eau et de la succession de François-Babber au Dormeur. Sept tranches, **quarante-deux bancs**, premier coup de pelle au printemps 1893 et mise en service officielle le 12 octobre 1904. Même statut **proposé, non décrété** ; les lacunes volontaires du canon (filiation de Babette-Marine, naissance de Roger Bontemps, valeur chiffrée de la Parité Poutine) y sont gardées ouvertes et déclarées comme telles. Les quatre planches de chantier sont rattachées à cette édition dans son `Annexe C`.
 - `chroniques/LIVRE_III_LAGE_HORIZONTAL.md` — *Livre III : L'Âge horizontal (1914–1959)* : le long règne de Babber le Dormeur, les audiences en hamac, l'Article 1 et l'Article 4.
 - `chroniques/LIVRE_IV_LERE_BALNEAIRE.md` — *Livre IV : L'Ère balnéaire (1959–1998)* : le règne de Babber II, les Monts Froissés, l'ouverture de McBabber's en 1986 et le Babbersgate de 1991.
-- `chroniques/LIVRE_V_LUNION_DES_REGNES.md` — *Livre V : L'Union des Règnes (1998–2010)* : les jumeaux Honoré-Pabst et Henri-Grain, la crise thermique du Pabstgate de 2004, la Guerre des Cornichons arbitrée par le Déchiré, et l'avènement de Babber Ier le Louche. Même statut **proposé, non décrété**.
-- `chroniques/LIVRE_VI_LE_SIECLE_QUI_LOUCHE.md` — *Livre VI : Le Siècle qui Louche (2010–2026)* : le fauteuil retrouvé, la victoire du vrai caillé, la Série B en chanvre pur, le Sommet Pabst-Ketchup, l'avènement de Ti-Babber (Génération VII) et la Nuit des Sept Mille. Même statut **proposé, non décrété**.
+- `chroniques/LIVRE_V_LUNION_DES_REGNES.md` — *Livre V : L'Union des Règnes (1998–2010)*, sous-titré *Deux plumes, un fauteuil vide* : les jumeaux Honoré-Pabst et Henri-Grain, la règle des jours pairs et impairs, la crise thermique du Pabstgate de 2004, la Guerre des Cornichons arbitrée par le Déchiré, et l'avènement de Babber Ier le Louche. **Édition développée du 2 septembre 2026** : sept tranches portées au standard du corpus (194 → 611 lignes), annexe des cotes complétée. Le rappel de continuité en tête du volume tient la règle du canon — avant le 2 janvier 2010, le Louche est *prince*, jamais roi régnant. Même statut **proposé, non décrété** ; les lacunes volontaires (naissance de Roger Bontemps, chaîne collatérale exacte du Déchiré, valeur chiffrée de la Parité Poutine) y sont gardées ouvertes et déclarées.
+- `chroniques/LIVRE_VI_LE_SIECLE_QUI_LOUCHE.md` — *Livre VI : Le Siècle qui Louche (2010–2026)*, sous-titré *Le fauteuil, le caillé, le chanvre et l'enfant* : le fauteuil retrouvé, le fromage timide et le Label de 2018, la Série A puis la Série B en chanvre pur, la transmission de la Sauce, le Sommet Pabst-Ketchup, la naissance de Ti-Babber (Génération VII) et la Nuit des Sept Mille. **Édition développée du 2 septembre 2026** : sept tranches portées au standard du corpus (171 → 517 lignes), annexe des cotes complétée, et **quatre écarts au canon corrigés** (le faux fromage était un fromage timide, non du plastique ; la Série B est de 2026 et non la Série A ; un seul burger reçut deux cornichons, non les sept mille ; le rocking-chair fut rendu après deux jours). Le rappel de continuité en tête tient l'Avis royal n° 5 — le chiffre VII marque la **génération**, jamais un règne. Même statut **proposé, non décrété**.
 
 ## Documents archivés
 
@@ -152,7 +153,7 @@ make workflows    # sources/github_actions_continuite.yml → .github/workflows/
                   # et retire au passage le talon invalide main.yml
 ```
 
-**20 étapes**, YAML validé au parseur, chacune rejouée localement : polices, dépendances,
+**20 étapes** (18 nommées + `checkout` + `setup-python`), YAML validé au parseur, chacune rejouée localement : polices, dépendances,
 compilation, **gel des archives, des maîtres et de la galerie** (placé avant toute régénération,
 R1.4.h + R1.9), **manifeste des livrables** (R1.3), **parité modèle ↔ workflow installé** (R1.8),
 continuité, parité des données, parité du portail, **chroniques**, atlas, arbre,
@@ -180,8 +181,9 @@ question, et `make workflows` la règle dans le sens du modèle.
 **Statut au 1ᵉʳ septembre 2026** : le droit `workflows` a été accordé à l'installation de l'App
 `arena-ai-coding-agent`, et la PR #22 a installé le workflow sur `main` (commit `9f527f3`).
 La CI est **active et verte** sur la branche principale, **20 étapes bloquantes sur 20**
-(les 18 de R1.4, plus la parité modèle ↔ installé de R1.8, le gel élargi à la galerie de
-R1.9 et le manifeste des livrables de R1.3). La
+(18 nommées + `actions/checkout` + `actions/setup-python` ; les 18 nommées couvrent la clôture
+R1.4, la parité modèle ↔ installé de R1.8, le gel élargi à la galerie de R1.9 et le manifeste
+des livrables de R1.3 — ces trois derniers sont *parmi* les 18 nommées, non en sus). La
 limitation qui fermait le volume (six étapes tolérantes, parce que les régénérations binaires
 ne sont pas reproductibles au bit près entre machines) est levée par R1.4.a-v3 et R1.4.c–g :
 le contrat n'est plus l'égalité des octets mais la charge sémantique. Ce qui reste connu et

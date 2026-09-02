@@ -40,10 +40,30 @@ C'est exactement la classe de dérive « en retard d'une campagne » que la cont
 
 ---
 
-### 🟥 C2 — 119 Mio d'images + 23 Mio de PDF committés dans git
+### ⚖️ C2 — Images et PDF lourds dans git — **DÉCRÉTÉ le 2 septembre 2026 (Avis royal n° 9)**
 **Gravité : haute. Impact : taille du clone, CI, sauvegardes.**
 
-`images/` pèse **119 Mio** (dont les `realistes/`), et deux PDF (~7,3 + ~15,6 Mio) sont versionnés. À chaque push, la CI ré-installe et régénère ; un clone pèse plus de 140 Mio. GitHub recommande de ne pas dépasser ~100 Mio par dépôt.
+> **Arbitrage rendu.** Variante **A′** retenue (`images/realistes/`, `images/vignettes/`,
+> `audio/` en LFS, ≈ 236 Mio) ; **Option B écartée** — la réécriture de l'historique briserait
+> tout clone et toute branche, et le passé du Royaume ne se réécrit pas (dans la ligne de
+> l'Avis n° 6). Aucun plafond de poids institué. **Exécution en attente** d'une machine ayant
+> accès au CDN GitHub : `github-cloud.s3.amazonaws.com` et `uploads.github.com` restent
+> inaccessibles depuis l'environnement d'agent (mesure reconduite le 2 sept.), et poser les
+> filtres LFS sans pouvoir téléverser produirait des pointeurs orphelins.
+> Voir `gouvernance/LFS_MIGRATION.md` § 5.
+
+*Mesures corrigées le 2 septembre 2026* — le chiffre de 119 Mio de la rédaction initiale était
+sous-évalué de presque trois fois :
+
+| Corpus | Fichiers | Poids |
+|---|---|---|
+| `images/realistes/` | 83 | **227 Mio** |
+| `images/*.png` (maîtres) | 28 | **75 Mio** |
+| `*.pdf` | 2 | **22 Mio** |
+| `images/vignettes/` + `audio/` | 86 | **8,7 Mio** |
+| **Total hors `.git`** | | **334 Mio** — et le magasin `.git` en pèse **329** |
+
+GitHub recommande de ne pas dépasser ~100 Mio par dépôt : on en est à plus du triple.
 
 **Actions proposées**
 - Adopter **Git LFS** pour `*.png`, `*.pdf`, `*.svg`, `audio/*.wav` (`.gitattributes` étend déjà la catégorie binaire). L'empreinte sémantique rend le suivi des dérivés **plus robuste** que le suivi binaire, donc Git LFS n'affaiblit pas le contrat de fraîcheur.
@@ -51,10 +71,18 @@ C'est exactement la classe de dérive « en retard d'une campagne » que la cont
 
 ---
 
-### 🟨 C3 — La CI n'est pas installée (`.github/` absent)
-**Gravité : moyenne. Impact : les contrôles ne tournent qu'en local.**
+### ✅ C3 — La CI n'est pas installée (`.github/` absent) — **RÉSOLU le 1ᵉʳ septembre 2026**
+**Gravité à l'époque : moyenne. Impact : les contrôles ne tournaient qu'en local.**
 
-Le gabarit `sources/github_actions_continuite.yml` (13 étapes) est excellent, mais `.github/workflows/continuite.yml` n'existe pas dans l'arbre de travail (constat déjà documenté **E-17**) : l'installation exige un jeton doté du droit `workflows`, hors de portée d'une App. Tant qu'aucun humain ne l'installe, la validation ne s'exécute qu'à la main (`make controle`).
+> **Constat clos.** Le droit `workflows` a été accordé à l'installation de l'App, la PR #22 a
+> installé `.github/workflows/continuite.yml` sur `main` (commit `9f527f3`), et la CI est
+> **active, verte, 20 étapes bloquantes sur 20** (18 nommées + `checkout` + `setup-python` ;
+> première exécution verte : 2026-09-01T21:46:19Z). `batterie.yml` est installé également.
+> R1.8 vérifie désormais que les workflows installés sont l'octet de leurs modèles.
+> **Le texte ci-dessous est conservé comme mémoire de l'instruction ; il ne décrit plus l'état
+> du dépôt.**
+
+~~Le gabarit `sources/github_actions_continuite.yml` (13 étapes) est excellent, mais `.github/workflows/continuite.yml` n'existe pas dans l'arbre de travail (constat déjà documenté **E-17**) : l'installation exige un jeton doté du droit `workflows`, hors de portée d'une App. Tant qu'aucun humain ne l'installe, la validation ne s'exécute qu'à la main (`make controle`).~~
 
 **Actions proposées**
 - Instruire l'installation par un humain ayant le droit `workflows` (`make workflows` puis commit du fichier), et le consigner à l'Avis.
@@ -106,11 +134,13 @@ Le convertisseur (1 ฿ = 24 bt) affiche `poutines = bt / 23` et `canettes = bt`
 
 ## 3. Tableau récapitulatif
 
-| # | Constat | Gravité | Effort | Effet |
-|---|---|---|---|---|
-| C1 | Portail `index.html` hors contrôle, dates en dérive | Haute | ~30 min (contrôle) | Le portail cesse d'être une zone aveugle du canon |
-| C2 | 119 Mio d'images + PDF dans git | Haute | moyen (Git LFS) | Clone/CI/sauvegardes allégés |
-| C3 | CI non installée (`.github/` absent) | Moyenne | humain requis | Les contrôles tournent enfin en continu |
+*État au 2 septembre 2026 — la colonne « Statut » est tenue à jour ; les constats clos le disent.*
+
+| # | Constat | Gravité | Effort | Effet | Statut |
+|---|---|---|---|---|---|
+| C1 | Portail `index.html` hors contrôle, dates en dérive | Haute | ~30 min (contrôle) | Le portail cesse d'être une zone aveugle du canon | ✅ **clos** — `check_portal.py` en CI |
+| C2 | Images + PDF lourds dans git (**334 Mio** hors `.git` au 2 sept.) | Haute | moyen (Git LFS) | Clone/CI/sauvegardes allégés | ⚖️ **décrété** — Avis n° 9 : variante A′, réécriture d'historique écartée ; exécution en attente d'une machine avec accès au CDN |
+| C3 | CI non installée (`.github/` absent) | Moyenne | humain requis | Les contrôles tournent enfin en continu | ✅ **clos** le 1ᵉʳ sept. — 20 étapes bloquantes, vertes |
 | C4 | Dictionnaire du portail dupliqué à la main | Moyenne | ~2 h (génération) | Supprime la duplication source de C1 |
 | C5 | Convertisseur monétaire : logique floue en UX | Faible | < 30 min | Clarté pour le visiteur |
 | C6 | Générateur de l'arbre condensé | Faible | ~1 h | Maintenabilité |
@@ -132,8 +162,15 @@ Le convertisseur (1 ฿ = 24 bt) affiche `poutines = bt / 23` et `canettes = bt`
 5. **Rejoué la chaîne** après les changements : les 7 contrôles + les deux scellés passent ; YAML du workflow validé (15 étapes).
 
 **Resté à l'instruction (nécessite une action qui n'est pas du code ou une décision)**
-- **C2 — Git LFS** pour `images/` (119 Mio) et les PDF : à faire **consciemment** (installe `git-lfs`, `git lfs migrate` réécrit l'historique — acte lourd, à décider hors de cette passe).
-- **C3 — installation de la CI** dans `.github/workflows/continuite.yml` : exige un jeton doté du droit `workflows` (constat E-17) ; le gabarit est tenu à jour et prêt (`make workflows`).
+- ~~**C2 — Git LFS**~~ → **tranché le 2 septembre 2026 par l'Avis royal n° 9** : variante A′
+  (`images/realistes/`, `vignettes/`, `audio/` en LFS, ≈ 236 Mio), **Option B écartée** — la
+  réécriture de l'historique briserait tout clone et toute branche, et le passé du Royaume ne se
+  réécrit pas. Reste à exécuter (`make lfs && git push`) depuis une machine ayant accès au CDN
+  GitHub, inaccessible depuis l'environnement d'agent (mesure reconduite le 2 sept.).
+  Voir `gouvernance/LFS_MIGRATION.md` § 5.
+- ~~**C3 — installation de la CI**~~ → **fait le 1ᵉʳ septembre 2026** : droit `workflows` accordé,
+  PR #22, commit `9f527f3`. CI active et verte, 20 étapes bloquantes ; parité modèle ↔ installé
+  vérifiée par R1.8.
 - **C4 — génération du dictionnaire du portail** depuis `canon/*.json` : refactor souhaitable mais le contrôle C1 neutralise déjà la cause de dérive.
 
 Ces éléments restent **non décrétés** ; leur incorporation se dit à l'Avis conformément au Rite de publication.
@@ -142,4 +179,17 @@ Ces éléments restent **non décrétés** ; leur incorporation se dit à l'Avis
 
 ## 5. En un mot
 
-Le Babberland est **exemplairement gouverné** : source unique, scellés, empreintes, batterie de mutations. Les plus gros gains sont désormais **d'étendre ce même niveau de contrôle au portail racine** (C1/C4), **d'alléger le dépôt** (C2) et **d'activer la CI** (C3). C'est peu de travail, et ça ferme précisément les fuites que votre propre contre-expertise a appris à traquer.
+Le Babberland est **exemplairement gouverné** : source unique, scellés, empreintes, batterie de mutations.
+
+*Mise à jour du 2 septembre 2026.* Des trois gains annoncés par cette note, **deux sont acquis** :
+le contrôle du portail racine (C1, `check_portal.py` en CI) et l'activation de la CI (C3, 20
+étapes bloquantes et vertes). Le troisième, l'allègement du dépôt (C2), est **décidé sans être
+exécuté** : l'Avis n° 9 retient la variante A′ et refuse la réécriture de l'historique, l'exécution
+attendant une machine ayant accès au CDN GitHub.
+
+Reste donc, par ordre d'intérêt : **C4** (générer le dictionnaire du portail depuis `canon/*.json`,
+pour supprimer la cause de C1 plutôt que d'en surveiller l'effet), puis C6 et C7. Et un constat
+que cette note n'avait pas fait : **l'appareil critique pèse désormais plus lourd que l'œuvre** —
+quelque 340 Kio de rapports, roadmaps et contre-expertises pour un seul Livre de chroniques.
+La machine de gouvernance fonctionne ; elle mérite d'être gelée dans son état plutôt qu'étendue,
+et l'énergie rendue au récit.
