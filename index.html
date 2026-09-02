@@ -533,10 +533,21 @@
       </div>
     </section>
 
-    <!-- PERSONNAGES -->
+        <!-- PERSONNAGES -->
     <section id="personnages" class="tab-section">
-      <h2 class="section-title">Dictionnaire des 18 Personnages Historiques</h2>
-      <input type="text" id="characterSearch" class="search-input" placeholder="🔍 Rechercher un souverain, prince, consort ou artisan..." onkeyup="filterCharacters()">
+      <h2 class="section-title">👥 Galerie & Dictionnaire Biographique des 18 Personnages</h2>
+      <p style="margin-bottom: 1.2rem;">
+        Explorez la biographie détaillée, les anecdotes, les citations et les attributs des 18 figures canoniques des sept générations du Babberland (1847–2026).
+      </p>
+
+      <div style="margin-bottom: 0.8rem; font-weight: bold; color: var(--navy);">Filtre par Génération :</div>
+      <div class="filters" id="charGenFilters"></div>
+
+      <div style="margin-bottom: 0.8rem; font-weight: bold; color: var(--navy); margin-top: 0.8rem;">Filtre par Rôle :</div>
+      <div class="filters" id="charTypeFilters" style="margin-bottom: 1.2rem;"></div>
+
+      <input type="text" id="characterSearch" class="search-input" placeholder="🔍 Rechercher par nom, rôle, citation, anecdote ou attribut..." oninput="filterCharacters()">
+
       <div id="characterGrid" class="grid-2"></div>
     </section>
 
@@ -575,6 +586,13 @@
     <p>👑 <strong>Royaume du Babberland</strong> · Archives Royales de Pabst City (1847–2026)</p>
     <p style="margin-top: 0.4rem;">« Une Pabst, une poutine, et on relaxe. » · <a href="gouvernance/index.html">Tableau de Bord de Gouvernance</a></p>
   </footer>
+
+    <div class="lightbox" id="bioModal" onclick="closeBioModal(event)">
+    <div class="card" style="max-width: 760px; width: 92vw; max-height: 90vh; overflow-y: auto; position: relative; padding: 2rem; cursor: default; background: var(--card-bg);" onclick="event.stopPropagation()">
+      <button onclick="closeBioModal()" style="position: absolute; top: 1rem; right: 1rem; background: var(--parchment); border: 1px solid var(--border); border-radius: 50%; width: 36px; height: 36px; cursor: pointer; font-weight: bold; font-size: 1.2rem; color: var(--navy);">✕</button>
+      <div id="bioModalContent"></div>
+    </div>
+  </div>
 
   <div class="lightbox" id="lightbox" onclick="closeLb()">
     <img id="lbImg" alt="">
@@ -620,43 +638,415 @@
         `= ${bt} Babetons, soit ${pl(poutines, 'poutine royale')} et ${pl(canettes, 'canette')}`;
     }
 
-    const characters = [
-      { name: "Babber Ier l’Ancien", dates: "1798–1889", photo: "images/realistes/babber_ier_l_ancien.png", role: "Fondateur & 1er Roi", note: "Pacte castoral de 1816 et Nappe du 12 octobre 1847." },
-      { name: "Babette Ire de Plantagenet", dates: "1804–1892", photo: "images/realistes/babette_ire_plantagenet.png", role: "Reine Consort Fondatrice", note: "Prêteuse de la nappe vichy et régente de mémoire." },
-      { name: "François-Babber l’Aqueducien", dates: "1832–1914", photo: "images/realistes/francois_babber_aqueducien.png", role: "Prince Régent & Ingénieur", note: "Bâtisseur du Double Aqueduc et des 42 bancs." },
-      { name: "Hortense du Grain", dates: "1840–1922", photo: "images/realistes/hortense_du_grain.png", role: "Princesse Consort", note: "Fondatrice de la réserve céréalière royale." },
-      { name: "Princesse Babette-Marine", dates: "1836–1916", photo: "images/realistes/princesse_babette_marine.png", role: "Princesse du Littoral", note: "Créatrice du port moderne de Port Babette et de son phare." },
-      { name: "Babber Ier le Dormeur", dates: "1875–1959", photo: "images/realistes/babber_le_dormeur_hamac.png", role: "Roi du Silence (1914–1959)", note: "45 ans de règne en hamac, Articles 1 & 4." },
-      { name: "Irène des Érables", dates: "1882–1966", photo: "images/realistes/irene_des_erables.png", role: "Reine Consort", note: "Morte en 1966, mère de Babber II." },
-      { name: "Babber II le Piscineux", dates: "1912–2002", photo: "images/realistes/babber_ii_piscineux.png", role: "Roi Baigneur (1959–1998)", note: "Créateur des Monts Froissés (1,20 m) et de McBabber's." },
-      { name: "Colette-Pabst de Grass City", dates: "1920–2011", photo: "images/realistes/colette_pabst_babbersgate.png", role: "Reine Consort & Juge", note: "Présidente de la commission du Babbersgate (1991–1993)." },
-      { name: "Honoré-Pabst", dates: "né 1938", photo: "images/realistes/honore_pabst_henri_grain.png", role: "Co-souverain (1998–2010)", note: "Signataire des jours impairs de l'Union des Règnes." },
-      { name: "Henri-Grain", dates: "né 1938", photo: "images/realistes/honore_pabst_henri_grain.png", role: "Co-souverain (1998–2010)", note: "Signataire des jours pairs de l'Union des Règnes." },
-      { name: "Babber Ier le Louche", dates: "né 1946", photo: "images/realistes/babber_ier_le_louche.png", role: "Roi Régnant (depuis 2010)", note: "Article 5, Série B en chanvre et proclamation de Génération VII." },
-      { name: "Reine Linéa de Grass City", dates: "née 1952", photo: "images/realistes/reine_linea_sauce_secrete.png", role: "Reine Consort", note: "Créatrice du nom McBabber's et de la Sauce secrète de 1986." },
-      { name: "Prince Rambo du Fjord", dates: "né 1962", photo: "images/realistes/rambo_du_fjord.png", role: "Prince du Fleuve", note: "Né le jour des Monts Froissés, grand pêcheur sans hameçon." },
-      { name: "Prince Babber le Fou", dates: "né 1986", photo: "images/realistes/babber_le_fou.png", role: "Héritier Présomptif (1er rang)", note: "Né le 1er avril 1986 à l'ouverture du premier restaurant." },
-      { name: "Princesse Ginette", dates: "née 1988", photo: "images/realistes/ginette_de_port_babette.png", role: "Princesse Consort", note: "Gardienne de la Sauce royale et mère de Ti-Babber." },
-      { name: "Babber le Déchiré", dates: "collatéral", photo: "images/realistes/babber_le_dechire.png", role: "Médiateur des Rives", note: "Médiateur de paix de la Guerre des Cornichons (2009)." },
-      { name: "Ti-Babber (Babber VII)", dates: "né 26 août 2026", photo: "images/realistes/ti_babber.png", role: "Prince Héritier en Second (2e)", note: "Septième génération issue de la fondation de 1847." }
+        const characters = [
+      {
+        name: "Babber Ier l’Ancien",
+        dates: "1798–1889",
+        photo: "images/realistes/babber_ier_l_ancien.png",
+        role: "Fondateur & 1er Roi",
+        note: "Pacte castoral de 1816 et Nappe du 12 octobre 1847.",
+        gen: 1,
+        genLabel: "Génération I",
+        type: "souverain",
+        typeLabel: "Roi & Souverain",
+        quote: "« Courir est un crime contre l'humanité. »",
+        bio: "Né en 1798 dans la forêt de Plantagenet, Babber Ier l'Ancien incarna l'horizontalité contemplative. Vers 1816, il conclut le Pacte castoral avec le Castor Patriote. Le 12 octobre 1847, étendant la nappe vichy rouge et blanche de son épouse Babette, il proclama la fondation du Babberland et la première Constitution. Il régna 42 ans suspendu au Chêne du Hamac à Pabst City.",
+        anecdote: "Lors de la Proclamation de 1847, il refusa d'écouter le message d'un coursier au galop tant que le rythme cardiaque du messager ne fut pas redescendu sous 60 battements par minute.",
+        attributs: ["Béret royal", "Nappe vichy", "Chêne du Hamac"]
+      },
+      {
+        name: "Babette Ire de Plantagenet",
+        dates: "1804–1892",
+        photo: "images/realistes/babette_ire_plantagenet.png",
+        role: "Reine Consort Fondatrice",
+        note: "Prêteuse de la nappe vichy et régente de mémoire.",
+        gen: 1,
+        genLabel: "Génération I",
+        type: "consort",
+        typeLabel: "Reine Consort",
+        quote: "« Une maison sans rocking-chair est une cage sans oiseau. »",
+        bio: "Née en 1804 dans le lignage de Plantagenet, Babette prêta sa nappe vichy de pique-nique le 12 octobre 1847 pour servir de tapis d'État. Après la mort de Babber Ier en 1889, elle assura la Régence de mémoire jusqu'en 1892 depuis sa rocking-chair face à la Baie des Castors à Port Babette.",
+        anecdote: "Elle conservait dans son panier d'osier d'érable le flacon d'encre végétale utilisé par le Castor Patriote pour signer le traité de 1847 avec sa queue.",
+        attributs: ["Nappe vichy originelle", "Panier d'osier", "Chaise berçante"]
+      },
+      {
+        name: "François-Babber l’Aqueducien",
+        dates: "1832–1914",
+        photo: "images/realistes/francois_babber_aqueducien.png",
+        role: "Prince Régent & Ingénieur",
+        note: "Bâtisseur du Double Aqueduc et des 42 bancs.",
+        gen: 2,
+        genLabel: "Génération II",
+        type: "prince",
+        typeLabel: "Prince Régent & Ingénieur",
+        quote: "« Posez d'abord les bancs. La tranchée attendra. »",
+        bio: "Né en 1832, fils unique des fondateurs, François-Babber est le Grand Ingénieur du Royaume. Il conçut le Double Aqueduc (1882–1904) transportant l'eau des collines et la Pabst fraîche. Il refusa l'ordinal II en 1892 pour demeurer bâtisseur et Prince Régent.",
+        anecdote: "Il imposa la fabrication et la pose de 42 bancs en bois d'épinette le long du tracé du canal avant d'autoriser le moindre coup de pelle.",
+        attributs: ["Cercle à bulle", "Double Aqueduc", "Truelle d'argent"]
+      },
+      {
+        name: "Hortense du Grain",
+        dates: "1840–1922",
+        photo: "images/realistes/hortense_du_grain.png",
+        role: "Princesse Consort",
+        note: "Fondatrice de la réserve céréalière royale.",
+        gen: 2,
+        genLabel: "Génération II",
+        type: "consort",
+        typeLabel: "Princesse Consort",
+        quote: "« Sans bon grain, la mousse n'est qu'un vain murmure. »",
+        bio: "Née en 1840 dans les plaines du Grain, Hortense épousa François-Babber en 1874. Elle fonda la Réserve céréalière royale et instaura le contrôle de qualité des maltages d'orge pour alimenter les brasseries royales. Mère de Babber le Dormeur (né 1875).",
+        anecdote: "Elle inspectait les silos d'orge à dos de mule au pas de promenade, refusant le grain battu trop vite car 'le grain précipité donne une bière fiévreuse'.",
+        attributs: ["Épi d'orge", "Réserve de grain", "Fiole de petit-lait"]
+      },
+      {
+        name: "Princesse Babette-Marine",
+        dates: "1836–1916",
+        photo: "images/realistes/princesse_babette_marine.png",
+        role: "Princesse du Littoral",
+        note: "Créatrice du port moderne de Port Babette et de son phare.",
+        gen: 2,
+        genLabel: "Génération II",
+        type: "prince",
+        typeLabel: "Princesse & Médiatrice",
+        quote: "« Le vent souffle où il veut, mais le port reste assis. »",
+        bio: "Née en 1836, la princesse Babette-Marine conçut les pontons et les quais de Port Babette ainsi que le Phare Blanc couronné d'or. Elle est l'ancêtre directe de la branche collatérale des médiateurs dont est issu Babber le Déchiré.",
+        anecdote: "Elle rejetait les boussoles aimantées nord-sud, leur préférant un instrument en laiton sans aiguille dont le cadran portait uniquement le mot 'Ici'.",
+        attributs: ["Boussole sans aiguille", "Phare blanc", "Longue-vue"]
+      },
+      {
+        name: "Babber Ier le Dormeur",
+        dates: "1875–1959",
+        photo: "images/realistes/babber_le_dormeur_hamac.png",
+        role: "Roi du Silence (1914–1959)",
+        note: "45 ans de règne en hamac, Articles 1 & 4.",
+        gen: 3,
+        genLabel: "Génération III",
+        type: "souverain",
+        typeLabel: "Roi & Souverain",
+        quote: "« Le trône le plus solide est celui qui se balance entre deux arbres. »",
+        bio: "Né en 1875, Babber le Dormeur incarna la perfection de la gouvernance horizontale. Durant ses 45 ans de règne (1914–1959), il ne posa jamais le pied par terre en public, gouvernant depuis son hamac de parade en soie bleu roi. Promulgateur de l'Article 1 (droit au hamac) et de l'Article 4 (sieste nationale).",
+        anecdote: "Lors d'une crise diplomatique, il ronfla doucement pendant la lecture d'un traité de 400 pages et conclut au réveil : 'Si votre texte ne tient pas dans une sieste, c'est qu'il est trop long.'",
+        attributs: ["Hamac de parade", "Coussin d'édredon", "Articles 1 & 4"]
+      },
+      {
+        name: "Irène des Érables",
+        dates: "1882–1966",
+        photo: "images/realistes/irene_des_erables.png",
+        role: "Reine Consort",
+        note: "Morte en 1966, mère de Babber II.",
+        gen: 3,
+        genLabel: "Génération III",
+        type: "consort",
+        typeLabel: "Reine Consort",
+        quote: "« Le silence est le tapis de velours du sommeil du Roi. »",
+        bio: "Née en 1882 dans les forêts d'érables, Irène épousa Babber le Dormeur en 1911. Elle fut la gardienne vigilante de la quiétude du Palais royal pendant près d'un demi-siècle et rassembla une célèbre collection de feuilles d'érable pressées. Mère de Babber II (1912).",
+        anecdote: "Elle tricotait des chaussons de feutre pour les chiens du Palais afin d'éviter tout bruit de coussinets sur le parquet durant la sieste constitutionnelle.",
+        attributs: ["Châle d'automne", "Feuille d'érable", "Herbier royal"]
+      },
+      {
+        name: "Babber II le Piscineux",
+        dates: "1912–2002",
+        photo: "images/realistes/babber_ii_piscineux.png",
+        role: "Roi Baigneur (1959–1998)",
+        note: "Créateur des Monts Froissés (1,20 m) et de McBabber's.",
+        gen: 4,
+        genLabel: "Génération IV",
+        type: "souverain",
+        typeLabel: "Roi & Souverain",
+        quote: "« Une montagne de un mètre vingt offre la même vue sur les étoiles qu'un sommet de quatre mille mètres. »",
+        bio: "Né en 1912, Babber II succéda à son père en 1959. Le 15 juillet 1962, en creusant la Grande Piscine Royale, il fit entasser la terre excavée pour créer Les Monts Froissés, sommet culminant du Babberland à 1,20 m d'altitude. Il approuva aussi la charte McBabber's en 1986.",
+        anecdote: "Chaque été, il hissait son transat en bois au sommet des Monts Froissés en gravissant deux marches en bois avec un piolet miniature en buis.",
+        attributs: ["Transat d'épinette", "Piscine", "Monts Froissés"]
+      },
+      {
+        name: "Colette-Pabst de Grass City",
+        dates: "1920–2011",
+        photo: "images/realistes/colette_pabst_babbersgate.png",
+        role: "Reine Consort & Juge",
+        note: "Présidente de la commission du Babbersgate (1991–1993).",
+        gen: 4,
+        genLabel: "Génération IV",
+        type: "consort",
+        typeLabel: "Reine Consort",
+        quote: "« La justice doit être aussi claire que la bière fraîche. »",
+        bio: "Née en 1920 à Grass City, Colette-Pabst épousa Babber II en 1937. Juriste réputée et protectrice du chanvre textile, elle présida la Commission royale d'enquête du Babbersgate (1991–1993) qui trancha le scandale des 317 pots de cornichons de contrebande.",
+        anecdote: "Elle faisait goûter un cornichon à chaque témoin du Babbersgate avant de recueillir son témoignage pour vérifier la neutralité de son jugement.",
+        attributs: ["Commission Babbersgate", "Lunettes d'écaille", "Marteau de buis"]
+      },
+      {
+        name: "Honoré-Pabst",
+        dates: "né 1938",
+        photo: "images/realistes/honore_pabst_henri_grain.png",
+        role: "Co-souverain (1998–2010)",
+        note: "Signataire des jours impairs de l'Union des Règnes.",
+        gen: 5,
+        genLabel: "Génération V",
+        type: "souverain",
+        typeLabel: "Co-souverain",
+        quote: "« Les jours impairs ont une poésie particulière. »",
+        bio: "Né jumeau d'Henri-Grain en 1938, Honoré-Pabst incarna le rameau de la Pabst lors de l'Union des Règnes (1998–2010). Il régna et signa les décrets royaux les jours impairs du calendrier avec une plume d'oie à encre bleu nuit, vêtu de son gilet gris à boutons de nacre.",
+        anecdote: "Lors des années bissextiles, le 29 février provoquait de joyeuses discussions fraternelles conclues autour d'un grand plateau de poutine partagé.",
+        attributs: ["Plume d'oie des jours impairs", "Gilet gris", "Sceau bleu"]
+      },
+      {
+        name: "Henri-Grain",
+        dates: "né 1938",
+        photo: "images/realistes/honore_pabst_henri_grain.png",
+        role: "Co-souverain (1998–2010)",
+        note: "Signataire des jours pairs de l'Union des Règnes.",
+        gen: 5,
+        genLabel: "Génération V",
+        type: "souverain",
+        typeLabel: "Co-souverain",
+        quote: "« L'équilibre du monde repose sur la régularité des jours pairs. »",
+        bio: "Né la même minute que son frère Honoré en 1938, Henri-Grain incarna le rameau céréalier. Co-souverain pendant douze ans (1998–2010), il gouverna le Babberland tous les jours pairs avec sa fiole de sable sécheur d'encre et son gilet gris d'apparat.",
+        anecdote: "Quand une audience débutée le 31 dépassait minuit, Henri-Grain reprenait le dossier au premier coup de minuit pour signer la décision royale.",
+        attributs: ["Plume des jours pairs", "Gilet gris", "Fiole de sable"]
+      },
+      {
+        name: "Babber Ier le Louche",
+        dates: "né 1946",
+        photo: "images/realistes/babber_ier_le_louche.png",
+        role: "Roi Régnant (depuis 2010)",
+        note: "Article 5, Série B en chanvre et proclamation de Génération VII.",
+        gen: 5,
+        genLabel: "Génération V",
+        type: "souverain",
+        typeLabel: "Roi Régnant",
+        quote: "« Le Roi a toujours raison, surtout lorsqu'il a tort. »",
+        bio: "Né en 1946, Babber Ier le Louche tire son nom d'un plissement d'yeux légendaire traduisant sa bienveillance souveraine. Roi régnant depuis 2010 après avoir invoqué l'Article 5, il garantit la parité Poutine-Pabst (3,2 °C) et a proclamé la Génération VII le 26 août 2026.",
+        anecdote: "Il vérifie chaque matin la température de sa canette étalon à 3,2 °C avec son thermomètre en cristal avant d'accorder son salut au peuple.",
+        attributs: ["Regard plissé bienveillant", "Article 5", "Pabst 3,2 °C"]
+      },
+      {
+        name: "Reine Linéa de Grass City",
+        dates: "née 1952",
+        photo: "images/realistes/reine_linea_sauce_secrete.png",
+        role: "Reine Consort",
+        note: "Créatrice du nom McBabber's et de la Sauce secrète de 1986.",
+        gen: 5,
+        genLabel: "Génération V",
+        type: "consort",
+        typeLabel: "Reine Consort",
+        quote: "« Une poutine sans sauce est comme un royaume sans roi. »",
+        bio: "Née en 1952 à Grass City, Linéa épousa le futur roi en 1978. Elle trouva le nom de la chaîne nationale McBabber's et créa au printemps 1986 la recette de la Sauce Brun Secrète. Première Gardienne de la Sauce jusqu'à la transmission de 2024 à la Princesse Ginette.",
+        anecdote: "La formule originale de la Sauce Brun Secrète fut rédigée en 1986 au verso d'un ticket de caisse de brasserie conservé sous triple serrure.",
+        attributs: ["Cuillère d'argent", "Recette secrète 1986", "Nom McBabber's"]
+      },
+      {
+        name: "Prince Rambo du Fjord",
+        dates: "né 1962",
+        photo: "images/realistes/rambo_du_fjord.png",
+        role: "Prince du Fleuve",
+        note: "Né le jour des Monts Froissés, grand pêcheur sans hameçon.",
+        gen: 5,
+        genLabel: "Génération V",
+        type: "prince",
+        typeLabel: "Prince & Protecteur",
+        quote: "« Saluer un poisson dans l'eau vaut mieux que l'attraper. »",
+        bio: "Né l'après-midi du 15 juillet 1962 lors de l'érection des Monts Froissés, le Prince Rambo est le Protecteur des Rapides. Vêtu de flanelle rouge, il pratique la pêche sans ligne ni hameçon avec une canne en frêne brut pour inviter les poissons à saluer le rivage.",
+        anecdote: "En 2008, lors d'un litige fluvial, il s'assit sur un rocher au milieu des rapides avec sa thermos de café chaud et invita les diplomates à l'y rejoindre.",
+        attributs: ["Canne sans hameçon", "Veste de flanelle rouge", "Thermos du Fjord"]
+      },
+      {
+        name: "Prince Babber le Fou",
+        dates: "né 1986",
+        photo: "images/realistes/babber_le_fou.png",
+        role: "Héritier Présomptif (1er rang)",
+        note: "Né le 1er avril 1986 à l'ouverture du premier restaurant.",
+        gen: 6,
+        genLabel: "Génération VI",
+        type: "prince",
+        typeLabel: "Prince Héritier",
+        quote: "« Le fromage doit faire couic-couic sous la dent pour recevoir l'onction. »",
+        bio: "Né le 1er avril 1986 à 15 h 01 précises lors de l'inauguration de McBabber's, Babber le Fou est le premier successible dans l'ordre du trône. Marié à la Princesse Ginette, il veille sur la qualité des frites royales et du fromage en grain. Père de Ti-Babber (2026).",
+        anecdote: "Son berceau princier en bois d'érable était orné d'une spatule en bois d'épinette avec laquelle il retourna la première portion de frites pour ses 18 ans.",
+        attributs: ["Né à l'ouverture de McBabber's", "Spatule de bois", "Salopette"]
+      },
+      {
+        name: "Princesse Ginette",
+        dates: "née 1988",
+        photo: "images/realistes/ginette_de_port_babette.png",
+        role: "Princesse Consort",
+        note: "Gardienne de la Sauce royale et mère de Ti-Babber.",
+        gen: 6,
+        genLabel: "Génération VI",
+        type: "consort",
+        typeLabel: "Princesse Consort",
+        quote: "« La sauce mijote à son rythme : vouloir la presser, c'est brusquer l'océan. »",
+        bio: "Née en 1988 à Port Babette, fille de marins, Ginette épousa Babber le Fou. En 2024, elle reçut la charge solennelle de Grande Maîtresse de la Sauce Royale et le pot scellé à la cire. Le 26 août 2026, elle a donné naissance au Prince Ti-Babber à Port Babette.",
+        anecdote: "Elle prépara une marmite de 500 litres de sauce brune bénie par le Castor Patriote pour fêter la naissance de Ti-Babber avec les 7 000 citoyens.",
+        attributs: ["Pot scellé", "Cuillère d'argent de transmission", "Louche royale"]
+      },
+      {
+        name: "Babber le Déchiré",
+        dates: "collatéral",
+        photo: "images/realistes/babber_le_dechire.png",
+        role: "Médiateur des Rives",
+        note: "Médiateur de paix de la Guerre des Cornichons (2009).",
+        gen: 6,
+        genLabel: "Génération VI",
+        type: "prince",
+        typeLabel: "Médiateur & Collatéral",
+        quote: "« Une manche déchirée se rafraîchit au vent, un peuple fâché se réconcilie en s'asseyant. »",
+        bio: "Issu de la branche de la Princesse Babette-Marine, Babber le Déchiré porte une veste verte au coude déchiré. Grand médiateur itinérant des rivières, il s'assit sur le pont frontalier pendant la Guerre des Cornichons (2007–2009) jusqu'à la signature du Traité de paix.",
+        anecdote: "Il a toujours refusé qu'un tailleur de la cour ne recoud sa coudière déchirée, affirmant qu'elle lui apportait la brise fraîche durant ses arbitrages.",
+        attributs: ["Veste à coude déchiré", "Traité des Cornichons 2009", "Canif"]
+      },
+      {
+        name: "Ti-Babber (Babber VII)",
+        dates: "né 26 août 2026",
+        photo: "images/realistes/ti_babber.png",
+        role: "Prince Héritier en Second (2e)",
+        note: "Septième génération issue de la fondation de 1847.",
+        gen: 7,
+        genLabel: "Génération VII",
+        type: "prince",
+        typeLabel: "Prince Héritier (2e)",
+        quote: "« Areu... »",
+        bio: "Né le 26 août 2026 à 14 h 22 à Port Babette, Ti-Babber fut présenté à 15 h 01 lors de la Nuit des Sept Mille par Babber le Louche. Incarnant la septième génération issue de la fondation de 1847, il est le symbole de la pérennité de l'horizontalité.",
+        anecdote: "Il s'endormit profondément au premier coup de cloche de 15 h 00 annonçant la fin de la sieste, prouvant immédiatement sa vocation royale.",
+        attributs: ["Linge vichy", "Chiffre VII générationnel", "Hochet d'érable"]
+      }
     ];
+
+        let selectedGen = "tous";
+    let selectedType = "tous";
+
+    const GEN_FILTERS = [
+      { id: "tous", label: "Toutes (18)" },
+      { id: 1, label: "Génération I (1847)" },
+      { id: 2, label: "Génération II (1892)" },
+      { id: 3, label: "Génération III (1914)" },
+      { id: 4, label: "Génération IV (1959)" },
+      { id: 5, label: "Génération V (1998)" },
+      { id: 6, label: "Génération VI (2024)" },
+      { id: 7, label: "Génération VII (2026)" }
+    ];
+
+    const TYPE_FILTERS = [
+      { id: "tous", label: "Tous les rôles" },
+      { id: "souverain", label: "Rois & Souverains" },
+      { id: "consort", label: "Reines Consorts" },
+      { id: "prince", label: "Princes & Collatéraux" }
+    ];
+
+    function renderCharFilters() {
+      const genEl = document.getElementById('charGenFilters');
+      const typeEl = document.getElementById('charTypeFilters');
+      if (!genEl || !typeEl) return;
+
+      genEl.innerHTML = GEN_FILTERS.map(f =>
+        `<button class="${f.id === selectedGen ? 'on' : ''}" onclick="setCharGenFilter('${f.id}')">${f.label}</button>`
+      ).join('');
+
+      typeEl.innerHTML = TYPE_FILTERS.map(f =>
+        `<button class="${f.id === selectedType ? 'on' : ''}" onclick="setCharTypeFilter('${f.id}')">${f.label}</button>`
+      ).join('');
+    }
+
+    function setCharGenFilter(id) {
+      selectedGen = id === "tous" ? "tous" : parseInt(id);
+      renderCharFilters();
+      filterCharacters();
+    }
+
+    function setCharTypeFilter(id) {
+      selectedType = id;
+      renderCharFilters();
+      filterCharacters();
+    }
 
     function renderCharacters(list) {
       const grid = document.getElementById('characterGrid');
-      grid.innerHTML = list.map(c => `
-        <div class="card" style="padding: 1rem;">
-          <img class="cover portrait" src="${thumb(c.photo)}" alt="${c.name} — ${c.role}" loading="lazy" onclick="openLb('${c.photo}', this.alt)">
-          <h3>${c.name}</h3>
-          <p><strong>${c.role}</strong> (${c.dates})</p>
-          <p>${c.note}</p>
+      if (!grid) return;
+      grid.innerHTML = list.map((c, idx) => {
+        const charIndex = characters.indexOf(c);
+        return `
+        <div class="card" style="padding: 1.2rem; display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <img class="cover portrait" src="${thumb(c.photo)}" alt="${c.name} — ${c.role}" loading="lazy" onclick="openLb('${c.photo}', this.alt)">
+            <div style="display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 0.5rem;">
+              <span class="badge" style="background: var(--navy); color: #fff; border-color: var(--gold);">${c.genLabel || 'Génération'}</span>
+              <span class="badge">${c.typeLabel || 'Personnage'}</span>
+            </div>
+            <h3 style="margin-bottom: 0.2rem;">${c.name}</h3>
+            <p style="font-size: 0.9rem; color: var(--muted); margin-bottom: 0.6rem;"><strong>${c.role}</strong> (${c.dates})</p>
+            ${c.quote ? `<blockquote style="font-style: italic; background: var(--parchment); padding: 0.5rem 0.8rem; border-left: 3px solid var(--gold); margin-bottom: 0.8rem; font-size: 0.88rem; border-radius: 4px;">${c.quote}</blockquote>` : ''}
+            <p style="font-size: 0.92rem; line-height: 1.45; margin-bottom: 0.8rem;">${c.note || ''}</p>
+          </div>
+          <button onclick="openBioModal(${charIndex})" style="background: var(--parchment); border: 1px solid var(--border); border-radius: 6px; padding: 0.5rem 0.9rem; font-weight: bold; color: var(--navy); cursor: pointer; text-align: center; transition: all 0.2s;">📖 Lire la biographie complète</button>
         </div>
-      `).join('');
+      `}).join('');
     }
 
     function filterCharacters() {
-      const q = document.getElementById('characterSearch').value.toLowerCase();
-      const filtered = characters.filter(c => c.name.toLowerCase().includes(q) || c.role.toLowerCase().includes(q) || c.note.toLowerCase().includes(q));
+      const q = (document.getElementById('characterSearch')?.value || '').toLowerCase();
+      const filtered = characters.filter(c => {
+        const matchesGen = selectedGen === "tous" || c.gen === selectedGen;
+        const matchesType = selectedType === "tous" || c.type === selectedType;
+        const matchesSearch = !q ||
+          c.name.toLowerCase().includes(q) ||
+          c.role.toLowerCase().includes(q) ||
+          (c.note && c.note.toLowerCase().includes(q)) ||
+          (c.quote && c.quote.toLowerCase().includes(q)) ||
+          (c.bio && c.bio.toLowerCase().includes(q)) ||
+          (c.anecdote && c.anecdote.toLowerCase().includes(q)) ||
+          (c.attributs && c.attributs.some(a => a.toLowerCase().includes(q)));
+        return matchesGen && matchesType && matchesSearch;
+      });
       renderCharacters(filtered);
+    }
+
+    function openBioModal(idx) {
+      const c = characters[idx];
+      if (!c) return;
+      const modal = document.getElementById('bioModal');
+      const container = document.getElementById('bioModalContent');
+      if (!modal || !container) return;
+
+      container.innerHTML = `
+        <div style="display: flex; gap: 1.5rem; flex-wrap: wrap; align-items: flex-start; margin-bottom: 1.5rem;">
+          <img src="${c.photo}" alt="${c.name}" style="width: 200px; height: 260px; object-fit: cover; border-radius: 8px; border: 2px solid var(--gold); box-shadow: var(--shadow);">
+          <div style="flex: 1; min-width: 260px;">
+            <div style="display: flex; gap: 0.5rem; margin-bottom: 0.5rem; flex-wrap: wrap;">
+              <span class="badge" style="background: var(--navy); color: #fff;">${c.genLabel}</span>
+              <span class="badge" style="background: var(--gold); color: #121820; font-weight: bold;">${c.typeLabel}</span>
+            </div>
+            <h2 style="color: var(--navy); font-size: 1.8rem; margin-bottom: 0.3rem;">${c.name}</h2>
+            <p style="font-size: 1.05rem; font-weight: bold; color: var(--muted); margin-bottom: 0.8rem;">${c.role} (${c.dates})</p>
+            ${c.quote ? `<blockquote style="font-style: italic; background: var(--parchment); padding: 0.8rem 1rem; border-left: 4px solid var(--gold); border-radius: 4px; color: var(--ink); font-size: 1rem;">${c.quote}</blockquote>` : ''}
+          </div>
+        </div>
+
+        <div style="border-top: 2px solid var(--border); padding-top: 1.2rem; margin-top: 1rem;">
+          <h3 style="color: var(--navy); margin-bottom: 0.6rem; font-size: 1.25rem;">📜 Récit Biographique Détaillé</h3>
+          <p style="font-size: 1rem; line-height: 1.65; margin-bottom: 1.2rem;">${c.bio || c.note}</p>
+
+          ${c.anecdote ? `
+            <div style="background: var(--parchment); border: 1px dashed var(--border); border-radius: 8px; padding: 1rem; margin-bottom: 1.2rem;">
+              <h4 style="color: var(--navy); margin-bottom: 0.4rem; font-size: 1.05rem;">💡 Anecdote Historique</h4>
+              <p style="font-size: 0.95rem; line-height: 1.55;">${c.anecdote}</p>
+            </div>
+          ` : ''}
+
+          ${c.attributs && c.attributs.length ? `
+            <div style="margin-top: 1rem;">
+              <h4 style="color: var(--navy); margin-bottom: 0.4rem; font-size: 1rem;">👑 Attributs & Reliques Royales :</h4>
+              <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                ${c.attributs.map(a => `<span class="badge" style="background: var(--card-bg); border-color: var(--gold); font-size: 0.85rem;">🏷️ ${a}</span>`).join('')}
+              </div>
+            </div>
+          ` : ''}
+        </div>
+      `;
+      modal.classList.add('open');
+    }
+
+    function closeBioModal(e) {
+      const modal = document.getElementById('bioModal');
+      if (modal) modal.classList.remove('open');
     }
 
     const gallery = [
@@ -773,6 +1163,7 @@
       `).join('');
     }
 
+    renderCharFilters();
     renderCharacters(characters);
     renderFilters();
     renderGallery();
