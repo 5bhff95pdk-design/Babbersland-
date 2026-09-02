@@ -88,14 +88,22 @@ def layout_of(reader: PdfReader) -> str:
     return "|".join(parts)
 
 
-def fingerprint(pdf: Path) -> tuple[str, int, int, int]:
+def fingerprint(pdf: Path) -> tuple[str, int, int, int, dict[str, str]]:
+    """(digest, pages, images distinctes, placements, sous-parties).
+
+    Les sous-parties — `texte` et `disposition` — ne sont pas un ornement : c'est
+    elles qui distinguent une dérive de CONTENU (le texte extrait a changé) d'un
+    hasard d'EMBALLAGE (le JPEG encodé par une autre libjpeg n'a pas les mêmes
+    octets, donc pas le même haché de flux, alors que l'image est la même). Sans
+    elles, accepter une variante du PDF se ferait sur une inférence.
+    """
     reader = PdfReader(str(pdf))
     layout = layout_of(reader)
+    texte_md5 = hashlib.md5(text_of(reader).encode()).hexdigest()
     per_page = [d for chunk in layout.split("|") if chunk for d in chunk.split(":", 1)[1].split(",")]
-    digest = hashlib.md5(
-        f"{len(reader.pages)}|{hashlib.md5(text_of(reader).encode()).hexdigest()}|{layout}".encode()
-    ).hexdigest()
-    return digest, len(reader.pages), len(set(per_page)), len(per_page)
+    digest = hashlib.md5(f"{len(reader.pages)}|{texte_md5}|{layout}".encode()).hexdigest()
+    parties = {"texte": texte_md5, "disposition": hashlib.md5(layout.encode()).hexdigest()}
+    return digest, len(reader.pages), len(set(per_page)), len(per_page), parties
 
 
 def charge_de(digest: str, pages: int, images: int, placements: int) -> str:
@@ -114,7 +122,7 @@ def main(argv: list[str] | None = None) -> int:
     if not args.pdf.is_file():
         print(f"PDF introuvable : {args.pdf}")
         return 1
-    digest, pages, images, placements = fingerprint(args.pdf)
+    digest, pages, images, placements, parties = fingerprint(args.pdf)
     charge = charge_de(digest, pages, images, placements)
     variantes = lire_variantes(MARQUEUR_VARIANTES, PREFIXE_VARIANTES)
 
@@ -160,7 +168,9 @@ def main(argv: list[str] | None = None) -> int:
         drift = {k: (fields.get(k), v) for k, v in current.items() if k in fields and fields[k] != v}
         connues = {v: k for k, v in variantes.items()}
         if not drift:
-            annoter("notice", "empreinte-pdf", f"charge={charge} connue=reference-gravee")
+            annoter("notice", "empreinte-pdf",
+                    f"charge={charge} connue=reference-gravee "
+                    f"texte={parties['texte'][:12]} disposition={parties['disposition'][:12]}")
             print(f"PDF à jour : empreinte {digest} ({pages} pages, {images} illustrations, "
                   f"{placements} placements)")
             return 0
@@ -174,7 +184,10 @@ def main(argv: list[str] | None = None) -> int:
             print("→ ce n'est pas un blanc-seing : la variante a été acceptée sur revue, "
                   "et l'écart doit se résorber par `make pdf` puis `make empreinte`.")
             return 0
-        detail = " | ".join(f"{k}={v}" for k, (g, v) in drift.items())
+        detail = (" | ".join(f"{k}={v}" for k, (g, v) in drift.items())
+                  + f" | texte={parties['texte'][:12]} disposition={parties['disposition'][:12]}"
+                  + f" | gravé texte={fields.get('empreinte_texte', 'absent')[:12]}"
+                  f" disposition={fields.get('empreinte_disposition', 'absent')[:12]}")
         print("PDF publié divergent du contrat gravé :")
         for field, (engraved, actual) in drift.items():
             print(f"- {field} : publié {actual} != gravé {engraved}")
