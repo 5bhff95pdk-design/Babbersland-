@@ -28,6 +28,30 @@ raconte des histoires. Cette entrée ferme la question par un décret, sans dép
   Un filtre posé d'avance transformerait le prochain commit binaire en pointeur orphelin —
   dépôt intact ici, en ruine pour tous les autres. `.gitattributes` reste à ses deux lignes `binary`.
 
+### Corrigé — la documentation avait une campagne de retard (passe 2, même jour)
+
+Même classe de dérive que E-27, appliquée cette fois aux documents *méta* — ceux que la chaîne
+ne contrôle pas, faute de pouvoir contrôler de la prose.
+
+* **`README.md` — les 24/28 illustrations n'étaient pas contradictoires, mais indistinctes** :
+  « 28 maîtres du volume 2026-I » laissait croire que les 28 entrent dans le PDF, alors que
+  **24 y entrent** et que **4 planches de chantier** restent hors volume par statut. La phrase
+  dit désormais 28 scellés dont 24 embarqués, ce qui réconcilie avec le § « vingt-quatre
+  illustrations promises » et avec `check_pdf.py`.
+* **`ANALYSE_ET_PROPOSITIONS_2026.md` — deux constats périmés donnaient une image fausse** :
+  C3 affirmait encore « la CI n'est pas installée, `.github/` absent » alors qu'elle tourne,
+  verte, depuis le 1ᵉʳ septembre (PR #22, `9f527f3`) ; C2 chiffrait les images à 119 Mio, soit
+  **presque trois fois moins que la réalité** (334 Mio hors `.git`). Les deux sont remesurés,
+  datés et marqués — clos pour C3, décrété pour C2 — le texte d'origine restant lisible comme
+  mémoire de l'instruction. Tableau récapitulatif doté d'une colonne **Statut**, synthèse § 5
+  réécrite.
+* **Fausse piste évitée, et consignée** : un `grep '^      - name:'` comptait 18 étapes de CI
+  et faisait croire à une erreur dans le « 20 » du README. Le compte **au parseur YAML** donne
+  bien **20** (18 nommées + `actions/checkout` + `actions/setup-python`) — convention que
+  `CI_LIMITES.md` énonce explicitement : « le compte est pris au parseur, pas au grep ». La
+  correction a été annulée et le README précise maintenant la ventilation, pour que le prochain
+  lecteur ne refasse pas le trajet.
+
 ### Corrigé — le runbook avait une campagne de retard
 * § 1 remesuré : la galerie était comptée **77 clichés / 220 Mio**, elle en pèse **83 / 227 Mio** ;
   les vignettes ont suivi (77 → 83). Le « 29 maîtres » de la première mesure était faux : il y en

@@ -9,7 +9,7 @@ Archives narratives et iconographiques du Royaume du Babberland.
 1. **`Royaume_du_Babberland_Encyclopedie_Consolidee_2026_I.pdf`** — encyclopédie illustrée consolidée et référence canonique autonome (24 illustrations après la campagne 2026-II).
 2. **`ENCYCLOPEDIE_CONSOLIDEE_2026_I.md`** — source éditoriale du volume 2026-I ; **c'est elle qui fait foi**, y compris sur la liste des illustrations que le PDF doit montrer.
 3. **`CHRONOLOGIE_MAITRESSE_1847_2026.md`** — registre chronologique détaillé, avec règnes, sources et contrôles de continuité.
-4. **`images/`** — portraits, numismatique et arbre généalogique illustré (28 maîtres du volume 2026-I).
+4. **`images/`** — portraits, numismatique et arbre généalogique illustré : **28 maîtres scellés** par `ICONOGRAPHIE.sha256`, dont **24 entrent dans le volume 2026-I** ; les 4 planches de chantier des chroniques restent hors volume par statut (voir « Ce que la chaîne vérifie »).
 5. **`images/realistes/`** — galerie photoréaliste du portail (83 clichés, dont les 18 figures du canon) ; hors PDF tant qu'un Avis ne les y fait pas entrer.
 6. **`geographie/`** — atlas temporel (proposé, non décrété) : analyse, roadmap, carte SVG/PNG, page `index.html`.
 
@@ -36,7 +36,7 @@ L'édition **2026-I** intègre directement les corrections et ne nécessite aucu
 | `gouvernance/ICONOGRAPHIE.sha256` | Scellés des 28 maîtres d'illustration, par leur nom (E-18) |
 | `gouvernance/MANIFEST.sha256` | **R1.3** : manifeste des livrables canoniques — octets du texte qui fait foi (2026-I), de la chronologie et de la source vectorielle de l'arbre. Le PDF et les images restent délégués à leurs propres contrats (`pdf_fingerprint.txt`, `ICONOGRAPHIE`, `GALERIE`). Gravé par `make manifest`, vérifié par `sources/check_manifest.py --check` (CI bloquante) |
 | `gouvernance/CI_LIMITES.md` | Journal des limites de la CI de continuité : R1.4.a à R1.4.h **tous livrés** — 18 étapes à la clôture de R1.4, **aucune** en `continue-on-error` ; causes, mesures et ceremony d'acceptation y restent écrites |
-| `.github/workflows/continuite.yml` | **CI active, entièrement bloquante** : 20 étapes à chaque push sur `main`, à chaque PR et à la demande (`workflow_dispatch`) — les 18 de R1.4 (première exécution verte : 2026-09-01T21:46:19Z), plus la parité modèle ↔ installé (R1.8), le gel élargi à la galerie (R1.9) et le manifeste des livrables (R1.3) |
+| `.github/workflows/continuite.yml` | **CI active, entièrement bloquante** : **20 étapes** (18 nommées + `actions/checkout` + `actions/setup-python`, compte pris au parseur YAML — cf. `CI_LIMITES.md`) à chaque push sur `main`, à chaque PR et à la demande (`workflow_dispatch`) — les 18 de la clôture R1.4 (première exécution verte : 2026-09-01T21:46:19Z), enrichies de la parité modèle ↔ installé (R1.8), du gel élargi à la galerie (R1.9) et du manifeste des livrables (R1.3) |
 | `.github/workflows/batterie.yml` | **Batterie de mutations à horaires** : lundi 03:17 UTC + exécution manuelle. Vingt-quatre scénarios sur copies isolées (19 fautes à refuser, 5 éditions légitimes à accepter), puis preuve que l'arbre de référence est resté intact. C'est le contrôle du contrôle |
 | `canon/` + `propositions_declarées` | Données structurées (R3.3) sous contrat de parité : une affirmation est attestée par le corpus ou déclarée comme proposition |
 | `gouvernance/pdf_fingerprint.txt` | Empreinte sémantique du PDF canonique — le contrat de fraîcheur de l'artefact |
@@ -153,7 +153,7 @@ make workflows    # sources/github_actions_continuite.yml → .github/workflows/
                   # et retire au passage le talon invalide main.yml
 ```
 
-**20 étapes**, YAML validé au parseur, chacune rejouée localement : polices, dépendances,
+**20 étapes** (18 nommées + `checkout` + `setup-python`), YAML validé au parseur, chacune rejouée localement : polices, dépendances,
 compilation, **gel des archives, des maîtres et de la galerie** (placé avant toute régénération,
 R1.4.h + R1.9), **manifeste des livrables** (R1.3), **parité modèle ↔ workflow installé** (R1.8),
 continuité, parité des données, parité du portail, **chroniques**, atlas, arbre,
@@ -181,8 +181,9 @@ question, et `make workflows` la règle dans le sens du modèle.
 **Statut au 1ᵉʳ septembre 2026** : le droit `workflows` a été accordé à l'installation de l'App
 `arena-ai-coding-agent`, et la PR #22 a installé le workflow sur `main` (commit `9f527f3`).
 La CI est **active et verte** sur la branche principale, **20 étapes bloquantes sur 20**
-(les 18 de R1.4, plus la parité modèle ↔ installé de R1.8, le gel élargi à la galerie de
-R1.9 et le manifeste des livrables de R1.3). La
+(18 nommées + `actions/checkout` + `actions/setup-python` ; les 18 nommées couvrent la clôture
+R1.4, la parité modèle ↔ installé de R1.8, le gel élargi à la galerie de R1.9 et le manifeste
+des livrables de R1.3 — ces trois derniers sont *parmi* les 18 nommées, non en sus). La
 limitation qui fermait le volume (six étapes tolérantes, parce que les régénérations binaires
 ne sont pas reproductibles au bit près entre machines) est levée par R1.4.a-v3 et R1.4.c–g :
 le contrat n'est plus l'égalité des octets mais la charge sémantique. Ce qui reste connu et
