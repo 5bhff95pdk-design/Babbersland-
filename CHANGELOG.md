@@ -2,6 +2,115 @@
 
 Toutes les modifications notables apportées au dépôt du **Royaume du Babberland** sont consignées dans ce document.
 
+## [2026-XIX] — 2026-09-02 (Avis royal n° 10 : les lacunes sont closes, bornées, et gardées)
+
+Le cycle des Chroniques étant homogène depuis 2026-XVIII, la session s'attaque au ticket que la
+ROADMAP appelait « décision structurante » : **R2.7, fermeture des lacunes volontaires**. Elle
+devait trancher entre décret de fixation et serment d'ignorance. Elle a d'abord découvert que la
+question était mal posée depuis le 30 août.
+
+### Trouvé — la promesse du Serment n'était tenue qu'à moitié, et trois listes se contredisaient
+
+`gouvernance/SERMENT_D_IGNORANCE.md` (30 août) proclamait **cinq silences** et affirmait au § III
+que « les scripts de validation rejettent toute tentative d'imposer une fixation arbitraire ».
+Relu pièce en main :
+
+| Écart | Mesure |
+|---|---|
+| **Trois inventaires, un seul registre** | le Serment dit cinq, la ROADMAP (R2.7) cinq autres, la Chronologie maîtresse (§ VIII) une troisième. Deux lacunes du Serment sont inconnues de la Chronologie ; deux de la Chronologie sont inconnues du Serment. |
+| **La machine ne gardait pas ce que le Serment jurait** | sur les cinq silences proclamés, **deux** seulement avaient un garde dans `check_continuity.py`. La première année de la Transparence brune — proclamée par les trois listes — pouvait être fixée en toutes lettres sans qu'aucun contrôle ne bronche. |
+| **Une lacune portait sur un fait inexistant** | le Serment jurait de taire l'heure de la pose de la première pierre du port ; or le registre **P-1** ne consigne aucune première pierre, ni ruban, ni discours, et le Livre II le dit expressément (tranche 5, *Le port qui n'a pas d'inauguration*). La Chancellerie avait inventé un mystère là où le corpus avait un fait. |
+
+La leçon est celle du constat E-24, une seconde fois : **une promesse de contrôle sans contrôle
+n'est pas une promesse, c'est de la rhétorique.**
+
+### Décrété — Avis royal n° 10 · *De la Clôture des Lacunes*
+
+* **Art. 1 — Inventaire arrêté à sept**, réconciliation faite des trois listes (tableau au registre).
+* **Art. 2 — La règle de partage** : une lacune se juge à sa **portée**. Elle est **jurée** quand
+  rien n'en dépend, **fixée** quand une pièce du corpus en dépend, **requalifiée** quand le fait
+  dont on taisait la circonstance n'a pas eu lieu. Corollaire : **un silence juré est borné** —
+  ce qui est su est dit, ce qui est tu est tu ; la borne distingue le mystère du trou.
+* **Art. 3 — Une seule fixation** : le Déchiré est rattaché à Babette-Marine **au quatrième
+  degré** (Gén. II → Gén. VI). Fixé parce que **l'arbre officiel en dépend** : le trait pointillé
+  traverse quatre bandes sans s'arrêter sur un nom ; nommer un porteur obligerait à redessiner
+  l'arbre. Les noms, eux, demeurent jurés.
+* **Art. 4 — Sept silences jurés et bornés** (S1 à S7).
+* **Art. 5 — Requalification** du silence de la première pierre en **silence d'inexistence** :
+  il n'y a pas d'heure à taire d'une cérémonie qui n'a pas eu lieu. **C'est le Serment qui se
+  trompait, et il le dit.**
+* **Art. 6 — Le garde** (ci-dessous).
+* **Art. 7 — Anti-dette** : toute formule du canon ou de la Chronologie qui avoue un manque doit
+  être couverte par un silence décrété ou une dispense écrite. **On ne taire plus sans décréter.**
+* **Art. 8 — Non-annexion** : les 7 000 âmes ne sont pas une lacune mais une proposition en
+  instance de l'Avis n° 7 ; l'Avis n° 10 refuse de l'absorber.
+* **Art. 9 — Exécution** : le décret touche au canon, donc il imprime (rite de publication).
+
+### Ajouté — le registre et son garde
+
+* **`canon/silences.json`** (nouveau, 5ᵉ fichier du dossier) — source unique : 7 silences, 1
+  fixation, 16 gardes, leurs bornes, les marqueurs de lacune et les dispenses.
+* **`sources/check_silences.py`** (nouveau, sans dépendance) — cinq vérifications :
+  *A* registre complet et **silences bornés** ; *B* **parité registre ↔ Serment dans les deux
+  sens** (un silence hors registre est une lacune non décrétée, un registre hors Serment est une
+  cérémonie oubliée) ; *C* **perce-ment** sur le canon et la Chronologie ; *D* **fixation
+  attestée** au canon *et* **rétro-contrôle arithmétique** (Gén. VI − Gén. II = 4) ; *E* **chasse
+  aux lacunes non décrétées** (art. 7).
+* **Délégation** — `check_continuity.py` ne *définit* plus les silences (deux figures en dur, deux
+  motifs d'événements) : il les **applique** au canon via le registre. Une seule source, un seul
+  endroit où l'on se trompe.
+* Branché à **`make controle`** et à une **21ᵉ étape CI bloquante** (modèle et copie installée
+  resynchronisés, parité R1.8 tenue).
+
+### Éprouvé — douze fautes refusées, une lacune décrétée acceptée
+
+Rejoué sur copies isolées avant livraison : naissance imposée à Bontemps ou au Déchiré, lieu de
+naissance, âge, porteur intermédiaire nommé, année de la première Transparence brune, date de la
+transmission de la sauce, grammage des aromates, heure donnée à une première pierre, fixation
+retirée du canon, écart des générations faussé (5 ou 7), silence retiré du Serment, silence
+ajouté au registre sans décret — **12/12 refusées**. La batterie en reprend trois (S5, F1, E1)
+jugés par `check_silences` **seul**, selon la leçon de R1.9 : un scénario de garde-fou doit être
+refusé par le mécanisme qu'il prouve, pas par un voisin.
+
+### Corrigé — un défaut préexistant de la batterie (V2 et R1 échouaient déjà sur `HEAD`)
+
+En rejouant `make batterie`, les scénarios légitimes **V2** et **R1** — ceux qui ajoutent une
+planche promise, ancrée et scellée — échouaient. Vérifié sur `git archive HEAD` : **ils
+échouaient avant tout changement de cette session.** Cause : R1.3 a mis
+`check_manifest.py --check` dans la chaîne le 1ᵉʳ septembre, et `regenerer()` réimprimait le
+volume et re-gravait l'empreinte **sans re-graver le manifeste** — scellé du texte depuis R1.3.
+La batterie prouvait donc la chaîne d'avant R1.3. `regenerer()` suit désormais le rite entier
+(compiler, vérifier, **graver**, sceller). Leçons E-13 et E-21, appliquées à la batterie
+elle-même : un garde-fou qui ne suit pas le rite prouve le rite d'hier.
+
+### Rejoué — le rite de publication, puisque le canon a changé
+
+Art. 9 : *un décret qui n'imprime pas n'a pas eu lieu.* La fixation est inscrite à 2026-I
+(Génération VI, § 2) ; le volume est réimprimé, l'empreinte sémantique regravée
+(`e1168ee0…` → **`566914094df86c169cfb14ab8ebd66a2`**), et le **manifeste** rescellé avec la
+Chronologie, dont le § VIII est mis en conformité (*Dates non consignées par décret*, sept
+entrées cotées S1–S7 + F1). `make controle` **vert** — 13 vérifications, 4 empreintes, 4 scellés.
+`make batterie` **31/31** (27 → 31 scénarios).
+
+### Suivi — une variante de rendu à réaccepter (connu, documenté, tracé)
+
+La réimpression du volume **périme la variante PDF acceptée** `ci-ubuntu-24.04-py3.12`
+(`fingerprint:1a76a0e8…`, R1.4.g) : la charge d'un rendu dépend du texte, et le texte a changé.
+Le runner refusera au premier run, et c'est le comportement voulu — la cérémonie d'acceptation
+existe pour ça (`pdf_fingerprint.py --accepter '<charge>' <étiquette>`, lue dans l'annotation du
+run). Consigné dans `gouvernance/CI_LIMITES.md`. Ce n'est pas une régression : c'est le prix
+connu, deux poussées par changement de contenu, tant que R1.2 (matrice multi-OS) n'existe pas.
+
+### Docs
+
+`gouvernance/SERMENT_D_IGNORANCE.md` (refondu, miroir lisible du registre),
+`gouvernance/REGISTRE_DES_AVIS_ROYAUX.md` (Avis n° 10), `CHRONOLOGIE_MAITRESSE_1847_2026.md`
+(§ VIII), `canon/personnages.json` (fiche du Déchiré + déclaration attestée),
+`sources/check_canon.py` (message : 4 → 5 fichiers JSON, le compte est calculé, plus écrit),
+`ROADMAP_2026_II.md` (R2.7 ✅), `gouvernance/CI_LIMITES.md`, `README.md`.
+
+---
+
 ## [2026-XVIII] — 2026-09-02 (Livre VI — le dernier moignon du cycle, et quatre écarts au canon)
 
 Suite immédiate de 2026-XVII. Le Livre VI était le second synopsis du corpus ; il est le

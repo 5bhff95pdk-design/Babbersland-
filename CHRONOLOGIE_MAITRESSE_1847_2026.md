@@ -116,16 +116,26 @@ Cette chronologie consolide les événements des anciens documents **2026-G** et
 
 ---
 
-## VIII. Dates encore non consignées
+## VIII. Dates non consignées par décret (Avis royal n° 10)
 
-Ces lacunes ne créent pas de contradiction, mais elles doivent rester ouvertes tant qu’un futur décret ne les fixe pas.
+Le 2 septembre 2026, l’**Avis royal n° 10** a arrêté l’inventaire : les lacunes du registre
+ne sont plus ouvertes par omission, elles sont **jurées** (S1 à S7), **fixées** (F1) ou
+**requalifiées** (S7, silence d’inexistence). Aucune ne peut être comblée sans décret, ni
+laissée sans borne. Le registre en est `canon/silences.json`, gardé par `sources/check_silences.py`.
 
-| Élément | Ce qui est établi | Ce qui demeure inconnu |
-|---|---|---|
-| **Babber le Déchiré** | Cousin collatéral de Génération VI ; majeur et médiateur attesté pendant la Guerre des Cornichons de 2007–2009. | Date et lieu de naissance ; chaîne intermédiaire complète depuis Babette-Marine. |
-| **Roger Bontemps** | Adulte attesté lors de la conception de McBabber’s en 1984–1986. | Date de naissance. |
-| **Transmission de la sauce** | Linéa garde d’abord la recette, puis la transmet à Ginette après sa majorité. | Date exacte de la transmission. |
-| **Journée de la Transparence brune** | Elle se tient chaque 17 mai après le Babbersgate. | Première année exacte de célébration. |
+| Cote | Élément | Ce qui est établi — la borne | Ce qui demeure tu |
+|---|---|---|---|
+| **S1** | **Babber le Déchiré** | Cousin collatéral de Génération VI ; majeur et médiateur attesté pendant la Guerre des Cornichons de 2007–2009. | Date et lieu de naissance. |
+| **S2** | **Chaîne collatérale** | Quatre degrés depuis Babette-Marine, de la Génération II à la Génération VI — fixation **F1**. | Nom et dates des porteurs intermédiaires. |
+| **S3** | **Roger Bontemps** | Adulte attesté lors de la conception de McBabber’s en 1984–1986. | Date de naissance et état civil. |
+| **S4** | **Transmission de la sauce** | Linéa garde d’abord la recette, puis la transmet à Ginette après sa majorité. | Date exacte de la transmission. |
+| **S5** | **Journée de la Transparence brune** | Elle se tient chaque 17 mai après le Babbersgate. | Première année exacte de célébration. |
+| **S6** | **Trois aromates de la sauce** | Composition générale connue ; écoulement de huit secondes à la cuillère d’argent. | Grammage. |
+| **S7** | **Première pierre du port** | Le registre P-1 ne consigne aucune inauguration : les ouvrages y paraissent le jour où ils servent. | Il n’y a pas d’heure à taire — silence d’inexistence. |
+
+**Fixation** — **F1** : le Prince Babber le Déchiré est, **au quatrième degré**, l’héritier de la
+branche collatérale fondée par la Princesse Babette-Marine. Le degré est inscrit au canon ; les
+porteurs des degrés intermédiaires n’y sont pas nommés.
 
 ---
 

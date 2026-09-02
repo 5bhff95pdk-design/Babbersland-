@@ -18,6 +18,6 @@
 # Un changement VOLONTAIRE d'un fichier listé se règle par « make manifest »
 # dans le même commit, jamais en silence : sans ce re-grave, la CI est rouge —
 # c'est la consigne « toute correction entre par I » rendue mécanique (E-13).
-3907694230c503dce79c7351403128527f74a43cb598d7d6e082a5a86c96a588  ENCYCLOPEDIE_CONSOLIDEE_2026_I.md
-5817e55724366cb7bab3a226d5dc392ca9143386aa47f37931a926d5b2b61f1a  CHRONOLOGIE_MAITRESSE_1847_2026.md
+4f5efa4494c0c7bcdba422001911786e0e6977394c71a646299af8b058b6055b  ENCYCLOPEDIE_CONSOLIDEE_2026_I.md
+17ca2325c12995751aa0631627620fa870c05fdd240f6ea4a771f8a6414935e6  CHRONOLOGIE_MAITRESSE_1847_2026.md
 37130db779125387a2b5ac5152f771d63b49c3d65b80c2b51bbe4337cd64c674  sources/arbre_genealogique_complet.svg

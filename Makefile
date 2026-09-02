@@ -97,9 +97,10 @@ scelle: ## gel des archives G et H, des maîtres, de la galerie (R1.9) + parité
 	  && echo "workflows installés fidèles à leurs modèles (2 comparaisons octet à octet)" \
 	  || (echo "workflow installé désaligné de son modèle : relancer « make workflows » et committer (R1.8)" && exit 1)
 
-controle: ## continuité, parité des données, chroniques, portail, artéfact, fraîcheur, manifeste (R1.3), géographie, quatre sceaux d'artéfacts, archives
+controle: ## continuité, silences (R2.7), parité des données, chroniques, portail, artéfact, fraîcheur, manifeste (R1.3), géographie, quatre sceaux d'artéfacts, archives
 	$(PY) -m py_compile sources/*.py
 	$(PY) sources/check_continuity.py
+	$(PY) sources/check_silences.py
 	$(PY) sources/check_canon.py
 	$(PY) sources/check_chroniques.py
 	$(PY) sources/check_pdf.py

@@ -53,5 +53,15 @@ ajoutée sans promesse du canon fait échouer cette étape (constats E-18, E-22)
 
 ### Étape 5 · Gravure, scellement et archivage
 * Si, et seulement si, `make controle` est vert : `make empreinte` grave le contrat de fraîcheur.
-* Empreinte ou scellé modifié = acte assumé : le consigner à l'Avis dans `gouvernance/REGISTRE_DES_AVIS_ROYAUX.md`.
+* **Et `make manifest` re-grave le manifeste des livrables (R1.3)** — dès que le TEXTE du canon
+  change, pas seulement quand on touche aux images. Trouvé le 2 septembre 2026 en rejouant la
+  batterie : les scénarios légitimes V2 et R1 réimprimaient le volume et re-gravaient l'empreinte
+  **sans** re-graver le manifeste, et échouaient depuis l'entrée de `check_manifest.py` dans la
+  chaîne. Un rite qui oublie une gravure n'est pas un rite allégé : c'est un rite faux.
+* Empreinte, manifeste ou scellé modifié = acte assumé : le consigner à l'Avis dans
+  `gouvernance/REGISTRE_DES_AVIS_ROYAUX.md`.
+* **Réimpression du volume = variante CI périmée** : la charge du PDF dépend du texte. Après
+  `make empreinte`, le runner refusera au premier run ; on lit son annotation et l'on accepte la
+  charge à la main (`pdf_fingerprint.py --accepter '<charge>' <étiquette>`). Deux poussées par
+  changement de contenu : le prix connu de R1.4.g tant que R1.2 n'existe pas.
 * Mettre à jour `README.md` et `CHANGELOG.md`, committer, puis reposer l'étiquette `v2026-…` et publier la Release (R1.5).

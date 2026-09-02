@@ -136,7 +136,7 @@ Face aux rumeurs de couloir, à la découverte de deux portraits d'apparat dissi
 Fils unique du Louche et de Linéa. Porteur officiel de **l'Aspirateur-Couronne** et grand maître du **Ballon Jaune Ier**. Héritier présomptif légitime de la Couronne.
 
 #### 2. S.A.R. le Prince Babber le Déchiré (date de naissance non consignée ; majeur attesté en 2007)
-Cousin issu de la branche de Babette-Marine et frère d’armes de Babber le Fou, prince de l’Ordre du Rocking-Chair. Son rattachement est collatéral : il n’est pas un second fils du Louche, ce qui préserve le statut de fils unique de Babber le Fou.
+Cousin issu de la branche de Babette-Marine **au quatrième degré** (de la Génération II à la Génération VI) et frère d’armes de Babber le Fou, prince de l’Ordre du Rocking-Chair. Son rattachement est collatéral : il n’est pas un second fils du Louche, ce qui préserve le statut de fils unique de Babber le Fou. Le degré est fixé par l’**Avis royal n° 10** ; les porteurs des degrés intermédiaires n’y sont pas nommés, et l’arbre officiel les traverse sans s’y arrêter.
 * **Style officiel** : *Son Altesse Royale Babber le Déchiré, Grand Duc du Poêle à Bois, Protecteur des Fins de Soirée et Champion du Pouce Levé*.
 * **Attributs régaliens** :
   * **La Casquette verte d'apparat** brodée d'or et de diamants.
