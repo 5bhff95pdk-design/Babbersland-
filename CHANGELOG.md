@@ -162,6 +162,13 @@ chaîne ne demande plus aux artéfacts d'être **les mêmes octets**, elle leur 
   quand même (`variante_acceptée_mais_texte_divergent`). Batterie **25/25 en 2 min 29 s** —
   avec une vue de contrôle dédiée (`vue_frais`), pour qu'un scénario de garde-fou ne soit jamais
   validé par un contrôle voisin du sien.
+* **Verdict du canari — le run vert complet (#33575391219), 18 étapes sur 18, aucune tolérante** :
+  hymne et vignettes donnent sur le runner **la charge de la référence locale** (contrat
+  machine-indépendant, aucune variante à graver) ; Atlas et Arbre donnent leur variante
+  d'environnement **nommément acceptée** ; le PDF, `connue=variante-acceptee:ci-ubuntu-24.04-py3.12`.
+  C'est la preuve bloquante que ce lot promettait : non pas « un canari est rouge puis devient
+  vert », mais cinq annotations qui disent, à chaque run, quelle charge a été vue sur quelle
+  machine et au titre de quel contrat.
 
 ### Documenté — constats C-02, C-03, C-04 du rapport RA-2026-IV-01
 * **C-02** (achevé) : le README n'annonce plus « 7 étapes » tolérantes.

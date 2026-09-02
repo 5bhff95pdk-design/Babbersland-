@@ -157,6 +157,25 @@ elles n'étaient pas conformes, elles n'avaient pas tourné. Le verdict attendu 
 vert complet, dont chaque `::notice charge=… connue=…` consignera la charge du runner pour
 les quatre sceaux à la fois.
 
+**Le run vert est venu (#33575391219, 1ᵉʳ septembre 2026) — 18 étapes sur 18, aucune
+tolérante, et les cinq annotations qui valent preuve :**
+
+```
+empreinte-atlas     : … 16x16box:00eaea478bdf40bb…|encre:0.325      connue=ci-ubuntu-24.04-py3.12
+empreinte-arbre     : … 16x16box:a586e3355260ebe4…|ink:0.131        connue=ci-ubuntu-24.04-py3.12
+empreinte-hymne     : frames:1598625|…|pcm8:b8c8b6db…|crete:0.720   connue=reference-locale
+empreinte-vignettes : nb:77|largeur:640|grilles:b0bb7402eac27fb3…   connue=reference-locale
+empreinte-pdf       : fingerprint:1a76a0e8ee10dec6…|pages:29|…      connue=variante-acceptee:ci-ubuntu-24.04-py3.12
+```
+
+Deux lectures à en tirer, et elles ne sont pas symétriques. **Là où la charge compare du
+contenu décodé** (hymne, vignettes), le runner donne **la charge de la référence locale**,
+sans variante à graver : le contrat est machine-indépendant, ce qui était le but de R1.4.a–d.
+**Là où la charge compare un raster** (Atlas, Arbre) ou un fichier conteneur (PDF), le runner
+donne une charge d'environnement **acceptée nommément** — pas tolérée, pas ignorée : gravée,
+étiquetée, et révisable par `make pdf` + `make empreinte` sur la machine de référence.
+Un `::warning::` qui dit « ce n'est pas grave » est un contrôle sans dents ; une variante
+nommée dit **quelle** divergence est tenue pour du rendu, par qui, et depuis quand.
 ---
 
 ## Statut R1.4.c et R1.4.d (1ᵉʳ septembre 2026) — Hymne et Vignettes : charges sémantiques
@@ -164,7 +183,7 @@ les quatre sceaux à la fois.
 **Point commun aux deux étapes** : elles comparaient des **octets** avec
 `git diff --exit-code`, ce qui est à la fois trop fragile (un environnement qui encode
 autrement rend la CI rouge) et trop lâche (le `git diff` ne compare que ce qui est
-*commité* : une artéfact périmé que la machine de référence reproduit à l'identique
+*commité* : l'artéfact périmé que la machine de référence reproduit à l'identique
 passe comme une lettre). Les deux défauts ont la même racine : on comparait le conteneur
 au lieu de comparer le contenu.
 
