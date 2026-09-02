@@ -2,6 +2,50 @@
 
 Toutes les modifications notables apportées au dépôt du **Royaume du Babberland** sont consignées dans ce document.
 
+## [2026-XVII] — 2026-09-02 (Livre V — rendre au récit ce que la gouvernance lui prenait)
+
+Le § 5 de la note d'audit, réécrit le matin même, constatait que l'appareil critique pesait
+plus lourd que l'œuvre. Cette entrée est la première à faire l'inverse : **aucun contrôle
+ajouté, aucun scellé regravé, 417 lignes de chronique**.
+
+### Étoffé — `chroniques/LIVRE_V_LUNION_DES_REGNES.md` (194 → 611 lignes)
+
+* **Le manque, mesuré** : le Livre V annonçait sept tranches et n'en développait qu'une
+  section chacune — un synopsis, pas une chronique. Il expédiait en 194 lignes ce à quoi le
+  Livre II consacre 1266 lignes pour un seul aqueduc. Le Livre VI (171 lignes) est dans le
+  même état ; il reste à faire.
+* **Ce qui est écrit** : la règle des jours pairs et impairs et ses quatre lignes de
+  règlement (**UR-1998**), le fauteuil du plateau resté vide douze ans, la fiole de sable
+  d'Henri-Grain et l'heure du Grain ; l'affaire de la taupe et les trois journées de sieste
+  officielle ; la propagation du Pabstgate, la doctrine de la preuve qui se réchauffe,
+  l'étalonnage sur le thermomètre de 1898 et le sort du garçon de salle ; la méthode du
+  canif et le triple refus de 2006 ; la barricade de pots, les deux affiches et les quatre
+  articles du Traité du Vinaigre Doux ; le dernier 31 décembre et la fiole vidée ;
+  l'objection écrite du Grand Argentier et le registre du thermomètre maître.
+* **Continuité tenue** : le rappel en tête de volume impose le titre de *prince* à Babber le
+  Louche jusqu'au 2 janvier 2010 (règle n° 1 de la chronologie maîtresse) ; le volume s'y
+  astreint sur sept tranches. Les lacunes volontaires du canon restent ouvertes et **dites** —
+  `COL-2006` va jusqu'à enregistrer que la Chancellerie *refuse* de préciser les degrés de la
+  branche collatérale.
+* **Contraintes mécaniques respectées, et c'était l'essentiel** : `check_chroniques.py`
+  échoue sur toute grandeur chiffrée nouvelle. Le relevé du volume est resté à `population
+  = {5}` (la délégation de 2004), et le texte ne dénombre ni bancs, ni canaux, ni arches, ni
+  villes, ni régions, ni kilomètres. Les douze cotes ajoutées (`UR-1999`, `ZINC-2004`,
+  `CRIS-2010`…) ont été choisies hors des 77 cotes déjà prises par le corpus : **79 cotes
+  relevées, aucune collision nouvelle**, les deux connues (G-1, P-3) restant seules déclarées.
+* `make controle` **vert** — 12 vérifications, 4 empreintes, 4 scellés. Aucun artéfact
+  régénéré, aucune empreinte regravée : une chronique ne touche pas au canon.
+
+### Corrigé — une analyse fausse, dite ici pour mémoire
+
+L'analyse du dépôt affirmait que le corpus narratif se réduisait à « un seul Livre de
+chroniques ». **C'était faux** : les six Livres existent (3 918 lignes), le README les liste
+tous, et le Livre II — donné pour manquant — est le plus abouti de l'ensemble. Le manque réel
+était l'inégalité de traitement entre les volumes I–IV et les volumes V–VI. Écrire un
+« Livre II » aurait écrasé le meilleur texte du fonds.
+
+---
+
 ## [2026-XVI] — 2026-09-02 (R1.6 — le poids des images : une décision, pas un runbook qui traîne)
 
 Le constat C2 de la note d'audit (« 119 Mio d'images committés ») était ouvert depuis le
