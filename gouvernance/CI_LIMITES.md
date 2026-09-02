@@ -128,6 +128,35 @@ mieux : là, rien n'était même tenté.
 appliqué par la chaîne : il n'y a donc pas de compatibilité à maintenir, et l'histoire
 est dans ce fichier.
 
+**Mesure en CI, canari du 1ᵉʳ septembre 2026 (runs #33573944229 puis #33574049627)** — et
+c'est exactement ce que le dispositif est là pour rendre lisible :
+
+- le runner a produit `svg:d6aab963c7ea953c` `html:10ab30af34f9c925`
+  `taille:1600x1100` `mode:RGB` `encre:0.325` — **les cinq composantes structurelles
+  identiques à `reference-locale`**. La carte n'a pas changé.
+- seule `16x16box` divergeait. La grille ayant été ajoutée au diagnostic (commit suivant du
+  même soir), la divergence est **comptée** et non plus devinée : **3 cellules sur 256,
+  chacune d'un seul niveau de quantification** (lignes 1-2 colonne 6 — la zone du titre — et
+  ligne 14 colonne 5 — les étiquettes de la forêt), encre inchangée. Signature identique à la
+  mesure de l'Arbre en R1.4.b : FreeType 2.12 ↔ 2.13, antialiasing des glyphes. Le PNG pèse
+  99 129 o sur le runner contre 98 814 o ici — même rendu, autre compresseur.
+- la mutation témoin **A2** de la batterie (un rectangle noir de 200×80 px, une région noyée)
+  déplace **4 cellules, d'amplitudes 2, 6 et 7 niveaux**, et bouge l'encre. Les deux
+  distributions se touchent en **nombre** de cellules (3 contre 4) et ne se touchent pas en
+  **amplitude** : c'est la démonstration, pour l'Atlas aussi, qu'aucun seuil ne sépare le
+  bruit du contenu — d'où le refus d'une tolérance chiffrée.
+- la variante du runner a donc été **acceptée à la main** sous l'étiquette
+  `ci-ubuntu-24.04-py3.12`, dans le même format que l'Arbre, et le run vert qui suit est la
+  preuve bloquante demandée. Deux poussées : c'est le prix, connu, de l'assentiment
+  double-machine tant que R1.2 (matrice ou image épinglée) n'existe pas.
+
+**Ce que le canari a aussi montré, qui n'était pas gagné** : une étape bloquante **arrête la
+chaîne**. Sur les deux runs rouges, l'Atlas échouant en position 9, les étapes 10 à 16
+(Arbre, Hymne, Vignettes, régénération, artéfact, fraîcheur) **ne se sont pas exécutées** :
+elles n'étaient pas conformes, elles n'avaient pas tourné. Le verdict attendu est le run
+vert complet, dont chaque `::notice charge=… connue=…` consignera la charge du runner pour
+les quatre sceaux à la fois.
+
 ---
 
 ## Statut R1.4.c et R1.4.d (1ᵉʳ septembre 2026) — Hymne et Vignettes : charges sémantiques

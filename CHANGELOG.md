@@ -94,6 +94,25 @@ chaîne ne demande plus aux artéfacts d'être **les mêmes octets**, elle leur 
 * `workflow_dispatch` et `timeout-minutes: 20` ajoutés à `continuite.yml` (run manuel avant
   une Release ; un run qui s'éternise n'est pas un run qui vérifie).
 
+### Mesuré — le canari CI, et ce qu'il a fallu voir deux fois
+* **Run #33573944229 : rouge, une seule étape — l'Atlas.** L'annotation disait déjà l'essentiel :
+  les cinq composantes structurelles (`svg`, `html`, `taille`, `mode`, `encre`) **identiques** à
+  `reference-locale`, seule `16x16box` dans l'inconnu. Autrement dit la carte n'avait pas bougé,
+  son rendu si — mais **compter** le divergence exigeait la grille, et le diagnostic de l'Atlas ne
+  la donnait pas. Ajoutée au commit suivant (même formule que l'Arbre), elle a rendu le verdict
+  mesurable : **3 cellules sur 256, un seul niveau chacune**, sous le titre et sur les étiquettes
+  de la forêt, encre intacte. FreeType 2.12 ↔ 2.13, exactement la signature de R1.4.b.
+* La mutation témoin A2, elle, déplace **4 cellules d'amplitudes 2, 6 et 7 niveaux et change
+  l'encre**. Les deux distributions se touchent par le **nombre** et pas par l'**amplitude** :
+  la preuve, pour l'Atlas, qu'aucun seuil ne sépare le bruit du contenu. La variante du runner a
+  donc été **acceptée à la main** (`atlas_variante_ci-ubuntu-24.04-py3.12`), pas tolérée.
+* **Ce que le rouge a révélé de non prévu** : une étape bloquante **arrête la chaîne**. Atlas
+  échouant en position 9, les étapes 10 à 16 n'avaient pas tourné — leurs sceaux n'étaient pas
+  conformes, ils n'avaient pas été évalués. Un canari rouge n'est pas un canari qui a tout vérifié :
+  la preuve reste le run **vert complet**, dont les `::notice` consigneront les quatre charges.
+* PNG du runner 99 129 o contre 98 814 o ici : même image, autre compresseur — ce que la charge
+  ignore par construction, et ce que `git diff --exit-code` aurait appelé une faute.
+
 ### Validé — batterie portée de 20 à 24 scénarios, tous conformes
 * **Trois fautes nouvelles, une par sceau branché** — chacune refusée **par le seul** contrôle
   ajouté aujourd'hui : `A2` PNG d'Atlas noyé d'un rectangle noir (textes et données intacts) →
