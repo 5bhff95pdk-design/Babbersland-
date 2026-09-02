@@ -2,6 +2,60 @@
 
 Toutes les modifications notables apportées au dépôt du **Royaume du Babberland** sont consignées dans ce document.
 
+## [2026-XVIII] — 2026-09-02 (Livre VI — le dernier moignon du cycle, et quatre écarts au canon)
+
+Suite immédiate de 2026-XVII. Le Livre VI était le second synopsis du corpus ; il est le
+dernier. Les six Livres sont désormais au même standard, et **le premier grand cycle
+(1798–2026) est homogène**.
+
+### Étoffé — `chroniques/LIVRE_VI_LE_SIECLE_QUI_LOUCHE.md` (171 → 517 lignes)
+
+* **Écrit** : les deux sillons de patin sur les dalles de la cour d'honneur et le laissez-passer
+  du mobilier ; l'épreuve du stéthoscope appliqué à la joue et non au fromage, et les quatre
+  articles du Label qui ne définissent qu'une **durée** ; les dix-neuf formulations écartées des
+  moulins, l'avis de la Banque sur la lavande (*« un billet qui sent bon revient plus vite en
+  circulation »*), la démonstration de Linéa faisant le tour de la table, et le billet de 50
+  qui ne représente personne ; les huit secondes de viscosité et les trois mille relevés de
+  fûts du Prince Héritier ; le flacon de ketchup posé au centre et auquel personne ne touche,
+  la clause de la demande expresse, les rideaux tirés sur la visite pontificale ; les
+  trente-neuf minutes d'attente avant la cloche ; la nuit des cuisines, la délibération en
+  pantoufles et le dernier servi.
+
+### Corrigé — quatre écarts au canon, relevés en lisant 2026-I avant d'écrire
+
+Une chronique **peut taire, elle ne peut pas contredire**. Le texte existant contredisait :
+
+| Écart | Ce que disait le Livre VI | Ce que dit 2026-I |
+|---|---|---|
+| **Le faux fromage** | trois tonnes de cubes plastiques importés, refusant de fondre | l'inspection « démontra qu'il s'agissait **bien de fromage**, mais d'un fromage si timide qu'il se cachait sous la sauce » |
+| **Le Label 2018** | distance de charrette, fabrication avant l'aube, chargement transformé en bouchons | le Label mesure **une durée de fonte**, rien d'autre ; la peine fut une tranche gratuite pendant un mois |
+| **Les séries fiduciaires** | la Série A décrite comme du chanvre indéchirable | **Série A = 2023** (chanvre + lin) ; **Série B = 2026** (chanvre pur, indéchirable). Le 1 Babber de la B reprend le recto de type A |
+| **La Nuit des Sept Mille** | deux cornichons distribués à **chaque** citoyen | **un seul** burger — le sept-millième — en reçut deux ; les **6 999** autres furent distribués normalement, et le fautif mis sous cloche au musée |
+
+Le quatrième écart était le plus coûteux : il effaçait l'anecdote qui **fonde** la Fête de la
+Double Garniture. La tranche 7 la restitue, cloche de verre comprise, et l'annonce en note de
+tête pour couper court à l'embellissement oral.
+
+### Tenu — continuité et contraintes mécaniques
+
+* **Avis royal n° 5** rappelé en tête et respecté sur sept tranches : le chiffre **VII** marque la
+  **septième génération**, non un septième règne ; le Louche règne toujours, le Fou est premier
+  successible, Ti-Babber second. Le roi exige d'ailleurs, dans la proclamation, que le mot
+  *génération* figure dans la phrase — « afin qu'aucun chroniqueur ne pût, plus tard, lire un
+  règne dans un chiffre ».
+* **Lacunes volontaires gardées ouvertes et dites** : le total de 7 000 âmes est signalé comme
+  proposition en attente de l'Avis n° 7 ; l'année de la première Journée de la Transparence
+  brune n'est pas fixée ; la valeur chiffrée de la Parité Poutine reste tue — le billet de 50
+  « qui la montre, se garde bien de la dire ».
+* **Grandeurs chiffrées** : relevé inchangé, `population = {7000}` pour ce volume. Les 6 999
+  burgers ne sont pas un dénombrement d'âmes et n'ont pas fait dériver le contrôle.
+* **Cotes** : 6 ajoutées (`KOUIK-2018`, `MOUL-2020`, `CHAI-2016`, les *bis*…), choisies hors des
+  cotes déjà prises — **85 cotes relevées, aucune collision nouvelle**, les deux connues
+  (G-1, P-3) restant seules déclarées.
+* `make controle` **vert** — 12 vérifications, 4 empreintes, 4 scellés. Aucun artéfact régénéré.
+
+---
+
 ## [2026-XVII] — 2026-09-02 (Livre V — rendre au récit ce que la gouvernance lui prenait)
 
 Le § 5 de la note d'audit, réécrit le matin même, constatait que l'appareil critique pesait
