@@ -1,23 +1,23 @@
 # 📸 Galerie Photos Ultra-Réalistes du Royaume du Babberland
 
 **Chancellerie Royale & Iconographie Officielle**  
-**Campagne 2026-V** · Dossier `images/realistes/`
+**Campagnes 2026-V à 2026-VII** · Dossier `images/realistes/`
 
 ---
 
 ## 🌟 Vue d'ensemble
 
-Afin de donner vie au Royaume du Babberland, **soixante-dix-sept (77)** photographies ultra-réalistes en haute définition sont versées au portail interactif (`index.html`).
+Afin de donner vie au Royaume du Babberland, **quatre-vingt-trois (83)** photographies ultra-réalistes en haute définition sont versées au portail interactif (`index.html`).
 
-La campagne 2026-V complète la série 2026-II : les **18 figures du canon** ont désormais chacune un cliché, puis les **cinq régions** et les **offices du Livre VIII**. Les photographies capturent les lieux canoniques, les figures historiques, l'architecture, la numismatique et l'humour caractéristique de la nation.
+La campagne 2026-V complète la série 2026-II : les **18 figures du canon** ont désormais chacune un cliché, puis les **cinq régions** et les **offices du Livre VIII**. La campagne 2026-VI y ajoute le **bestiaire royal** (Titre III du guide gastronomique), la campagne 2026-VII les **transports et la marine royale** (Titre IV). Les photographies capturent les lieux canoniques, les figures historiques, l'architecture, la numismatique, la faune et l'humour caractéristique de la nation.
 
 Ces images sont **hors volume 2026-I et hors scellé `ICONOGRAPHIE.sha256`** : elles n'entrent pas dans le PDF tant qu'un Avis ne les y fait pas entrer. Consigne reconduite : **aucun lettrage dans l'image**.
 
-**Diffusion (30 août 2026)** : le portail charge en grille des **vignettes WebP de 640 px** dérivées de ces maîtres (`images/vignettes/`, générées par `make vignettes`, 220 Mio → 4,65 Mio) ; le cliché pleine taille du dossier `images/realistes/` reste **un clic plus loin**, dans la visionneuse. Les maîtres ne sont pas modifiés — le scellé d'iconographie et la sortie prévue en LFS (R1.6, `gouvernance/LFS_MIGRATION.md`) les concernent, pas les vignettes.
+**Diffusion (30 août 2026)** : le portail charge en grille des **vignettes WebP de 640 px** dérivées de ces maîtres (`images/vignettes/`, générées par `make vignettes`, 238 Mio → 5,07 Mio) ; le cliché pleine taille du dossier `images/realistes/` reste **un clic plus loin**, dans la visionneuse. Les maîtres ne sont pas modifiés — le scellé d'iconographie et la sortie prévue en LFS (R1.6, `gouvernance/LFS_MIGRATION.md`) les concernent, pas les vignettes.
 
 ---
 
-## 🖼️ Inventaire Complet de la Galerie (77 Photos)
+## 🖼️ Inventaire Complet de la Galerie (83 Photos)
 
 ### Série 2026-II (16)
 
@@ -116,14 +116,30 @@ Ces images sont **hors volume 2026-I et hors scellé `ICONOGRAPHIE.sha256`** : e
 | `images/realistes/union_des_regnes.png` | **Union des Règnes** | Signature 2024, cuillère d'argent. |
 | `images/realistes/nuit_de_leau.png` | **Jour de l'Eau** | Aqueduc qui se remplit, 1904. |
 
+### Série 2026-VI (4) — le Bestiaire Royal (Titre III du guide gastronomique)
+
+| Fichier | Sujet | Description & Ambiance |
+|---|---|---|
+| `images/realistes/lievre_d_ombre.png` | **Le Lièvre d'Ombre** (*Lepus sedatus*) | Refuse la fuite : assis en tailleur sous une fougère, il regarde passer les promeneurs d'un air digne. |
+| `images/realistes/pic_somnolent.png` | **Le Pic Somnolent** (*Dryocopus dormiens*) | Ne frappe l'écorce qu'une fois toutes les trois minutes, pour respecter l'ambiance sonore de la forêt. |
+| `images/realistes/truite_meditative.png` | **La Truite Méditative** (*Salmo philosophicus*) | Remonte les rapides à reculons pour garder les yeux rivés sur le paysage traversé. |
+| `images/realistes/ecureuil_econome.png` | **L'Écureuil Économe** (*Sciurus canapensis*) | Enterre ses noisettes au pied des chaises de jardin, pour éviter d'avoir à marcher trop loin. |
+
+### Série 2026-VII (2) — Transports & Marine royale (Titre IV du guide gastronomique)
+
+| Fichier | Sujet | Description & Ambiance |
+|---|---|---|
+| `images/realistes/ptit_train_qui_baille.png` | **Le P'tit Train qui Baille (1891)** | 18 km/h, fenêtres ouvertes pour la cueillette des baies, hamacs suspendus sur amortisseurs et arrêt castoral : le chef de train sert café chaud et beignes. |
+| `images/realistes/babette_marine_1_amiral.png` | **La *Babette-Marine I*, navire-amiral** | Péniche royale à fond plat de 28 mètres, ponton de pêche contemplative et fumoir à poisson au bois d'érable. Clapotis limité à 5 cm. |
+
 ---
 
 ## 🌐 Intégration Web
 
-Les 77 photographies sont consultables dans le portail :
+Les 83 photographies sont consultables dans le portail :
 
 - **Fichier principal** : `index.html`
-- **Onglet dédié** : `📸 Galerie Photos Réalistes` (filtres : Tous · Personnages · Lieux · Institutions · Table & Monnaie)
+- **Onglet dédié** : `📸 Galerie Photos Réalistes` (filtres : Tous · Personnages · Lieux · Faune · Transports · Institutions · Table & Monnaie)
 - **Dictionnaire des 18 personnages** : chaque fiche porte son portrait
 - **Accueil** : héro du Double Aqueduc et cartes des cinq régions
 - **Chroniques I–VI** et **Institutions** : planches d'ambiance
