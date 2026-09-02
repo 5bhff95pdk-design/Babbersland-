@@ -1,14 +1,15 @@
 # 🔧 Limites connues de la CI de continuité
 
 **Référence** : CI-2026-I · diagnostic des étapes en `continue-on-error: true`
-**Établi le** : 1ᵉʳ septembre 2026 · **dernier état** : 1ᵉʳ septembre 2026 (R1.4.a-v3 et R1.4.c–g livrés)
-**Ticket de durcissement** : R1.4 (sous-tickets R1.4.a à R1.4.h) — **les huit sont livrés**
+**Établi le** : 1ᵉʳ septembre 2026 · **dernier état** : 1ᵉʳ septembre 2026 (R1.8 et R1.9 livrés à la suite de R1.4)
+**Ticket de durcissement** : R1.4 (sous-tickets R1.4.a à R1.4.h) — **les huit sont livrés** ; les deux bornes nées en route (R1.8, R1.9) le sont aussi
 
-**État mesuré le 1ᵉʳ septembre 2026, en soirée** : `sources/github_actions_continuite.yml` compte
-**18 étapes** (16 nommées + `actions/checkout` + `actions/setup-python`), **0** portant
-`continue-on-error`. Le compte est pris au parseur YAML, pas au grep : une étape
-tolérante de trop dans ce document coûterait moins cher qu'une étape tolérante de trop
-dans le workflow.
+**État mesuré le 1ᵉʳ septembre 2026, tard en soirée** : `sources/github_actions_continuite.yml` compte
+**19 étapes** (17 nommées + `actions/checkout` + `actions/setup-python`), **0** portant
+`continue-on-error`. La 19ᵉ est la **parité modèle ↔ workflow installé** (R1.8) ; le gel
+en tête de chaîne couvre désormais aussi `gouvernance/GALERIE.sha256` (R1.9). Le compte
+est pris au parseur YAML, pas au grep : une étape tolérante de trop dans ce document
+coûterait moins cher qu'une étape tolérante de trop dans le workflow.
 
 ---
 
@@ -203,14 +204,21 @@ et quantifiée par vignette, lot haché, plus `nb`, `largeur` (promesses du diff
 `octets` (mesure de diffusion signalée, non contractée). Un ré-encodage libwebp
 différent ne bouge pas ; un maître oublié de régénérer bouge.
 
-**Ce que R1.4.d révèle au passage** : `images/realistes/` (211 Mio, 77 pièces) n'est
+**Ce que R1.4.d révèle au passage** : `images/realistes/` (211 Mio, 77 pièces) n'était
 **scellé par rien** — `ICONOGRAPHIE.sha256` couvre `images/*.png`, les 28 maîtres du
-volume. La galerie du portail n'a donc d'autre garde-fou de contenu que l'empreinte des
+volume. La galerie du portail n'avait donc d'autre garde-fou de contenu que l'empreinte des
 vignettes, qui ne la protège qu'à moitié (une photographie retouchée dont on oublie de
-régénérer les vignettes passe ; retouchée **et** régénérée, elle bloque). Un scellé
-`gouvernance/GALERIE.sha256` est le remède naturel — hors périmètre R1.4, à porter au
-prochain ticket. La batterie le démontre : scénario J1, refusé **uniquement** par
-`empreinte_vignettes`.
+régénérer les vignettes passe ; retouchée **et** régénérée, elle bloque). La batterie le
+démontrait : scénario J1, refusé **uniquement** par `empreinte_vignettes`.
+
+**Fermé le 1ᵉʳ septembre 2026 (R1.9)** : `gouvernance/GALERIE.sha256` (77 lignes, gravé
+par `make galerie`) est vérifié par `make scelle` — donc par `make controle` et par
+l'étape de gel en tête de chaîne, avant toute régénération, comme les deux autres scellés.
+Coût mesuré, conforme au ticket : +77 lignes de scellé, 0 octet de plus en CI (les
+fichiers sont déjà dans le checkout ; `sha256sum` les lit en ~1,3 s). Preuve : scénario
+**J1bis** de la batterie — la même retouche que J1, vignettes PAS régénérées, refusée par
+`scelle` seul (`vue_scelle`, le juge à un seul œil, pour que le mécanisme visé soit bien
+celui qui bronche).
 
 ---
 
@@ -354,7 +362,8 @@ Les causes précises (à investiguer en R1.4) sont probablement :
 | Artéfact publié (planches) | dérivée du PDF | pages, flux, légendes, appariement | ✅ **bloquant** | R1.4.f — livré |
 | Fraîcheur du PDF | dérivée de l'empreinte sémantique | `pdf_fingerprint.txt` (+ `texte` comparé) et variantes `PDF CANONIQUE` | ✅ **bloquant**, variante du runner gravée sur mesure | R1.4.g — livré ; R1.10 déclarée |
 
-**Aucune des 18 étapes du workflow ne porte plus `continue-on-error`.** Le durcissement
+**Aucune des 19 étapes du workflow ne porte plus `continue-on-error`** (18 à la clôture
+de R1.4 ; la parité modèle ↔ installé de R1.8 fait la 19ᵉ, bloquante d'emblée). Le durcissement
 a une contrepartie, déclarée : la chaîne peut désormais être rouge pour un rendu
 d'environnement. La procédure est la même pour les sept artéfacts — lire l'annotation
 (`charge=… connue=NON`), juger si la composante fautive est du bruit ou du contenu, puis
@@ -413,4 +422,5 @@ La situation est analogue à un wiki : on ne « gèle » pas un export PDF en v�
 
 *Document établi à Pabst City, le 1ᵉʳ septembre 2026, par l'agent Arena.ai (session `arena/01a05e26-babbersland`).*  
 *Statut R1.4.b ajouté le même jour (session `arena/01a05f15-babbersland`) : l'Arbre est durci et bloquant via empreinte sémantique tolérante.*  
-*Statuts R1.4.a-v3 et R1.4.c–g ajoutés le 1ᵉʳ septembre 2026 (session `arena/01a05f55-babbersland`) : les sept artéfacts régénérés ont un contrat sémantique en variantes acceptées, la CI les appelle tous, et **plus aucune étape n'est tolérante**. La batterie de mutations, elle, a trouvé un horaire : workflow `batterie.yml`.*
+*Statuts R1.4.a-v3 et R1.4.c–g ajoutés le 1ᵉʳ septembre 2026 (session `arena/01a05f55-babbersland`) : les sept artéfacts régénérés ont un contrat sémantique en variantes acceptées, la CI les appelle tous, et **plus aucune étape n'est tolérante**. La batterie de mutations, elle, a trouvé un horaire : workflow `batterie.yml`.*  
+*Statuts R1.8 et R1.9 ajoutés le 1ᵉʳ septembre 2026 (session `arena/01a05f96-babbersland`) : les deux bornes nées de la vague R1.4 sont fermées — la galerie photoréaliste est scellée (`GALERIE.sha256`, 77 lignes, vérifiée en tête de chaîne) et la parité modèle ↔ workflow installé est une étape bloquante (19ᵉ du workflow). Batterie portée à **27 scénarios** (J1bis, W1), chacun jugé par le seul mécanisme qu'il prouve.*

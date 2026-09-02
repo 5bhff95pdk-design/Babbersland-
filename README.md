@@ -34,7 +34,7 @@ L'édition **2026-I** intègre directement les corrections et ne nécessite aucu
 | `gouvernance/ARCHIVE.sha256` | Scellés des archives 2026-G et 2026-H, vérifiés par la CI et par `make scelle` |
 | `gouvernance/ICONOGRAPHIE.sha256` | Scellés des 28 maîtres d'illustration, par leur nom (E-18) |
 | `gouvernance/CI_LIMITES.md` | Journal des limites de la CI de continuité : R1.4.a à R1.4.h **tous livrés** — 18 étapes, **aucune** en `continue-on-error` ; causes, mesures et ceremony d'acceptation y restent écrites |
-| `.github/workflows/continuite.yml` | **CI active, entièrement bloquante** : 18 étapes à chaque push sur `main`, à chaque PR et à la demande (`workflow_dispatch`) (première exécution verte : 2026-09-01T21:46:19Z) |
+| `.github/workflows/continuite.yml` | **CI active, entièrement bloquante** : 19 étapes à chaque push sur `main`, à chaque PR et à la demande (`workflow_dispatch`) — les 18 de R1.4 (première exécution verte : 2026-09-01T21:46:19Z) plus la parité modèle ↔ installé (R1.8), et le gel élargi à la galerie (R1.9) |
 | `.github/workflows/batterie.yml` | **Batterie de mutations à horaires** : lundi 03:17 UTC + exécution manuelle. Vingt-quatre scénarios sur copies isolées (19 fautes à refuser, 5 éditions légitimes à accepter), puis preuve que l'arbre de référence est resté intact. C'est le contrôle du contrôle |
 | `canon/` + `propositions_declarées` | Données structurées (R3.3) sous contrat de parité : une affirmation est attestée par le corpus ou déclarée comme proposition |
 | `gouvernance/pdf_fingerprint.txt` | Empreinte sémantique du PDF canonique — le contrat de fraîcheur de l'artefact |
@@ -79,12 +79,12 @@ Tout passe par `make`, qui installe ses propres dépendances dans un venv — le
 make env          # python3 -m venv .venv + pip install -r requirements.txt
 make tout         # arbre → hymne → PDF → CONTRÔLES → empreinte (l'ordre est un contrôle, voir E-21)
 make controle     # douze contrôles + les scellés, sans rien régénérer
-make scelle       # gel des archives G et H + scellé des 28 maîtres d'illustration
+make scelle       # gel des archives G et H, des 28 maîtres, des 77 clichés de la galerie (R1.9) + parité des workflows (R1.8)
 ```
 
 Buts disponibles : `env`, `arbre`, `carte`, `hymne`, `vignettes`, `pdf`, `empreinte`,
 `empreinte-atlas`, `empreinte-arbre`, `empreinte-hymne`, `empreinte-vignettes`,
-`controle`, `scelle`, `iconographie`, `lfs`, `batterie`, `workflows`, `tout`, `propre`.
+`controle`, `scelle`, `iconographie`, `galerie`, `lfs`, `batterie`, `workflows`, `tout`, `propre`.
 
 **Quatre actes d'assentiment, pas quatre vérifications.** `make empreinte-<artéfact>`
 grave la charge sémantique de l'artéfact régénéré dans
@@ -93,8 +93,8 @@ changement de rendu voulu se grave ici et se dit à l'Avis ; une variante venue 
 autre environnement (runner CI, puis matrice multi-OS R1.2) s'accepte par
 `--accepter '<charge>' <étiquette>` après lecture de l'annotation — jamais en silence.
 
-`make batterie` ne contrôle pas le dépôt : il **malmène vingt-cinq copies isolées** de son arbre (naissances fausses, deux portraits permutés, archive gelée raturée, générateur syntaxiquement cassé, un banc de plus non déclaré, une cote réattribuée, une déclaration obsolète, **un PNG d'Atlas noyé d'encre**, **un hymne rejoué sur une autre graine**, **une photographie réaliste retouchée puis ses vignettes régénérées**, **un texte du volume réimprimé que l'on prétend couvrir en variant d'environnement**) et vérifie que la chaîne refuse — puis qu'elle accepte **cinq** éditions légitimes, dont la cérémonie d'acceptation d'une variante de rendu (V4 : on observe la charge, on l'accepte à la main, la chaîne laisse passer). C'est la seule preuve que les contrôles ont des dents ; elle coûte **2 min 29 s** (mesure du
-1ᵉʳ septembre 2026, 25 scénarios) et ne fait pas partie de `controle`, puisqu'elle réécrit des scellés dans ses laboratoires — mais **elle a un horaire en CI** : `.github/workflows/batterie.yml`, le lundi à 03:17 UTC et à la demande. Un contrôle émasculé (la classe du constat C-01, qui a survécu à quatre audits) ne survit plus à une semaine.
+`make batterie` ne contrôle pas le dépôt : il **malmène vingt-sept copies isolées** de son arbre (naissances fausses, deux portraits permutés, archive gelée raturée, générateur syntaxiquement cassé, un banc de plus non déclaré, une cote réattribuée, une déclaration obsolète, **un PNG d'Atlas noyé d'encre**, **un hymne rejoué sur une autre graine**, **une photographie réaliste retouchée puis ses vignettes régénérées**, **la même photographie retouchée SANS régénérer les vignettes** (le trou que R1.9 ferme), **un workflow installé retouché à la main, modèle intact** (le trou que R1.8 ferme), **un texte du volume réimprimé que l'on prétend couvrir en variant d'environnement**) et vérifie que la chaîne refuse — puis qu'elle accepte **cinq** éditions légitimes, dont la cérémonie d'acceptation d'une variante de rendu (V4 : on observe la charge, on l'accepte à la main, la chaîne laisse passer). C'est la seule preuve que les contrôles ont des dents ; elle coûte **2 min 41 s** (mesure du
+1ᵉʳ septembre 2026, 27 scénarios) et ne fait pas partie de `controle`, puisqu'elle réécrit des scellés dans ses laboratoires — mais **elle a un horaire en CI** : `.github/workflows/batterie.yml`, le lundi à 03:17 UTC et à la demande. Un contrôle émasculé (la classe du constat C-01, qui a survécu à quatre audits) ne survit plus à une semaine.
 **Graver l'empreinte n'est jamais une vérification** : `empreinte` clôt la chaîne et consigne un assentiment ;
 la CI, elle, ne fait que `--check`. Un changement d'empreinte voulu se dit à l'Avis. Hors venv : `make PY=python3 …`. Les générateurs cherchent les polices DejaVu sur Linux, macOS et Windows (`BABBERLAND_FONT_DIR` pour forcer un répertoire). L'atlas géographique (`make carte`) est **hors canon** : il ne rentre pas dans `make tout` ni dans le PDF, tant qu'un Avis ne l'a pas ratifié. L'hymne national (`make hymne`), décrété par l'Avis royal n° 8, **entre dans `make tout`** : son enregistrement de référence (`audio/`) se régénère au bit près, partition lue dans le dossier officiel.
 
@@ -137,7 +137,7 @@ make scelle
 - **`check_pdf.py`** (`pypdf`) ouvre le PDF publié et **apparie chaque planche à sa légende, page par page**, sur le md5 du dérivé réellement embarqué : deux portraits intervertis, une planche de trop, une légende sans image sont des échecs (constats E-18, E-22). L'attendu vient du canon, pas du générateur ; la transformée d'image est unique (`sources/babberland_images.py`), partagée par le générateur et les contrôles.
 - **`pdf_fingerprint.py --check`** compare l'artefact publié à l'empreinte gravée : le PDF n'est pas reproductible à l'octet (ReportLab nomme ses XObject aléatoirement), donc on compare ce que le lecteur voit — pages, texte, placements. L'empreinte n'est plus un ensemble trié : permuter deux illustrations la modifie (E-18). Le **texte extrait** est un champ comparé à part entière (`texte = …` dans le contrat) ; les **hachés de flux d'images**, eux, sont consignés en commentaire et non comparés — ils portent le bitstream JPEG de la libjpeg du moteur, donc varient d'une machine sans que l'image change (mesure du canari, run #33574438077). Un écart est **nommé** : `CONTENU` se corrige, `EMBALLAGE` s'accepte après revue — et le scénario P1c de la batterie prouve qu'accepter une variante ne couvre jamais un texte différent.
 - **`check_portal.py`** (sans dépendance, constat C1) fait la **parité du portail racine** : `index.html` contre `canon/personnages.json` — chaque fiche du dictionnaire doit correspondre à *exactement une* fiche du canon et porter les **mêmes années de vie** (peu importe la rédaction : « né le 15 juillet 1962 » ≡ « né 1962 », « Babber Ier le Dormeur » ≡ « Babber le Dormeur »). C'est ce qui a pris le portail en flagrant délit de quatre dates contradictoires avec le canon.
-- **`make scelle`** vérifie `gouvernance/ARCHIVE.sha256` (archives 2026-G et 2026-H) **et** `gouvernance/ICONOGRAPHIE.sha256` (les 28 maîtres, scellés par leur nom). Ce second scellé est la réponse au seul résidu que la chaîne assume : réengraver *les deux* après une permutation reste un acte éditorial, lisible dans le diff, et qui demande un Avis.
+- **`make scelle`** vérifie `gouvernance/ARCHIVE.sha256` (archives 2026-G et 2026-H), `gouvernance/ICONOGRAPHIE.sha256` (les 28 maîtres, scellés par leur nom), `gouvernance/GALERIE.sha256` (les 77 clichés photoréalistes, R1.9 — avant lui, un cliché retouché dont on oubliait de régénérer les vignettes passait : la charge des vignettes ne regarde que les dérivés) **et la parité modèle ↔ workflow installé** (R1.8 : `sources/github_actions_*.yml` comparés octet à octet à `.github/workflows/*.yml` — un workflow retouché à la main désalignait la chaîne de son contrat en silence). Le scellé des maîtres est la réponse au seul résidu que la chaîne assume : réengraver *les deux* après une permutation reste un acte éditorial, lisible dans le diff, et qui demande un Avis.
 
 Les mêmes contrôles sont enchaînés à chaque push sur `main` et à chaque pull request par le workflow `sources/github_actions_continuite.yml` : arbre régénéré identique au bit près, régénération du volume, artéfact, empreinte de fraîcheur, scellé des archives, PDF déposé en pièce jointe de relecture.
 
@@ -149,10 +149,11 @@ make workflows    # sources/github_actions_continuite.yml → .github/workflows/
                   # et retire au passage le talon invalide main.yml
 ```
 
-**18 étapes**, YAML validé au parseur, chacune rejouée localement : polices, dépendances,
-compilation, **gel des archives et des maîtres** (placé avant toute régénération, R1.4.h),
-continuité, parité des données, parité du portail, **chroniques**, atlas, arbre, **hymne (Avis
-royal n° 8)**, **vignettes**, régénération du volume, artéfact apparié, fraîcheur, pièce jointe.
+**19 étapes**, YAML validé au parseur, chacune rejouée localement : polices, dépendances,
+compilation, **gel des archives, des maîtres et de la galerie** (placé avant toute régénération,
+R1.4.h + R1.9), **parité modèle ↔ workflow installé** (R1.8), continuité, parité des données,
+parité du portail, **chroniques**, atlas, arbre, **hymne (Avis royal n° 8)**, **vignettes**,
+régénération du volume, artéfact apparié, fraîcheur, pièce jointe.
 
 **Aucune étape n'est tolérante depuis R1.4.a-v3 et R1.4.c–g (1ᵉʳ septembre 2026).** Chacune des
 quatre régénérations binaires est désormais régie par une **charge sémantique en variantes
@@ -165,14 +166,17 @@ ou régénérer et re-graver (contenu).
 Le fichier `.github/workflows/continuite.yml` **ne peut pas sortir d'une App sans le droit `workflows`** :
 GitHub refuse qu'un tel jeton crée ou modifie `.github/workflows/*` (constats **E-17** et **F-01**, mesuré
 à plusieurs reprises — refus à la fois par `git push` et par l'API *contents*). Le dépôt versionne donc
-**les modèles** (`sources/github_actions_*.yml`) **et** leurs copies installées. Ce que la chaîne
-ne fait pas encore : vérifier mécaniquement que les deux concordent — `make workflows` les écrit
-côte à côte et le diff de revue fait foi. Limite connue, à durcir (une comparaison de deux lignes
-dans `make controle`).
+**les modèles** (`sources/github_actions_*.yml`) **et** leurs copies installées. Depuis R1.8
+(1ᵉʳ septembre 2026), la chaîne vérifie mécaniquement que les deux concordent : `make scelle`
+(donc `make controle` et la CI) compare les deux paires octet à octet, et le scénario W1 de la
+batterie prouve qu'un workflow retouché à la main est refusé. Nota : la CI exécute le YAML
+installé ; si les deux fichiers divergent, l'échec ne dit pas lequel a raison — il force la
+question, et `make workflows` la règle dans le sens du modèle.
 
 **Statut au 1ᵉʳ septembre 2026** : le droit `workflows` a été accordé à l'installation de l'App
 `arena-ai-coding-agent`, et la PR #22 a installé le workflow sur `main` (commit `9f527f3`).
-La CI est **active et verte** sur la branche principale, **18 étapes bloquantes sur 18**. La
+La CI est **active et verte** sur la branche principale, **19 étapes bloquantes sur 19**
+(les 18 de R1.4, plus la parité modèle ↔ installé de R1.8). La
 limitation qui fermait le volume (six étapes tolérantes, parce que les régénérations binaires
 ne sont pas reproductibles au bit près entre machines) est levée par R1.4.a-v3 et R1.4.c–g :
 le contrat n'est plus l'égalité des octets mais la charge sémantique. Ce qui reste connu et

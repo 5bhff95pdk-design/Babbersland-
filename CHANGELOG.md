@@ -2,6 +2,62 @@
 
 Toutes les modifications notables apportées au dépôt du **Royaume du Babberland** sont consignées dans ce document.
 
+## [2026-XIV] — 2026-09-01, tard en soirée (R1.8 et R1.9 — les deux bornes nées de R1.4 sont fermées le jour même)
+
+La vague R1.4 avait déclaré deux trous plutôt que de les résoudre en silence ; les voici
+fermés, dans le grain du projet : **un scellé de plus, une parité vérifiée, deux scénarios
+de batterie qui prouvent chacun le mécanisme qu'il vise — et rien d'autre**.
+
+### Ajouté — R1.9 : `gouvernance/GALERIE.sha256`, le dernier corpus d'images sans scellé
+* **Le trou, mesuré par R1.4.d** : `images/realistes/` (77 pièces, 211 Mio) n'était scellé
+  par rien — `ICONOGRAPHIE.sha256` couvre les 28 maîtres du volume, la charge des vignettes
+  ne regarde que les dérivés. Un cliché retouché dont on **oubliait** de régénérer les
+  vignettes passait (retouché **et** régénéré, il bloquait : J1).
+* `gouvernance/GALERIE.sha256` (77 lignes), gravé par le nouveau but **`make galerie`**,
+  vérifié par `make scelle` — donc par `make controle` et par l'étape de gel en tête de
+  chaîne, avant toute régénération (le placement de R1.4.h vaut pour lui aussi : le scellé
+  protège les octets commités, le rendu régénéré a ses propres contrats).
+* **Mesure jointe, conforme au ticket** : +77 lignes de scellé, **0 octet de plus en CI**
+  (les fichiers sont déjà dans le checkout ; `sha256sum` les lit en ~1,3 s).
+* La dépendance pressentie à R1.6 (LFS) s'est révélée inutile : le scellé lit des octets
+  commités, où qu'ils habitent — une migration LFS ne changera que le canal de lecture.
+
+### Ajouté — R1.8 : la parité modèle ↔ workflow installé, vérifiée au lieu d'espérée
+* **Le trou, hérité d'E-17/F-01** : le dépôt versionne les modèles (`sources/github_actions_*.yml`)
+  **et** leurs copies installées (`.github/workflows/*.yml`), parce qu'une App sans le droit
+  `workflows` ne peut pas poser les secondes. `make workflows` les écrivait côte à côte, et
+  **rien ne vérifiait qu'elles concordent** : un `|| true` glissé à la main dans le workflow
+  installé désalignait la chaîne de son contrat, en silence — la classe E-09/C-01, celle que
+  quatre audits ont poursuivie partout ailleurs.
+* Deux `cmp` octet à octet dans `make scelle`, et une **19ᵉ étape CI dédiée**, bloquante
+  d'emblée (« Parité modèle ↔ workflow installé (R1.8) »).
+* **Borne d'honnêteté, écrite dans le YAML** : la CI exécute le workflow **installé** ; si
+  les deux fichiers divergent, l'échec ne dit pas lequel porte la vérité — il force la
+  question. `make workflows` la règle dans le sens du modèle, et le diff de revue fait foi.
+
+### Batterie — 25 → **27 scénarios (27/27)**, chacun jugé par son propre mécanisme
+* **J1bis** : la retouche de J1 (rectangle noir sur `babber_ier_l_ancien.png`), vignettes
+  **pas** régénérées — exactement le cas qui passait avant R1.9. Refusé par `scelle` seul.
+* **W1** : `pdf_fingerprint.py --check` neutralisé par `|| true` dans le workflow installé,
+  modèle intact — exactement le cas qui passait avant R1.8. Refusé par `scelle` seul.
+* Nouveau juge **`vue_scelle`** (le pendant de `vue_frais`) : un scénario de garde-fou doit
+  être refusé par le mécanisme qu'il prouve, pas par un contrôle voisin — sans quoi il ne
+  prouverait rien. Mesure du 1ᵉʳ septembre 2026 : 2 min 41 s pour les 27 scénarios.
+
+### Mis à jour
+* `Makefile` (buts `galerie` et `scelle` élargi), les deux modèles de workflows **et leurs
+  copies installées** (resynchronisées par `make workflows`, comme le contrat l'exige
+  désormais), `README.md`, `gouvernance/CI_LIMITES.md`, `ROADMAP_2026_II.md`.
+* Comptes tenus à jour : CI de continuité à **19 étapes, 0 tolérante** ; `batterie.yml`
+  annonce « Vingt-deux fautes refusées, cinq éditions acceptées ».
+
+**Rejoué avant livraison** : `make controle` vert (12 vérifications + les scellés élargis),
+`make batterie` **27/27**, `make scelle` idempotent après `make galerie`, YAML des deux
+workflows validé au parseur, et les deux nouveaux scénarios éprouvés aussi en isolation
+(refus par `scelle` seul, témoin intact accepté).
+
+---
+
 ## [2026-XIII] — 2026-09-01, dans la soirée (R1.4.a-v3 et R1.4.c–g — la CI n'a plus une seule étape tolérante)
 
 **Clôture de R1.4.** Après R1.4.b (Arbre) et R1.4.h (gel des archives) le même jour, les

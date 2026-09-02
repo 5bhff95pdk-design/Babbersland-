@@ -10,10 +10,11 @@ name: Batterie de mutations — les contrôles ont-ils des dents ?
 # plus coûteuse pour ce projet, parce qu'elle est silencieuse ET qu'elle est
 # vérifiable par la seule exécution.
 #
-# `sources/test_mutations.py` isole vingt copies de l'arbre, en casse seize (fautes
-# qui doivent être refusées) et laisse quatre en édition légitime (qui doivent passer),
-# puis rend son verdict. La référence n'est jamais touchée — le dernier pas de ce
-# workflow le prouve, au lieu de le promettre.
+# `sources/test_mutations.py` isole vingt-sept copies de l'arbre, en casse vingt-deux
+# (fautes qui doivent être refusées — dont, depuis R1.8/R1.9, un workflow retouché à la
+# main et un cliché de la galerie retouché sans régénération) et laisse cinq en édition
+# légitime (qui doivent passer), puis rend son verdict. La référence n'est jamais
+# touchée — le dernier pas de ce workflow le prouve, au lieu de le promettre.
 #
 # Pourquoi un workflow distinct, et à horaire : la batterie coûte une minute et des
 # poussières, réécrit des scellés dans ses laboratoires et n'a rien à dire sur un
@@ -30,7 +31,7 @@ permissions:
 
 jobs:
   batterie:
-    name: Seize fautes refusées, quatre éditions acceptées
+    name: Vingt-deux fautes refusées, cinq éditions acceptées
     runs-on: ubuntu-latest
     # Vingt copies d'arbre, dont quatre chaînes complètes `make controle` et des
     # régénérations de PDF : large. Mieux vaut un rouge franc qu'un hang.
@@ -48,7 +49,7 @@ jobs:
       - name: Dépendances épinglées
         run: python -m pip install --break-system-packages -r requirements.txt
 
-      - name: Batterie de mutations (16 fautes attendues refusées, 4 éditions légitimes acceptées)
+      - name: Batterie de mutations (22 fautes attendues refusées, 5 éditions légitimes acceptées)
         run: python sources/test_mutations.py
 
       - name: La référence est restée intacte (la batterie ne casse que ses copies)
@@ -64,3 +65,4 @@ jobs:
         run: |
           sha256sum --check --quiet gouvernance/ARCHIVE.sha256
           sha256sum --check --quiet gouvernance/ICONOGRAPHIE.sha256
+          sha256sum --check --quiet gouvernance/GALERIE.sha256
