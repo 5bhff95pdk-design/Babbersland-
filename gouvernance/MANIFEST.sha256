@@ -1,0 +1,23 @@
+# Manifeste des livrables du Royaume du Babberland — liste d'intégrité (R1.3).
+# Génération (acte d'assentiment) : python sources/make_manifest.py
+# Vérification (CI bloquante)    : python sources/check_manifest.py --check
+# ------------------------------------------------------------------------
+# Ce manifeste scelle par OCTETS le corpus canonique LIVRÉ : le texte qui fait
+# foi (ENCYCLOPEDIE_CONSOLIDEE_2026_I.md), le registre chronologique
+# (CHRONOLOGIE_MAITRESSE_1847_2026.md) et la source vectorielle de l'arbre
+# (sources/arbre_genealogique_complet.svg), ces trois-là n'ayant aucun scellé
+# par octets.
+#
+# Il ne scelle PAS — délégués à leurs contrats propres :
+#   - le PDF 2026-I : octets NON-déterministes (ReportLab), fraîcheur SÉMANTIQUE
+#     gouvernée par gouvernance/pdf_fingerprint.txt (la CI compare, jamais ne grave) ;
+#   - les 28 masters d'illustration : gouvernance/ICONOGRAPHIE.sha256 ;
+#   - les 77 clichés réalistes         : gouvernance/GALERIE.sha256 ;
+#   - les archives 2026-G et 2026-H    : gouvernance/ARCHIVE.sha256.
+#
+# Un changement VOLONTAIRE d'un fichier listé se règle par « make manifest »
+# dans le même commit, jamais en silence : sans ce re-grave, la CI est rouge —
+# c'est la consigne « toute correction entre par I » rendue mécanique (E-13).
+3907694230c503dce79c7351403128527f74a43cb598d7d6e082a5a86c96a588  ENCYCLOPEDIE_CONSOLIDEE_2026_I.md
+5817e55724366cb7bab3a226d5dc392ca9143386aa47f37931a926d5b2b61f1a  CHRONOLOGIE_MAITRESSE_1847_2026.md
+37130db779125387a2b5ac5152f771d63b49c3d65b80c2b51bbe4337cd64c674  sources/arbre_genealogique_complet.svg

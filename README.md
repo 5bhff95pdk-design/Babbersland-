@@ -33,8 +33,9 @@ L'édition **2026-I** intègre directement les corrections et ne nécessite aucu
 | `gouvernance/ARCHIVE.md` | Politique d'archivage : ce qui est gelé, ce qui ne l'est pas, comment dégeler |
 | `gouvernance/ARCHIVE.sha256` | Scellés des archives 2026-G et 2026-H, vérifiés par la CI et par `make scelle` |
 | `gouvernance/ICONOGRAPHIE.sha256` | Scellés des 28 maîtres d'illustration, par leur nom (E-18) |
-| `gouvernance/CI_LIMITES.md` | Journal des limites de la CI de continuité : R1.4.a à R1.4.h **tous livrés** — 18 étapes, **aucune** en `continue-on-error` ; causes, mesures et ceremony d'acceptation y restent écrites |
-| `.github/workflows/continuite.yml` | **CI active, entièrement bloquante** : 19 étapes à chaque push sur `main`, à chaque PR et à la demande (`workflow_dispatch`) — les 18 de R1.4 (première exécution verte : 2026-09-01T21:46:19Z) plus la parité modèle ↔ installé (R1.8), et le gel élargi à la galerie (R1.9) |
+| `gouvernance/MANIFEST.sha256` | **R1.3** : manifeste des livrables canoniques — octets du texte qui fait foi (2026-I), de la chronologie et de la source vectorielle de l'arbre. Le PDF et les images restent délégués à leurs propres contrats (`pdf_fingerprint.txt`, `ICONOGRAPHIE`, `GALERIE`). Gravé par `make manifest`, vérifié par `sources/check_manifest.py --check` (CI bloquante) |
+| `gouvernance/CI_LIMITES.md` | Journal des limites de la CI de continuité : R1.4.a à R1.4.h **tous livrés** — 18 étapes à la clôture de R1.4, **aucune** en `continue-on-error` ; causes, mesures et ceremony d'acceptation y restent écrites |
+| `.github/workflows/continuite.yml` | **CI active, entièrement bloquante** : 20 étapes à chaque push sur `main`, à chaque PR et à la demande (`workflow_dispatch`) — les 18 de R1.4 (première exécution verte : 2026-09-01T21:46:19Z), plus la parité modèle ↔ installé (R1.8), le gel élargi à la galerie (R1.9) et le manifeste des livrables (R1.3) |
 | `.github/workflows/batterie.yml` | **Batterie de mutations à horaires** : lundi 03:17 UTC + exécution manuelle. Vingt-quatre scénarios sur copies isolées (19 fautes à refuser, 5 éditions légitimes à accepter), puis preuve que l'arbre de référence est resté intact. C'est le contrôle du contrôle |
 | `canon/` + `propositions_declarées` | Données structurées (R3.3) sous contrat de parité : une affirmation est attestée par le corpus ou déclarée comme proposition |
 | `gouvernance/pdf_fingerprint.txt` | Empreinte sémantique du PDF canonique — le contrat de fraîcheur de l'artefact |
@@ -78,12 +79,13 @@ Tout passe par `make`, qui installe ses propres dépendances dans un venv — le
 ```bash
 make env          # python3 -m venv .venv + pip install -r requirements.txt
 make tout         # arbre → hymne → PDF → CONTRÔLES → empreinte (l'ordre est un contrôle, voir E-21)
-make controle     # douze contrôles + les scellés, sans rien régénérer
+make controle     # douze contrôles + le manifeste des livrables (R1.3) + les scellés, sans rien régénérer
+make manifest     # R1.3 : regrave le manifeste des livrables canoniques (gouvernance/MANIFEST.sha256)
 make scelle       # gel des archives G et H, des 28 maîtres, des 77 clichés de la galerie (R1.9) + parité des workflows (R1.8)
 ```
 
 Buts disponibles : `env`, `arbre`, `carte`, `hymne`, `vignettes`, `pdf`, `empreinte`,
-`empreinte-atlas`, `empreinte-arbre`, `empreinte-hymne`, `empreinte-vignettes`,
+`empreinte-atlas`, `empreinte-arbre`, `empreinte-hymne`, `empreinte-vignettes`, `manifest`,
 `controle`, `scelle`, `iconographie`, `galerie`, `lfs`, `batterie`, `workflows`, `tout`, `propre`.
 
 **Quatre actes d'assentiment, pas quatre vérifications.** `make empreinte-<artéfact>`
@@ -122,6 +124,7 @@ python .venv/bin/python sources/check_canon.py
 python .venv/bin/python sources/check_chroniques.py
 python .venv/bin/python sources/check_pdf.py
 python .venv/bin/python sources/pdf_fingerprint.py --check
+python .venv/bin/python sources/check_manifest.py --check
 python .venv/bin/python sources/check_geography.py
 python .venv/bin/python sources/check_portal.py
 python .venv/bin/python sources/empreinte_atlas.py --check
@@ -135,7 +138,7 @@ make scelle
 - **`check_canon.py`** (sans dépendance, constat E-19) fait la **parité des données** : `canon/*.json` contre 2026-I, la Chronologie maîtresse et le Registre des personnages — 18 fiches, sommes de population, échelle monétaire 24 Babetons, événements datés, **arithmétique des six successions** (durée annoncée = soustraction des bornes, chaîne continue, mort = fin de règne). Sa règle : dans un dossier nommé `canon`, une affirmation est soit **attestée** par le corpus, soit **inscrite dans `propositions_declarées`** avec sa source — 1 500 âmes de la forêt et le 12 octobre 1904 y sont, tant que l'Avis n° 7 n'a pas parlé.
 - **`check_chroniques.py`** (sans dépendance) fait l'**arithmétique interne des chroniques** : sept grandeurs récurrentes (bancs, canaux, arches, villes, régions, kilomètres, population) confrontées d'un volume à l'autre, et les **cotes d'archives** — la même cote `Q-3` ou `A-34` ne peut pas désigner deux documents différents sans que la collision soit écrite. Sa règle, celle d'E-19 : une divergence est **résolue ou déclarée** dans `gouvernance/DIVERGENCES_CHRONIQUES.md`, et une déclaration qui ne décrit plus rien d'observable est elle-même une faute. Il porte les constats **F-02** (huit cotes en collision, dont une que l'audit n'avait pas vue) et **F-03** (généalogie castorale, déclarée hors contrôle automatique).
 - **`check_pdf.py`** (`pypdf`) ouvre le PDF publié et **apparie chaque planche à sa légende, page par page**, sur le md5 du dérivé réellement embarqué : deux portraits intervertis, une planche de trop, une légende sans image sont des échecs (constats E-18, E-22). L'attendu vient du canon, pas du générateur ; la transformée d'image est unique (`sources/babberland_images.py`), partagée par le générateur et les contrôles.
-- **`pdf_fingerprint.py --check`** compare l'artefact publié à l'empreinte gravée : le PDF n'est pas reproductible à l'octet (ReportLab nomme ses XObject aléatoirement), donc on compare ce que le lecteur voit — pages, texte, placements. L'empreinte n'est plus un ensemble trié : permuter deux illustrations la modifie (E-18). Le **texte extrait** est un champ comparé à part entière (`texte = …` dans le contrat) ; les **hachés de flux d'images**, eux, sont consignés en commentaire et non comparés — ils portent le bitstream JPEG de la libjpeg du moteur, donc varient d'une machine sans que l'image change (mesure du canari, run #33574438077). Un écart est **nommé** : `CONTENU` se corrige, `EMBALLAGE` s'accepte après revue — et le scénario P1c de la batterie prouve qu'accepter une variante ne couvre jamais un texte différent.
+- **`pdf_fingerprint.py --check`** compare l'artefact publié à l'empreinte gravée : le PDF n'est pas reproductible à l'octet (ReportLab nomme ses XObject aléatoirement), donc on compare ce que le lecteur voit — pages, texte, placements. L'empreinte n'est plus un ensemble trié : permuter deux illustrations la modifie (E-18). Le **texte extrait** est un champ comparé à part entière (`texte = …` dans le contrat) ; les **hachés de flux d'images**, eux, sont consignés en commentaire et non comparés — ils portent le bitstream JPEG de la libjpeg du moteur, donc varient d'une machine sans que l'image change (mesure du canari, run #33574438077). Un écart est **nommé** : `CONTENU` se corrige, `EMBALLAGE` s'accepte après revue — et le scénario P1c de la batterie prouve qu'accepter une variante ne couvre jamais un texte différent.\n- **`check_manifest.py --check`** (R1.3, sans dépendance) vérifie `gouvernance/MANIFEST.sha256`, le manifeste des **livrables canoniques** : les octets du texte qui fait foi (2026-I), de la chronologie maîtresse et de la source vectorielle de l'arbre n'avaient aucun scellé par octets (le PDF est gouverné sémantiquement, les images par `ICONOGRAPHIE`/`GALERIE`). Une divergence nomme le fichier dérivé et exige un **re-grave explicite** (`make manifest`, dans le même commit que la correction) — la consigne « toute correction entre par I » (E-13) devient mécanique.
 - **`check_portal.py`** (sans dépendance, constat C1) fait la **parité du portail racine** : `index.html` contre `canon/personnages.json` — chaque fiche du dictionnaire doit correspondre à *exactement une* fiche du canon et porter les **mêmes années de vie** (peu importe la rédaction : « né le 15 juillet 1962 » ≡ « né 1962 », « Babber Ier le Dormeur » ≡ « Babber le Dormeur »). C'est ce qui a pris le portail en flagrant délit de quatre dates contradictoires avec le canon.
 - **`make scelle`** vérifie `gouvernance/ARCHIVE.sha256` (archives 2026-G et 2026-H), `gouvernance/ICONOGRAPHIE.sha256` (les 28 maîtres, scellés par leur nom), `gouvernance/GALERIE.sha256` (les 77 clichés photoréalistes, R1.9 — avant lui, un cliché retouché dont on oubliait de régénérer les vignettes passait : la charge des vignettes ne regarde que les dérivés) **et la parité modèle ↔ workflow installé** (R1.8 : `sources/github_actions_*.yml` comparés octet à octet à `.github/workflows/*.yml` — un workflow retouché à la main désalignait la chaîne de son contrat en silence). Le scellé des maîtres est la réponse au seul résidu que la chaîne assume : réengraver *les deux* après une permutation reste un acte éditorial, lisible dans le diff, et qui demande un Avis.
 
@@ -149,11 +152,12 @@ make workflows    # sources/github_actions_continuite.yml → .github/workflows/
                   # et retire au passage le talon invalide main.yml
 ```
 
-**19 étapes**, YAML validé au parseur, chacune rejouée localement : polices, dépendances,
+**20 étapes**, YAML validé au parseur, chacune rejouée localement : polices, dépendances,
 compilation, **gel des archives, des maîtres et de la galerie** (placé avant toute régénération,
-R1.4.h + R1.9), **parité modèle ↔ workflow installé** (R1.8), continuité, parité des données,
-parité du portail, **chroniques**, atlas, arbre, **hymne (Avis royal n° 8)**, **vignettes**,
-régénération du volume, artéfact apparié, fraîcheur, pièce jointe.
+R1.4.h + R1.9), **manifeste des livrables** (R1.3), **parité modèle ↔ workflow installé** (R1.8),
+continuité, parité des données, parité du portail, **chroniques**, atlas, arbre,
+**hymne (Avis royal n° 8)**, **vignettes**, régénération du volume, artéfact apparié, fraîcheur,
+pièce jointe.
 
 **Aucune étape n'est tolérante depuis R1.4.a-v3 et R1.4.c–g (1ᵉʳ septembre 2026).** Chacune des
 quatre régénérations binaires est désormais régie par une **charge sémantique en variantes
@@ -175,8 +179,9 @@ question, et `make workflows` la règle dans le sens du modèle.
 
 **Statut au 1ᵉʳ septembre 2026** : le droit `workflows` a été accordé à l'installation de l'App
 `arena-ai-coding-agent`, et la PR #22 a installé le workflow sur `main` (commit `9f527f3`).
-La CI est **active et verte** sur la branche principale, **19 étapes bloquantes sur 19**
-(les 18 de R1.4, plus la parité modèle ↔ installé de R1.8). La
+La CI est **active et verte** sur la branche principale, **20 étapes bloquantes sur 20**
+(les 18 de R1.4, plus la parité modèle ↔ installé de R1.8, le gel élargi à la galerie de
+R1.9 et le manifeste des livrables de R1.3). La
 limitation qui fermait le volume (six étapes tolérantes, parce que les régénérations binaires
 ne sont pas reproductibles au bit près entre machines) est levée par R1.4.a-v3 et R1.4.c–g :
 le contrat n'est plus l'égalité des octets mais la charge sémantique. Ce qui reste connu et

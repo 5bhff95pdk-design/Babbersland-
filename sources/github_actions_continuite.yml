@@ -102,6 +102,17 @@ jobs:
           sha256sum --check --quiet gouvernance/ICONOGRAPHIE.sha256
           sha256sum --check --quiet gouvernance/GALERIE.sha256
 
+      - name: Manifeste des livrables (R1.3) — bloquant
+        # Les trois fichiers livrés du corpus canonique (2026-I, chronologie,
+        # source vectorielle de l'arbre) n'avaient aucun scellé par octets :
+        # ARCHIVE.sha256 ne scelle que les archives G/H, ICONOGRAPHIE/GALERIE
+        # les images, pdf_fingerprint.txt la fraîcheur SÉMANTIQUE du PDF
+        # (ses octets sont non-déterministes). Un changement de contenu du canon
+        # doit donc être un ACTE — re-graver le manifeste dans le même commit —
+        # pas une retouche silencieuse (fin de E-13). Ici on VÉRIFIE, on ne grave
+        # jamais : la CI compare, conformément au constat E-21.
+        run: python sources/check_manifest.py --check
+
       - name: Parité modèle ↔ workflow installé (R1.8)
         # `make workflows` pose les copies côte à côte ; rien ne vérifiait qu'elles
         # concordent. Un `.github/workflows/*.yml` modifié à la main — ou un modèle

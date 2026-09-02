@@ -2,6 +2,45 @@
 
 Toutes les modifications notables apportées au dépôt du **Royaume du Babberland** sont consignées dans ce document.
 
+## [2026-XV] — 2026-09-01 (R1.3 — le manifeste des livrables, ce que rien ne scellait par octets)
+
+Addenda à la vague R1.4 : le ticket de fond R1.3 était resté ouvert, plus petit que
+ses voisins mais du même grain — un corpus sans scellé, un acte d'assentiment à rendre
+lisible. Il est livré le même jour, sans toucher à la matrice multi-OS (qui reste R1.2).
+
+### Ajouté — `gouvernance/MANIFEST.sha256`, le manifeste du corpus canonique livré
+* **Le trou, mesuré par R0.5 et par l'audit (E-12/E-13)** : le dépôt scellait ses archives
+  G/H (`ARCHIVE.sha256`), ses 28 maîtres (`ICONOGRAPHIE.sha256`), ses 77 clichés
+  réalistes (`GALERIE.sha256`) et signait le PDF *sémantiquement* (`pdf_fingerprint.txt`).
+  Mais le **texte qui fait foi** (2026-I), la **chronologie maîtresse** et la **source
+  vectorielle de l'arbre** n'avaient aucun scellé par octets : une retouche silencieuse
+  de l'un d'eux ne laissait aucune trace mécanique.
+* Le périmètre initial du ticket (« 2 PDF + 14 PNG = 16 lignes ») datait de l'audit et
+  **recouvrait des corpus déjà scellés** ; le manifeste scelle donc ce qui ne l'était pas :
+  `ENCYCLOPEDIE_CONSOLIDEE_2026_I.md`, `CHRONOLOGIE_MAITRESSE_1847_2026.md`,
+  `sources/arbre_genealogique_complet.svg`. Le PDF reste délégué à sa fraîcheur sémantique
+  (ses octets ne sont pas déterministes), les images à `ICONOGRAPHIE`/`GALERIE`.
+* Gravé par le but **`make manifest`** (`sources/make_manifest.py`), vérifié par
+  `sources/check_manifest.py --check` — brancheé dans `make controle` **et** en CI
+  (`check_manifest.py --check`, étape bloquante dédiée).
+
+### Vérifié — le scellé mord, et il reste compatible
+* `make controle` **vert** (12 vérifications + scellés + **manifeste vérifié**).
+* Un ajout de ligne à 2026-I fait **échouer** `check_manifest.py --check` (exit 1) et
+  `sha256sum --check` (même verdict), puis repasse vert une fois restauré : le re-grave
+  explicite est bien le seul passage, pas une tolérance silencieuse.
+
+### Mis à jour
+* `Makefile` (buts `manifest` ; `controle` appelant `check_manifest.py --check`),
+  `sources/github_actions_continuite.yml` **et sa copie installée** (resynchronisée par
+  `make workflows`, la parité R1.8 l'exige), `README.md` (table de gouvernance, buts,
+  validation), `gouvernance/CI_LIMITES.md` (état courant : **20 étapes, 0 tolérante**),
+  `ROADMAP_2026_II.md` (R1.3 ✅, retiré de « Reste ouvert »).
+* `make controle` rejoué après coup : la chaîne reste verte, la parité des workflows (R1.8)
+  aussi.
+
+---
+
 ## [2026-XIV] — 2026-09-01, tard en soirée (R1.8 et R1.9 — les deux bornes nées de R1.4 sont fermées le jour même)
 
 La vague R1.4 avait déclaré deux trous plutôt que de les résoudre en silence ; les voici

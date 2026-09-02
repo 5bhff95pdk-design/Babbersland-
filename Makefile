@@ -1,5 +1,5 @@
 # Chancellerie royale — chaîne de production du volume 2026-I.
-# Buts : env · arbre · carte · hymne · vignettes · pdf · empreinte · empreinte-atlas · empreinte-arbre · controle · scelle · iconographie · galerie · lfs · tout · propre
+# Buts : env · arbre · carte · hymne · vignettes · pdf · empreinte · empreinte-atlas · empreinte-arbre · manifest · controle · scelle · iconographie · galerie · lfs · tout · propre
 # Hors venv, remplacer PY=.venv/bin/python par PY=python3 (make PY=python3).
 
 PY      ?= .venv/bin/python
@@ -7,7 +7,7 @@ VENV    ?= .venv
 PDF     := Royaume_du_Babberland_Encyclopedie_Consolidee_2026_I.pdf
 
 .DEFAULT_GOAL := tout
-.PHONY: env arbre carte hymne vignettes pdf empreinte empreinte-atlas empreinte-arbre empreinte-hymne empreinte-vignettes controle scelle iconographie galerie lfs batterie workflows tout propre
+.PHONY: env arbre carte hymne vignettes pdf empreinte empreinte-atlas empreinte-arbre empreinte-hymne empreinte-vignettes manifest controle scelle iconographie galerie lfs batterie workflows tout propre
 
 env: ## crée le venv et y épingle les dépendances (contournement PEP 668, constat E-11)
 	@test -x $(PY) || python3 -m venv $(VENV)
@@ -66,6 +66,9 @@ lfs: ## R1.6 : prépare le passage des binaires lourds en Git LFS (variante A′
 	git commit -m "LFS : galerie 2026-V, vignettes et audio hors Git (R1.6, variante A′)"
 	@echo "Puis « git push » — étape qui exige l'accès au CDN GitHub (bloqué dans l'environnement d'agent, gouvernance/LFS_MIGRATION.md § 2)."
 
+manifest: ## R1.3 : regrave le manifeste des livrables canoniques (gouvernance/MANIFEST.sha256) — acte d'assentiment
+	$(PY) sources/make_manifest.py
+
 iconographie: ## scelle les maîtres d'illustration par leur nom (gouvernance/ICONOGRAPHIE.sha256)
 	@cd $(CURDIR) && sha256sum images/*.png > gouvernance/ICONOGRAPHIE.sha256 \
 	  && echo "gouvernance/ICONOGRAPHIE.sha256 regreffé — $(words $(wildcard images/*.png)) maîtres scellés"
@@ -94,13 +97,14 @@ scelle: ## gel des archives G et H, des maîtres, de la galerie (R1.9) + parité
 	  && echo "workflows installés fidèles à leurs modèles (2 comparaisons octet à octet)" \
 	  || (echo "workflow installé désaligné de son modèle : relancer « make workflows » et committer (R1.8)" && exit 1)
 
-controle: ## continuité, parité des données, chroniques, portail, artéfact, fraîcheur, géographie, quatre sceaux d'artéfacts, archives
+controle: ## continuité, parité des données, chroniques, portail, artéfact, fraîcheur, manifeste (R1.3), géographie, quatre sceaux d'artéfacts, archives
 	$(PY) -m py_compile sources/*.py
 	$(PY) sources/check_continuity.py
 	$(PY) sources/check_canon.py
 	$(PY) sources/check_chroniques.py
 	$(PY) sources/check_pdf.py
 	$(PY) sources/pdf_fingerprint.py --check
+	$(PY) sources/check_manifest.py --check
 	$(PY) sources/check_geography.py
 	$(PY) sources/check_portal.py
 	$(PY) sources/empreinte_atlas.py --check
