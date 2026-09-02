@@ -1,5 +1,5 @@
 # Chancellerie royale — chaîne de production du volume 2026-I.
-# Buts : env · arbre · carte · hymne · vignettes · pdf · empreinte · empreinte-atlas · empreinte-arbre · controle · scelle · iconographie · lfs · tout · propre
+# Buts : env · arbre · carte · hymne · vignettes · pdf · empreinte · empreinte-atlas · empreinte-arbre · controle · scelle · iconographie · galerie · lfs · tout · propre
 # Hors venv, remplacer PY=.venv/bin/python par PY=python3 (make PY=python3).
 
 PY      ?= .venv/bin/python
@@ -7,7 +7,7 @@ VENV    ?= .venv
 PDF     := Royaume_du_Babberland_Encyclopedie_Consolidee_2026_I.pdf
 
 .DEFAULT_GOAL := tout
-.PHONY: env arbre carte hymne vignettes pdf empreinte empreinte-atlas empreinte-arbre empreinte-hymne empreinte-vignettes controle scelle iconographie lfs batterie workflows tout propre
+.PHONY: env arbre carte hymne vignettes pdf empreinte empreinte-atlas empreinte-arbre empreinte-hymne empreinte-vignettes controle scelle iconographie galerie lfs batterie workflows tout propre
 
 env: ## crée le venv et y épingle les dépendances (contournement PEP 668, constat E-11)
 	@test -x $(PY) || python3 -m venv $(VENV)
@@ -70,12 +70,29 @@ iconographie: ## scelle les maîtres d'illustration par leur nom (gouvernance/IC
 	@cd $(CURDIR) && sha256sum images/*.png > gouvernance/ICONOGRAPHIE.sha256 \
 	  && echo "gouvernance/ICONOGRAPHIE.sha256 regreffé — $(words $(wildcard images/*.png)) maîtres scellés"
 
-scelle: ## vérifie le gel des archives G et H et des maîtres d'illustration (E-18, E-23)
+galerie: ## R1.9 : scelle la galerie photoréaliste du portail par son nom (gouvernance/GALERIE.sha256)
+	@cd $(CURDIR) && sha256sum images/realistes/*.png > gouvernance/GALERIE.sha256 \
+	  && echo "gouvernance/GALERIE.sha256 regreffé — $(words $(wildcard images/realistes/*.png)) clichés scellés"
+
+# R1.9 : la galerie (77 pièces, 211 Mio) était le seul corpus d'images sans scellé —
+# la charge des vignettes (R1.4.d) ne regarde que les dérivés : un cliché retouché
+# dont on OUBLIE de régénérer les vignettes passait. Plus maintenant.
+# R1.8 : les workflows installés doivent être l'octet de leurs modèles — un
+# `.github/workflows/*.yml` retouché à la main désaligne la chaîne de son contrat,
+# en silence (classe E-09/C-01). La parité est un gel comme les autres : elle se vérifie.
+scelle: ## gel des archives G et H, des maîtres, de la galerie (R1.9) + parité des workflows (R1.8)
 	@sha256sum --check --quiet gouvernance/ARCHIVE.sha256 \
 	  && echo "archives 2026-G et 2026-H intactes"
 	@test -f gouvernance/ICONOGRAPHIE.sha256 || (echo "aucun scellé des maîtres : lancer « make iconographie »" && exit 1)
 	@sha256sum --check --quiet gouvernance/ICONOGRAPHIE.sha256 \
 	  && echo "maîtres d'illustration conformes au scellé ($$(grep -c . gouvernance/ICONOGRAPHIE.sha256) lignes)"
+	@test -f gouvernance/GALERIE.sha256 || (echo "aucun scellé de la galerie : lancer « make galerie »" && exit 1)
+	@sha256sum --check --quiet gouvernance/GALERIE.sha256 \
+	  && echo "galerie photoréaliste conforme au scellé ($$(grep -c . gouvernance/GALERIE.sha256) lignes)"
+	@cmp -s sources/github_actions_continuite.yml .github/workflows/continuite.yml \
+	  && cmp -s sources/github_actions_batterie.yml .github/workflows/batterie.yml \
+	  && echo "workflows installés fidèles à leurs modèles (2 comparaisons octet à octet)" \
+	  || (echo "workflow installé désaligné de son modèle : relancer « make workflows » et committer (R1.8)" && exit 1)
 
 controle: ## continuité, parité des données, chroniques, portail, artéfact, fraîcheur, géographie, quatre sceaux d'artéfacts, archives
 	$(PY) -m py_compile sources/*.py

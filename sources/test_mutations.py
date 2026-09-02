@@ -4,7 +4,7 @@
 Répondre à « le verrou tient-il ? » ne se fait pas en lisant le code : on **casse**
 une copie du dépôt et l'on regarde qui bronche.
 
-**Vingt fautes à refuser, cinq éditions légitimes à laisser passer** — dont la
+**Vingt-deux fautes à refuser, cinq éditions légitimes à laisser passer** — dont la
 cérémonie d'acceptation d'une variante de rendu (V4), qui teste l'autre sens du
 contrat : une dérive d'environnement se RÉSOUT par un acte tracé, elle ne se subit
 pas par tolérance. Et son envers, P1c : une dérive de CONTENU présentée comme un
@@ -126,6 +126,17 @@ def vue_frais(labo: Path) -> tuple[bool, str]:
     return rc != 0, f"pdf_fingerprint --check → {dernier}"
 
 
+def vue_scelle(labo: Path) -> tuple[bool, str]:
+    """Le gel seul : `make scelle`, sans les dix contrôles qui le précèdent.
+
+    Même raison d'être que `vue_frais` : les scénarios R1.8 et R1.9 prouvent des
+    garde-fous qui vivent dans `scelle` (parité des workflows, scellé de la galerie) —
+    si un contrôle voisin bronchait à leur place, on n'aurait rien prouvé du mécanisme.
+    """
+    rc, dernier = courir(labo, f"make --no-print-directory PY={PY} scelle")
+    return rc != 0, f"scelle → {dernier}"
+
+
 def vue_controles(labo: Path) -> tuple[bool, str]:
     for controle in CONTROLES:
         rc, dernier = courir(labo, f"{PY} {controle}")
@@ -233,6 +244,15 @@ FAUTES: list[tuple[str, object, object]] = [
      lambda d: (retoucher(d, "images/realistes/babber_ier_l_ancien.png", (40, 40, 260, 200)),
                 regenerer_seulement(d, "generate_vignettes.py")),
      vue_controles),
+    ("J1bis · photographie retouchée, vignettes PAS régénérées : le scellé de la galerie "
+     "seul (R1.9)",
+     lambda d: retoucher(d, "images/realistes/babber_ier_l_ancien.png", (40, 40, 260, 200)),
+     vue_scelle),
+    ("W1 · workflow installé retouché à la main, modèle intact : la parité seule (R1.8)",
+     lambda d: editer(d, ".github/workflows/continuite.yml",
+                      "python sources/pdf_fingerprint.py --check",
+                      "python sources/pdf_fingerprint.py --check || true"),
+     vue_scelle),
 ]
 
 # Une divergence nouvelle que le registre déclare doit passer : c'est le contrat

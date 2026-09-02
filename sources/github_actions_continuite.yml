@@ -73,7 +73,7 @@ jobs:
       - name: Compilation des sources (py_compile)
         run: python -m py_compile sources/*.py
 
-      - name: Gel des archives (G et H intacts) et des maîtres d'illustration
+      - name: Gel des archives (G et H intacts), des maîtres d'illustration et de la galerie
         # R1.4.h (1ᵉʳ septembre 2026) : le contrat est redevenu STRICT — un écart
         # de scellé fait échouer le run.
         #
@@ -90,9 +90,30 @@ jobs:
         # Le scellé protège les octets COMMITÉS (E-18) ; le rendu régénéré est
         # régi par son propre contrat : empreinte_arbre.py (étape bloquante,
         # variantes acceptées, R1.4.b).
+        #
+        # R1.9 (GALERIE.sha256) : `images/realistes/` (77 pièces, 211 Mio) était
+        # le seul corpus d'images sans scellé — la charge des vignettes (R1.4.d)
+        # ne regarde que les dérivés, donc un cliché retouché dont on oublie de
+        # régénérer les vignettes passait (mesure : scénario J1bis de la batterie).
+        # +77 lignes de scellé, 0 octet de plus à télécharger : les fichiers sont
+        # déjà dans le checkout.
         run: |
           sha256sum --check --quiet gouvernance/ARCHIVE.sha256
           sha256sum --check --quiet gouvernance/ICONOGRAPHIE.sha256
+          sha256sum --check --quiet gouvernance/GALERIE.sha256
+
+      - name: Parité modèle ↔ workflow installé (R1.8)
+        # `make workflows` pose les copies côte à côte ; rien ne vérifiait qu'elles
+        # concordent. Un `.github/workflows/*.yml` modifié à la main — ou un modèle
+        # oublié de resynchroniser — désaligne la chaîne de son contrat, en silence :
+        # la classe de dérive que quatre audits ont poursuivie ailleurs (E-09, C-01).
+        # Nota : ce run exécute le YAML installé ; si les deux fichiers divergent,
+        # c'est peut-être LE MODÈLE qui porte la vérité — l'échec ne tranche pas,
+        # il force la question. Deux fichiers, une comparaison d'octets, zéro coût.
+        run: |
+          cmp sources/github_actions_continuite.yml .github/workflows/continuite.yml
+          cmp sources/github_actions_batterie.yml .github/workflows/batterie.yml
+          echo "workflows installés fidèles à leurs modèles."
 
       - name: Continuité des sources (canon, chronologie, archives, chroniques, ancres, silences)
         run: python sources/check_continuity.py
