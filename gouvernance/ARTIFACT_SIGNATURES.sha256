@@ -1,17 +1,5 @@
 
 
-# === ATLAS GÉOGRAPHIQUE ===
-# Signé par sources/empreinte_atlas.py (analogue à pdf_fingerprint.py).
-# L'Atlas (SVG, PNG, HTML) n'est pas reproductible au bit près entre
-# machines (timing d'écriture, ordre d'itération, encodage des flottants
-# Pillow) ; on compare donc son contenu sémantique :
-# - SVG : viewBox, ids, data-since, classes, toponymes canoniques ;
-# - PNG : dimension, mode, somme MD5 des pixels ;
-# - HTML : ids, classes, h1/h2, dates maîtresses.
-atlas_svg = fe1e95c5298c1748b845b5609cd23b3db8d2e29b315f2394f7c8e9485f8b29e0
-atlas_png = 354e0fe58d89d2433c5782deae9e51019dbd59da517fd6d044c7d21e9aae0c65
-atlas_html = d34401c3be7ee033a15a7e7d2cbf82a76f9473b74089e9ef9fed135df2cc50ae
-
 # === ARBRE GÉNÉALOGIQUE ===
 # Signé par sources/empreinte_arbre.py — modèle « variantes acceptées ».
 # Le PNG est bit-stable par machine mais PAS entre machines (FreeType
@@ -28,3 +16,65 @@ atlas_html = d34401c3be7ee033a15a7e7d2cbf82a76f9473b74089e9ef9fed135df2cc50ae
 arbre_png = ec9a36231d2a8a4b9cb6f3180aed8e63e2b712bedc6d8bee9878c89142d1caf5
 arbre_variante_ci-ubuntu-24.04-py3.12 = size:1600x1000|mode:RGB|16x16box:a586e3355260ebe42e4b49e59bee4547|ink:0.131
 arbre_variante_reference-locale = size:1600x1000|mode:RGB|16x16box:45e876bf246090e1529901c43d950697|ink:0.131
+
+# === HYMNE NATIONAL ===
+# Signé par sources/empreinte_hymne.py — modèle « variantes acceptées » (R1.4.c).
+# Le WAV est synthétisé par la bibliothèque standard (graine 1847) : bit-stable
+# par machine, pas entre machines (un ULP de libm, un chunk RIFF ajouté).
+# La charge compare ce qui s'entend :
+#   frames/rate/bits/chan : géométrie du signal (72,5 s à 22 050 Hz, 16 bits, mono) ;
+#   profil : RMS par fenêtre de 250 ms, quantifié sur 8 bits, haché ;
+#   pcm8   : tout le signal replié sur 8 bits, haché (sensible à l'ordre des notes) ;
+#   crete  : amplitude crête normalisée, au millième.
+# Les chunks RIFF hors fmt /data sont ignorés par la charge et signalés au
+# diagnostic : une tolérance doit rester nommée, pas devenir un angle mort.
+# Nouvelle machine légitime ? Lire l'annotation CI, puis
+# `python sources/empreinte_hymne.py --accepter '<charge>' <étiquette>`.
+hymne_pcm = 1e4d01ced105751b194151a1d11c621b1c13f7f5f50ad08daa60fd3063445390
+hymne_variante_reference-locale = frames:1598625|rate:22050|bits:16|chan:1|profil:0efdc7680e80b66c75bb99dcaa48d058|pcm8:b8c8b6dbd8501f4ad920f7564ebf8ce5|crete:0.720
+
+# === VIGNETTES DU PORTAIL ===
+# Signé par sources/empreinte_vignettes.py — modèle « variantes acceptées » (R1.4.d).
+# Les 77 vignettes WebP sont DÉRIVÉES de images/realistes/*.png : leurs octets
+# dépendent de libwebp (version, options SIMD), pas du canon. On compare donc le
+# contenu décodé :
+#   nb       : le nombre de vignettes (une promesse du diffuseur, pas un comptage)
+#   largeur  : la largeur de rendu (640 px)
+#   grilles  : md5 de la liste triée « nom:md5(grille 8x8 BOX quantifiée 16 niveaux) »
+# Le poids du lot est signalé au diagnostic, jamais contracté : un encodeur qui
+# change les octets sans changer l'image ne doit pas ouvrir d'acceptation.
+# Une vignette périmée ou recadrée change `grilles` ; un ré-encodage équivalent
+# ne le change pas. Nouvelle machine légitime ? Lire l'annotation CI, puis
+# `python sources/empreinte_vignettes.py --accepter '<charge>' <étiquette>`.
+vignettes_lot = 1b1432814ddeb5849487dca3a2df0f4b3c07f9d9eeec83c247d3a4921d4b59fc
+vignettes_variante_reference-locale = nb:77|largeur:640|grilles:b0bb7402eac27fb3ed6313b7561955d2
+
+# === ATLAS GÉOGRAPHIQUE ===
+# Signé par sources/empreinte_atlas.py — modèle « variantes acceptées » (R1.4.a-v3).
+# Reprise de R1.4.a-v2, qui gravait trois SHA-256 en valeur unique sans que la CI
+# appelle le contrôle. La charge combine contenu structurel et rendu, et
+# s'appuie sur l'ensemble des charges OBSERVÉES (comme l'Arbre, R1.4.b) :
+#   svg      : md516 du contenu structurel du SVG (viewBox, ids, data-since,
+#              classes, toponymes canoniques) — indépendant de la machine ;
+#   html     : md516 du contenu structurel de la page (ids, classes, h1/h2,
+#              dates maîtresses) — indépendant de la machine ;
+#   taille/mode/16x16box/encre : le PNG, moyenné BOX 16x16 quantifié sur 16
+#              niveaux + proportion d'encre — tolère l'antialiasing, refuse la
+#              région manquante (le NEAREST 16x16 de v2 était trop fragile).
+# Une charge inédite bloque. Si seule `16x16box` (ou `encre`) bouge, c'est du
+# bruit de rendu d'un nouvel environnement : lire l'annotation, puis accepter.
+# Si `svg` ou `html` bouge, la carte a changé : cela se décrète, cela se grave.
+atlas_lot = 078eb1b68c6b061047a0db6f2d862e8f77fdccbfef612e4636767fcf3bf95c13
+atlas_variante_ci-ubuntu-24.04-py3.12 = svg:d6aab963c7ea953c|html:10ab30af34f9c925|taille:1600x1100|mode:RGB|16x16box:00eaea478bdf40bb116b31e29c35c804|encre:0.325
+atlas_variante_reference-locale = svg:d6aab963c7ea953c|html:10ab30af34f9c925|taille:1600x1100|mode:RGB|16x16box:55aacd600ec5d674968d464dff7bf113|encre:0.325
+
+# === PDF CANONIQUE ===
+# Signé par sources/pdf_fingerprint.py --accepter — variantes d'environnement (R1.4.g).
+# Le contrat canonique du volume reste la valeur unique de
+# gouvernance/pdf_fingerprint.txt (gravée par `make empreinte`). Cette section
+# n'accepte que des VARIANTES DE RENDU d'un autre environnement (runner CI,
+# matrice multi-OS R1.2) : la charge compare l'empreinte ordonnée, le nombre de
+# pages, d'illustrations et de placements. Accepter une variante n'est JAMAIS
+# excuser une dérive sur la machine de référence : là, on régénère et on re-grave.
+pdf_variantes_acceptees = f0ca28998ece73d5350045b52cb4a98eed52db125566209324bba1bdf70fa412
+pdf_variante_ci-ubuntu-24.04-py3.12 = fingerprint:1a76a0e8ee10dec621d0534e4612b01b|pages:29|images:24|placements:25

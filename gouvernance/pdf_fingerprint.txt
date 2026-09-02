@@ -3,7 +3,14 @@
 # c'est cette empreinte, et non le binaire, que la CI compare.
 # Elle est ordonnée page à page (constat E-18) : permuter deux illustrations
 # la modifie. Graver ici = assumer un changement, pas le contrôler (E-21).
+# `texte` est CONTRACTÉ : le texte extrait, normalisé, ne dépend d'aucune
+# machine (mesure du 1ᵉʳ septembre 2026 : runner et référence donnent le
+# même md5). `disposition` est INFORMATIVE — les hachés de flux embarquent le
+# bitstream JPEG produit par la libjpeg du moteur, donc varie d'un
+# environnement sans que l'image change. Elle n'est pas comparée, elle se lit.
 fingerprint = e1168ee0842c0f1472bee0939045323a
 pages = 29
 images = 24
 placements = 25
+texte = 8296cf53ba121751a7f977feae75367b
+# disposition = cd6fdb581a48ee4866100776ea6b5fcf

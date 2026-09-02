@@ -2,6 +2,194 @@
 
 Toutes les modifications notables apportées au dépôt du **Royaume du Babberland** sont consignées dans ce document.
 
+## [2026-XIII] — 2026-09-01, dans la soirée (R1.4.a-v3 et R1.4.c–g — la CI n'a plus une seule étape tolérante)
+
+**Clôture de R1.4.** Après R1.4.b (Arbre) et R1.4.h (gel des archives) le même jour, les
+six sous-tickets restants sont livrés : **Atlas (v3), Hymne, Vignettes, et les trois étapes
+de la chaîne du PDF**. Le workflow de continuité passe de **6 étapes tolérantes sur 18** à
+**0**. Ce n'est pas un durcissement de plus, c'est le retournement d'une hypothèse : la
+chaîne ne demande plus aux artéfacts d'être **les mêmes octets**, elle leur demande d'avoir
+**le même contenu** — et elle le dit, composante par composante, dans une annotation lisible.
+
+### Ajouté — `sources/sceaux.py` : la mécanique commune des sceaux (200 lignes, quatre artéfacts)
+* **Une famille de règles, pas quatre.** Variantes acceptées, sections du scellé, annotations
+  de check-run, cérémonie d'acceptation (`--write` / `--accepter` / `--check` / listage) :
+  tout ce que R1.4.b avait dû inventer dans un seul script est rendu réutilisable, et
+  `empreinte_arbre.py` est **repassé dessus sans changer de contrat** — vérifié : la section
+  `ARBRE GÉNÉALOGIQUE` de `gouvernance/ARTIFACT_SIGNATURES.sha256` est identique octet pour
+  octet avant et après le remaniement (seule la graphie d'un commentaire d'école était à
+  reprendre, `<étiquette>`).
+* **`comparer_composantes()`** : une charge est une somme de `cle:valeur`, et la divergence
+  nomme **la** composante fautive. La question « bruit de rendu ou dérive de contenu ? »
+  cesse d'être une intuition : `svg`/`html` qui bougent = la carte a changé (délibération,
+  re-gravure) ; seul `16x16box`/`encre` = un environnement de rendu (acceptation).
+* **Le canal d'annotation est obligatoire, y compris en succès** (`::notice charge=… connue=…`) :
+  les journaux d'étape passent par Azure Blob, injoignables depuis l'environnement d'agent —
+  la trace de ce qu'une machine a réellement produit est la seule chose qui ne se négocie pas.
+
+### Ajouté — R1.4.c : `sources/empreinte_hymne.py`
+* Charge `frames|rate|bits|chan|profil|pcm8|crete` : géométrie du signal, **enveloppe RMS par
+  fenêtre de 250 ms** quantifiée sur 8 bits, PCM replié sur 8 bits, amplitude crête au millième.
+  Un ULP de libm ne la fait pas bouger ; permuter deux notes de même durée, si.
+* **L'audit RIFF promis par le ticket est fait, et exposé** : `--chunks` énumère les chunks ;
+  l'enregistrement de référence ne contient que `fmt ` et `data` — **aucun horodatage**. Un
+  chunk ajouté par une future version de `wave` resterait ignoré par la charge **et signalé**
+  au diagnostic : une tolérance doit être nommée, pas devenir un angle mort.
+* Étape CI : `git diff --exit-code` remplacé par le `--check` ; but `make empreinte-hymne` ;
+  `--check` dans `make controle`.
+
+### Ajouté — R1.4.d : `sources/empreinte_vignettes.py`
+* Lot des 77 WebP comparé **par contenu décodé** (grille 8×8 BOX quantifiée par vignette,
+  liste triée hachée) plus `nb`, `largeur` et `octets` (mesure de diffusion signalée, non
+  contractée). Le `git diff` avait ici un second défaut, plus grave que la fragilité : il ne
+  comparait que ce qui était **commité** — une vignette périmée que la machine de référence
+  reproduisait à l'identique passait comme une lettre.
+* `--grilles` imprime les 77 empreintes courtes (~800 octets) : deux environnements se
+  comparent **par annotation**, sans journal d'étape et sans manifeste à entretenir.
+* But `make empreinte-vignettes` ; `--check` dans `make controle`.
+
+### Durci — R1.4.a-v3 : l'Atlas, dont le contrat n'était pas appelé
+* **Le défaut n'était pas l'empreinte, c'est l'étape** : elle lançait `generate_map.py` puis
+  `check_geography.py`, sous `continue-on-error`, **sans jamais consulter**
+  `gouvernance/ARTIFACT_SIGNATURES.sha256`. Le contrat vivait dans le dépôt, pas dans la
+  chaîne — la classe exacte du constat E-09, en pire (là, rien n'était même tenté).
+* Le PNG n'est plus échantillonné **NEAREST 16×16** (un pixel lu sur cent : la fragilité
+  elle-même, et la cause probable des échecs de PR #25 qu'on n'avait pas pu lire) mais
+  **moyenné BOX 16×16 quantifié sur 16 niveaux + proportion d'encre**, comme l'Arbre.
+* **Migration assumée** : la section v2 (`atlas_svg`/`atlas_png`/`atlas_html`, trois SHA-256
+  nus) est **remplacée** par `atlas_lot` + `atlas_variante_reference-locale`. Un contrat
+  que la chaîne n'a jamais appliqué n'a pas de compatibilité à protéger.
+* **Les trois options du ticket sont écartées, et c'est écrit** : image Docker épinglée
+  (geler une machine pour un problème de sens), seuil de tolérance (mesure R1.4.b : il
+  n'existe pas), régénération-gravure en CI (E-21 l'interdit).
+
+### Durci — R1.4.e, R1.4.f, R1.4.g : la chaîne du PDF, trois `continue-on-error` retirés
+* Les trois étapes portaient `continue-on-error: true  # R1.4 — voir note Atlas` : un
+  **héritage de formulation**, pas une mesure. La non-reproductibilité binaire qui avait fait
+  mettre l'Atlas en mode tolérant ne les concernait pas — elles ne comparent pas d'octets.
+* Ce que chaque retrait corrige, noir sur blanc : l'étape de **régénération** ne vérifiait
+  rien du tout (un générateur qui plante passait) ; **`check_pdf.py`** et la **fraîcheur**
+  pouvaient dire vrai sans que le run bronche. Une CI verte avec un volume publié périmé
+  (risque n° 1 du rapport RA-2026-IV-01) n'est plus une issue possible.
+* R1.4.g donne au PDF sa **section de variantes d'environnement** (`PDF CANONIQUE` dans
+  `ARTIFACT_SIGNATURES.sha256`, `pdf_fingerprint.py --accepter '<charge>' <étiquette>`),
+  hiérarchisée sans ambiguïté : `gouvernance/pdf_fingerprint.txt` **reste** le contrat
+  canonique, seul re-gravé par `make empreinte` ; la variante n'excuse qu'un rendu observé
+  ailleurs. La CI grave toujours zéro.
+* `--check` émet son `::notice charge=… connue=…` : la divergence du runner est **mesurée**,
+  plus supposée.
+
+### Nouveau — workflow `.github/workflows/batterie.yml` : le contrôle du contrôle, à horaires
+* **Le trou que la batterie laissait.** `make batterie` est la seule preuve que les contrôles
+  mordent ; il ne tournait **que** sur la machine de qui pense à le lancer. Or la défaillance
+  propre à ce projet n'est pas la faute dans le texte, c'est le **contrôle émasculé** : C-01
+  (un `|| echo` qui rend une étape infaillible) a survécu à quatre audits avant d'être vu.
+* Un job **distinct**, à horaire (lundi 03:17 UTC) et à la demande (`workflow_dispatch`) :
+  la batterie coûte 2 min 26 s (mesure du 1ᵉʳ septembre 2026, 24 scénarios à ce moment-là —
+  25 et 2 min 29 s après P1c, plus bas ; `time make batterie`), réécrit des scellés dans ses laboratoires et n'a rien à dire d'un commit qui
+  ne touche ni sources ni artéfacts — elle n'a donc rien à faire sur chaque push.
+* **Deux pas de plus que le script local** : la preuve que l'isolation est vraie
+  (`git diff --quiet` + `git status` sur l'arbre de référence, après la course) et que les
+  scellés n'ont pas bougé. Une promesse de laboratoire qui ne vérifie pas sa paillasse.
+* `workflow_dispatch` et `timeout-minutes: 20` ajoutés à `continuite.yml` (run manuel avant
+  une Release ; un run qui s'éternise n'est pas un run qui vérifie).
+
+### Mesuré — le canari CI, et ce qu'il a fallu voir deux fois
+* **Run #33573944229 : rouge, une seule étape — l'Atlas.** L'annotation disait déjà l'essentiel :
+  les cinq composantes structurelles (`svg`, `html`, `taille`, `mode`, `encre`) **identiques** à
+  `reference-locale`, seule `16x16box` dans l'inconnu. Autrement dit la carte n'avait pas bougé,
+  son rendu si — mais **compter** le divergence exigeait la grille, et le diagnostic de l'Atlas ne
+  la donnait pas. Ajoutée au commit suivant (même formule que l'Arbre), elle a rendu le verdict
+  mesurable : **3 cellules sur 256, un seul niveau chacune**, sous le titre et sur les étiquettes
+  de la forêt, encre intacte. FreeType 2.12 ↔ 2.13, exactement la signature de R1.4.b.
+* La mutation témoin A2, elle, déplace **4 cellules d'amplitudes 2, 6 et 7 niveaux et change
+  l'encre**. Les deux distributions se touchent par le **nombre** et pas par l'**amplitude** :
+  la preuve, pour l'Atlas, qu'aucun seuil ne sépare le bruit du contenu. La variante du runner a
+  donc été **acceptée à la main** (`atlas_variante_ci-ubuntu-24.04-py3.12`), pas tolérée.
+* **Ce que le rouge a révélé de non prévu** : une étape bloquante **arrête la chaîne**. Atlas
+  échouant en position 9, les étapes 10 à 16 n'avaient pas tourné — leurs sceaux n'étaient pas
+  conformes, ils n'avaient pas été évalués. Un canari rouge n'est pas un canari qui a tout vérifié :
+  la preuve reste le run **vert complet**, dont les `::notice` consigneront les quatre charges.
+* PNG du runner 99 129 o contre 98 814 o ici : même image, autre compresseur — ce que la charge
+  ignore par construction, et ce que `git diff --exit-code` aurait appelé une faute.
+
+### Validé — batterie portée de 20 à 24 scénarios, tous conformes
+* **Trois fautes nouvelles, une par sceau branché** — chacune refusée **par le seul** contrôle
+  ajouté aujourd'hui : `A2` PNG d'Atlas noyé d'un rectangle noir (textes et données intacts) →
+  `empreinte_atlas` ; `H1` hymne rejoué graine 1848 (même partition, même 72,5 s, même promesse)
+  → `empreinte_hymne` ; `J1` photographie réaliste retouchée **et** ses vignettes régénérées →
+  `empreinte_vignettes`. Les `CONTROLES` de la batterie intègrent les quatre empreintes : sans
+  quoi elle prouvait les dents des contrôles d'hier.
+* **Une édition légitime nouvelle (`V4`), qui teste l'autre sens du contrat** : régénérer sur
+  une graine étrangère, **lire la charge produite** dans le message d'échec, l'accepter à la
+  main sous une étiquette — et la chaîne laisse passer. Si `--accepter` n'existait pas, V4 le
+  dirait ; si ce n'était qu'un `|| true` déguisé, V4 le dirait aussi.
+* Diagnostic mesuré des trois fautes, dans l'ordre attendu : l'Atlas diverge sur
+  `16x16box` **et** `encre` (le rendu, pas la structure), l'hymne sur `profil` et `pcm8`
+  (`frames` intact : la durée promise tient), les vignettes sur `grilles` seul — le poids du
+  lot, sorti de la charge pour cette raison, n'y figure plus que comme signalement.
+* `make controle` : **12 vérifications + les scellés, 0 échec** ; YAML des deux workflows
+  validé au parseur (18 et 7 étapes, 0 `continue-on-error`).
+
+### Mesuré (acte II du canari) — la fraîcheur du PDF, et ce que le runner a vraiment dit
+* **Run #33574244756** : les six étapes durcies **passent toutes** sur le runner — dont les deux
+  charges neuves, **identiques à la référence locale** : vignettes `grilles:b0bb7402…` (le contenu
+  décodé ne dépend pas de l'encodeur, c'était la thèse du ticket) et hymne
+  `frames:1598625|…|crete:0.720`. Reste la fraîcheur du PDF, rouge, avec
+  `pages:29|images:24|placements:25` conformes et le seul `fingerprint` dans l'inconnu.
+* **Refus de conclure là-dessus** : le diagnostic a été ajouté (`texte=` et `disposition=` dans les
+  deux annotations), un run de plus a été demandé, et la mesure est tombée —
+  `texte=8296cf53ba12` **identique** des deux côtés, `disposition` `cd6fdb58…` contre `7f47b597…`.
+  Cause nommée : `derive_bytes()` encode en JPEG `quality=78, optimize, progressive`, donc le
+  bitstream appartient à la libjpeg du moteur, et `page_image_hashes()` hachait **ces octets-là**.
+  Le PDF était le dernier artéfact de la chaîne signé sur ses **conteneurs** et non sur son
+  **contenu**.
+* **Deux actes, distincts** : (1) `texte` devient un **champ contracté** de
+  `gouvernance/pdf_fingerprint.txt` (comparé, machine-indépendant — la table du canari le prouve),
+  `disposition` y est consignée en commentaire, informative et non comparée, et l'écart est
+  **nommé** : `CONTENU : … à corriger, pas à accepter` si le texte bouge, `EMBALLAGE` si seul
+  l'empreinte combinée bouge. Accepter une variante ne peut plus effacer une dérive de texte.
+  (2) `pdf_variante_ci-ubuntu-24.04-py3.12` acceptée **sur ces nombres**, dans `PDF CANONIQUE`.
+* **Une limite nouvelle, déclarée en ticket** : **R1.10** (signature du PDF par **identité** de
+  planches plutôt que par haché de leurs octets — la voie qui rendrait la variante inutile, avec
+  son contre-poids écrit : ce que le scellé des maîtres devrait alors garantir).
+* Re-gravure de `pdf_fingerprint.txt` (acte d'assentiment) : `fingerprint`, `pages`, `images`,
+  `placements` **inchangés**, deux lignes ajoutées. Le volume publié, lui, n'a pas été touché.
+* **Et le garde-fou, mesuré** : la clause ne valait pas d'être écrite sans qu'on la teste au
+  pire usage — accepter une divergence de texte comme si c'était un rendu. Nouveau scénario
+  **P1c** dans la batterie : une date du volume est altérée, le volume est réimprimé, la charge
+  inédite est **acceptée à la main comme une variante**, et `pdf_fingerprint.py --check` refuse
+  quand même (`variante_acceptée_mais_texte_divergent`). Batterie **25/25 en 2 min 29 s** —
+  avec une vue de contrôle dédiée (`vue_frais`), pour qu'un scénario de garde-fou ne soit jamais
+  validé par un contrôle voisin du sien.
+* **Verdict du canari — le run vert complet (#33575391219), 18 étapes sur 18, aucune tolérante** :
+  hymne et vignettes donnent sur le runner **la charge de la référence locale** (contrat
+  machine-indépendant, aucune variante à graver) ; Atlas et Arbre donnent leur variante
+  d'environnement **nommément acceptée** ; le PDF, `connue=variante-acceptee:ci-ubuntu-24.04-py3.12`.
+  C'est la preuve bloquante que ce lot promettait : non pas « un canari est rouge puis devient
+  vert », mais cinq annotations qui disent, à chaque run, quelle charge a été vue sur quelle
+  machine et au titre de quel contrat.
+
+### Documenté — constats C-02, C-03, C-04 du rapport RA-2026-IV-01
+* **C-02** (achevé) : le README n'annonce plus « 7 étapes » tolérantes.
+* **C-03** : les comptages **inexpliqués sont retirés, pas réexpliqués**. « 4 post-step »
+  (README, ROADMAP, CHANGELOG 2026-XI) et « 22 sous-étapes » (`CI_LIMITES.md`) ne décrivent
+  rien de mesurable : le workflow a 18 étapes (16 nommées + `actions/checkout` +
+  `actions/setup-python`), **aucune** section `post:`. Un compte qu'on ne peut pas vérifier
+  est un compte qui mentira tout seul dans six mois — le précédent « 6 contre 7 » a déjà coûté
+  une PR. Les chiffres du jour sont pris au **parseur YAML**, pas à un grep.
+* **C-04** : `getdata()` n'est plus appelé nulle part (l'Atlas passe par `tobytes()` comme
+  l'Arbre) — le `DeprecationWarning` Pillow qui pollue `make controle` depuis des jours a
+  disparu avec la réécriture, sans qu'il ait fallu attendre Pillow 14 (2027-10-15).
+* `gouvernance/CI_LIMITES.md` : sections « Statut R1.4.a-v3 », « R1.4.c et R1.4.d »,
+  « R1.4.e–g » ; table des sept artéfacts régénérés (tous **bloquants**) ; les causes de
+  non-reproductibilité deviennent une **mémoire**, avec post-scriptum sur ce qui s'est résolu
+  sans être investigué ; et **ce qui est trouvé en route, déclaré** : `images/realistes/`
+  (211 Mio) n'est scellé par rien.
+* Deux **tickets nouveaux** ouverts plutôt que des notes en l'air : **R1.8** (parité
+  modèle ↔ workflow installé — rien ne vérifie qu'ils concordent) et **R1.9** (sceller la
+  galerie réaliste, que le sceau des vignettes ne garde qu'à moitié).
+
 ## [2026-XII] — 2026-09-01 (R1.4.h — Gel des archives : mode strict restauré, vérifié avant régénération)
 
 ### Corrigé — `RAPPORT_ANALYSE_2026_IV.md`, constat C-01
