@@ -4,12 +4,19 @@
 Répondre à « le verrou tient-il ? » ne se fait pas en lisant le code : on **casse**
 une copie du dépôt et l'on regarde qui bronche.
 
-**Vingt-deux fautes à refuser, cinq éditions légitimes à laisser passer** — dont la
+**Vingt-cinq fautes à refuser, six éditions légitimes à laisser passer** — dont la
 cérémonie d'acceptation d'une variante de rendu (V4), qui teste l'autre sens du
 contrat : une dérive d'environnement se RÉSOUT par un acte tracé, elle ne se subit
 pas par tolérance. Et son envers, P1c : une dérive de CONTENU présentée comme un
 rendu doit être refusée **même après acceptation explicite de la variante** — la
 porte ouverte par V4 ne doit pas devenir une porte de service.
+
+Depuis l'Avis royal n° 10 (2 septembre 2026), la batterie juge aussi les silences
+dans les deux sens : S5, F1 et E1 refusent l'année imposée à une fête, la fixation
+retirée du canon et la lacune que personne n'a décrétée ; V5 laisse passer une
+lacune nouvelle **jurée selon le rite** — registre et Serment ensemble. Une lacune
+non décrétée est une dette, non un mystère : encore faut-il que le rite qui la
+décrète soit, lui, praticable.
 
 Chaque scénario travaille sur sa propre copie de l'arbre (hors dépôt, hors `.git`,
 hors `.venv`) : la référence n'est jamais touchée, même quand un scénario régénère
@@ -23,6 +30,7 @@ Code de sortie 0 si tout est conforme, 1 sinon.
 """
 from __future__ import annotations
 
+import json
 import shutil
 import subprocess
 import sys
@@ -40,6 +48,7 @@ PY = sys.executable
 # qu'on vient de rendre bloquants.
 CONTROLES = [
     "sources/check_continuity.py",
+    "sources/check_silences.py",
     "sources/check_canon.py",
     "sources/check_chroniques.py",
     "sources/check_pdf.py",
@@ -108,9 +117,19 @@ def intervertir(labo: Path, a: str, b: str) -> None:
 
 
 def regenerer(labo: Path, sceller: bool = True) -> None:
-    """"Réimprime le volume, grave à nouveau l'empreinte et, par défaut, re-scelle les maîtres."""
+    """"Réimprime le volume, re-grave empreinte ET manifeste, et re-scelle les maîtres.
+
+    R1.3 (1ᵉʳ septembre 2026) a mis `check_manifest.py --check` dans la chaîne. Une
+    édition légitime du canon qui réimprime sans re-graver le manifeste échoue donc —
+    à juste titre, puisque le manifeste est le scellé du texte. La batterie doit
+    suivre le rite entier (ÉCRIRE → CONTRÔLER → COMPILER → VÉRIFIER → GRAVER), sans
+    quoi les scénarios V2 et R1 prouvaient la chaîne d'avant R1.3 : trouvé le
+    2 septembre 2026 en rejouant la batterie, les deux scénarios échouant **aussi**
+    sur `HEAD`, c'est-à-dire avant tout changement de cette session.
+    """
     courir(labo, f"{PY} sources/generate_encyclopedie_2026_i.py")
     courir(labo, f"{PY} sources/pdf_fingerprint.py --write")
+    courir(labo, f"make --no-print-directory PY={PY} manifest")
     if sceller:
         courir(labo, f"make --no-print-directory PY={PY} iconographie")
 
@@ -135,6 +154,19 @@ def vue_scelle(labo: Path) -> tuple[bool, str]:
     """
     rc, dernier = courir(labo, f"make --no-print-directory PY={PY} scelle")
     return rc != 0, f"scelle → {dernier}"
+
+
+def vue_silences(labo: Path) -> tuple[bool, str]:
+    """La garde des silences seule (Avis royal n° 10, ticket R2.7).
+
+    Même raison d'être que `vue_frais` et `vue_scelle` : un scénario de garde-fou
+    doit être refusé par le mécanisme qu'il prouve. Les scénarios de silence
+    passaient avant ce jour par la continuité, qui les tenait pour deux figures
+    sur sept ; ils passeraient encore par un voisin si on les jugeait à la chaîne
+    entière, et ne prouveraient rien du registre.
+    """
+    rc, dernier = courir(labo, f"{PY} sources/check_silences.py")
+    return rc != 0, f"check_silences → {dernier}"
 
 
 def vue_controles(labo: Path) -> tuple[bool, str]:
@@ -253,6 +285,21 @@ FAUTES: list[tuple[str, object, object]] = [
                       "python sources/pdf_fingerprint.py --check",
                       "python sources/pdf_fingerprint.py --check || true"),
      vue_scelle),
+    ("S5 · année imposée à la première Transparence brune — silence juré que rien ne gardait",
+     lambda d: editer(d, "ENCYCLOPEDIE_CONSOLIDEE_2026_I.md",
+                      "célèbre depuis la **Journée de la Transparence brune**",
+                      "célèbre depuis 1994 la **Journée de la Transparence brune**"),
+     vue_silences),
+    ("F1 · fixation retirée du canon, Serment et registre intacts : le décret devient une opinion",
+     lambda d: editer(d, "ENCYCLOPEDIE_CONSOLIDEE_2026_I.md",
+                      "**au quatrième degré** (de la Génération II à la Génération VI) ", ""),
+     vue_silences),
+    ("E1 · lacune nouvelle non décrétée : le phare allumé une année qu'on ne dit pas (art. 7)",
+     lambda d: editer(d, "CHRONOLOGIE_MAITRESSE_1847_2026.md",
+                      "## VIII. Dates non consignées par décret",
+                      "## VIII. Dates non consignées par décret\n\n"
+                      "L'année d'allumage du phare de Port Babette n'est pas précisée par le registre."),
+     vue_silences),
 ]
 
 # Une divergence nouvelle que le registre déclare doit passer : c'est le contrat
@@ -285,6 +332,44 @@ def ceremony_acceptation(labo: Path) -> None:
                  f"'{produites[0]}' batterie-environnement-etranger")
 
 
+def silence_nouveau_decrete(labo: Path) -> None:
+    """Le rite de l'Avis n° 10 éprouvé dans le bon sens : on jure, la chaîne passe.
+
+    Sans ce scénario, l'article 7 ne serait qu'une interdiction de raconter. Il est
+    une obligation de déclarer : un huitième silence est juré — son entrée au
+    registre, son titre au Serment, et le compte que le Serment annonce en tête —
+    et la chaîne entière doit le laisser passer.
+    """
+    registre = labo / "canon" / "silences.json"
+    doc = json.loads(registre.read_text(encoding="utf-8"))
+    doc["silences"].append({
+        "id": "S8",
+        "objet": "Nom du castor qui mordit la botte du Dormeur",
+        "borne": "Le fait est attesté par le rapport A-41 : la botte fut conservée, le castor relâché.",
+        "tu": "Le nom de l'animal. Le rapport ne donne que son rang dans la hiérarchie des castors.",
+        "couvre": ["castor"],
+        "portee": ["ENCYCLOPEDIE_CONSOLIDEE_2026_I.md"],
+        "gardes": [{"ancrage": "castor",
+                    "motif": "matricule\\s+\\d{2,4}-\\d{2,4}",
+                    "dit": "matricule d'un castor du chantier"}],
+    })
+    registre.write_text(json.dumps(doc, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    serment = labo / "gouvernance" / "SERMENT_D_IGNORANCE.md"
+    texte = serment.read_text(encoding="utf-8")
+    ancre = "## IV. La fixation"
+    assert ancre in texte, "rubrique des fixations introuvable dans le Serment"
+    texte = texte.replace(ancre,
+                          "### S8 · Le nom du castor qui mordit la botte du Dormeur\n\n"
+                          "* **Borne (ce qui est su)** — Le fait est attesté par le rapport A-41 : "
+                          "la botte fut conservée, le castor relâché.\n"
+                          "* **Tu** — Le nom de l'animal. Le rapport ne donne que son rang dans la "
+                          "hiérarchie des castors.\n"
+                          "* **Garde** — Aucun matricule ne peut être attaché à un castor du chantier.\n\n"
+                          + ancre, 1)
+    texte = texte.replace("7 silences jurés", "8 silences jurés")
+    serment.write_text(texte, encoding="utf-8")
+
+
 # ── ce que la chaîne doit laisser passer ─────────────────────────────────────
 JUSTES: list[tuple[str, object]] = [
     ("V1 · dépôt tel quel, chaîne complète", None),
@@ -310,6 +395,8 @@ JUSTES: list[tuple[str, object]] = [
      divergence_nouvelle_declares),
     ("V4 · rendu d'un autre environnement OBSERVÉ puis ACCEPTÉ à la main : la chaîne laisse passer",
      ceremony_acceptation),
+    ("V5 · lacune nouvelle JURÉE selon le rite (registre + Serment + compte) : la chaîne laisse passer",
+     silence_nouveau_decrete),
 ]
 
 

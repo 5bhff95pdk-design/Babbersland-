@@ -227,7 +227,8 @@
       "attributs": ["Veste à coude déchiré", "Traité des Cornichons 2009"],
       "statut": "collateral",
       "citation": "Une manche déchirée se rafraîchit au vent, un peuple fâché se réconcilie en s'asseyant.",
-      "biographie": "Ermite et médiateur itinérant de la branche Babette-Marine, artisan de la paix lors de la Guerre des Cornichons (2009).",
+      "biographie": "Ermite et médiateur itinérant de la branche Babette-Marine, artisan de la paix lors de la Guerre des Cornichons (2009). Rattaché à la souche Babette-Marine au quatrième degré (Avis royal n° 10) ; les porteurs des degrés intermédiaires ne sont pas consignés.",
+      "degres_collateraux": 4,
       "anecdote": "Refusa toujours de faire recoudre sa coudière déchirée car elle lui apportait la brise fraîche de la rivière.",
       "lieu_residence": "Rives du Fleuve"
     },
@@ -243,6 +244,15 @@
       "biographie": "Né le 26 août 2026 à 14 h 22 à Port Babette, proclamé à 15 h 01 lors de la Nuit des Sept Mille.",
       "anecdote": "S'endormit profondément au premier coup de cloche de 15 h 00, prouvant sa haute vocation de dormeur royal.",
       "lieu_residence": "Port Babette / Pabst City"
+    }
+  ],
+  "propositions_declarées": [
+    {
+      "champ": "personnages[babber_le_dechire].degres_collateraux",
+      "valeur": 4,
+      "statut": "attesté",
+      "source": "ENCYCLOPEDIE_CONSOLIDEE_2026_I.md — Livre II, Génération VI, § 2 ; Avis royal n° 10, art. 3",
+      "note": "Le degré est fixé parce que l’arbre officiel en dépend : le trait pointillé traverse quatre bandes de générations. Les porteurs intermédiaires demeurent jurés (silence S2), et l’écart est rétro-contrôlé par sources/check_silences.py."
     }
   ]
 }

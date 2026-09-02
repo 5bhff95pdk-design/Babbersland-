@@ -124,6 +124,52 @@ Les archives royales ayant conservé des fragments d'Avis commençant à l'Avis 
 
 ---
 
+### ⚜️ AVIS ROYAL N° 10
+**Date de promulgation** : 2 septembre 2026
+**Souverain** : Babber Ier le Louche (sur rapport de Luc Foster, Grand Argentier, Chancelier et Archiviste royal)
+**Objet** : *De la Clôture des Lacunes, du Partage entre le Décret et le Silence, et de la Correction d'un Serment trop généreux*
+**Texte** :
+> **Considérant** qu'un Royaume qui ne sait pas ce qu'il tait finit par ne plus savoir ce qu'il sait ;
+> **Considérant** que le Serment d'Ignorance du 30 août proclamait cinq silences, que la ROADMAP en énumérait cinq autres au ticket R2.7, et que la Chronologie maîtresse en tenait une troisième au § VIII — trois listes pour un même registre, ce qui n'est pas une doctrine mais une distraction ;
+> **Considérant** que ledit Serment promettait en son § III que « les scripts de validation rejettent toute tentative d'imposer une fixation arbitraire », et que cette promesse n'était tenue que pour deux des cinq silences proclamés, la première année de la Transparence brune pouvant être fixée en toutes lettres sans qu'aucune machine ne bronche ;
+> **Considérant** que le même Serment jurait de taire l'heure de la pose de la première pierre du port, alors que le registre **P-1** ne consigne aucune première pierre, aucune inauguration, aucun ruban ni aucun discours — le Livre II des Chroniques l'ayant dit expressément en sa tranche 5 —, et qu'on ne saurait taire la circonstance d'une cérémonie qui n'a pas eu lieu ;
+> **Considérant** qu'une lacune non décrétée n'est pas un mystère mais une dette, et que le Royaume a déjà payé assez cher les runbooks prêts que personne n'exécutait ;
+> **Considérant enfin** que la branche collatérale du Prince Déchiré soutient un trait de l'arbre officiel, et qu'un trait qui traverse quatre bandes de générations sans s'arrêter sur un nom engage le dessin autant que le récit ;
+> **Il est décrété** :
+
+**Art. 1er — Inventaire arrêté.** Les lacunes volontaires du Royaume sont arrêtées au nombre de **sept**, réconciliation faite des trois listes en vigueur :
+
+| Cote | Lacune | Chronologie § VIII | Serment 2026 | ROADMAP R2.7 | Décision |
+|---|---|:--:|:--:|:--:|---|
+| **S1** | Naissance du Déchiré (jour, mois, année, lieu) | ✔ | ✔ | ✔ | jurée |
+| **S2** | Nom des porteurs intermédiaires de la branche collatérale | ✔ | — | ✔ | jurée |
+| **S3** | Naissance et état civil de Roger Bontemps | ✔ | ✔ | ✔ | jurée |
+| **S4** | Date de la transmission de la sauce, Linéa → Ginette | ✔ | — | ✔ | jurée |
+| **S5** | Première année de la Journée de la Transparence brune | ✔ | ✔ | ✔ | jurée |
+| **S6** | Grammage des trois aromates de la sauce royale | — | ✔ | — | jurée (confirmée) |
+| **S7** | Heure de la pose de la première pierre du port | — | ✔ | — | **requalifiée** |
+| **F1** | Nombre de degrés de la branche collatérale | ✔ | — | ✔ | **fixée : quatre** |
+
+**Art. 2 — La règle de partage.** Une lacune se juge à sa portée, non à son mystère. Elle est **jurée** quand rien n'en dépend, **fixée** quand une pièce du corpus en dépend, **requalifiée** quand le fait dont on taisait la circonstance n'a pas eu lieu. Nul silence ne vaut sans sa **borne** : ce qui est su doit être dit, faute de quoi le mystère se distingue mal du trou.
+
+**Art. 3 — La fixation.** Le Prince Babber le Déchiré est, **au quatrième degré**, l'héritier de la branche collatérale fondée par la Princesse Babette-Marine (Génération II), dont il est le descendant en Génération VI. Cette fixation est portée au texte de 2026-I (Livre II, Génération VI) ; elle vaut pour l'arbre officiel, dont le trait pointillé traverse exactement quatre bandes sans s'arrêter sur aucun nom. Le nom, le sexe et les dates des porteurs de ces degrés demeurent jurés (S2) : nommer l'un d'eux obligerait à redessiner l'arbre, ce qui est une autre affaire.
+
+**Art. 4 — Les sept silences.** Sont jurés, bornés et gardés les silences S1 à S7 énumérés à l'article 1er, dans les termes du Serment d'Ignorance refondu ce jour. Leur teneur est celle du registre `canon/silences.json`, et nulle autre : on ne jure pas une lacune qu'on n'a pas écrite.
+
+**Art. 5 — Requalification du silence de la première pierre.** Est requalifié en **silence d'inexistence** le silence dit *de l'heure de la pose de la première pierre du port* (S7). Le registre ne tait rien : le port de Port Babette n'a point eu de pose, et ses ouvrages paraissent au registre **P-1** le jour où ils servent, jamais avant. La pierre du quai porte une phrase de la Princesse ; elle ne porte pas de date. Le présent Avis corrige le Serment, et la correction est dite ici pour mémoire — une erreur de la Chancellerie ne s'efface pas, elle se consigne.
+
+**Art. 6 — Le garde.** Est institué le registre `canon/silences.json`, source unique des silences et des fixations, dont `gouvernance/SERMENT_D_IGNORANCE.md` est le miroir lisible. Le contrôle `sources/check_silences.py` en assure la garde : parité du registre et du Serment dans les deux sens, refus de toute fixation interdite, attestation et rétro-contrôle arithmétique de la fixation F1. Il est branché à `make controle`, à une étape bloquante de la CI et à deux scénarios de la batterie de mutations. Les gardes antérieurs de `check_continuity.py` lui sont **délégués** : le registre définit, le contrôle applique, et non l'inverse.
+
+**Art. 7 — Anti-dette.** Toute formule du canon ou de la Chronologie qui avoue un manque — *non consignée*, *ne précise pas*, *sans en donner la date*, *reste ouverte* — doit être couverte par un silence décrété ou par une dispense écrite au registre. Une lacune que la machine relève et que nul n'a décrétée fait échouer le contrôle dès la session qui la trouve. **On ne taire plus sans décréter.**
+
+**Art. 8 — Non-annexion.** Le total de **7 000 âmes** n'est pas une lacune du registre : c'est une proposition en instance de l'**Avis royal n° 7**, à qui elle demeure renvoyée. Le présent Avis refuse de l'absorber, une lacune et une proposition en attente ne se soignant pas de la même manière.
+
+**Art. 9 — Exécution.** Le présent Avis est un décret touchant au canon : la fixation qu'il porte est inscrite à 2026-I, le volume est réimprimé, l'empreinte sémantique regravée et le manifeste des livrables rescellé dans la même session, selon le Rite de publication — un décret qui n'imprime pas n'a pas eu lieu.
+
+*Promulgué le 2 septembre 2026. Pièces jointes : `gouvernance/SERMENT_D_IGNORANCE.md` (édition refondue), `canon/silences.json` (registre), `sources/check_silences.py` (garde). Statut d'exécution : **exécuté le jour même**.*
+
+---
+
 ## Formulaire Officiel d'Avis Royal
 
 Tout futur projet d'Avis soumis au Conseil des Sages doit comporter obligatoirement :

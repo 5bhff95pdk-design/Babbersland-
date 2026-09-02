@@ -1,0 +1,198 @@
+{
+  "royaume": "Royaume du Babberland",
+  "autorite": "gouvernance/SERMENT_D_IGNORANCE.md",
+  "reference_canonique": "ENCYCLOPEDIE_CONSOLIDEE_2026_I.md",
+  "avis": "Avis royal n° 10",
+  "promulgue_le": "2 septembre 2026",
+  "doctrine": "Une lacune est JURÉE quand rien n'en dépend ; elle est FIXÉE quand une pièce du corpus en dépend ; elle est REQUALIFIÉE quand le fait dont on taisait la circonstance n'a pas eu lieu. Toute lacune doit être décrétée : une lacune non décrétée est une dette, non un mystère.",
+  "silences": [
+    {
+      "id": "S1",
+      "objet": "Naissance de Babber le Déchiré",
+      "borne": "Majeur attesté en 2007 ; cousin collatéral, Génération VI ; médiateur de la Guerre des Cornichons (2007–2009).",
+      "tu": "Le jour, le mois, l'année et le lieu de sa naissance.",
+      "couvre": ["Déchiré"],
+      "portee": ["ENCYCLOPEDIE_CONSOLIDEE_2026_I.md", "CHRONOLOGIE_MAITRESSE_1847_2026.md"],
+      "gardes": [
+        {
+          "ancrage": "Déchiré",
+          "motif": "\\b(?:n[ée]|n[ée]s|n[ée]es)\\s+(?:le\\s+|en\\s+|vers\\s+|au\\s+)?\\d{3,4}",
+          "dit": "date de naissance"
+        },
+        {
+          "ancrage": "Déchiré",
+          "motif": "\\b(?:n[ée]|n[ée]s|n[ée]es)\\s+(?:à|au|aux|chez|dans)\\s+[A-ZÉÈÀ]",
+          "dit": "lieu de naissance"
+        },
+        {
+          "ancrage": "Déchiré",
+          "motif": "\\(\\s*(?:v\\.\\s*)?\\d{4}\\s*[–-]",
+          "dit": "années de vie"
+        },
+        {
+          "ancrage": "Déchiré",
+          "motif": "âg[ée]e?s?\\s+de\\s+\\d+",
+          "dit": "âge"
+        }
+      ]
+    },
+    {
+      "id": "S2",
+      "objet": "Porteurs intermédiaires de la branche collatérale",
+      "borne": "Quatre degrés séparent Babette-Marine (Génération II) du Déchiré (Génération VI) — fixation F1.",
+      "tu": "Le nom, le sexe, les dates et le nombre exact de porteurs de ces degrés : le trait pointillé de l'arbre officiel traverse quatre bandes sans s'arrêter sur aucun nom.",
+      "couvre": ["Déchiré", "collatérale"],
+      "portee": ["ENCYCLOPEDIE_CONSOLIDEE_2026_I.md", "CHRONOLOGIE_MAITRESSE_1847_2026.md"],
+      "gardes": [
+        {
+          "ancrage": "Déchiré",
+          "motif": "(?:fils|fille|petit-fils|petite-fille|arri[èe]re-petit-fils|arri[èe]re-petite-fille|neveu|ni[èe]ce|descendante?|issu|issu de)\\s+d(?:e|u|es|')\\s+([^.,;:]{0,40})",
+          "permet": ["Babette-Marine", "branche", "lign[ée]e", "rive", "fleuve"],
+          "dit": "porteur intermédiaire nommé"
+        }
+      ]
+    },
+    {
+      "id": "S3",
+      "objet": "Naissance et état civil de Roger Bontemps",
+      "borne": "Adulte attesté lors de la fondation de McBabber's (1984–1986) ; greffier de la commission Colette-Pabst en 1991.",
+      "tu": "Ses dates d'état civil, son âge et sa famille. Le Royaume garde le droit de ne pas savoir l'âge de son rire.",
+      "couvre": ["Bontemps"],
+      "portee": ["ENCYCLOPEDIE_CONSOLIDEE_2026_I.md", "CHRONOLOGIE_MAITRESSE_1847_2026.md"],
+      "gardes": [
+        {
+          "ancrage": "Bontemps",
+          "motif": "\\b(?:n[ée]|n[ée]s|n[ée]es)\\s+(?:le\\s+|en\\s+|vers\\s+|au\\s+)?\\d{3,4}",
+          "dit": "date de naissance"
+        },
+        {
+          "ancrage": "Bontemps",
+          "motif": "\\b(?:n[ée]|n[ée]s|n[ée]es)\\s+(?:à|au|aux|chez|dans)\\s+[A-ZÉÈÀ]",
+          "dit": "lieu de naissance"
+        },
+        {
+          "ancrage": "Bontemps",
+          "motif": "\\(\\s*(?:v\\.\\s*)?\\d{4}\\s*[–-]",
+          "dit": "années de vie"
+        },
+        {
+          "ancrage": "Bontemps",
+          "motif": "âg[ée]e?s?\\s+de\\s+\\d+",
+          "dit": "âge ou décès"
+        }
+      ]
+    },
+    {
+      "id": "S4",
+      "objet": "Date de la transmission de la sauce de Linéa à Ginette",
+      "borne": "Le fait est canon : Linéa garda la recette, puis la transmit à la princesse Ginette après la majorité de celle-ci.",
+      "tu": "L'année, le jour et l'heure de la transmission. La recette n'ayant jamais été écrite, l'acte fut de la main, non du papier.",
+      "couvre": ["transm", "sauce", "recette"],
+      "portee": ["ENCYCLOPEDIE_CONSOLIDEE_2026_I.md", "CHRONOLOGIE_MAITRESSE_1847_2026.md"],
+      "gardes": [
+        {
+          "ancrage": "(?:sauce|recette|secret)",
+          "motif": "(?:transm(?:is|it|ise|et|ettre|ission)?|remise|succession)[^.]{0,60}\\d{4}",
+          "dit": "date de transmission"
+        },
+        {
+          "ancrage": "(?:sauce|recette|secret)",
+          "motif": "\\d{4}[^.]{0,60}(?:transm(?:is|it|ise|et|ettre|ission)?|remise|succession)",
+          "dit": "date de transmission"
+        }
+      ]
+    },
+    {
+      "id": "S5",
+      "objet": "Première année de la Journée de la Transparence brune",
+      "borne": "Elle se tient chaque 17 mai ; elle est postérieure au Décret de la Sauce ouverte (1991–1993).",
+      "tu": "L'année civile de la première célébration. Le canon dit « depuis », il ne dit pas « depuis quand ».",
+      "couvre": ["Transparence brune"],
+      "portee": ["ENCYCLOPEDIE_CONSOLIDEE_2026_I.md", "CHRONOLOGIE_MAITRESSE_1847_2026.md"],
+      "gardes": [
+        {
+          "ancrage": "Transparence",
+          "motif": "(?:premi[èe]re|1re|1ère)[^.]{0,80}Transparence[^.]{0,40}\\d{4}",
+          "dit": "année de la première célébration"
+        },
+        {
+          "ancrage": "Transparence",
+          "motif": "\\d{4}[^.]{0,40}(?:premi[èe]re|1re|1ère)[^.]{0,40}Transparence",
+          "dit": "année de la première célébration"
+        },
+        {
+          "ancrage": "Transparence",
+          "motif": "depuis\\s+(?:l[’']?ann[ée]e\\s+)?\\d{4}[^.]{0,40}Transparence",
+          "dit": "année de la première célébration"
+        }
+      ]
+    },
+    {
+      "id": "S6",
+      "objet": "Grammage des trois aromates de la sauce royale",
+      "borne": "La composition générale est connue, ainsi que le temps d'écoulement à la cuillère d'argent : huit secondes.",
+      "tu": "Le grammage au milligramme des trois aromates secrets. Linéa cuisinait « à l'œil, au nez et à la quantité de frites » ; la recette n'a jamais été écrite, ce qui est la seule façon de la garder secrète.",
+      "couvre": ["sauce", "recette", "aromate", "épice"],
+      "portee": ["ENCYCLOPEDIE_CONSOLIDEE_2026_I.md", "CHRONOLOGIE_MAITRESSE_1847_2026.md"],
+      "gardes": [
+        {
+          "ancrage": "(?:sauce|recette|aromates?|[ée]pices?)",
+          "motif": "\\d+(?:[  ]\\d{3})*\\s*(?:grammes?|g\\b|cuill[èe]r[ée]es?|pinc[ée]es?|ml\\b|cl\\b|mg\\b|kilos?|kg\\b)",
+          "dit": "quantité chiffrée d'un aromate"
+        }
+      ]
+    },
+    {
+      "id": "S7",
+      "objet": "Heure et date de la pose de la première pierre du port",
+      "nature": "silence d'inexistence — REQUALIFIÉE par l'Avis royal n° 10, art. 5",
+      "borne": "La pierre du quai porte une phrase de la Princesse ; le registre P-1 consigne des ouvrages entrés en service, jamais une inauguration.",
+      "tu": "Il n'y a pas d'heure à taire : le port de Port Babette n'a pas eu de pose de première pierre, ni de ruban, ni de discours. Le Serment avait juré de cacher une circonstance ; le corpus, lui, nie la cérémonie. C'est le Serment qui se trompait.",
+      "couvre": ["première pierre", "inauguration"],
+      "portee": ["ENCYCLOPEDIE_CONSOLIDEE_2026_I.md", "CHRONOLOGIE_MAITRESSE_1847_2026.md"],
+      "gardes": [
+        {
+          "ancrage": "(?:premi[èe]re pierre|inauguration|pose de la premi[èe]re)",
+          "motif": "\\d{1,2}\\s*h\\s*\\d{2}|\\b\\d{4}\\b",
+          "permet": ["aucune", "ne consigne", "pas de", "jamais", "sans"],
+          "dit": "date ou heure données à une cérémonie qui n'a pas eu lieu"
+        }
+      ]
+    }
+  ],
+  "fixations": [
+    {
+      "id": "F1",
+      "objet": "Nombre de degrés de la branche collatérale",
+      "valeur": 4,
+      "lettre": "quatre",
+      "attestation": {
+        "fichier": "ENCYCLOPEDIE_CONSOLIDEE_2026_I.md",
+        "motif": "au quatrième degré"
+      },
+      "arithmetique": {
+        "souche": {"fichier": "canon/personnages.json", "id": "babette_marine", "champ": "generation"},
+        "bout": {"fichier": "canon/personnages.json", "id": "babber_le_dechire", "champ": "generation"},
+        "ecart": 4
+      },
+      "note": "Fixé parce que l'arbre officiel en dépend : le trait pointillé vert descend de la Génération II à la Génération VI sans s'arrêter sur aucun nom. Nommer un porteur intermédiaire obligerait à redessiner l'arbre ; le nombre de degrés, lui, ne se discute plus."
+    }
+  ],
+  "marqueurs_lacune": [
+    "non consign",
+    "jamais été écrite",
+    "n'est pas précis",
+    "ne précise pas",
+    "sans en donner la date",
+    "reste ouverte",
+    "restent ouvertes",
+    "non daté"
+  ],
+  "dispenses": [
+    {
+      "fichier": "CHRONOLOGIE_MAITRESSE_1847_2026.md",
+      "motif": "^## VIII",
+      "pourquoi": "la rubrique qui énumère les dates non consignées par décret est elle-même l'inventaire : elle ne saurait se déclarer lacune."
+    }
+  ]
+}

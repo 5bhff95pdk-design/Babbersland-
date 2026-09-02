@@ -129,6 +129,15 @@ jobs:
       - name: Continuité des sources (canon, chronologie, archives, chroniques, ancres, silences)
         run: python sources/check_continuity.py
 
+      - name: Garde des silences (Avis royal n° 10 — registre ↔ Serment, fixations, lacunes non décrétées)
+        # R2.7 (2 septembre 2026) : le Serment promettait depuis le 30 août que la
+        # chaîne « rejette toute fixation arbitraire » ; la promesse ne tenait que
+        # pour deux silences sur cinq proclamés, et trois listes se contredisaient.
+        # `canon/silences.json` est désormais la source unique, le Serment en est le
+        # miroir, et cette étape est bloquante d'emblée — une lacune non décrétée
+        # est une dette, pas un mystère.
+        run: python sources/check_silences.py
+
       - name: Parité des données structurées (canon/*.json contre 2026-I, Chronologie, Registre)
         run: python sources/check_canon.py
 

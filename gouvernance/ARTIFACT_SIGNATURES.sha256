@@ -76,5 +76,5 @@ atlas_variante_reference-locale = svg:d6aab963c7ea953c|html:10ab30af34f9c925|tai
 # matrice multi-OS R1.2) : la charge compare l'empreinte ordonnée, le nombre de
 # pages, d'illustrations et de placements. Accepter une variante n'est JAMAIS
 # excuser une dérive sur la machine de référence : là, on régénère et on re-grave.
-pdf_variantes_acceptees = f0ca28998ece73d5350045b52cb4a98eed52db125566209324bba1bdf70fa412
-pdf_variante_ci-ubuntu-24.04-py3.12 = fingerprint:1a76a0e8ee10dec621d0534e4612b01b|pages:29|images:24|placements:25
+pdf_variantes_acceptees = 902c0566bc402c947fd31af9b36d6f57ba3b93cb0532c76ed1f9c6560eda51b7
+pdf_variante_ci-ubuntu-24.04-py3.12 = fingerprint:72d2f6a43fa2bd29f100bfd7dcce5b1a|pages:29|images:24|placements:25

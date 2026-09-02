@@ -336,4 +336,4 @@ if errors:
     raise SystemExit(1)
 
 print("Parité des données validée : " + " · ".join(constats)
-      + " · 18 fiches, 4 fichiers JSON, règnes et successions recalculés.")
+      + f" · 18 fiches, {len(list(DATA.glob('*.json')))} fichiers JSON, règnes et successions recalculés.")

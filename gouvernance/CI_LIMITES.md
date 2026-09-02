@@ -1,8 +1,13 @@
 # 🔧 Limites connues de la CI de continuité
 
 **Référence** : CI-2026-I · diagnostic des étapes en `continue-on-error: true`
-**Établi le** : 1ᵉʳ septembre 2026 · **dernier état** : 1ᵉʳ septembre 2026 (R1.3 — manifeste des livrables — ajouté à la CI, après R1.4, R1.8 et R1.9)
-**Ticket de durcissement** : R1.4 (sous-tickets R1.4.a à R1.4.h) — **les huit sont livrés** ; les bornes nées en route (R1.8, R1.9) le sont aussi, et R1.3 (manifeste des livrables) a rejoint la chaîne
+**Établi le** : 1ᵉʳ septembre 2026 · **dernier état** : 2 septembre 2026 (R2.7 — garde des silences — ajouté à la CI, après R1.3, R1.4, R1.8 et R1.9)
+**Ticket de durcissement** : R1.4 (sous-tickets R1.4.a à R1.4.h) — **les huit sont livrés** ; les bornes nées en route (R1.8, R1.9) le sont aussi, et R1.3 (manifeste des livrables) et R2.7 (garde des silences) ont rejoint la chaîne
+
+**État mesuré le 2 septembre 2026** : `sources/github_actions_continuite.yml` compte **21 étapes**
+(19 nommées + `actions/checkout` + `actions/setup-python`), **0** tolérante — la garde des
+silences (R2.7, Avis royal n° 10) ayant rejoint la chaîne entre la continuité des sources et
+la parité des données. Compte pris au parseur, comme toujours.
 
 **État mesuré le 1ᵉʳ septembre 2026, tard en soirée** : `sources/github_actions_continuite.yml` compte
 **20 étapes** (18 nommées + `actions/checkout` + `actions/setup-python`), **0** portant
@@ -319,6 +324,48 @@ donc rien à attendre.
 À surveiller pour la mise à jour des actions (aucune action requise aujourd'hui).
 
 ---
+
+## Statut R2.7 (2 septembre 2026) — la garde des silences, bloquante d'emblée
+
+**Étape ajoutée** : `python sources/check_silences.py`, en 21ᵉ position (19 nommées + 2 `uses:`).
+**Aucune tolérance** n'a été ménagée : le ticket R2.7 était ouvert depuis le 30 août précisément
+parce qu'une promesse de contrôle y tenait lieu de contrôle.
+
+**Ce que l'étape vérifie** : parité `canon/silences.json` ↔ `SERMENT_D_IGNORANCE.md` dans les
+deux sens ; perce-ment des sept silences sur 2026-I et la Chronologie ; attestation de la
+fixation F1 **et** son rétro-contrôle arithmétique ; chasse aux lacunes non décrétées.
+
+### Variante PDF périmée puis réacceptée — cérémonie rejouée le jour même (clôturé)
+
+La réimpression du volume du 2 septembre 2026 (canon modifié par l'Avis royal n° 10 : la
+fixation « au quatrième degré » inscrite en Génération VI) **change la charge du PDF**, donc
+périme la variante acceptée :
+
+```
+pdf_variante_ci-ubuntu-24.04-py3.12 = fingerprint:1a76a0e8ee10dec621d0534e4612b01b|pages:29|images:24|placements:25
+```
+
+Le runner refusera donc au premier run, **et c'est le comportement voulu** : une variante
+d'environnement n'excuse pas un changement de texte (`pdf_fingerprint.py`, garde explicite
+`variante_acceptée_mais_texte_divergent`). La marche à suivre est celle de R1.4.g :
+
+1. lire l'annotation `empreinte-pdf` du run CI ;
+2. `python sources/pdf_fingerprint.py --accepter '<charge>' ci-ubuntu-24.04-py3.12` ;
+3. pousser — l'acte est tracé dans git, jamais silencieux.
+
+Ce n'est pas une régression : c'est le prix connu, **deux poussées par changement de contenu**,
+tant que R1.2 (matrice multi-OS) n'existe pas — prix déjà payé pour l'Arbre le 1ᵉʳ septembre.
+
+**Exécuté le 2 septembre 2026** (run **#33644149960**) : le premier run a refusé, comme annoncé ;
+l'annotation `empreinte-pdf-divergence` portait `nature=EMBALLAGE` — *texte, pages, images et
+placements conformes, seuls les octets des flux JPEG embarqués diffèrent (libjpeg du moteur)* —,
+seule nature que le rite autorise à accepter. Charge acceptée à la main sous la même étiquette :
+
+```
+pdf_variante_ci-ubuntu-24.04-py3.12 = fingerprint:72d2f6a43fa2bd29f100bfd7dcce5b1a|pages:29|images:24|placements:25
+```
+
+Seconde poussée : **run #33644538835, CI verte, 21 étapes** — la garde des silences comprise.
 
 ## Mémoire : pourquoi ces étapes étaient tolérantes (état du 1ᵉʳ septembre 2026)
 

@@ -122,31 +122,18 @@ for rel in sorted(served - promised - exempted):
         "(la promettre dans le canon, l'exclure, ou retirer l'insertion)"
     )
 
-# Cinq silences sanctifiés (SERMENT_D_IGNORANCE.md §III). Le texte du Serment
-# promet que la batterie « rejette toute tentative d'imposer une fixation
-# arbitraire » : la voici, sinon la promesse reste de la rhétorique (E-24).
-SILENCES = {
-    "Babber le Déchiré": r"né(?:e)?\s+(?:le\s+)?(?:en\s+)?\d{4}|\(\s*(?:v\.\s*)?\d{4}[–-]",
-    "Roger Bontemps": r"né(?:e)?\s+(?:le\s+)?(?:en\s+)?\d{4}|\(\s*(?:v\.\s*)?\d{4}[–-]",
-}
-SILENCES_EVENEMENTS = {
-    "Transparence brune": r"\b\d{1,2}\s*h\s*\d{2}|\b\d{4}-\d{2}-\d{2}\b",
-    "première pierre": r"\b\d{1,2}\s*h\s*\d{2}",
-    "Recette (complète|royale|secrète)": r"\d+\s*(?:grammes|cuillères|pincées|ml|g)\b",
-}
-for figure, pattern in SILENCES.items():
-    for line in canon_text.splitlines():
-        if figure in line and re.search(pattern, line) and "non consignée" not in line:
-            errors.append(
-                f"silence sanctifié percé — naissance chiffrée de {figure} : « {line.strip()[:78]}… » "
-                "(SERMENT_D_IGNORANCE.md, II.1 et II.2 : ces dates doivent rester tues)"
-            )
-for subject, pattern in SILENCES_EVENEMENTS.items():
-    for line in canon_text.splitlines():
-        if re.search(subject, line, flags=re.I) and re.search(pattern, line):
-            errors.append(
-                f"silence sanctifié percé — fixation arbitraire sur {subject} : « {line.strip()[:78]}… »"
-            )
+# Silences sanctifiés (SERMENT_D_IGNORANCE.md §III, Avis royal n° 10). Le Serment
+# promettait depuis le 30 août 2026 que la chaîne « rejette toute tentative
+# d'imposer une fixation arbitraire ». Relue le 2 septembre, la promesse n'était
+# tenue que pour deux des cinq silences proclamés, et deux listes de cinq se
+# contredisaient. Elle l'est désormais par le registre `canon/silences.json`,
+# dont le Serment refondu est le miroir et `sources/check_silences.py` le garde.
+# Ce contrôle ne DÉFINIT donc plus les silences : il les APPLIQUE au canon, ce
+# qui est son office (E-24, ticket R2.7 — une lacune que rien ne garde n'est pas
+# un mystère, c'est un trou).
+import check_silences  # noqa: E402 — même dossier : ce contrôle est appelé par son chemin
+
+errors.extend(check_silences.percees(CANON.name, canon_text))
 
 # Chroniques : hors canon, mais elles doivent déclarer leur statut éditorial
 # « proposé, non décrété » et respecter les formulations canoniques ci-dessus.
