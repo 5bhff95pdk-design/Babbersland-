@@ -2,6 +2,42 @@
 
 Toutes les modifications notables apportées au dépôt du **Royaume du Babberland** sont consignées dans ce document.
 
+## [2026-XVI] — 2026-09-02 (R1.6 — le poids des images : une décision, pas un runbook qui traîne)
+
+Le constat C2 de la note d'audit (« 119 Mio d'images committés ») était ouvert depuis le
+30 août, avec un runbook complet en face — et personne pour trancher. Un runbook « prêt, non
+exécuté » qui survit à deux campagnes n'est plus une procédure : c'est une dette qui se
+raconte des histoires. Cette entrée ferme la question par un décret, sans déplacer un octet.
+
+### Décrété — Avis royal n° 9, transport des images lourdes
+* **Variante A′ retenue** : `images/realistes/*.png` (227 Mio, 83 clichés), `images/vignettes/*.webp`
+  et `audio/*` passent au transport Git LFS — ≈ 236 Mio sortis du magasin Git à terme.
+* **Option B écartée** : la réécriture de l'historique de `main` aurait ramené le dépôt sous
+  5 Mio, mais brisé tout clone et toute branche en cours. Le principe l'emporte sur les octets —
+  *le passé du Royaume ne se réécrit pas*, dans la ligne du scellement des archives G/H (Avis n° 6).
+* **Restent en Git** : les 28 maîtres scellés (75 Mio) et les 2 PDF (22 Mio) — dans la chaîne,
+  déjà dans l'historique, rien à gagner à les en sortir.
+* **Aucun plafond de poids institué** (art. 6) : la garde coûterait en cérémonie ce qu'elle
+  épargnerait en octets. La croissance des images reste un jugement éditorial.
+
+### Mesuré — le blocage réseau tient, la migration ne s'exécute pas ici
+* Sondes reconduites le 2 septembre, identiques au 30 août : `api.github.com` → **200**,
+  `github-cloud.s3.amazonaws.com` et `uploads.github.com` → **SSL_ERROR_SYSCALL**, `git-lfs` absent.
+* Conséquence gravée aux art. 3 et 4 : **défense d'engager la migration depuis l'environnement
+  d'agent**, et **aucun filtre LFS n'est inscrit à `.gitattributes`** avant téléversement possible.
+  Un filtre posé d'avance transformerait le prochain commit binaire en pointeur orphelin —
+  dépôt intact ici, en ruine pour tous les autres. `.gitattributes` reste à ses deux lignes `binary`.
+
+### Corrigé — le runbook avait une campagne de retard
+* § 1 remesuré : la galerie était comptée **77 clichés / 220 Mio**, elle en pèse **83 / 227 Mio** ;
+  les vignettes ont suivi (77 → 83). Le « 29 maîtres » de la première mesure était faux : il y en
+  a **28**, conformément à `ICONOGRAPHIE.sha256`.
+* § 3 réordonné (arbitrage rendu en tête, Option B marquée écartée), § 5 réécrit en fiche de
+  statut décrété. `README.md` référence désormais le runbook et l'Avis n° 9.
+* Aucun fichier de la chaîne n'est touché : `make controle` reste vert, scellés inchangés.
+
+---
+
 ## [2026-XV] — 2026-09-01 (R1.3 — le manifeste des livrables, ce que rien ne scellait par octets)
 
 Addenda à la vague R1.4 : le ticket de fond R1.3 était resté ouvert, plus petit que

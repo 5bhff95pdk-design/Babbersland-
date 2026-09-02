@@ -24,7 +24,8 @@ L'édition **2026-I** intègre directement les corrections et ne nécessite aucu
 | `RAPPORT_DE_CONTRE_EXPERTISE_2026_III.md` | Contre-expertise RC-2026-III-01 : mutations rejouées (E-18 à E-28) ; lot C0 appliqué le 29 août, suivi d'exécution en §6 |
 | `ROADMAP_2026_II.md` | Feuille de route en quatre horizons, 28 tickets, risques et indicateurs |
 | `gouvernance/LIVRE_VIII_INSTITUTIONS.md` | Proposition Livre VIII (R2.1) : Les 5 corps d'État, gardiens du caillé, police de la sieste |
-| `gouvernance/REGISTRE_DES_AVIS_ROYAUX.md` | Registre officiel des Avis royaux (R2.2) : restauration des décrets n° 1 à 4 et suite |
+| `gouvernance/REGISTRE_DES_AVIS_ROYAUX.md` | Registre officiel des Avis royaux (R2.2) : restauration des décrets n° 1 à 4 et suite, jusqu'à l'**Avis n° 9** (2 sept. 2026, transport LFS des images lourdes) |
+| `gouvernance/LFS_MIGRATION.md` | Runbook R1.6 du passage en Git LFS — **variante A′ décrétée** par l'Avis n° 9, réécriture de l'historique écartée ; exécution en attente d'une machine ayant accès au CDN GitHub |
 | `gouvernance/CODE_DE_LA_FRAICHEUR_ET_PARITE_POUTINE.md` | Code de la Fraîcheur (R2.4), Parité Poutine chiffrée (R2.3) et calendrier national (R2.5) |
 | `gouvernance/GUIDE_GASTRONOMIQUE_ET_JEUX_LENTS.md` | Guide des 3 Spatules royales, Jeux Lents de Pabst City, bestiaire national et marine |
 | `gouvernance/REGISTRE_DES_PERSONNAGES.md` | Registre d'autorité des 18 personnages historiques du canon (R2.9) |

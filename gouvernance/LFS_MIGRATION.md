@@ -6,18 +6,23 @@ une commande par machine**, avec le blocage mesuré à l'appui.
 
 ---
 
-## 1 · Ce qui pèse, au 30 août 2026
+## 1 · Ce qui pèse, **remesuré le 2 septembre 2026**
 
-| Contenu | Fichiers | Poids | Dans la chaîne ? |
-|---|---|---|---|
-| `images/realistes/*.png` (galerie 2026-V) | 77 | **220,1 Mio** | Non — le portail n'affiche que les vignettes (`images/vignettes/`), les maîtres restent en lightbox |
-| `images/*.png` (28 maîtres scellés + planches de chantier, arbre) | 29 | **78,2 Mio** | Oui — 24 maîtres sont embarqués dans le PDF 2026-I ; scellés par `ICONOGRAPHIE.sha256` |
-| `*.pdf` (2026-I et archive 2026-G) | 2 | **22,9 Mio** | Oui — l'artéfact publié et son empreinte sémantique |
-| `audio/*` (hymne WAV + 2 MP3 de récitation) | 3 | **4,0 Mio** | Oui — le WAV se régénère au bit près (`make hymne`) |
-| `images/vignettes/*.webp` | 77 | **4,7 Mio** | Oui — régénérées par `make vignettes` |
-| **Total candidat** | **198** | **≈ 330 Mio** | |
+| Contenu | Fichiers | Poids | Dans la chaîne ? | Sort en LFS (A′) ? |
+|---|---|---|---|---|
+| `images/realistes/*.png` (galerie 2026-V) | **83** | **227 Mio** | Non — le portail n'affiche que les vignettes (`images/vignettes/`), les maîtres restent en lightbox | ✅ |
+| `images/*.png` (maîtres scellés, planches de chantier, arbre) | **28** | **75 Mio** | Oui — embarqués dans le PDF 2026-I ; scellés par `ICONOGRAPHIE.sha256` | ❌ (art. 2) |
+| `*.pdf` (2026-I et archive 2026-G) | 2 | **22 Mio** | Oui — l'artéfact publié et son empreinte sémantique | ❌ (art. 2) |
+| `images/vignettes/*.webp` | **83** | **5,0 Mio** | Oui — régénérées par `make vignettes` | ✅ |
+| `audio/*` (hymne WAV + 2 MP3 de récitation) | 3 | **3,7 Mio** | Oui — le WAV se régénère au bit près (`make hymne`) | ✅ |
+| **Total hors `.git`** | | **334 Mio** | | **≈ 236 Mio partent** |
 
-Le dépôt pèse ≈ 340 Mio dans son intégralité (binaires + 240 Ko de sources et de textes).
+Le magasin `.git` pèse à lui seul **329 Mio** — c'est lui que l'Option B aurait vidé, et c'est
+lui que l'Avis n° 9 choisit de laisser intact.
+
+> *Écart avec la mesure du 30 août* : la galerie est passée de 77 à 83 clichés (+7 Mio), les
+> vignettes ont suivi. Le comptage « 29 maîtres » de la première mesure était erroné : il y en
+> a 28, conformément à `ICONOGRAPHIE.sha256`.
 
 ## 2 · Ce qui a été mesuré le 30 août 2026 (depuis l'environnement d'agent)
 
@@ -36,6 +41,10 @@ pourquoi la migration n'est **pas** engagée par cet environnement. Elle attend 
 accès au CDN GitHub — ou la levée du blocage réseau.
 
 ## 3 · La migration — une commande, une machine, un avis
+
+> **Arbitrage rendu.** L'Avis royal n° 9 (2 septembre 2026) retient la **variante A′** et écarte
+> l'Option B. Les descriptions ci-dessous sont conservées pour la mémoire de l'instruction :
+> seule A′ a force exécutoire.
 
 ### Option A — LFS prospectif (sans réécriture de l'historique)
 
@@ -68,7 +77,7 @@ git commit -m "LFS : galerie 2026-V, vignettes et audio hors Git (R1.6, variante
 git push
 ```
 
-### Option B — LFS + réécriture de l'historique (allègement réel)
+### Option B — LFS + réécriture de l'historique (allègement réel) · ❌ **ÉCARTÉE (Avis n° 9, art. 1er)**
 
 ```bash
 git lfs install
@@ -96,9 +105,44 @@ git push --force origin main
   insensibles au transport Git vs LFS.
 - Le portail : vignettes en grille, maîtres en lightbox — inchangé.
 
-## 5 · Statut
+## 5 · Statut — **décrété le 2 septembre 2026 (Avis royal n° 9)**
 
-**Prêt, non exécuté** : la mesure du 30 août bloque l'upload des objets depuis l'environnement
-d'agent (tableau § 2). À exécuter (Option A′ ou B) depuis une machine avec accès au CDN GitHub,
-après avis pour l'Option B. Quand l'environnement aura accès au CDN, `make lfs` (ci-après)
-résume l'Option A′.
+Le runbook n'est plus une hypothèse : la Chancellerie a tranché.
+
+| | |
+|---|---|
+| **Option retenue** | **A′** — LFS pour `images/realistes/*.png`, `images/vignettes/*.webp`, `audio/*` |
+| **Option écartée** | **B** — la réécriture de l'historique de `main` est refusée (Avis n° 9, considérant 3 et art. 1er) : le passé du Royaume ne se réécrit pas, fût-ce pour gagner 325 Mio |
+| **Restent en Git** | les 28 maîtres scellés et les 2 PDF (art. 2) |
+| **Plafond de poids** | aucun, délibérément (art. 6) |
+| **Exécution** | **en attente d'une machine** ayant accès au CDN GitHub |
+
+### Pourquoi ce n'est toujours pas exécuté
+
+Mesure **reconduite le 2 septembre 2026** depuis l'environnement d'agent, identique à celle du
+30 août :
+
+```
+api.github.com                      → 200
+github-cloud.s3.amazonaws.com:443   → SSL_ERROR_SYSCALL
+uploads.github.com:443              → SSL_ERROR_SYSCALL
+git-lfs                             → absent de l'environnement
+```
+
+Le blocage n'a pas bougé. Y engager la migration téléverserait des **pointeurs sans objets** :
+un dépôt intact pour l'agent, en ruine pour tous les autres. L'art. 3 de l'Avis n° 9 en fait
+donc une **défense expresse**, et l'art. 4 interdit d'inscrire par avance le moindre filtre LFS
+à `.gitattributes` — un filtre posé sans téléversement possible transforme le prochain commit
+binaire en pointeur orphelin. `.gitattributes` reste donc à ses deux lignes `binary`.
+
+### La commande, le jour venu
+
+Sur une machine avec `git-lfs` et l'accès au CDN, depuis un clone à jour :
+
+```bash
+make lfs        # = git lfs install + track (A′) + commit de .gitattributes
+git push        # téléverse ≈ 232 Mio d'objets
+make controle   # rejoué après publication, comme tout acte de la chaîne
+```
+
+Puis consigner l'exécution en § 5 et au registre, sous l'Avis n° 9.

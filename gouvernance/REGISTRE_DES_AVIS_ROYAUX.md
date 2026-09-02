@@ -103,6 +103,27 @@ Les archives royales ayant conservé des fragments d'Avis commençant à l'Avis 
 
 ---
 
+### ⚜️ AVIS ROYAL N° 9
+**Date de promulgation** : 2 septembre 2026
+**Souverain** : Babber Ier le Louche (sur rapport de Luc Foster, Grand Argentier et Archiviste royal)
+**Objet** : *Du Transport des Images Lourdes et du Refus de Réécrire le Passé*
+**Texte** :
+> « Considérant que les archives du Royaume pèsent désormais trois cent trente mébioctets, et qu'un fardeau qu'on traîne sans l'avoir choisi est une négligence, tandis qu'un fardeau qu'on assume est une politique ;
+> Considérant que la galerie photoréaliste — deux cent vingt mébioctets, quatre-vingt-trois clichés — n'entre dans aucun volume canonique et ne sert qu'au portail, lequel n'affiche que ses vignettes ;
+> Considérant qu'il fut proposé de réécrire l'historique du dépôt pour l'alléger sous cinq mébioctets, et que cette voie briserait tout clone existant et toute branche en cours ;
+> Considérant enfin que **le passé du Royaume ne se réécrit pas, même pour gagner de la place** — principe déjà porté par le scellement des archives G et H (Avis n° 6) ;
+> **Il est décrété** :
+> **Art. 1er** — Est retenue la **variante A′** du runbook R1.6 : passent au transport Git LFS les corpus `images/realistes/*.png`, `images/vignettes/*.webp` et `audio/*`. L'Option B, qui emporte réécriture de l'historique de `main`, est **écartée**.
+> **Art. 2** — Demeurent en Git ordinaire les vingt-huit maîtres d'illustration scellés et les deux volumes PDF : ils sont dans la chaîne, déjà dans l'historique, et leur sortie ne gagnerait rien qu'un risque.
+> **Art. 3** — La migration s'exécute par `make lfs` puis `git push`, depuis une machine ayant accès au CDN de GitHub. L'environnement d'agent en est privé : mesure du 2 septembre 2026 reconduisant celle du 30 août — `api.github.com` répond 200, `github-cloud.s3.amazonaws.com` et `uploads.github.com` échouent en `SSL_ERROR_SYSCALL`. Y engager la migration produirait des pointeurs sans objets, c'est-à-dire un dépôt en ruine pour autrui : **il est fait défense de l'y tenter**.
+> **Art. 4** — Nul filtre LFS ne sera inscrit à `.gitattributes` avant l'exécution complète, téléversement compris, par la machine idoine. Le fichier reste en l'état.
+> **Art. 5** — Les scellés (`GALERIE.sha256`, `ICONOGRAPHIE.sha256`, `MANIFEST.sha256`) étant fondés sur le contenu et non sur le transport, ils demeurent valables après migration ; `make controle` sera rejoué après le `push` comme après tout acte de publication.
+> **Art. 6** — Aucun plafond de poids n'est institué : la Chancellerie juge que la garde d'un tel plafond coûterait en cérémonie ce qu'elle épargnerait en octets. La croissance des images relève de l'appréciation éditoriale, non de la mécanique. »
+
+*Promulgué le 2 septembre 2026. Pièce jointe : `gouvernance/LFS_MIGRATION.md` (runbook R1.6, mesures réseau, commandes). Statut d'exécution : **décrété, en attente de la machine** — voir § 5 du runbook.*
+
+---
+
 ## Formulaire Officiel d'Avis Royal
 
 Tout futur projet d'Avis soumis au Conseil des Sages doit comporter obligatoirement :
